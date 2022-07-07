@@ -16,10 +16,12 @@ function NavBar() {
   };
 
   return (
-    <div class="navbar">
-      <div class="w-1/6 justify-center">
+    <div class="navbar border-b">
+      <div class="w-1/6">
         <Link href="/dashboard">
-          <a class="btn btn-ghost normal-case text-2xl text-rosa">kooki</a>
+          <a class="btn btn-ghost normal-case text-2xl text-rosa mx-auto">
+            kooki
+          </a>
         </Link>
       </div>
 
@@ -58,24 +60,28 @@ function NavBar() {
               onBlur={onBlur}
               required
             />
-            {searchField.length > 1 ? (
-              <button
-                onClick={onSubmit}
-                className="text-white absolute right-2.5 bottom-2.5 bg-stone-800 hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-800 font-medium rounded-lg text-sm px-4 py-2 dark:bg-zinc-400"
-              >
-                Search
-              </button>
-            ) : (
-              <button className="text-white absolute right-2.5 bottom-2.5 bg-stone-300 hover:bg-stone-800 focus:ring-4 focus:outline-none focus:ring-stone-800 font-medium rounded-lg text-sm px-4 py-2 dark:bg-zinc-400">
-                Search
-              </button>
-            )}
           </div>
         </form>
       </div>
-      <div className="justify-center w-1/6 grid grid-cols-1 content-evenly items-center">
+      <div className="justify-center w-1/6 grid grid-cols-2 content-evenly items-center">
+        <button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 mx-auto"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </button>
         <div class="dropdown dropdown-end mx-auto">
-          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+          <label tabIndex="0" class="btn btn-ghost btn-circle hover:glass ">
             <div class="w-6 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,8 +100,8 @@ function NavBar() {
             </div>
           </label>
           <ul
-            tabindex="0"
-            class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+            tabIndex="0"
+            class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
           >
             <li>
               <a>Notifications</a>
@@ -109,17 +115,19 @@ function NavBar() {
             <li>
               <a>Create Recipe</a>
             </li>
-            <li>
-              <Link href="/account-settings">
-                <a class="justify-between">
-                  Account
-                  <span class="badge">New</span>
-                </a>
-              </Link>
-            </li>
-            <li>
-              <a>Help</a>
-            </li>
+            <div className="divide-y">
+              <li>
+                <Link href="/account-settings">
+                  <a class="justify-between">
+                    Account
+                    <span class="badge">New</span>
+                  </a>
+                </Link>
+              </li>
+              <li>
+                <a>Help</a>
+              </li>
+            </div>
             <li>
               <a>Logout</a>
             </li>
