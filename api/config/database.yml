@@ -23,7 +23,9 @@ default: &default
 
 development:
   <<: *default
-  database: rails_kooki_1
+  database: kooki_test_v1
+  username: postgres
+  password: postgres
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
