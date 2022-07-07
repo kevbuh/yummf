@@ -8,6 +8,7 @@ namespace :api do
     namespace :andoid do 
       resources :recipes
     end
+    get '/users/me', to: 'users#me'
   end
 end
 
