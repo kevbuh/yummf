@@ -9,9 +9,9 @@ export default function Home() {
   const [shouldShowLogin, setShouldShowLogin] = useState(false);
   const router = useRouter();
 
-  const getUser = async (values) => {
+  const signUpUser = async (values) => {
     console.log("called", values);
-    const apiRes = await fetch(`/api/login`, {
+    const apiRes = await fetch(`/api/signup`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -101,7 +101,7 @@ export default function Home() {
           </div>
         ) : (
           <div className="p-2">
-            <p className="text-xl flex flex-col items-center">Sign Up!</p>
+            <p className="text-xl flex flex-col items-center">Sign Up Below!</p>
             <Formik
               initialValues={{ email: "", password: "" }}
               validationSchema={Yup.object({
@@ -118,21 +118,25 @@ export default function Home() {
               })}
               onSubmit={(values, { setSubmitting }) => {
                 // register user here
+                signUpUser(values);
+
                 setSubmitting(false);
               }}
             >
               <Form>
-                <div className="rounded-lg bg-stone-100 px-8 my-4 flex flex-col items-center">
+                <div className="rounded-lg bg-stone-100 px-8 my-4 flex flex-col ">
                   <label htmlFor="email" className="bg-stone-100">
                     Email Address
                   </label>
-                  <Field name="email" type="email" />
+                  <Field name="email" type="email" className="p-2 my-1" />
                   <ErrorMessage name="email">
                     {(msg) => <p className="text-red-600">{msg}</p>}
                   </ErrorMessage>
 
-                  <label htmlFor="password">Password</label>
-                  <Field name="password" type="password" />
+                  <label htmlFor="password" className="mt-1">
+                    Password
+                  </label>
+                  <Field name="password" type="password" className="p-2 my-1" />
                   <ErrorMessage name="password">
                     {(msg) => <p className="text-red-600">{msg}</p>}
                   </ErrorMessage>

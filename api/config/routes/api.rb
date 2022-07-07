@@ -1,14 +1,15 @@
 namespace :api do
   namespace :v1 do
+    get '/users/me', to: 'users#me'
     scope :users, module: :users do
-      post '/', to: 'registrations#create', as: :user_registration
+      # api/v1/users POST to register user
+      post '/', to: 'registrations#create', as: :user_registration 
     end
     resources :recipes
 
     namespace :andoid do 
       resources :recipes
     end
-    get '/users/me', to: 'users#me'
   end
 end
 

@@ -6,11 +6,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-# if Doorkeeper::Application.count.zero?
-#   Doorkeeper::Application.create!(name: "Web Client", redirect_uri: "", scopes: "")
-#   Doorkeeper::Application.create!(name: "iOS Client", redirect_uri: "", scopes: "")
-#   Doorkeeper::Application.create!(name: "Android Client", redirect_uri: "", scopes: "")
-#   Doorkeeper::Application.create!(name: "React Client", redirect_uri: "", scopes: "")
+#for production 
+if Doorkeeper::Application.count.zero?
+  Doorkeeper::Application.create(name: "NextJS Client", redirect_uri: "", scopes: ["read", "write"])
+end
 
-# end
 User.first_or_create(email: 'dean@example.com', password: 'password', password_confirmation: "password", role: User.roles[:admin])
