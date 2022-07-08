@@ -17,6 +17,21 @@ function NavBar() {
     router.push(`/search-results`);
   };
 
+  const logUserOut = async () => {
+    const res = await fetch("api/logout", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (res.status === 200) {
+      router.push("/");
+    } else {
+      console.log("error logging out");
+    }
+  };
+
   return (
     <div className="navbar border-b">
       <div className="w-1/6">
@@ -144,7 +159,7 @@ function NavBar() {
               </Link>
             </div>
             <li>
-              <a>Logout</a>
+              <a onClick={logUserOut}>Logout</a>
             </li>
           </ul>
         </div>

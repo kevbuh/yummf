@@ -2,20 +2,14 @@ import cookie from "cookie";
 import { API_URL, CLIENT_ID } from "../../config/index";
 
 export default async (req, res) => {
-  console.log("GOT HERE 0");
-
   if (req.method === "POST") {
-    console.log("GOT HERE 1.0", CLIENT_ID);
-
     const { email, password } = req.body;
 
     const body = JSON.stringify({
-      client_id: "RI4fROiGipcgoohdOtDswC50QPmDZvAHo5BhWCyYTuQ", // need to make this an env variable
+      client_id: process.env.CLIENT_ID, // need to make this an env variable
       email,
       password,
     });
-
-    console.log("GOT HERE 1", body);
 
     try {
       const apiRes = await fetch(`${API_URL}/api/v1/users`, {
@@ -29,18 +23,16 @@ export default async (req, res) => {
 
       const data = await apiRes.json();
 
-      console.log("GOT HERE 2", data);
-
       if (apiRes.status === 200) {
         res.setHeader("Set-Cookie", [
-          cookie.serialize("access", data.access_token, {
+          cookie.serialize("access", data.user.access_token, {
             httpOnly: true,
             secure: process.env.NODE_ENV !== "development",
             maxAge: 60 * 60 * 8,
             sameSite: "strict",
             path: "/api/",
           }),
-          cookie.serialize("refresh", data.refresh_token, {
+          cookie.serialize("refresh", data.user.refresh_token, {
             httpOnly: true,
             secure: process.env.NODE_ENV !== "development",
             maxAge: 60 * 60 * 24,

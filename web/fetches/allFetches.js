@@ -11,5 +11,5 @@ export const getUser = async () => {
 
   const data = await apiRes.json();
 
-  console.log("GOT HERE", data);
+  // console.log("GOT HERE", data);
 };
