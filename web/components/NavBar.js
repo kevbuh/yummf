@@ -26,7 +26,7 @@ function NavBar() {
       </div>
 
       <div className="w-2/3 ">
-        <form className="w-full  ">
+        <form className="w-full mx-auto">
           <label
             htmlFor="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
@@ -64,22 +64,24 @@ function NavBar() {
         </form>
       </div>
       <div className="justify-center w-1/6 grid grid-cols-2 content-evenly items-center">
-        <button>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 mx-auto"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-            />
-          </svg>
-        </button>
+        <Link href="/grocery-list">
+          <button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 mx-auto"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+              />
+            </svg>
+          </button>
+        </Link>
         <div className="dropdown dropdown-end mx-auto">
           <label tabIndex="0" className="btn btn-ghost btn-circle hover:glass ">
             <div className="w-6 rounded-full">
@@ -106,18 +108,24 @@ function NavBar() {
             <li>
               <a>Notifications</a>
             </li>
-            <li>
-              <a>Saved Recipes</a>
-            </li>
-            <li>
-              <a>Grocery List</a>
-            </li>
-            <li>
-              <a>Create Recipe</a>
-            </li>
+            <Link href="/saved-recipes">
+              <li>
+                <a>Saved Recipes</a>
+              </li>
+            </Link>
+            <Link href="/grocery-list">
+              <li>
+                <a>Grocery List</a>
+              </li>
+            </Link>
+            <Link href="/create">
+              <li>
+                <a>Create Recipe</a>
+              </li>
+            </Link>
             <div className="divide-y">
               <li>
-                <Link href="/account-settings">
+                <Link href="/account/">
                   <a className="justify-between">
                     Account
                     <span Name="badge">New</span>

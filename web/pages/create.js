@@ -20,7 +20,7 @@ function CreateRecipePage() {
   return (
     <div>
       <NavBar />
-      <div className="mt-8 rounded-lg w-2/3 item-center mx-auto">
+      <div className="mt-8 rounded-lg w-3/5 item-center mx-auto">
         <div>
           <p className="text-4xl mb-8">Create New Recipe</p>
           <Formik
@@ -188,7 +188,7 @@ function CreateRecipePage() {
 
                   <button
                     type="submit"
-                    className="p-2 bg-stone-100 my-4 hover:bg-rosa hover:text-white rounded-lg"
+                    className="p-2 mx-auto w-1/2 bg-stone-100 mt-4 mb-20 hover:bg-rosa hover:text-white rounded-lg"
                   >
                     Publish
                   </button>
