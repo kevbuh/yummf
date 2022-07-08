@@ -3,12 +3,14 @@ import NavBar from "../components/NavBar";
 import { useQuery } from "react-query";
 
 import { getUser } from "../fetches/allFetches";
+import { useSession, signIn } from "next-auth/react";
 
 function ProfilePage() {
   // const { isLoading, isError, isSuccess, data, error } = useQuery(
   //   "getUserData", // could probably add cookie to differentiate
   //   getUser
   // );
+  const { data: session } = useSession();
 
   return (
     <div>
@@ -17,6 +19,18 @@ function ProfilePage() {
         <div>
           <p className="text-4xl mb-2">Profile</p>
         </div>
+
+        {session ? (
+          <>
+            Signed in as {session.user.user.email} <br />
+            <button onClick={() => signOut()}>Sign out</button>
+          </>
+        ) : (
+          <>
+            Not signed in <br />
+            <button onClick={() => signIn()}>Sign in</button>
+          </>
+        )}
 
         {/* {isLoading && <p>loading...</p>}
         {isError && <p>{error.message}</p>}

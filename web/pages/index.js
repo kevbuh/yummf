@@ -40,13 +40,22 @@ export default function Home() {
 
       {session ? (
         <>
-          Signed in as {session.user.user.email} <br />
-          <button onClick={() => signOut()}>Sign out</button>
+          <p>Successful login!</p>
+          <button
+            className="bg-rosa text-white p-3 text-lg rounded-lg"
+            onClick={() => router.push("/profile")}
+          >
+            Go to profile
+          </button>
         </>
       ) : (
         <>
           Not signed in <br />
-          <button onClick={() => signIn()}>Sign in</button>
+          <button
+            onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
+          >
+            Sign in
+          </button>
         </>
       )}
     </div>
