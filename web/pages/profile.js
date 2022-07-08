@@ -2,18 +2,11 @@ import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import { useQuery } from "react-query";
 
-import { useState } from "react";
+import { getUser } from "../fetches/allFetches";
 
 function ProfilePage() {
-  const getUser = async () => {
-    console.log("calling fetch");
-    const apiRes = await fetch("/api/user");
-    const data = await apiRes.json();
-    return data;
-  };
-
   const { isLoading, isError, isSuccess, data, error } = useQuery(
-    "getUserData",
+    "getUserData", // could probably add cookie to differentiate
     getUser
   );
 
@@ -25,10 +18,14 @@ function ProfilePage() {
           <p className="text-4xl mb-2">Profile</p>
         </div>
 
-        <button onClick={getUser}>User</button>
         {isLoading && <p>loading...</p>}
         {isError && <p>{error.message}</p>}
-        {isSuccess && <p>{data.user.email}</p>}
+        {isSuccess ? (
+          <div>
+            <p>{data.user.email}</p>
+            <p>Joined on {data.user.created_at}</p>
+          </div>
+        ) : null}
 
         <div className="h-40"></div>
       </div>

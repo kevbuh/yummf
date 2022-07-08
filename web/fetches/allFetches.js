@@ -1,15 +1,6 @@
 export const getUser = async () => {
-  console.log("called");
-  const apiRes = await fetch(`http://localhost:8000/api/v1/users`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: body,
-  });
-
+  console.log("calling fetch");
+  const apiRes = await fetch("/api/user");
   const data = await apiRes.json();
-
-  // console.log("GOT HERE", data);
+  return data;
 };

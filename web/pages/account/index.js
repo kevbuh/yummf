@@ -1,17 +1,30 @@
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import Link from "next/link";
+import { useQuery } from "react-query";
+
+import { getUser } from "../../fetches/allFetches";
 
 function AccountSettingsPage() {
+  const { isLoading, isError, isSuccess, data, error } = useQuery(
+    "getUserData", // could probably add cookie to differentiate
+    getUser
+  );
+
   return (
     <div>
       <NavBar />
       <div className="mt-8 rounded-lg w-2/3 item-center mx-auto">
         <div>
           <p className="text-4xl mb-2">Account</p>
+
           <p className="text-lg">
-            <span className="font-semibold">First Last</span> | email@email.com
-            | &nbsp;
+            <span className="font-semibold">FirstName LastName</span>
+            <div>
+              {isLoading && <p>loading...</p>}
+              {isError && <p>{error.message}</p>}
+              {isSuccess ? <p>{data.user.email}</p> : null}
+            </div>
             <Link href="/profile">
               <span className="underline cursor-pointer">Go to profile</span>
             </Link>

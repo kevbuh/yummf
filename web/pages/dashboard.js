@@ -11,7 +11,7 @@ function dashboard() {
         <div className="w-1/5 flex flex-col">
           <div className=" px-3 mt-3">
             <Link href="/create">
-              <button className="rounded-xl hover:bg-rosa hover:text-white font-semibold py-2.5 w-full bg-stone-100 ">
+              <button className="rounded-xl hover:bg-rosa hover:text-white font-semibold py-2.5 text-xl w-full bg-stone-100 ">
                 Create
               </button>
             </Link>
