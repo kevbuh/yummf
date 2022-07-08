@@ -16,10 +16,10 @@ function NavBar() {
   };
 
   return (
-    <div class="navbar border-b">
-      <div class="w-1/6">
+    <div className="navbar border-b">
+      <div className="w-1/6">
         <Link href="/dashboard">
-          <a class="btn btn-ghost normal-case text-2xl text-rosa mx-auto">
+          <a className="btn btn-ghost normal-case text-2xl text-rosa mx-auto">
             kooki
           </a>
         </Link>
@@ -76,13 +76,13 @@ function NavBar() {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
             />
           </svg>
         </button>
-        <div class="dropdown dropdown-end mx-auto">
-          <label tabIndex="0" class="btn btn-ghost btn-circle hover:glass ">
-            <div class="w-6 rounded-full">
+        <div className="dropdown dropdown-end mx-auto">
+          <label tabIndex="0" className="btn btn-ghost btn-circle hover:glass ">
+            <div className="w-6 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -101,7 +101,7 @@ function NavBar() {
           </label>
           <ul
             tabIndex="0"
-            class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
+            className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
           >
             <li>
               <a>Notifications</a>
@@ -118,9 +118,9 @@ function NavBar() {
             <div className="divide-y">
               <li>
                 <Link href="/account-settings">
-                  <a class="justify-between">
+                  <a className="justify-between">
                     Account
-                    <span class="badge">New</span>
+                    <span Name="badge">New</span>
                   </a>
                 </Link>
               </li>
