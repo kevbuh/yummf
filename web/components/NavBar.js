@@ -12,7 +12,9 @@ function NavBar() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    router.push(`/search_results?result=${searchField}`);
+    // router.push(`/search-results?result=${searchField}`);
+    // console.log("called");
+    router.push(`/search-results`);
   };
 
   return (
@@ -49,6 +51,7 @@ function NavBar() {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 ></path>
               </svg>
+              <button onClick={onSubmit}></button>
             </div>
             <input
               type="search"
@@ -105,9 +108,11 @@ function NavBar() {
             tabIndex="0"
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
           >
-            <li>
-              <a>Notifications</a>
-            </li>
+            <Link href="/notifications">
+              <li>
+                <a>Notifications</a>
+              </li>
+            </Link>
             <Link href="/saved-recipes">
               <li>
                 <a>Saved Recipes</a>
@@ -128,13 +133,15 @@ function NavBar() {
                 <Link href="/account/">
                   <a className="justify-between">
                     Account
-                    <span Name="badge">New</span>
+                    <span name="badge">New</span>
                   </a>
                 </Link>
               </li>
-              <li>
-                <a>Help</a>
-              </li>
+              <Link href="/help">
+                <li>
+                  <a>Help</a>
+                </li>
+              </Link>
             </div>
             <li>
               <a>Logout</a>
