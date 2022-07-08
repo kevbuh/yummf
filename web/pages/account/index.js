@@ -6,10 +6,10 @@ import { useQuery } from "react-query";
 import { getUser } from "../../fetches/allFetches";
 
 function AccountSettingsPage() {
-  const { isLoading, isError, isSuccess, data, error } = useQuery(
-    "getUserData", // could probably add cookie to differentiate
-    getUser
-  );
+  // const { isLoading, isError, isSuccess, data, error } = useQuery(
+  //   "getUserData", // could probably add cookie to differentiate
+  //   getUser
+  // );
 
   return (
     <div>
@@ -20,11 +20,11 @@ function AccountSettingsPage() {
 
           <p className="text-lg">
             <span className="font-semibold">FirstName LastName</span>
-            <div>
+            {/* <div>
               {isLoading && <p>loading...</p>}
               {isError && <p>{error.message}</p>}
               {isSuccess ? <p>{data.user.email}</p> : null}
-            </div>
+            </div> */}
             <Link href="/profile">
               <span className="underline cursor-pointer">Go to profile</span>
             </Link>

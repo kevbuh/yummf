@@ -5,10 +5,10 @@ import { useQuery } from "react-query";
 import { getUser } from "../fetches/allFetches";
 
 function ProfilePage() {
-  const { isLoading, isError, isSuccess, data, error } = useQuery(
-    "getUserData", // could probably add cookie to differentiate
-    getUser
-  );
+  // const { isLoading, isError, isSuccess, data, error } = useQuery(
+  //   "getUserData", // could probably add cookie to differentiate
+  //   getUser
+  // );
 
   return (
     <div>
@@ -18,14 +18,14 @@ function ProfilePage() {
           <p className="text-4xl mb-2">Profile</p>
         </div>
 
-        {isLoading && <p>loading...</p>}
+        {/* {isLoading && <p>loading...</p>}
         {isError && <p>{error.message}</p>}
         {isSuccess ? (
           <div>
             <p>{data.user.email}</p>
             <p>Joined on {data.user.created_at}</p>
           </div>
-        ) : null}
+        ) : null} */}
 
         <div className="h-40"></div>
       </div>
