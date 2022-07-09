@@ -33,6 +33,7 @@ function CreateRecipePage() {
 
   const onFileChange = (e) => {
     setImage(e.target.files[0]);
+    console.log("::::", image);
   };
 
   const initialValues = {
@@ -84,8 +85,8 @@ function CreateRecipePage() {
                     name="featured_image"
                     // placeholder="Upload images"
                     onChange={(event) => {
-                      setImage(event.currentTarget.files[0]);
-                      onFileChange;
+                      setImage(event.target.files[0]);
+                      onFileChange(event);
                     }}
                     className="block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-stone-100 hover:file:bg-pink-600 my-3 hover:file:text-white hover:file:cursor-pointer"
                   />

@@ -18,13 +18,16 @@ function RecipeCard({ name, author, num_saves, cook_time, rating, id, image }) {
     <div className="rounded-lg p-2 bg-white ">
       <div className="m-1">
         {image && image !== null && image !== undefined ? (
-          <div className="bg-stone-100 rounded h-48 relative">
+          <div className="bg-stone-100 rounded h-48 relative  mb-6">
             <Image
               className="rounded-xl cursor-pointer"
               loader={() => image}
               src={image}
-              layout="fill"
-              objectFit="contain" // Scale your image down to fit into the container
+              objectFit="cover"
+              unoptimized={true}
+              width={300}
+              height={300}
+              position="relative"
             />
           </div>
         ) : (
