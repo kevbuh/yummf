@@ -9,6 +9,10 @@ function PersonalInformationPage() {
         <div>
           <p className="text-4xl mb-2">Personal Information</p>
         </div>
+        <div>
+          <p>Email Address:</p>
+          <p>Full Name:</p>
+        </div>
 
         <div className="h-40"></div>
       </div>
