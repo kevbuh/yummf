@@ -24,25 +24,25 @@ export default async (req, res) => {
       const data = await apiRes.json();
 
       if (apiRes.status === 200) {
-        res.setHeader("Set-Cookie", [
-          cookie.serialize("access", data.user.access_token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV !== "development",
-            maxAge: 60 * 60 * 8,
-            sameSite: "strict",
-            path: "/api/",
-          }),
-          cookie.serialize("refresh", data.user.refresh_token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV !== "development",
-            maxAge: 60 * 60 * 24,
-            sameSite: "strict",
-            path: "/api/",
-          }),
-        ]);
+        // res.setHeader("Set-Cookie", [
+        //   cookie.serialize("access", data.user.access_token, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV !== "development",
+        //     maxAge: 60 * 60 * 8,
+        //     sameSite: "strict",
+        //     path: "/api/",
+        //   }),
+        //   cookie.serialize("refresh", data.user.refresh_token, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV !== "development",
+        //     maxAge: 60 * 60 * 24,
+        //     sameSite: "strict",
+        //     path: "/api/",
+        //   }),
+        // ]);
 
         return res.status(200).json({
-          success: "Logged in successfully",
+          success: "Signed up successfully",
         });
       } else {
         return res.status(apiRes.status).json({

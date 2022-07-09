@@ -3,7 +3,8 @@ import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useState } from "react";
-import { SessionProvider } from "next-auth/react";
+import { store } from "../redux/store";
+import { Provider } from "react-redux";
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   const [queryClient] = useState(
@@ -18,7 +19,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   );
 
   return (
-    <SessionProvider session={session}>
+    <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <Head>
           <title>Kooki, the Food Platform</title>
@@ -26,7 +27,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         <Component {...pageProps} />
         <ReactQueryDevtools />
       </QueryClientProvider>
-    </SessionProvider>
+    </Provider>
   );
 };
 

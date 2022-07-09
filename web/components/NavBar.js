@@ -2,18 +2,33 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+import { logout } from "../redux/features/user";
+import { useSelector, useDispatch } from "react-redux";
+import { getUser } from "../fetches/allFetches";
+import { useQuery } from "react-query";
+
 function NavBar() {
   const [searchField, setSearchField] = useState("");
   const [focused, setFocused] = useState(false);
   const onBlur = () => setFocused(false);
   const onFocus = () => setFocused(true);
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const { isLoading, isError, isSuccess, data, error } = useQuery(
+    "getUserData", // could probably add cookie to differentiate
+    getUser
+  );
+
+  const { registered, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     // router.push(`/search-results?result=${searchField}`);
-    // console.log("called");
+
     router.push(`/search-results`);
   };
 
@@ -31,6 +46,17 @@ function NavBar() {
       console.log("error logging out");
     }
   };
+
+  if (
+    typeof window !== "undefined" &&
+    !isLoading &&
+    !loading &&
+    data.error &&
+    !isAuthenticated
+  ) {
+    console.log("navbar pushing back");
+    router.push("/");
+  }
 
   return (
     <div className="navbar border-b">
@@ -159,7 +185,13 @@ function NavBar() {
               </Link>
             </div>
             <li>
-              <a onClick={logUserOut}>Logout</a>
+              <a
+                onClick={() => {
+                  dispatch(logout());
+                }}
+              >
+                Logout
+              </a>
             </li>
           </ul>
         </div>

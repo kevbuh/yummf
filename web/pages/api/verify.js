@@ -1,46 +1,41 @@
+import { API_URL } from "../../config";
 import cookie from "cookie";
-import { API_URL } from "../../config/index";
 
 export default async (req, res) => {
   if (req.method === "GET") {
     const cookies = cookie.parse(req.headers.cookie ?? "");
-
     const access = cookies.access ?? false;
 
     if (access === false) {
-      return res.status(401).json({
-        error: "User unauthorized to make this request",
+      return res.status(403).json({
+        error: "User forbidden from making the request",
       });
     }
 
     try {
-      const apiRes = await fetch(`${API_URL}/api/v1/users/me`, {
-        method: "GET",
+      const apiRes = await fetch(`${API_URL}/api/v1/oauth/token/info`, {
+        method: "POST",
         headers: {
           Accept: "application/json",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${access}`,
         },
       });
-      const data = await apiRes.json();
 
       if (apiRes.status === 200) {
-        return res.status(200).json({
-          user: data,
-        });
+        return res.status(200).json({ success: "Authenticated successfully" });
       } else {
         return res.status(apiRes.status).json({
-          error: data.error,
+          error: "Failed to authenticate",
         });
       }
     } catch (err) {
       return res.status(500).json({
-        error: "Something went wrong when retrieving user",
+        error: "Something went wrong when trying to authenticate",
       });
     }
   } else {
     res.setHeader("Allow", ["GET"]);
-    return res.status(405).json({
-      error: `Method ${req.method} not allowed`,
-    });
+    return res.status(405).json({ error: `Method ${req.method} not allowed` });
   }
 };

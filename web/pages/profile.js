@@ -1,16 +1,29 @@
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import { useQuery } from "react-query";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 import { getUser } from "../fetches/allFetches";
-import { useSession, signIn } from "next-auth/react";
 
 function ProfilePage() {
-  // const { isLoading, isError, isSuccess, data, error } = useQuery(
-  //   "getUserData", // could probably add cookie to differentiate
-  //   getUser
-  // );
-  const { data: session } = useSession();
+  const { registered, loading, isAuthenticated } = useSelector(
+    (state) => state.user
+  );
+  const { isLoading, isError, isSuccess, data, error } = useQuery(
+    "getUserData", // could probably add cookie to differentiate
+    getUser
+  );
+  const router = useRouter();
+
+  if (
+    typeof window !== "undefined" &&
+    !isAuthenticated &&
+    !isLoading &&
+    !loading &&
+    data.user.length > 0
+  )
+    router.push("/");
 
   return (
     <div>
@@ -19,27 +32,13 @@ function ProfilePage() {
         <div>
           <p className="text-4xl mb-2">Profile</p>
         </div>
-
-        {session ? (
-          <>
-            Signed in as {session.user.user.email} <br />
-            <button onClick={() => signOut()}>Sign out</button>
-          </>
-        ) : (
-          <>
-            Not signed in <br />
-            <button onClick={() => signIn()}>Sign in</button>
-          </>
-        )}
-
-        {/* {isLoading && <p>loading...</p>}
+        {isLoading && <p>loading...</p>}
         {isError && <p>{error.message}</p>}
         {isSuccess ? (
           <div>
-            <p>{data.user.email}</p>
-            <p>Joined on {data.user.created_at}</p>
+            <p>Welcome, {data?.user?.email}</p>
           </div>
-        ) : null} */}
+        ) : null}
 
         <div className="h-40"></div>
       </div>
