@@ -17,23 +17,25 @@ export const postNewRecipe = async (values) => {
 
   const user = await apiRes.json();
 
-  const body = JSON.stringify({
-    user_id: user.user.id,
-    name: values.name,
-    directions: values.directions,
-    cook_time: values.cook_time,
-    serving: values.serving,
-    url: values.source_url,
-    caption: values.caption,
-  });
+  // console.log("here");
+
+  // const body = JSON.stringify({
+  //   user_id: user.user.id,
+  //   name: values.name,
+  //   directions: values.directions,
+  //   cook_time: values.cook_time,
+  //   serving: values.serving,
+  //   url: values.source_url,
+  //   caption: values.caption,
+  // });
 
   const apiRes2 = await fetch(`${API_URL}/api/v1/recipes`, {
     method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: body,
+    // headers: {
+    //   Accept: "application/json",
+    //   "Content-Type": "multipart/form-data",
+    // },
+    body: values,
   });
 
   const data = await apiRes2.json();

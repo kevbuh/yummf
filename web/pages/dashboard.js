@@ -5,9 +5,9 @@ import Link from "next/link";
 
 function dashboard() {
   return (
-    <div>
+    <div className="mb-8">
       <NavBar />
-      <div className="flex flex-row mx-10">
+      <div className="flex flex-row mx-20">
         <div className="w-1/5 flex flex-col">
           <div className=" px-3 mt-3">
             <Link href="/create">

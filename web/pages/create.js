@@ -5,15 +5,38 @@ import * as Yup from "yup";
 import { useMutation } from "react-query";
 import { postNewRecipe } from "../fetches/allFetches";
 import { useRouter } from "next/router";
-
+import { useState } from "react";
 function CreateRecipePage() {
+  const [image, setImage] = useState(null);
   const router = useRouter();
   const mutation = useMutation(async (values) => {
-    const posted = await postNewRecipe(values);
+    console.log(":::", values);
+
+    const apiRes = await fetch("/api/user");
+
+    const user = await apiRes.json();
+
+    const formData = new FormData();
+
+    formData.append("user_id", user.user.id);
+    formData.append("featured_image", image);
+
+    formData.append("name", values.name);
+    formData.append("directions", values.directions);
+    formData.append("cook_time", values.cook_time);
+    formData.append("serving", values.serving);
+    formData.append("url", values.url);
+    formData.append("caption", values.caption);
+
+    const posted = await postNewRecipe(formData);
     if (posted === 201) {
       router.push("/dashboard");
     }
   });
+
+  const onFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
 
   const initialValues = {
     name: "",
@@ -22,6 +45,7 @@ function CreateRecipePage() {
     serving: "",
     cook_time: "",
     caption: "",
+    featured_image: null,
 
     ingredient_list: [
       {
@@ -37,6 +61,7 @@ function CreateRecipePage() {
       <div className="mt-8 rounded-lg w-3/5 item-center mx-auto">
         <div>
           <p className="text-4xl mb-8">Create New Recipe</p>
+
           <Formik
             initialValues={initialValues}
             validationSchema={Yup.object({
@@ -46,15 +71,34 @@ function CreateRecipePage() {
               serving: Yup.string(),
               cook_time: Yup.string(),
               caption: Yup.string(),
+              featured_image: Yup.mixed(),
             })}
             onSubmit={(values, { setSubmitting }) => {
+              console.log("clicked");
               mutation.mutate(values);
+              // console.log(":::", values);
               setSubmitting(false);
             }}
           >
             {({ values }) => (
               <Form>
                 <div className="flex flex-col ">
+                  <input
+                    type="file"
+                    name="featured_image"
+                    // placeholder="Upload images"
+                    onChange={(event) => {
+                      setImage("file", null);
+                      setImage("file", event.currentTarget.files[0]);
+                      setImage("file", event.currentTarget.files[0]);
+                      setImage(event.currentTarget.files[0]);
+
+                      console.log("dskjajflsaj", image);
+                    }}
+                    // required
+                    // className="p-2 bg-stone-100 w-full rounded my-2"
+                    className="block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-stone-100 hover:file:bg-pink-600 my-3 hover:file:text-white hover:file:cursor-pointer"
+                  />
                   <Field
                     name="name"
                     placeholder="Title"
@@ -71,7 +115,6 @@ function CreateRecipePage() {
                   <ErrorMessage name="caption">
                     {(msg) => <p>{msg}</p>}
                   </ErrorMessage>
-
                   <Field
                     name="directions"
                     placeholder="Enter directions of this recipe"
@@ -80,7 +123,6 @@ function CreateRecipePage() {
                   <ErrorMessage name="directions">
                     {(msg) => <p>{msg}</p>}
                   </ErrorMessage>
-
                   <Field
                     name="source_url"
                     placeholder="Add recipe origin"
@@ -89,7 +131,6 @@ function CreateRecipePage() {
                   <ErrorMessage name="source_url">
                     {(msg) => <p>{msg}</p>}
                   </ErrorMessage>
-
                   <label htmlFor="serving" className="mt-4 text-xl">
                     Serving
                   </label>
@@ -101,7 +142,6 @@ function CreateRecipePage() {
                   <ErrorMessage name="serving">
                     {(msg) => <p>{msg}</p>}
                   </ErrorMessage>
-
                   <label htmlFor="cook_time" className="mt-4 text-xl">
                     Cook Time
                   </label>
@@ -113,22 +153,17 @@ function CreateRecipePage() {
                   <ErrorMessage name="cook_time">
                     {(msg) => <p>{msg}</p>}
                   </ErrorMessage>
-
                   <label htmlFor="ingredients" className="mt-4 text-xl">
                     Ingredients
                   </label>
-
                   <FieldArray name="ingredient_list">
                     {({ insert, remove, push }) => (
                       <div className="">
                         {values.ingredient_list.length > 0 &&
                           values.ingredient_list.map(
                             (ingredient_list, index) => (
-                              <>
-                                <div
-                                  className="grid grid-cols-3 gap-4 my-4"
-                                  key={index}
-                                >
+                              <div key={index}>
+                                <div className="grid grid-cols-3 gap-4 my-4">
                                   <div className="">
                                     <Field
                                       name={`ingredient_list.${index}.ingredient_name`}
@@ -177,7 +212,7 @@ function CreateRecipePage() {
                                     </button>
                                   </div>
                                 </div>
-                              </>
+                              </div>
                             )
                           )}
                         <button
@@ -208,7 +243,6 @@ function CreateRecipePage() {
                       </div>
                     )}
                   </FieldArray>
-
                   <button
                     type="submit"
                     className="p-2 mx-auto w-1/2 bg-stone-100 mt-4 mb-20 hover:bg-rosa hover:text-white rounded-lg"

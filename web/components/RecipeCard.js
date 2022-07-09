@@ -1,7 +1,9 @@
 import React from "react";
-import Link from "next/link";
+// import Link from "next/link";
+import Image from "next/image";
+import { API_URL } from "../config";
 
-function RecipeCard({ name, author, num_saves, cook_time, rating, id }) {
+function RecipeCard({ name, author, num_saves, cook_time, rating, id, image }) {
   const getStars = (num_stars) => {
     const steps = [];
     for (let i = 1; i <= num_stars; i++) {
@@ -10,10 +12,24 @@ function RecipeCard({ name, author, num_saves, cook_time, rating, id }) {
     return steps;
   };
 
+  // console.log("!!!!:!:!:", image);
+
   return (
     <div className="rounded-lg p-2 bg-white ">
       <div className="m-1">
-        <p className="bg-stone-100 rounded h-40"></p>
+        {image && image !== null && image !== undefined ? (
+          <div className="bg-stone-100 rounded h-48 relative">
+            <Image
+              className="rounded-xl cursor-pointer"
+              loader={() => image}
+              src={image}
+              layout="fill"
+              objectFit="contain" // Scale your image down to fit into the container
+            />
+          </div>
+        ) : (
+          <p className="bg-stone-100 rounded h-48"></p>
+        )}
         <div className="flex flex-row justify-evenly mt-2.5">
           <div className="badge badge-outline border-stone-200 w-2/5">
             {cook_time}
@@ -22,9 +38,7 @@ function RecipeCard({ name, author, num_saves, cook_time, rating, id }) {
             {num_saves} saves
           </div>
         </div>
-        <Link href={"/recipes/" + id}>
-          <p className="font-semibold text-lg mt-1 cursor-pointer">{name}</p>
-        </Link>
+        <p className="font-semibold text-lg mt-1 cursor-pointer">{name}</p>
         <p className="font-semibold text-lg">{getStars(rating)} </p>
         <p className="font-light text-sm">Author #{author}</p>
       </div>

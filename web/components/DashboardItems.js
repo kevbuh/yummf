@@ -1,6 +1,7 @@
 import RecipeCard from "./RecipeCard";
 import { useQuery } from "react-query";
 import { getAllRecipes } from "../fetches/allFetches";
+import { API_URL } from "../config/index";
 
 function DashboardItems() {
   const { isLoading, isError, isSuccess, data, error } = useQuery(
@@ -18,15 +19,22 @@ function DashboardItems() {
 
       <div className="grid grid-cols-4 gap-4">
         {isSuccess &&
-          data.map((d) => {
+          data.map((d, index) => {
+            // console.log("@@@@", API_URL + d.featured_image?.url.split("?")[0]);
             return (
               <RecipeCard
+                key={index}
                 name={d.name}
                 author={d.user_id}
                 num_saves={d.num_saves}
                 rating={d.rating}
                 cook_time={d.cook_time}
                 id={d.id}
+                image={
+                  d.featured_image !== null && d.featured_image !== undefined
+                    ? API_URL + d.featured_image?.url.split("?")[0]
+                    : null
+                }
               />
             );
           })}

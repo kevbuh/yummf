@@ -56,7 +56,7 @@ function NavBar() {
   }
 
   return (
-    <div className="navbar border-b">
+    <div className="navbar shadow-sm bg-white">
       <div className="w-1/6">
         <Link href="/dashboard">
           <a className="btn btn-ghost normal-case text-2xl text-rosa mx-auto">
