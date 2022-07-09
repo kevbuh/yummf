@@ -18,7 +18,9 @@ function dashboard() {
           </div>
           <Sidebar />
         </div>
-        <div className="w-4/5">{/* <DashboardItems /> */}</div>
+        <div className="w-4/5">
+          <DashboardItems />
+        </div>
       </div>
     </div>
   );

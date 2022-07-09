@@ -6,10 +6,16 @@ export const getUser = async () => {
   return data;
 };
 
-export const getAllRecipes = async () => {
-  const apiRes = await fetch(`http://localhost:8000/api/v1/recipes`);
-  const data = await apiRes.json();
-  return data;
+export const getAllRecipes = async ({ pageParam = 0 }) => {
+  if (pageParam == 0) {
+    const res = await fetch(`${API_URL}/api/v1/recipes`);
+    return res.json();
+  } else if (pageParam) {
+    const res = await fetch(
+      `${API_URL}/api/v1/recipes?cursor_created_at=${pageParam}=next`
+    );
+    return res.json();
+  }
 };
 
 export const postNewRecipe = async (values) => {
@@ -20,3 +26,9 @@ export const postNewRecipe = async (values) => {
 
   return apiRes2.status;
 };
+
+// export const getAllRecipes = async () => {
+//   const apiRes = await fetch(`http://localhost:8000/api/v1/recipes`);
+//   const data = await apiRes.json();
+//   return data;
+// };
