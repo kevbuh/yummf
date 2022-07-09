@@ -1,5 +1,7 @@
 class Api::V1::RecipesController < ApplicationController
+  include Pagination
   before_action :set_recipe, only: %i[ show update destroy ]
+
 
   def search
     @recipes = Recipes.search_by_term(params[:query])
@@ -8,11 +10,17 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   # GET /recipes
-  def index
-    @recipes = Recipe.all
+  # def index
+  #   @recipes = Recipe.all
 
-    render json: @recipes
-  end
+  #   render json: @recipes
+  # end
+
+  def index
+        render json: pages(records: records, url: api_v1_recipes_path),
+               except: [:updated_at],
+               status: :ok
+      end
 
   # GET /recipes/1
   def show
@@ -54,4 +62,8 @@ class Api::V1::RecipesController < ApplicationController
     def recipe_params
       params.permit(:name, :user_id, :cook_time, :directions, :caption, :rating, :secret, :serving, :url, :featured_image)
     end
+
+    def records
+          Recipe.with_attached_featured_image
+        end
 end

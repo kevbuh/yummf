@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
   belongs_to :user
   has_many :comments, dependent: :delete_all
   has_one_attached :featured_image
