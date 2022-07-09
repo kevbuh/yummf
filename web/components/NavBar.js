@@ -54,7 +54,6 @@ function NavBar() {
     data.error &&
     !isAuthenticated
   ) {
-    console.log("navbar pushing back");
     router.push("/");
   }
 

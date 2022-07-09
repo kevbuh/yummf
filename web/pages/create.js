@@ -2,13 +2,26 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
+import { useMutation } from "react-query";
+import { postNewRecipe } from "../fetches/allFetches";
+import { useRouter } from "next/router";
 
 function CreateRecipePage() {
+  const router = useRouter();
+  const mutation = useMutation(async (values) => {
+    const posted = await postNewRecipe(values);
+    if (posted === 201) {
+      router.push("/dashboard");
+    }
+  });
+
   const initialValues = {
     name: "",
     description: "",
     source_url: "",
     serving: "",
+    cook_time: "",
+
     ingredient_list: [
       {
         ingredient_name: "",
@@ -33,6 +46,7 @@ function CreateRecipePage() {
               cook_time: Yup.string(),
             })}
             onSubmit={(values, { setSubmitting }) => {
+              mutation.mutate(values);
               setSubmitting(false);
             }}
           >

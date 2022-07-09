@@ -16,6 +16,7 @@ class Api::V1::RecipesController < ApplicationController
   # POST /recipes
   def create
     @recipe = Recipe.new(recipe_params)
+    puts recipe_params
 
     if @recipe.save
       render json: @recipe, status: :created, location: @recipe
@@ -46,6 +47,6 @@ class Api::V1::RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:name)
+      params.require(:recipe).permit(:name, :user_id, :cook_time, :description, :caption, :rating, :secret)
     end
 end

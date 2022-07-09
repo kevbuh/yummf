@@ -5,7 +5,7 @@ class RecipesController < ApiController
   def index
     @recipes = Recipe.all
 
-    render json: @recipes
+    render json: @recipes, :include => :comments
   end
 
   # GET /recipes/1
