@@ -46,6 +46,9 @@ group :development do
   # gem "spring"
 end
 
+gem 'active_model_serializers', '~> 0.10.13'
+
+gem 'pg_search', '~> 2.3', '>= 2.3.6'
 
 gem "devise", "~> 4.8"
 

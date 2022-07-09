@@ -1,6 +1,12 @@
 class Api::V1::RecipesController < ApplicationController
   before_action :set_recipe, only: %i[ show update destroy ]
 
+  def search
+    @recipes = Recipes.search_by_term(params[:query])
+
+    render json: @recipes
+  end
+
   # GET /recipes
   def index
     @recipes = Recipe.all
