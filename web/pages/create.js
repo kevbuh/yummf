@@ -13,14 +13,11 @@ function CreateRecipePage() {
     console.log(":::", values);
 
     const apiRes = await fetch("/api/user");
-
     const user = await apiRes.json();
-
     const formData = new FormData();
 
     formData.append("user_id", user.user.id);
     formData.append("featured_image", image);
-
     formData.append("name", values.name);
     formData.append("directions", values.directions);
     formData.append("cook_time", values.cook_time);
@@ -76,7 +73,6 @@ function CreateRecipePage() {
             onSubmit={(values, { setSubmitting }) => {
               console.log("clicked");
               mutation.mutate(values);
-              // console.log(":::", values);
               setSubmitting(false);
             }}
           >
@@ -88,15 +84,9 @@ function CreateRecipePage() {
                     name="featured_image"
                     // placeholder="Upload images"
                     onChange={(event) => {
-                      setImage("file", null);
-                      setImage("file", event.currentTarget.files[0]);
-                      setImage("file", event.currentTarget.files[0]);
                       setImage(event.currentTarget.files[0]);
-
-                      console.log("dskjajflsaj", image);
+                      onFileChange;
                     }}
-                    // required
-                    // className="p-2 bg-stone-100 w-full rounded my-2"
                     className="block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-stone-100 hover:file:bg-pink-600 my-3 hover:file:text-white hover:file:cursor-pointer"
                   />
                   <Field
