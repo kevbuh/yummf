@@ -11,7 +11,7 @@ function RecipeCard({ name, author, num_saves, cook_time, rating, id }) {
   };
 
   return (
-    <div className="rounded-lg p-2 bg-white">
+    <div className="rounded-lg p-2 bg-white ">
       <div className="m-1">
         <p className="bg-stone-100 rounded h-40"></p>
         <div className="flex flex-row justify-evenly mt-2.5">

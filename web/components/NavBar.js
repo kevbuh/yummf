@@ -27,9 +27,7 @@ function NavBar() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // router.push(`/search-results?result=${searchField}`);
-
-    router.push(`/search-results`);
+    router.push(`/search-results?result=${searchField}`);
   };
 
   const logUserOut = async () => {
