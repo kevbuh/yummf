@@ -46,6 +46,6 @@ class RecipesController < ApiController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:name)
+      params.require(:recipe).permit(:name) # WRONG CONTROLLER CHECK IN API/V1
     end
 end

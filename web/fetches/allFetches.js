@@ -20,8 +20,11 @@ export const postNewRecipe = async (values) => {
   const body = JSON.stringify({
     user_id: user.user.id,
     name: values.name,
-    description: values.description,
+    directions: values.directions,
     cook_time: values.cook_time,
+    serving: values.serving,
+    url: values.source_url,
+    caption: values.caption,
   });
 
   const apiRes2 = await fetch(`${API_URL}/api/v1/recipes`, {

@@ -59,6 +59,7 @@ export const login = createAsyncThunk(
       email,
       password,
     });
+    console.log("logging in..");
 
     try {
       const res = await fetch("/api/login", {

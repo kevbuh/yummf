@@ -17,10 +17,11 @@ function CreateRecipePage() {
 
   const initialValues = {
     name: "",
-    description: "",
+    directions: "",
     source_url: "",
     serving: "",
     cook_time: "",
+    caption: "",
 
     ingredient_list: [
       {
@@ -40,10 +41,11 @@ function CreateRecipePage() {
             initialValues={initialValues}
             validationSchema={Yup.object({
               name: Yup.string().required("Please enter a recipe title!"),
-              description: Yup.string().required("Please enter a description"),
+              directions: Yup.string().required("Please enter directions"),
               source_url: Yup.string(),
               serving: Yup.string(),
               cook_time: Yup.string(),
+              caption: Yup.string(),
             })}
             onSubmit={(values, { setSubmitting }) => {
               mutation.mutate(values);
@@ -61,13 +63,21 @@ function CreateRecipePage() {
                   <ErrorMessage name="name">
                     {(msg) => <p>{msg}</p>}
                   </ErrorMessage>
-
                   <Field
-                    name="description"
-                    placeholder="Enter a description of this recipe"
+                    name="caption"
+                    placeholder="Enter caption"
                     className="text bg-stone-100 rounded p-3 w-full my-1"
                   />
-                  <ErrorMessage name="description">
+                  <ErrorMessage name="caption">
+                    {(msg) => <p>{msg}</p>}
+                  </ErrorMessage>
+
+                  <Field
+                    name="directions"
+                    placeholder="Enter directions of this recipe"
+                    className="text bg-stone-100 rounded p-3 w-full my-1"
+                  />
+                  <ErrorMessage name="directions">
                     {(msg) => <p>{msg}</p>}
                   </ErrorMessage>
 
@@ -85,7 +95,6 @@ function CreateRecipePage() {
                   </label>
                   <Field
                     name="serving"
-                    type="number"
                     placeholder="4 people"
                     className="text bg-stone-100 rounded p-3 w-full my-1"
                   />
