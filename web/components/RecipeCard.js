@@ -1,6 +1,15 @@
 import React from "react";
+import Link from "next/link";
 
-function RecipeCard({ name, author, num_saves, cook_time, rating }) {
+function RecipeCard({ name, author, num_saves, cook_time, rating, id }) {
+  const getStars = (num_stars) => {
+    const steps = [];
+    for (let i = 1; i <= num_stars; i++) {
+      steps.push("⭐️");
+    }
+    return steps;
+  };
+
   return (
     <div className="rounded-lg p-2 bg-white">
       <div className="m-1">
@@ -13,8 +22,10 @@ function RecipeCard({ name, author, num_saves, cook_time, rating }) {
             {num_saves} saves
           </div>
         </div>
-        <p className="font-semibold text-lg mt-1">{name}</p>
-        <p className="font-semibold text-lg">{rating} ⭐️ </p>
+        <Link href={"/recipes/" + id}>
+          <p className="font-semibold text-lg mt-1 cursor-pointer">{name}</p>
+        </Link>
+        <p className="font-semibold text-lg">{getStars(rating)} </p>
         <p className="font-light text-sm">Author #{author}</p>
       </div>
     </div>

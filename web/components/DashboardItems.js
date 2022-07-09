@@ -26,6 +26,7 @@ function DashboardItems() {
                 num_saves={d.num_saves}
                 rating={d.rating}
                 cook_time={d.cook_time}
+                id={d.id}
               />
             );
           })}
