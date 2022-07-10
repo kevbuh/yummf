@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :recipes, dependent: :delete_all
   has_many :comments, dependent: :delete_all
+  has_many :ratings, dependent: :delete_all
 
   validates :email, format: URI::MailTo::EMAIL_REGEXP
   enum role: %i[user admin]

@@ -1,6 +1,6 @@
 class RecipeSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :user_id, :cook_time, :directions, :caption, :rating, :secret, :serving, :url, :featured_image, :comments
+  attributes :id, :name, :user_id, :cook_time, :directions, :caption, :secret, :serving, :url, :featured_image, :comments, :past_hour_average
 
   def featured_image
     if object.featured_image.attached?

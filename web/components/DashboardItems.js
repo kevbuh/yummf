@@ -58,7 +58,7 @@ function DashboardItems() {
                   name={d.name}
                   author={d.user_id}
                   num_saves={d.num_saves}
-                  rating={d.rating}
+                  rating={d.past_hour_average}
                   cook_time={d.cook_time}
                   caption={d.caption}
                   id={d.id}

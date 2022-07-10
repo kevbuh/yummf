@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_10_190154) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_10_231318) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,6 +87,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_190154) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "recipe_id", null: false
+    t.integer "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_ratings_on_recipe_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -121,5 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_190154) do
   add_foreign_key "comments", "recipes"
   add_foreign_key "comments", "users"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "ratings", "recipes"
+  add_foreign_key "ratings", "users"
   add_foreign_key "recipes", "users"
 end

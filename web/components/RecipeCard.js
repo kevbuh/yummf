@@ -70,7 +70,7 @@ function RecipeCard({
               {cook_time}{" "}
             </div>
             <p className="font-semibold  flex flex-row ml-auto ">
-              4
+              {rating}
               <span className="my-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
