@@ -10,7 +10,7 @@ function CreateRecipePage() {
   const [image, setImage] = useState(null);
   const router = useRouter();
   const mutation = useMutation(async (values) => {
-    console.log(":::", values);
+    console.log("@@@@", image);
 
     const apiRes = await fetch("/api/user");
     const user = await apiRes.json();
@@ -83,11 +83,7 @@ function CreateRecipePage() {
                   <input
                     type="file"
                     name="featured_image"
-                    // placeholder="Upload images"
-                    onChange={(event) => {
-                      setImage(event.target.files[0]);
-                      onFileChange(event);
-                    }}
+                    onChange={onFileChange}
                     className="block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-stone-100 hover:file:bg-pink-600 my-3 hover:file:text-white hover:file:cursor-pointer"
                   />
                   <Field

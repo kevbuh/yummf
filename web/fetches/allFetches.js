@@ -7,6 +7,7 @@ export const getUser = async () => {
 };
 
 export const getAllRecipes = async ({ pageParam = 0 }) => {
+  console.log("fetching...");
   const res = await fetch(`${API_URL}/api/v1/recipes?page=${pageParam}`);
   return res.json();
 };

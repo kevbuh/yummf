@@ -17,16 +17,18 @@ function DashboardItems() {
     isError,
   } = useInfiniteQuery("allRecipes", getAllRecipes, {
     getNextPageParam: (lastPage) => {
-      console.log("PAGES", lastPage.pagination.next_page);
-      lastPage.nextCursor = lastPage.pagination.next_page;
-      return lastPage.nextCursor;
+      // console.log("PAGES", lastPage.pagination);
+      if (lastPage.pagination.current_page < lastPage.pagination.total_pages) {
+        lastPage.nextCursor = lastPage.pagination.next_page;
+        return lastPage.nextCursor;
+      }
     },
   });
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       const entry = entries[0];
-      console.log("entry", entry);
+      // console.log("entry", entry);
       fetchNextPage();
     });
     observer.observe(myRef.current);
