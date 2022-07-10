@@ -7,15 +7,8 @@ export const getUser = async () => {
 };
 
 export const getAllRecipes = async ({ pageParam = 0 }) => {
-  if (pageParam == 0) {
-    const res = await fetch(`${API_URL}/api/v1/recipes`);
-    return res.json();
-  } else if (pageParam) {
-    const res = await fetch(
-      `${API_URL}/api/v1/recipes?cursor_created_at=${pageParam}=next`
-    );
-    return res.json();
-  }
+  const res = await fetch(`${API_URL}/api/v1/recipes?page=${pageParam}`);
+  return res.json();
 };
 
 export const postNewRecipe = async (values) => {

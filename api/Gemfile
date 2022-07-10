@@ -53,3 +53,11 @@ gem 'pg_search', '~> 2.3', '>= 2.3.6'
 gem "devise", "~> 4.8"
 
 gem "doorkeeper", "~> 5.5"
+
+gem 'kaminari' 
+
+# gem 'pager_api'
+
+# gem 'pagy'
+
+gem 'api-pagination'

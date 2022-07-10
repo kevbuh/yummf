@@ -15,7 +15,7 @@ function RecipeCard({ name, author, num_saves, cook_time, rating, id, image }) {
   // console.log("!!!!:!:!:", image);
 
   return (
-    <div className="rounded-lg p-2 bg-white ">
+    <div className="rounded-lg p-2 border border-stone-100 shadow-sm">
       <div className="m-1">
         {image && image !== null && image !== undefined ? (
           <div className="bg-stone-100 rounded h-48 relative  mb-6">

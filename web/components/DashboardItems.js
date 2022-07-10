@@ -17,7 +17,8 @@ function DashboardItems() {
     isError,
   } = useInfiniteQuery("allRecipes", getAllRecipes, {
     getNextPageParam: (lastPage) => {
-      lastPage.nextCursor = lastPage.next_url?.split("=")[1];
+      console.log("PAGES", lastPage.pagination.next_page);
+      lastPage.nextCursor = lastPage.pagination.next_page;
       return lastPage.nextCursor;
     },
   });
@@ -34,7 +35,7 @@ function DashboardItems() {
   // console.log(data.pages.);
 
   return (
-    <div className="bg-stone-100 flex flex-col p-4 m-3 rounded-lg ">
+    <div className=" flex flex-col  m-3  ">
       <div>
         <p className="text-xl font-semibold mb-4">For You</p>
       </div>
@@ -42,14 +43,14 @@ function DashboardItems() {
       <div
         className={
           isFetchingNextPage
-            ? "grid grid-cols-3 animate-pulse gap-4"
-            : "grid grid-cols-3  gap-4"
+            ? "grid grid-cols-4 animate-pulse gap-4"
+            : "grid grid-cols-4  gap-4"
         }
       >
         <>
           {data?.pages.map((group, i) => (
             <React.Fragment key={i}>
-              {group?.records?.map((d, index) => (
+              {group?.recipes?.map((d, index) => (
                 <RecipeCard
                   key={index}
                   name={d.name}

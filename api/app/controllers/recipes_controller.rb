@@ -2,11 +2,11 @@ class RecipesController < ApiController
   before_action :set_recipe, only: %i[ show update destroy ]
 
   # GET /recipes
-  def index
-    @recipes = Recipe.all
+  # def index
+  #   @recipes = Recipe.all
 
-    render json: @recipes, :include => :comments
-  end
+  #   render json: @recipes, :include => :comments
+  # end
 
   # GET /recipes/1
   def show

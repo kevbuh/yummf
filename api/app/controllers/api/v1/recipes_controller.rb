@@ -1,7 +1,7 @@
 class Api::V1::RecipesController < ApplicationController
-  include Pagination
-  before_action :set_recipe, only: %i[ show update destroy ]
 
+  
+  before_action :set_recipe, only: %i[ show update destroy ]
 
   def search
     @recipes = Recipes.search_by_term(params[:query])
@@ -10,18 +10,18 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   # GET /recipes
-  # def index
-  #   @recipes = Recipe.all
-
-  #   render json: @recipes
-  # end
-
+  # @recipes = Recipe.page(params[:page] ? params[:page].to_i : 1)            
+  # render json: {objects:@recipes, meta:pagination_meta(@recipes) }
+  # @recipes = Recipe.all
   def index
-        render json: pages(records: records, url: api_v1_recipes_path),
-               except: [:updated_at],
-               status: :ok
-      end
+    require 'pagination'
+    @recipes = Recipe.page(params[:page] ? params[:page].to_i : 1)            
+    
+    render json: Pagination.build_json(@recipes)
+  end
+  
 
+  
   # GET /recipes/1
   def show
     render json: @recipe
@@ -60,10 +60,15 @@ class Api::V1::RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.permit(:name, :user_id, :cook_time, :directions, :caption, :rating, :secret, :serving, :url, :featured_image)
+      params.permit(:name, :user_id, :cook_time, :directions, :caption, :rating, :secret, :serving, :url)
     end
 
-    def records
-          Recipe.with_attached_featured_image
-        end
+    def pagination_meta(object) {        
+      current_page: object.current_page,        
+      next_page: object.next_page,        
+      prev_page: object.prev_page,        
+      total_pages: object.total_pages,        
+      total_count: object.total_count       
+     }    
+    end
 end
