@@ -1,5 +1,5 @@
 import RecipeCard from "./RecipeCard";
-import { useQuery, useInfiniteQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { getAllRecipes } from "../fetches/allFetches";
 import { API_URL } from "../config/index";
 import React, { useRef, useEffect } from "react";
@@ -37,16 +37,16 @@ function DashboardItems() {
   // console.log(data.pages.);
 
   return (
-    <div className=" flex flex-col  m-3  ">
+    <div className=" flex flex-col m-3  ">
       <div>
-        <p className="text-xl font-semibold mb-4">For You</p>
+        <p className="text-2xl font-semibold mb-4">For You</p>
       </div>
 
       <div
         className={
           isFetchingNextPage
-            ? "grid grid-cols-4 animate-pulse gap-4"
-            : "grid grid-cols-4  gap-4"
+            ? "grid grid-cols-4 animate-pulse gap-3"
+            : "grid grid-cols-4 gap-3"
         }
       >
         <>
@@ -60,6 +60,7 @@ function DashboardItems() {
                   num_saves={d.num_saves}
                   rating={d.rating}
                   cook_time={d.cook_time}
+                  caption={d.caption}
                   id={d.id}
                   image={
                     d.featured_image !== null && d.featured_image !== undefined
@@ -84,7 +85,7 @@ function DashboardItems() {
               ? // <button class="btn btn-square loading"></button>
                 null
               : hasNextPage
-              ? "Loading..."
+              ? "View More"
               : "You scrolled to the bottom!"}
           </button>
         </div>

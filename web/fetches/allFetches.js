@@ -6,7 +6,7 @@ export const getUser = async () => {
   return data;
 };
 
-export const getAllRecipes = async ({ pageParam = 0 }) => {
+export const getAllRecipes = async ({ pageParam = 1 }) => {
   console.log("fetching...");
   const res = await fetch(`${API_URL}/api/v1/recipes?page=${pageParam}`);
   return res.json();
@@ -20,9 +20,3 @@ export const postNewRecipe = async (values) => {
 
   return apiRes2.status;
 };
-
-// export const getAllRecipes = async () => {
-//   const apiRes = await fetch(`http://localhost:8000/api/v1/recipes`);
-//   const data = await apiRes.json();
-//   return data;
-// };

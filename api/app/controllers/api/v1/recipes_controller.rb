@@ -15,7 +15,7 @@ class Api::V1::RecipesController < ApplicationController
   # @recipes = Recipe.all
   def index
     require 'pagination'
-    @recipes = Recipe.page(params[:page] ? params[:page].to_i : 1)            
+    @recipes = Recipe.order(id: :desc).page(params[:page] ? params[:page].to_i : 1).per(10)          
     
     render json: Pagination.build_json(@recipes)
   end

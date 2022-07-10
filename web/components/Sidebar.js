@@ -1,11 +1,11 @@
 function Sidebar() {
   return (
-    <div className="bg-stone-100 flex flex-col p-4 m-3 rounded-lg divide-y">
+    <div className="bg-stone-100 flex flex-col p-4 m-3 rounded-lg divide-y ">
       <div>
-        <p className="text-xl font-semibold mb-1 ">Explore</p>
+        <p className="text-xl font-semibold mb-1">Categories</p>
       </div>
-      <div className="mt-1">
-        <div className="grid grid-cols-2 space-4 mt-3">
+      <div className="">
+        <div className="flex flex-row mt-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -20,9 +20,9 @@ function Sidebar() {
               d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
             />
           </svg>
-          <p className="text-lg">Saved</p>
+          <p className="text-lg ml-6">Saved</p>
         </div>
-        <div className="grid grid-cols-2 space-4">
+        <div className="flex flex-row ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -42,9 +42,9 @@ function Sidebar() {
               d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
             />
           </svg>
-          <p className="text-lg">New</p>
+          <p className="text-lg ml-6">New</p>
         </div>
-        <div className="grid grid-cols-2 space-4">
+        <div className="flex flex-row ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -59,9 +59,9 @@ function Sidebar() {
               d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
             />
           </svg>
-          <p className="text-lg">Trending</p>
+          <p className="text-lg ml-6">Trending</p>
         </div>
-        <div className="grid grid-cols-2 space-4">
+        <div className="flex flex-row ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -76,9 +76,9 @@ function Sidebar() {
               d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
             />
           </svg>
-          <p className="text-lg">Cooking Tips</p>
+          <p className="text-lg ml-6">Cooking Tips</p>
         </div>
-        <div className="grid grid-cols-2 space-4">
+        <div className="flex flex-row ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -98,7 +98,7 @@ function Sidebar() {
               d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"
             />
           </svg>
-          <p className="text-lg">Nutrition</p>
+          <p className="text-lg ml-6">Nutrition</p>
         </div>
         <div className="mt-1">
           <a className="font-semibold text-blue-600 cursor-pointer">

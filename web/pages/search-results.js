@@ -30,14 +30,14 @@ function SearchResultPage() {
   return (
     <>
       <NavBar />
-      <div className=" flex flex-col justify-self-center  mx-6 my-5 self-center items-center">
+      <div className=" flex flex-col justify-self-center   my-5 self-center items-center">
         <div className="w-2/3 flex flex-col">
           <div className="flex flex-col my-10 ">
             {isLoading && <p>loading...</p>}
             {isError && <p>{error.message}</p>}
 
             {isSuccess && data.length > 0 ? (
-              <div className="grid grid-cols-4 gap-4 bg-stone-100 p-3 rounded-lg">
+              <div className="grid grid-cols-4 gap-4 ">
                 {data.map((d) => {
                   return (
                     <RecipeCard

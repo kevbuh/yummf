@@ -8,7 +8,7 @@ function dashboard() {
     <div className="mb-8">
       <NavBar />
       <div className="flex flex-row mx-20">
-        <div className="w-1/5 flex flex-col">
+        <div className="w-1/5 flex flex-col h-screen sticky top-20">
           <div className=" px-3 mt-3">
             <Link href="/create">
               <button className="rounded-xl hover:bg-rosa hover:text-white font-semibold py-2.5 text-xl w-full bg-stone-100 ">
