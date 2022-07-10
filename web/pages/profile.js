@@ -1,12 +1,12 @@
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import { useQuery } from "react-query";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
-
 import { getUser } from "../fetches/allFetches";
 
 function ProfilePage() {
+  const router = useRouter();
   const { registered, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );
@@ -14,7 +14,6 @@ function ProfilePage() {
     "getUserData", // could probably add cookie to differentiate
     getUser
   );
-  const router = useRouter();
 
   if (
     typeof window !== "undefined" &&

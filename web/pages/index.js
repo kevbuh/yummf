@@ -2,20 +2,20 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 import { register, resetRegistered, login } from "../redux/features/user";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
+import { getUser } from "../fetches/allFetches";
+import { useQuery } from "react-query";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { registered, loading, isAuthenticated } = useSelector(
-    (state) => state.user
+  const router = useRouter();
+  const { isLoading, isError, isSuccess, data, error } = useQuery(
+    "getUserData", // could probably add cookie to differentiate
+    getUser
   );
 
   const [shouldShowLogin, setShouldShowLogin] = useState(false);
-  const router = useRouter();
-
-  if (typeof window !== "undefined" && isAuthenticated && !loading)
-    router.push("/account");
 
   return (
     <div className="flex flex-col items-center">
@@ -24,7 +24,21 @@ export default function Home() {
       </p>
 
       <div className="bg-stone-100 p-4 rounded-xl flex flex-col ">
-        {shouldShowLogin ? (
+        {isSuccess && !isLoading && !isError && data ? (
+          <button>
+            <p>Welcome, {data.user.email}</p>
+            <p
+              className="mt-1 text-rosa"
+              onClick={() => {
+                router.push("/profile");
+              }}
+            >
+              Go to Kooki dashboard
+            </p>
+          </button>
+        ) : isLoading ? (
+          <div className="btn loading"></div>
+        ) : shouldShowLogin ? (
           <div className="p-2">
             <p className="text-2xl flex flex-col items-center">Login</p>
 
