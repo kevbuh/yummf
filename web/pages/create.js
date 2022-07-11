@@ -6,9 +6,11 @@ import { useMutation } from "react-query";
 import { postNewRecipe } from "../fetches/allFetches";
 import { useRouter } from "next/router";
 import { useState } from "react";
+
 function CreateRecipePage() {
   const [image, setImage] = useState(null);
   const router = useRouter();
+
   const mutation = useMutation(async (values) => {
     console.log("@@@@", image);
 

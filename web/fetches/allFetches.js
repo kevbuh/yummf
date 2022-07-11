@@ -20,3 +20,18 @@ export const postNewRecipe = async (values) => {
 
   return apiRes2.status;
 };
+
+export const postNewRating = async (values) => {
+  console.log("@@@@", values);
+
+  const apiRes2 = await fetch(`${API_URL}/api/v1/rating`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify(values),
+  });
+
+  return apiRes2.status;
+};

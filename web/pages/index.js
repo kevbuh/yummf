@@ -24,9 +24,9 @@ export default function Home() {
       </p>
 
       <div className="bg-stone-100 p-4 rounded-xl flex flex-col ">
-        {isSuccess && !isLoading && !isError && data ? (
+        {isSuccess && !isLoading && !isError && data?.user ? (
           <button>
-            <p>Welcome, {data.user.email}</p>
+            <p>Welcome, {data?.user?.email}</p>
             <p
               className="mt-1 text-rosa"
               onClick={() => {
@@ -92,9 +92,10 @@ export default function Home() {
               Haven't Signed Up? &nbsp;
               <button
                 className="underline"
-                onClick={() =>
-                  setShouldShowLogin((shouldShowLogin) => !shouldShowLogin)
-                }
+                onClick={() => {
+                  setShouldShowLogin((shouldShowLogin) => !shouldShowLogin);
+                  router.push("/dashboard");
+                }}
               >
                 Sign Up
               </button>
@@ -134,6 +135,8 @@ export default function Home() {
                   if (result2.status == 200) {
                     dispatch(resetRegistered());
                   }
+
+                  router.push("/dashboard");
                 }
                 setSubmitting(false);
               }}
