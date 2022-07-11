@@ -178,7 +178,7 @@ function selectRecipePage() {
                       </p>
                     </div>
 
-                    <div className="stat-desc">
+                    <div className="font-light text-stone-400">
                       {/* <div>
                         {data?.num_likes} Saves, ({data?.reviews.length})
                         Reviews
@@ -187,9 +187,9 @@ function selectRecipePage() {
                         <>
                           {isSuccessUser &&
                           dataUser?.user?.id === data?.user_id ? (
-                            <>
+                            <div className="">
                               <button
-                                className="bg-stone-100 p-2 mx-3 my-2 rounded font-semibold"
+                                className="bg-stone-100 p-2 mr-2 rounded font-semibold"
                                 onClick={() =>
                                   setShowEdit((showEdit) => !showEdit)
                                 }
@@ -206,7 +206,7 @@ function selectRecipePage() {
                                       headers: {
                                         "Content-Type": "application/json",
                                       },
-                                      body: JSON.stringify(data.id),
+                                      // body: JSON.stringify(data.id),
                                     }
                                   ).catch((error) =>
                                     console.log("error", error)
@@ -216,7 +216,7 @@ function selectRecipePage() {
                               >
                                 Delete Recipe
                               </button>
-                            </>
+                            </div>
                           ) : (
                             <>
                               {showRate ? (
@@ -391,7 +391,7 @@ function selectRecipePage() {
                 </div>
 
                 <p className="font-light">
-                  {data?.ingredient_list
+                  {data?.ingredient_list?.length > 0
                     ? //  {console.log("yUUHH", JSON.parse(data.ingredient_list))}
                       JSON.parse(data.ingredient_list).map((d) => {
                         return (

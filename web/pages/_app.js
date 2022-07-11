@@ -28,6 +28,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
       <QueryClientProvider client={queryClient}>
         <Head>
           <title>Kooki, the Food Platform</title>
+          <link rel="shortcut icon" href="../public/favicon.svg" />
         </Head>
         <Component {...pageProps} />
         <ReactQueryDevtools />
