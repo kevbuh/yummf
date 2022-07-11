@@ -45,8 +45,8 @@ function DashboardItems() {
       <div
         className={
           isFetchingNextPage
-            ? "grid grid-cols-4 animate-pulse gap-3"
-            : "grid grid-cols-4 gap-3"
+            ? "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 animate-pulse"
+            : "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
         }
       >
         <>
@@ -58,7 +58,9 @@ function DashboardItems() {
                   name={d.name}
                   author={d.user_id}
                   num_saves={d.num_saves}
-                  rating={d.past_hour_average?.toFixed(2)}
+                  rating={
+                    d.past_hour_average ? d.past_hour_average?.toFixed(2) : null
+                  }
                   cook_time={d.cook_time}
                   caption={d.caption}
                   id={d.id}

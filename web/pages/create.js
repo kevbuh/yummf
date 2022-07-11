@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
-import { useMutation } from "react-query";
+import { useQueryClient, useMutation } from "react-query";
 import { postNewRecipe } from "../fetches/allFetches";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -10,10 +10,9 @@ import { useState } from "react";
 function CreateRecipePage() {
   const [image, setImage] = useState(null);
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const mutation = useMutation(async (values) => {
-    console.log("@@@@", image);
-
     const apiRes = await fetch("/api/user");
     const user = await apiRes.json();
     const formData = new FormData();
@@ -28,7 +27,9 @@ function CreateRecipePage() {
     formData.append("caption", values.caption);
 
     const posted = await postNewRecipe(formData);
+
     if (posted === 201) {
+      queryClient.invalidateQueries("allRecipes");
       router.push("/dashboard");
     }
   });
@@ -68,9 +69,13 @@ function CreateRecipePage() {
               name: Yup.string().required("Please enter a recipe title!"),
               directions: Yup.string().required("Please enter directions"),
               source_url: Yup.string(),
-              serving: Yup.string(),
-              cook_time: Yup.string(),
-              caption: Yup.string(),
+              serving: Yup.string().required("Please enter serving size!"),
+              cook_time: Yup.string().required(
+                "Please enter the total cook time"
+              ),
+              caption: Yup.string().required(
+                "Please enter a short description"
+              ),
               featured_image: Yup.mixed(),
             })}
             onSubmit={(values, { setSubmitting }) => {
@@ -106,6 +111,7 @@ function CreateRecipePage() {
                   </ErrorMessage>
                   <Field
                     name="directions"
+                    component="textarea"
                     placeholder="Enter directions of this recipe"
                     className="text bg-stone-100 rounded p-3 w-full my-1"
                   />

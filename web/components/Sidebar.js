@@ -1,9 +1,7 @@
 function Sidebar() {
   return (
     <div className="bg-stone-100 flex flex-col p-4 m-3 rounded-lg divide-y ">
-      <div>
-        <p className="text-xl font-semibold mb-1">Categories</p>
-      </div>
+      <p className="text-xl font-semibold mb-1 mx-auto">Categories</p>
       <div className="">
         <div className="flex flex-row mt-1">
           <svg

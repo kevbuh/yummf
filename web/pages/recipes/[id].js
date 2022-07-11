@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { postNewRating } from "../../fetches/allFetches";
 import * as Yup from "yup";
-import { format } from "date-fns";
+import MoreLikeThis from "../../components/moreLikeThis";
 
 function selectRecipePage() {
   const { query } = useRouter();
@@ -84,6 +84,7 @@ function selectRecipePage() {
   return (
     <>
       <NavBar />
+
       <div className="mt-20 rounded-lg w-2/3 item-center mx-auto">
         {isLoading ? (
           <div>
@@ -92,12 +93,58 @@ function selectRecipePage() {
         ) : (
           <div>
             <div className="">
-              <div className="flex flex-row justify-between">
+              <div className="grid grid-cols-2">
+                <div className="text-5xl font-light mb-1">{data?.name}</div>
+              </div>
+              <div className="w-1/2">
+                <p
+                  className="
+                text-stone-400 text-sm"
+                >
+                  {data?.caption}
+                </p>
+                <div className="flex flex-row mx-auto justify-center border rounded-lg py-2">
+                  <button
+                    className={
+                      liked ? "bg-pink-600 text-black w-full rounded" : null
+                    }
+                    onClick={() => {
+                      fetch("/api/account/like_recipe", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          liked_recipe: data?.id,
+                          user: userID,
+                        }),
+                      }).catch((error) => console.log("error", error));
+                      // router.push("/");
+                      setLiked((liked) => !liked);
+                    }}
+                  >
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                        />
+                      </svg>
+                    </>
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-col-reverse lg:flex-row justify-between align-top">
                 <div className="my-auto h-full">
-                  <div className="text-4xl mb-1">{data?.name}</div>
                   <div className="">
-                    <div className="text-stone-400">{data?.caption}</div>
-
                     {/* {data?.category.map((d) => (
                       <div>
                         <button className="border-stone-100 mx-2 border-2 rounded-2xl py-1 px-5 ">
@@ -136,7 +183,11 @@ function selectRecipePage() {
                   <div className="my-5">
                     <p className="text-2xl mr-1">Rating </p>
                     <div className=" text-lg flex flex-row">
-                      <p>{data?.past_hour_average.toFixed(2)} </p>
+                      <p>
+                        {data?.past_hour_average
+                          ? data.past_hour_average.toFixed(2)
+                          : "No Rating!"}{" "}
+                      </p>
                       <p className="flex flex-row my-auto">
                         {getStars(data?.past_hour_average)}
                       </p>
@@ -150,7 +201,7 @@ function selectRecipePage() {
                       <div>
                         <>
                           {isSuccessUser &&
-                          dataUser.user.id === data?.user_id ? (
+                          dataUser?.user.id === data?.user_id ? (
                             <>
                               <button
                                 className="bg-stone-100 p-2 mx-3 my-2 rounded font-semibold"
@@ -265,54 +316,6 @@ function selectRecipePage() {
                     {/* <div className=" text-lg">{data?.price}</div> */}
                     <div className="stat-desc">Estimated Ingredient Cost</div>
                   </div>
-                  <div className="flex flex-row mx-auto justify-center border rounded">
-                    <button
-                      className={
-                        liked ? "bg-pink-600 text-black w-full rounded" : null
-                      }
-                      onClick={() => {
-                        fetch("/api/account/like_recipe", {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify({
-                            liked_recipe: data?.id,
-                            user: userID,
-                          }),
-                        }).catch((error) => console.log("error", error));
-                        // router.push("/");
-                        setLiked((liked) => !liked);
-                      }}
-                    >
-                      {/* {isSuccess ? null : (
-                        <div className="flex justify-center items-center p-2">
-                          {isSuccess ? (
-                            <div className="text-white">
-                              <p className="text-xl">Saved!</p>
-                            </div>
-                          ) : ( */}
-                      <>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                          />
-                        </svg>
-                      </>
-                      {/* )}
-                        </div>
-                      )} */}
-                    </button>
-                  </div>
                 </div>
 
                 <div className="w-3/5">
@@ -340,29 +343,44 @@ function selectRecipePage() {
               </div>
             </div>
 
-            <div className="rounded py-2">
+            <br />
+            <br />
+            <hr />
+            <br />
+            <br />
+
+            <div>
               {data?.private ? (
-                <p className="text-xl">Private Recipe </p>
+                <>
+                  <p className="text-xl">Private Recipe </p>
+                  <div className="text-xs mt-1">Created {data?.created_at}</div>
+                </>
               ) : null}
               <div className="text-2xl mt-6 w-full">Ingredients</div>
 
+              <br />
+              <br />
+              <hr />
+              <br />
+              <br />
+
               <p className="text-2xl mt-6">Directions</p>
 
-              <div className="mb-4  my-2 border rounded p-3 shadow w-full">
-                <p className="text-medium whitespace-pre-line">
+              <div className="mb-4  my-2 border rounded p-3 shadow-sm w-full">
+                <p className="font-light whitespace-pre-line">
                   {data?.directions}
                 </p>
-                <div className="text-xs mt-1">Created {data?.created_at}</div>
               </div>
-              {data?.url ? (
-                <div>
-                  Source:
-                  <a className="text-xs">{data?.source}</a>
-                </div>
-              ) : null}
             </div>
+
+            <br />
+            <br />
+            <hr />
+            <br />
+            <br />
+
             <div className="text-2xl w-full">Comments</div>
-            <div>
+            <div className="mb-4  my-2 border rounded p-3 shadow-sm w-full">
               {data?.comments.length > 0 &&
               !isLoading &&
               isSuccess &&
@@ -378,11 +396,18 @@ function selectRecipePage() {
                   ))}
                 </div>
               ) : (
-                <div className="text-xl mt-6">No Comments</div>
+                <div className=" mt-6">No Comments</div>
               )}
             </div>
           </div>
         )}
+        <br />
+        <br />
+        <hr />
+        <br />
+        <br />
+        <MoreLikeThis />
+
         <div className="h-40"></div>
       </div>
 

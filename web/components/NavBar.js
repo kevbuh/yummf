@@ -57,15 +57,15 @@ function NavBar() {
 
   return (
     <div className="navbar shadow-sm bg-white sticky top-0 z-10">
-      <div className="w-1/6">
+      <div className="sm:w-1/6">
         <Link href="/dashboard">
-          <a className="btn btn-ghost normal-case text-2xl text-rosa mx-auto">
+          <a className="btn btn-ghost normal-case text-2xl text-rosa sm:mx-auto">
             kooki
           </a>
         </Link>
       </div>
 
-      <div className="w-2/3 ">
+      <div className="w-full">
         <form className="w-full mx-auto">
           <label
             htmlFor="default-search"
@@ -104,7 +104,7 @@ function NavBar() {
           </div>
         </form>
       </div>
-      <div className="justify-center w-1/6 grid grid-cols-2 content-evenly items-center">
+      <div className="justify-center w-1/3 md:w-1/6 grid grid-cols-2 content-evenly items-center">
         <Link href="/grocery-list">
           <button>
             <svg

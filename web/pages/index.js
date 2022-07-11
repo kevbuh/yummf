@@ -30,7 +30,7 @@ export default function Home() {
             <p
               className="mt-1 text-rosa"
               onClick={() => {
-                router.push("/profile");
+                router.push("/dashboard");
               }}
             >
               Go to Kooki dashboard
@@ -58,6 +58,8 @@ export default function Home() {
                 dispatch(
                   login({ email: values.email, password: values.password })
                 );
+                router.push("/dashboard");
+
                 setSubmitting(false);
               }}
             >

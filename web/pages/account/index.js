@@ -2,7 +2,7 @@ import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import Link from "next/link";
 import { useQuery } from "react-query";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getUser } from "../../fetches/allFetches";
 import { useRouter } from "next/router";
 
@@ -25,14 +25,14 @@ function AccountSettingsPage() {
     !isAuthenticated &&
     !isLoading &&
     !loading &&
-    data.user.length > 0
+    !data
   )
     router.push("/");
 
   return (
     <div>
       <NavBar />
-      <div className="mt-8 rounded-lg w-2/3 item-center mx-auto">
+      <div className="mt-8 rounded-lg sm:w-2/3 item-center mx-4 sm:mx-auto">
         <div>
           <p className="text-4xl mb-2">Account</p>
           {isLoading && <p>loading...</p>}
@@ -48,7 +48,7 @@ function AccountSettingsPage() {
             </div>
           ) : null}
         </div>
-        <div className="grid grid-cols-2 gap-4 mt-14 mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-14 sm:mx-auto">
           <Link href="/account/info">
             <button className="py-6 rounded-lg shadow border">
               Personal Info

@@ -7,9 +7,9 @@ function dashboard() {
   return (
     <div className="mb-8">
       <NavBar />
-      <div className="flex flex-row mx-20">
-        <div className="w-1/5 flex flex-col h-screen sticky top-20">
-          <div className=" px-3 mt-3">
+      <div className="flex lg:flex-row xl:mx-20">
+        <div className="hidden sm:visible lg:w-1/5 sm:flex sm:flex-col lg:h-screen sm:sticky sm:top-20">
+          <div className="sm:px-3 sm:mt-3">
             <Link href="/create">
               <button className="rounded-xl hover:bg-rosa hover:text-white font-semibold py-2.5 text-xl w-full bg-stone-100 ">
                 Create
@@ -18,7 +18,7 @@ function dashboard() {
           </div>
           <Sidebar />
         </div>
-        <div className="w-4/5">
+        <div className="w-full lg:w-4/5">
           <DashboardItems />
         </div>
       </div>
