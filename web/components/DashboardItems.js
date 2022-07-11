@@ -58,7 +58,7 @@ function DashboardItems() {
                   name={d.name}
                   author={d.user_id}
                   num_saves={d.num_saves}
-                  rating={d.past_hour_average}
+                  rating={d.past_hour_average?.toFixed(2)}
                   cook_time={d.cook_time}
                   caption={d.caption}
                   id={d.id}
@@ -74,23 +74,24 @@ function DashboardItems() {
         </>
       </div>
 
-      <div>
-        <div className=" flex justify-center mt-4 ">
-          <button
-            onClick={() => fetchNextPage()}
-            disabled={(isFetchingNextPage, !hasNextPage)}
-            className={isFetchingNextPage ? "btn loading" : ""}
-          >
-            {isFetchingNextPage
-              ? // <button class="btn btn-square loading"></button>
-                null
-              : hasNextPage
-              ? "View More"
-              : "You scrolled to the bottom!"}
-          </button>
-        </div>
-        <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
+      <div className="mx-auto mt-4 ">
+        <button
+          onClick={() => fetchNextPage()}
+          disabled={(isFetchingNextPage, !hasNextPage)}
+          className={isFetchingNextPage ? "btn loading" : ""}
+        >
+          {isFetchingNextPage
+            ? null
+            : hasNextPage
+            ? "View More"
+            : !isLoading
+            ? "You scrolled to the bottom!"
+            : null}
+        </button>
       </div>
+      {isFetching && !isFetchingNextPage ? (
+        <div className="btn border-stone-100 loading h-96 mx-auto w-full"></div>
+      ) : null}
       <div className="bg-stone-100 rounded-lg" ref={myRef}></div>
     </div>
   );

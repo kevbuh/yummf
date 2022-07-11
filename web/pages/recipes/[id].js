@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { postNewRating } from "../../fetches/allFetches";
 import * as Yup from "yup";
+import { format } from "date-fns";
 
 function selectRecipePage() {
   const { query } = useRouter();
@@ -93,8 +94,10 @@ function selectRecipePage() {
             <div className="">
               <div className="flex flex-row justify-between">
                 <div className="my-auto h-full">
-                  <div className="text-4xl mb-4">{data?.name}</div>
-                  <div className="flex flex-row justify-evenly">
+                  <div className="text-4xl mb-1">{data?.name}</div>
+                  <div className="">
+                    <div className="text-stone-400">{data?.caption}</div>
+
                     {/* {data?.category.map((d) => (
                       <div>
                         <button className="border-stone-100 mx-2 border-2 rounded-2xl py-1 px-5 ">
@@ -357,6 +360,26 @@ function selectRecipePage() {
                   <a className="text-xs">{data?.source}</a>
                 </div>
               ) : null}
+            </div>
+            <div className="text-2xl w-full">Comments</div>
+            <div>
+              {data?.comments.length > 0 &&
+              !isLoading &&
+              isSuccess &&
+              !isError ? (
+                <div>
+                  {data?.comments.map((d) => (
+                    <div className="my-2 rounded border shadow p-3">
+                      <p>{d.text}</p>
+                      <p className="text-sm text-stone-400">
+                        {d.created_at.slice(5, 7)}/{d.created_at.slice(2, 4)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-xl mt-6">No Comments</div>
+              )}
             </div>
           </div>
         )}
