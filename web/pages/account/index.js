@@ -26,27 +26,37 @@ function AccountSettingsPage() {
     !isLoading &&
     !loading &&
     !data
-  )
+  ) {
     router.push("/");
+  }
 
   return (
     <div>
       <NavBar />
       <div className="mt-8 rounded-lg sm:w-2/3 item-center mx-4 sm:mx-auto">
         <div>
-          <p className="text-4xl mb-2">Account</p>
-          {isLoading && <p>loading...</p>}
-          {isError && <p>{error.message}</p>}
-          {isSuccess ? (
-            <div>
-              <p className="text-lg">
-                <span className="font-semibold">
-                  Welcome, {data?.user?.email}
-                </span>
-              </p>
-              <p>Joined {data?.user?.created_at}</p>
+          <p className="text-4xl mb-8">Account</p>
+          <div className="flex flex-row">
+            <div class="avatar">
+              <div class="w-24 rounded-full mr-8">
+                <img src="https://placeimg.com/192/192/people" />
+              </div>
             </div>
-          ) : null}
+            <div className="my-auto">
+              {isLoading && <p>loading...</p>}
+              {isError && <p>{error.message}</p>}
+              {isSuccess ? (
+                <>
+                  <p className="text-lg">
+                    <span className="font-semibold text-xl">
+                      Welcome, {data?.user?.email}
+                    </span>
+                  </p>
+                  <p>Joined {data?.user?.created_at}</p>
+                </>
+              ) : null}
+            </div>
+          </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-14 sm:mx-auto">
           <Link href="/account/info">

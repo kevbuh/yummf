@@ -92,7 +92,7 @@ function selectRecipePage() {
     <>
       <NavBar />
 
-      <div className="mt-20 rounded-lg w-2/3 item-center mx-auto">
+      <div className="mt-20 rounded-lg md:w-2/3 item-center mx-4 md:mx-auto">
         {isLoading ? (
           <div>
             <p>Loading...</p>
@@ -100,57 +100,34 @@ function selectRecipePage() {
         ) : (
           <div>
             <div className="">
-              <div className="grid grid-cols-2">
-                <div className="text-5xl font-light mb-1">{data?.name}</div>
-              </div>
-              <div className="w-1/2">
-                <p
-                  className="
-                text-stone-400 text-sm"
-                >
-                  {data?.caption}
-                </p>
-                <div className="flex flex-row mx-auto justify-center border rounded-lg py-2">
-                  <button
-                    className={
-                      liked ? "bg-pink-600 text-black w-full rounded" : null
-                    }
-                    onClick={() => {
-                      fetch("/api/account/like_recipe", {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                          liked_recipe: data?.id,
-                          user: userID,
-                        }),
-                      }).catch((error) => console.log("error", error));
-                      // router.push("/");
-                      setLiked((liked) => !liked);
-                    }}
-                  >
-                    <>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                        />
-                      </svg>
-                    </>
-                  </button>
-                </div>
-              </div>
               <div className="flex flex-col-reverse lg:flex-row justify-between align-top">
                 <div className="my-auto h-full">
+                  <div className="lg: mt-4">
+                    <div className="text-5xl font-light mb-1">{data?.name}</div>
+                  </div>
+                  <div className="mb-4">
+                    <p
+                      className="
+                text-stone-400 text-sm"
+                    >
+                      {data?.caption}
+                    </p>
+                    <p
+                      className="
+                text-stone-400 text-sm font-light mt-1"
+                    >
+                      Recipe #{data?.id} submitted by{" "}
+                      <span className="underline cursor-pointer">
+                        Author {data?.user_id}
+                      </span>
+                      .
+                      <span className="underline">
+                        {" "}
+                        {data?.url !== "undefined" ? data?.url : null}
+                      </span>
+                    </p>
+                  </div>
+                  <hr />
                   <div className="">
                     {/* {data?.category.map((d) => (
                       <div>
@@ -167,7 +144,7 @@ function selectRecipePage() {
                   <div className="flex flex-col my-5">
                     <div className=" flex flex-row items-center">
                       <p className="text-2xl mr-1">Time </p>
-                      <svg
+                      {/* <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
                         fill="none"
@@ -180,13 +157,14 @@ function selectRecipePage() {
                           strokeLinejoin="round"
                           d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
-                      </svg>
+                      </svg> */}
                     </div>
                     <div className=" text-lg">
-                      <p>{data?.cook_time} mins</p>
+                      <p>{data?.cook_time ? data.cook_time : "N/A time"}</p>
                     </div>
                     <div className="stat-desc">Community Average</div>
                   </div>
+                  <hr />
                   <div className="my-5">
                     <p className="text-2xl mr-1">Rating </p>
                     <div className=" text-lg flex flex-row">
@@ -208,7 +186,7 @@ function selectRecipePage() {
                       <div>
                         <>
                           {isSuccessUser &&
-                          dataUser?.user.id === data?.user_id ? (
+                          dataUser?.user?.id === data?.user_id ? (
                             <>
                               <button
                                 className="bg-stone-100 p-2 mx-3 my-2 rounded font-semibold"
@@ -264,11 +242,8 @@ function selectRecipePage() {
                                     }}
                                   >
                                     <Form className="p-3 flex flex-col rounded bg-stone-100 mt-6">
-                                      <label
-                                        htmlFor="value"
-                                        className=" text-xl"
-                                      >
-                                        Rate this recipe below:
+                                      <label htmlFor="value" className="">
+                                        Rate this recipe:
                                       </label>
                                       <Field
                                         id="value"
@@ -302,12 +277,12 @@ function selectRecipePage() {
                                 </div>
                               ) : (
                                 <button
-                                  className=" font-semibold"
+                                  className=" "
                                   onClick={() =>
                                     setShowRate((showRate) => !showRate)
                                   }
                                 >
-                                  Rate
+                                  Rate this recipe
                                 </button>
                               )}
                             </>
@@ -316,12 +291,53 @@ function selectRecipePage() {
                       </div>
                     </div>
                   </div>
+                  <hr />
+
                   <div className="flex flex-col my-5">
                     <p className="text-2xl mr-1">Cost </p>
                     <div className=" text-lg">$$$</div>
 
                     {/* <div className=" text-lg">{data?.price}</div> */}
                     <div className="stat-desc">Estimated Ingredient Cost</div>
+                  </div>
+
+                  <div className="flex flex-row w-40 justify-center border rounded-lg py-2">
+                    <button
+                      className={
+                        liked ? "bg-pink-600 text-black rounded" : null
+                      }
+                      onClick={() => {
+                        fetch("/api/account/like_recipe", {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify({
+                            liked_recipe: data?.id,
+                            user: userID,
+                          }),
+                        }).catch((error) => console.log("error", error));
+                        // router.push("/");
+                        setLiked((liked) => !liked);
+                      }}
+                    >
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                          />
+                        </svg>
+                      </>
+                    </button>
                   </div>
                 </div>
 
@@ -373,7 +389,7 @@ function selectRecipePage() {
 
               <p className="text-2xl mt-6">Directions</p>
 
-              <div className="mb-4  my-2 border rounded p-3 shadow-sm w-full">
+              <div className="mb-4  my-2  w-full">
                 <p className="font-light whitespace-pre-line">
                   {data?.directions}
                 </p>
@@ -386,7 +402,7 @@ function selectRecipePage() {
             <br />
             <br />
 
-            <div className="text-2xl w-full">Comments</div>
+            <div className="text-2xl w-full">Reviews</div>
             <div className="mb-4  my-2 border rounded p-3 shadow-sm w-full">
               {data?.comments.length > 0 &&
               !isLoading &&
@@ -394,11 +410,18 @@ function selectRecipePage() {
               !isError ? (
                 <div>
                   {data?.comments.map((d) => (
-                    <div className="my-2 rounded border shadow p-3">
-                      <p>{d.text}</p>
-                      <p className="text-sm text-stone-400">
-                        {d.created_at.slice(5, 7)}/{d.created_at.slice(2, 4)}
-                      </p>
+                    <div className="my-2 p-3 flex flex-row">
+                      <div class="avatar">
+                        <div class="w-12 rounded-full mr-4">
+                          <img src="https://placeimg.com/192/192/people" />
+                        </div>
+                      </div>
+                      <div className="my-auto">
+                        <p>{d.text}</p>
+                        <p className="text-sm text-stone-400">
+                          {d.created_at.slice(5, 7)}/{d.created_at.slice(2, 4)}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>

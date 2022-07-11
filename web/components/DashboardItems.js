@@ -38,8 +38,9 @@ function DashboardItems() {
 
   return (
     <div className=" flex flex-col m-3  ">
-      <div>
-        <p className="text-2xl font-semibold mb-4">For You</p>
+      <div className="mt-4 mb-6">
+        <p className="text-3xl font-semibold">For You</p>
+        {/* <hr /> */}
       </div>
 
       <div

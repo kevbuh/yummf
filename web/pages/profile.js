@@ -31,6 +31,7 @@ function ProfilePage() {
         <div>
           <p className="text-4xl mb-2">Profile</p>
         </div>
+
         {isLoading && <p>loading...</p>}
         {isError && <p>{error.message}</p>}
         {isSuccess ? (

@@ -11,7 +11,7 @@ function PersonalInformationPage() {
   return (
     <div>
       <NavBar />
-      <div className="mt-8 rounded-lg mx-4 md:w-2/3 item-center sm:mx-auto">
+      <div className="mt-8 rounded-lg mx-4 item-center sm:mx-auto">
         <div className="mt-8 rounded-lg sm:w-2/3 item-center sm:mx-auto">
           <div>
             <p className="text-4xl my-8">Personal Information</p>
