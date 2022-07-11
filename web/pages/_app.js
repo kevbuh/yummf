@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { useState } from "react";
 import { store } from "../redux/store";
 import { Provider } from "react-redux";
+import mixpanel from "mixpanel-browser";
 
 const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   const [queryClient] = useState(
@@ -17,6 +18,10 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
         },
       })
   );
+
+  mixpanel.init("fe954f9cea9b43ee01a8374815b78e20", {
+    debug: true,
+  });
 
   return (
     <Provider store={store}>

@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { postNewRating } from "../../fetches/allFetches";
 import * as Yup from "yup";
 import MoreLikeThis from "../../components/moreLikeThis";
+import mixpanel from "mixpanel-browser";
 
 function selectRecipePage() {
   const { query } = useRouter();
@@ -39,9 +40,15 @@ function selectRecipePage() {
     const posted = await postNewRating(values);
 
     if (posted === 201) {
+      mixpanel.track(`Rated a recipe`, {
+        source: "Kookie Web Client",
+      });
       console.log("success!");
       router.reload(window.location.pathname);
     } else {
+      mixpanel.track(`Failed to rate a recipe`, {
+        source: "Kookie Web Client",
+      });
       console.log("failure to submit rating");
     }
   });

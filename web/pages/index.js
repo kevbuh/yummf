@@ -1,6 +1,6 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { register, resetRegistered, login } from "../redux/features/user";
 import { useState } from "react";
 import { useRouter } from "next/router";

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import mixpanel from "mixpanel-browser";
 
 export const register = createAsyncThunk(
   "users/register",
@@ -19,6 +20,15 @@ export const register = createAsyncThunk(
       });
 
       const data = await res.json();
+
+      Mixpanel.identify(email);
+      mixpanel.track("Successful Sign Up", {
+        source: "Kookie Web Client",
+        "Signed in with email": true,
+      });
+      Mixpanel.people.set({
+        $email: email,
+      });
 
       if (res.status === 200) {
         return data;
@@ -74,12 +84,21 @@ export const login = createAsyncThunk(
       const data = await res.json();
 
       if (res.status === 200) {
+        Mixpanel.identify(email);
+        Mixpanel.track("Successful login");
+        Mixpanel.people.set({
+          $email: email,
+        });
+
         const { dispatch } = thunkAPI;
 
         dispatch(getUser());
 
         return data;
       } else {
+        mixpanel.track("Failed Log In", {
+          source: "Kookie Web Client",
+        });
         return thunkAPI.rejectWithValue(data);
       }
     } catch (err) {
@@ -128,8 +147,15 @@ export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
     const data = await res.json();
 
     if (res.status === 200) {
-      return data;
+      mixpanel.track("Successfully logged out", {
+        source: "Kookie Web Client",
+      });
+
+      return res.status;
     } else {
+      mixpanel.track("Failed log out", {
+        source: "Kookie Web Client",
+      });
       return thunkAPI.rejectWithValue(data);
     }
   } catch (err) {

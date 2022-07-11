@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import mixpanel from "mixpanel-browser";
 
 function RecipeCard({
   name,
@@ -32,7 +33,14 @@ function RecipeCard({
   return (
     <div className="rounded-lg p-1 border border-stone-100 shadow-sm cursor-pointer">
       <Link href={"/recipes/" + id}>
-        <div className="m-1">
+        <div
+          className="m-1"
+          onClick={() => {
+            mixpanel.track("Clicked on recipe", {
+              source: "Kookie Web Client",
+            });
+          }}
+        >
           {image && image !== null && image !== undefined ? (
             <div className=" rounded relative">
               <Image

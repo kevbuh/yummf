@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 import { logout } from "../redux/features/user";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../fetches/allFetches";
 import { useQuery } from "react-query";
+import mixpanel from "mixpanel-browser";
 
 function NavBar() {
   const [searchField, setSearchField] = useState("");
@@ -25,6 +25,10 @@ function NavBar() {
   );
 
   const onSubmit = async (e) => {
+    mixpanel.track(`Searched for recipe ${searchField}`, {
+      source: "Kookie Web Client",
+    });
+
     e.preventDefault();
 
     router.push(`/search-results?result=${searchField}`);
@@ -183,8 +187,11 @@ function NavBar() {
             </div>
             <li>
               <a
-                onClick={() => {
-                  dispatch(logout());
+                onClick={async () => {
+                  const try_logout = await dispatch(logout());
+                  if (try_logout === 200) {
+                    router.reload(window.location.pathname);
+                  }
                 }}
               >
                 Logout

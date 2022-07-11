@@ -1,4 +1,5 @@
 import { API_URL } from "../config";
+import mixpanel from "mixpanel-browser";
 
 export const getUser = async () => {
   const apiRes = await fetch("/api/user");
@@ -16,6 +17,10 @@ export const postNewRecipe = async (values) => {
   const apiRes2 = await fetch(`${API_URL}/api/v1/recipes`, {
     method: "POST",
     body: values,
+  });
+
+  mixpanel.track("Created Recipe", {
+    source: "Kookie Web Client",
   });
 
   return apiRes2.status;
