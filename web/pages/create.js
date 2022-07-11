@@ -25,7 +25,10 @@ function CreateRecipePage() {
     formData.append("serving", values.serving);
     formData.append("url", values.url);
     formData.append("caption", values.caption);
+    // values.ingredient_list.forEach((item)=>formData.append('ingredient_list'))
+    formData.append("ingredient_list", JSON.stringify(values.ingredient_list));
 
+    console.log("clicked", formData);
     const posted = await postNewRecipe(formData);
 
     if (posted === 201) {
@@ -79,7 +82,6 @@ function CreateRecipePage() {
               featured_image: Yup.mixed(),
             })}
             onSubmit={(values, { setSubmitting }) => {
-              console.log("clicked");
               mutation.mutate(values);
               setSubmitting(false);
             }}

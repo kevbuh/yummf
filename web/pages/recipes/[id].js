@@ -341,7 +341,7 @@ function selectRecipePage() {
                   </div>
                 </div>
 
-                <div className="w-3/5">
+                <div className="lg:w-3/5">
                   {!isLoading && data && !isError && isSuccess ? (
                     <div>
                       <Image
@@ -379,7 +379,31 @@ function selectRecipePage() {
                   <div className="text-xs mt-1">Created {data?.created_at}</div>
                 </>
               ) : null}
-              <div className="text-2xl mt-6 w-full">Ingredients</div>
+              <div className="text-2xl mt-6 mb-4 w-full">Ingredients</div>
+              <div className="w-1/2">
+                <div className=" w-full grid grid-cols-2 mb-2">
+                  <p className="rounded-lg p-1 bg-stone-100 mr-auto font-lg">
+                    Ingredient
+                  </p>
+                  <p className="rounded-lg p-1 bg-stone-100 mr-auto font-lg">
+                    Amount
+                  </p>
+                </div>
+
+                <p className="font-light">
+                  {data?.ingredient_list
+                    ? //  {console.log("yUUHH", JSON.parse(data.ingredient_list))}
+                      JSON.parse(data.ingredient_list).map((d) => {
+                        return (
+                          <div className="grid grid-cols-2 border p-2 rounded-lg my-2">
+                            <p>{d.ingredient_name}</p>
+                            <p>{d.ingredient_amount}</p>
+                          </div>
+                        );
+                      })
+                    : null}
+                </p>
+              </div>
 
               <br />
               <br />
