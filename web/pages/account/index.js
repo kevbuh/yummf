@@ -37,8 +37,8 @@ function AccountSettingsPage() {
         <div>
           <p className="text-4xl mb-8">Account</p>
           <div className="flex flex-row">
-            <div class="avatar">
-              <div class="w-24 rounded-full mr-8">
+            <div className="avatar">
+              <div className="w-24 rounded-full mr-8">
                 <img src="https://placeimg.com/192/192/people" />
               </div>
             </div>

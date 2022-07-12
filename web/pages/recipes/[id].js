@@ -392,8 +392,7 @@ function selectRecipePage() {
 
                 <p className="font-light">
                   {data?.ingredient_list?.length > 0
-                    ? //  {console.log("yUUHH", JSON.parse(data.ingredient_list))}
-                      JSON.parse(data.ingredient_list).map((d) => {
+                    ? JSON.parse(data.ingredient_list).map((d) => {
                         return (
                           <div className="grid grid-cols-2 border p-2 rounded-lg my-2">
                             <p>{d.ingredient_name}</p>

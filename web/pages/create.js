@@ -28,7 +28,6 @@ function CreateRecipePage() {
     // values.ingredient_list.forEach((item)=>formData.append('ingredient_list'))
     formData.append("ingredient_list", JSON.stringify(values.ingredient_list));
 
-    console.log("clicked", formData);
     const posted = await postNewRecipe(formData);
 
     if (posted === 201) {
@@ -39,7 +38,6 @@ function CreateRecipePage() {
 
   const onFileChange = (e) => {
     setImage(e.target.files[0]);
-    console.log("::::", image);
   };
 
   const initialValues = {

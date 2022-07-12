@@ -21,8 +21,6 @@ export default function Home() {
   const myRef2 = useRef(null);
 
   const responseGoogle = (response) => {
-    console.log("GOOG", response, jwt_decode(response.credential));
-
     var token = jwt_decode(response.credential);
 
     var data = {
@@ -33,9 +31,10 @@ export default function Home() {
         email: token.email,
       },
       client_id: process.env.CLIENT_ID,
+      avatar_url: token.picture,
     };
 
-    console.log("USER OBJECT FROM GOOGLE", data);
+    console.log("USER OBJECT FROM GOOGLE", token);
 
     const requestOptions = {
       method: "POST",
@@ -49,13 +48,18 @@ export default function Home() {
 
     return fetch(`${API_URL}/api/v1/users/social_auth/callback`, requestOptions)
       .then((response) => response.json())
-      .then((response) => {
-        console.log(response, "I AM  RESPONSE FROM THE BACKEND");
-        // login({
-        //   email: response.data.email,
-        //   password: values.password,
-        // });
-        // do something
+      .then(async (response) => {
+        const result2 = await dispatch(
+          login({
+            email: response.data.user.email,
+            password: response.data.user.uid,
+          })
+        );
+        if (result2.status == 200) {
+          console.log("Success");
+          dispatch(resetRegistered());
+        }
+        router.push("/dashboard");
       })
       .catch((err) => console.log(err));
   };
@@ -196,14 +200,16 @@ export default function Home() {
               {/* <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
                 Google
               </p> */}
-              <GoogleLogin
-                onSuccess={(credentialResponse) => {
-                  responseGoogle(credentialResponse);
-                }}
-                onError={() => {
-                  console.log("Login Failed");
-                }}
-              />
+              <div className="mx-auto items-center w-2/3">
+                <GoogleLogin
+                  onSuccess={(credentialResponse) => {
+                    responseGoogle(credentialResponse);
+                  }}
+                  onError={() => {
+                    console.log("Login Failed");
+                  }}
+                />
+              </div>
 
               <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
                 Facebook

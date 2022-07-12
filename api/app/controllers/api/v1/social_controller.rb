@@ -12,7 +12,10 @@ class Api::V1::SocialController < ApplicationController
       render json: {
         status: 'SUCCESS GOOGLE LOGIN',
         message: 'User was successfully logged in through google provider',
-        data: @user
+        data: {
+          user: @user,
+          # pswrd: @user.password
+        }
       }, status: :created
     else
       render json: {

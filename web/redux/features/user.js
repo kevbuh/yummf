@@ -43,13 +43,7 @@ export const register = createAsyncThunk(
 
 const getUser = createAsyncThunk("users/me", async (_, thunkAPI) => {
   try {
-    const res = await fetch("/api/user", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-      },
-    });
-
+    const res = await fetch("/api/user");
     const data = await res.json();
 
     if (res.status === 200) {
@@ -69,7 +63,6 @@ export const login = createAsyncThunk(
       email,
       password,
     });
-    console.log("logging in..");
 
     try {
       const res = await fetch("/api/login", {
@@ -84,12 +77,6 @@ export const login = createAsyncThunk(
       const data = await res.json();
 
       if (res.status === 200) {
-        Mixpanel.identify(email);
-        Mixpanel.track("Successful login");
-        Mixpanel.people.set({
-          $email: email,
-        });
-
         const { dispatch } = thunkAPI;
 
         dispatch(getUser());

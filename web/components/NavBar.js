@@ -25,9 +25,9 @@ function NavBar() {
   );
 
   const onSubmit = async (e) => {
-    mixpanel.track(`Searched for recipe ${searchField}`, {
-      source: "Kookie Web Client",
-    });
+    // mixpanel.track(`Searched for recipe ${searchField}`, {
+    //   source: "Kookie Web Client",
+    // });
 
     e.preventDefault();
 

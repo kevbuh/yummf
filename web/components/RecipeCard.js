@@ -35,11 +35,11 @@ function RecipeCard({
       <Link href={"/recipes/" + id}>
         <div
           className="m-1"
-          onClick={() => {
-            mixpanel.track("Clicked on recipe", {
-              source: "Kookie Web Client",
-            });
-          }}
+          // onClick={() => {
+          //   mixpanel.track("Clicked on recipe", {
+          //     source: "Kookie Web Client",
+          //   });
+          // }}
         >
           {image && image !== null && image !== undefined ? (
             <div className=" rounded relative">

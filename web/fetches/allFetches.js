@@ -8,7 +8,6 @@ export const getUser = async () => {
 };
 
 export const getAllRecipes = async ({ pageParam = 1 }) => {
-  console.log("fetching...");
   const res = await fetch(`${API_URL}/api/v1/recipes?page=${pageParam}`);
   return res.json();
 };
@@ -19,16 +18,14 @@ export const postNewRecipe = async (values) => {
     body: values,
   });
 
-  mixpanel.track("Created Recipe", {
-    source: "Kookie Web Client",
-  });
+  // mixpanel.track("Created Recipe", {
+  //   source: "Kookie Web Client",
+  // });
 
   return apiRes2.status;
 };
 
 export const postNewRating = async (values) => {
-  console.log("@@@@", values);
-
   const apiRes2 = await fetch(`${API_URL}/api/v1/rating`, {
     method: "POST",
     headers: {

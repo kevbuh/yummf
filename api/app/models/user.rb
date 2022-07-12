@@ -24,7 +24,9 @@ class User < ApplicationRecord
   def self.signin_or_create_from_provider(provider_data)
     where(provider: provider_data[:provider], uid: provider_data[:uid]).first_or_create do |user|
       user.email = provider_data[:info][:email]
-      user.password = Devise.friendly_token[0,20]
+      user.password = provider_data[:uid]  # tutorial did this: Devise.friendly_token[0,20]
+      user.avatar_url = provider_data[:avatar_url]
+     
       # user.skip_confirmation!
     end
   end

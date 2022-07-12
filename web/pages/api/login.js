@@ -3,6 +3,8 @@ import { API_URL } from "../../config/index";
 
 export default async (req, res) => {
   if (req.method === "POST") {
+    console.log("here");
+
     const { email, password } = req.body;
 
     const body = JSON.stringify({

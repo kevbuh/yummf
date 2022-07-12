@@ -20,9 +20,9 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
       })
   );
 
-  // mixpanel.init("fe954f9cea9b43ee01a8374815b78e20", {
-  //   debug: true,
-  // });
+  mixpanel.init("fe954f9cea9b43ee01a8374815b78e20", {
+    debug: true,
+  });
 
   return (
     <GoogleOAuthProvider clientId="589870505728-gpdvvd2v04nq5nvlj59gere6o2ga9jk5.apps.googleusercontent.com">
