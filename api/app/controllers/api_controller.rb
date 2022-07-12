@@ -2,9 +2,10 @@ class ApiController < ApplicationController
   # equivalent of authenticate_user! on devise, but this one will check the oauth token
   # before_action :authenticate_user!
   before_action :doorkeeper_authorize!
+  protect_from_forgery with: :null_session
 
   # Skip checking CSRF token authenticity for API requests.
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
 
   # Set response type
   respond_to :json

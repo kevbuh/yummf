@@ -6,6 +6,9 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { getUser } from "../fetches/allFetches";
 import { useQuery } from "react-query";
+import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import { API_URL } from "../config";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -16,6 +19,46 @@ export default function Home() {
   );
   const myRef = useRef(null);
   const myRef2 = useRef(null);
+
+  const responseGoogle = (response) => {
+    console.log("GOOG", response, jwt_decode(response.credential));
+
+    var token = jwt_decode(response.credential);
+
+    var data = {
+      provider: "google_oauth2",
+      uid: token.sub,
+      id_token: token.sub,
+      info: {
+        email: token.email,
+      },
+      client_id: process.env.CLIENT_ID,
+    };
+
+    console.log("USER OBJECT FROM GOOGLE", data);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token.jti}`,
+        "Content-Type": "application/json",
+        access_token: `${token.jti}`,
+      },
+      body: JSON.stringify(data),
+    };
+
+    return fetch(`${API_URL}/api/v1/users/social_auth/callback`, requestOptions)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response, "I AM  RESPONSE FROM THE BACKEND");
+        // login({
+        //   email: response.data.email,
+        //   password: values.password,
+        // });
+        // do something
+      })
+      .catch((err) => console.log(err));
+  };
 
   const arrowDown = useRef(null);
 
@@ -150,9 +193,18 @@ export default function Home() {
           </div>
           <div>
             <div className="mx-auto text-2xl rounded-lg bg-stone-100 p-2 text-center space-y-4 py-8">
-              <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
+              {/* <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
                 Google
-              </p>
+              </p> */}
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  responseGoogle(credentialResponse);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+
               <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
                 Facebook
               </p>

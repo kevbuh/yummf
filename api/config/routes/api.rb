@@ -9,7 +9,9 @@ namespace :api do
     scope :users, module: :users do
       # api/v1/users POST to register user
       post '/', to: 'registrations#create', as: :user_registration 
+      # mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks]
     end
+    post '/users/social_auth/callback', to: 'social#authenticate_social_auth_user'
     
     # namespace :andoid do 
     #   resources :recipes
