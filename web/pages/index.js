@@ -132,7 +132,7 @@ export default function Home() {
         </div>
 
         {/* put something cool here */}
-        <div className="rounded-xl bg-stone-100 h-3/5 my-auto p-30 ml-1 mr-8 bg-gradient-to-l from-rosa to-white"></div>
+        <div className="rounded-xl bg-stone-100 h-3/5 my-auto p-30 ml-1 mr-8 "></div>
       </div>
 
       <div className=" grid grid-cols-1 mb-20" ref={arrowDown}>
@@ -163,22 +163,22 @@ export default function Home() {
           </div>
         </div>
         <div className="mx-auto">
-          <div className="text-4xl font-semibold font-light">
+          <div className="text-3xl font-light mt-2">
             With a Fully Integrated Suite of Products
           </div>
         </div>
-        <div className="mx-auto grid grid-cols-4 h-80 gap-8 mt-8">
-          <div className="text-4xl font-semibold font-light rounded-lg bg-stone-100 w-60">
-            &nbsp;
+        <div className="mx-auto grid grid-cols-4 h-80 gap-8 mt-6">
+          <div className="text-2xl font-semibold  rounded-lg bg-stone-100 w-60">
+            Discover
           </div>
-          <div className="text-4xl font-semibold font-light rounded-lg bg-stone-100">
-            &nbsp;
+          <div className="text-2xl font-semibold  rounded-lg bg-stone-100">
+            Create
           </div>
-          <div className="text-4xl font-semibold font-light rounded-lg bg-stone-100">
-            &nbsp;
+          <div className="text-2xl font-semibold  rounded-lg bg-stone-100">
+            Learn
           </div>
-          <div className="text-4xl font-semibold font-light rounded-lg bg-stone-100">
-            &nbsp;
+          <div className="text-2xl font-semibold  rounded-lg bg-stone-100">
+            Order
           </div>
         </div>
       </div>
@@ -200,8 +200,9 @@ export default function Home() {
               {/* <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
                 Google
               </p> */}
-              <div className="mx-auto items-center w-2/3">
+              <div className="w-1/2 mx-auto">
                 <GoogleLogin
+                  className="ml-auto"
                   onSuccess={(credentialResponse) => {
                     responseGoogle(credentialResponse);
                   }}
@@ -211,9 +212,9 @@ export default function Home() {
                 />
               </div>
 
-              <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
+              {/* <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
                 Facebook
-              </p>
+              </p> */}
               <p className="text-base font-light">or</p>
               <div className="bg-stone-100 px-2 rounded-xl flex flex-col ">
                 {isSuccess && !isLoading && !isError && data?.user ? (
