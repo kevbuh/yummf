@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import { API_URL } from "../config";
+import { Player, Controls } from "@lottiefiles/react-lottie-player";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -107,6 +108,7 @@ export default function Home() {
       <div className="h-screen grid grid-cols-2">
         <div className="m-auto grid grid-rows-2 justify-evenly">
           <div>
+            {/* The complete food solution, everything in one place */}
             <div className="text-7xl font-semibold">Food Platform</div>
             <div className="text-7xl font-semibold">
               For <span className="underline">Everyone</span>
@@ -132,7 +134,15 @@ export default function Home() {
         </div>
 
         {/* put something cool here */}
-        <div className="rounded-xl bg-stone-100 h-3/5 my-auto p-30 ml-1 mr-8 "></div>
+        <div className="rounded-xl bg-stone-100 h-3/5 my-auto p-30 ml-1 mr-8 ">
+          <Player
+            autoplay={true}
+            speed={0.2}
+            loop={true}
+            src="https://assets5.lottiefiles.com/packages/lf20_mutit5qg.json"
+            style={{ height: "500px", width: "500px" }}
+          ></Player>
+        </div>
       </div>
 
       <div className=" grid grid-cols-1 mb-20" ref={arrowDown}>
@@ -144,17 +154,41 @@ export default function Home() {
         <div className="m-auto text-7xl font-semibold">Search</div>
 
         {/* put something cool here */}
-        <div className="rounded-xl bg-stone-100 h-full p-30 mx-8"></div>
+        <div className="rounded-xl bg-stone-100 h-full p-30 mx-8">
+          <Player
+            autoplay={true}
+            speed={0.2}
+            loop={true}
+            src="https://assets3.lottiefiles.com/packages/lf20_3c7ghk3c.json"
+            style={{ height: "500px", width: "500px" }}
+          ></Player>
+        </div>
       </div>
       <div className="h-96 grid grid-cols-2">
-        <div className="rounded-xl bg-stone-100 h-full p-30 mx-8"></div>
+        <div className="rounded-xl bg-stone-100 h-full p-30 mx-8">
+          <Player
+            autoplay={true}
+            speed={0.2}
+            loop={true}
+            src="https://assets7.lottiefiles.com/packages/lf20_irbx8ets.json"
+            style={{ height: "500px", width: "500px" }}
+          ></Player>
+        </div>
 
         <div className="m-auto text-7xl font-semibold">Save</div>
       </div>
       <div className="h-96 grid grid-cols-2 my-4">
         <div className="m-auto text-7xl font-semibold">Start!</div>
 
-        <div className="rounded-xl bg-stone-100 h-full p-30 mx-8"></div>
+        <div className="rounded-xl bg-stone-100 h-full p-30 mx-8">
+          <Player
+            autoplay={true}
+            speed={0.2}
+            loop={true}
+            src="https://assets8.lottiefiles.com/packages/lf20_yvvq3eqt.json"
+            style={{ height: "500px", width: "500px" }}
+          ></Player>
+        </div>
       </div>
       <div className=" grid grid-row-1 mt-48">
         <div className="mx-auto mb-4">
