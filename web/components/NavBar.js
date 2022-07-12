@@ -35,18 +35,18 @@ function NavBar() {
   };
 
   const logUserOut = async () => {
-    const res = await fetch("api/logout", {
+    const res = await fetch("/api/logout", {
       method: "POST",
       headers: {
         Accept: "application/json",
       },
     });
 
-    if (res.status === 200) {
-      router.push("/");
-    } else {
-      console.log("error logging out");
-    }
+    router.reload(window.location.pathname);
+    // if (res.) {
+    // } else {
+    //   console.log("error logging out");
+    // }
   };
 
   if (
@@ -189,8 +189,8 @@ function NavBar() {
               <a
                 onClick={async () => {
                   const try_logout = await dispatch(logout());
-                  if (try_logout === 200) {
-                    router.reload(window.location.pathname);
+                  if (try_logout) {
+                    router.push("/");
                   }
                 }}
               >

@@ -19,9 +19,9 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
       })
   );
 
-  mixpanel.init("fe954f9cea9b43ee01a8374815b78e20", {
-    debug: true,
-  });
+  // mixpanel.init("fe954f9cea9b43ee01a8374815b78e20", {
+  //   debug: true,
+  // });
 
   return (
     <Provider store={store}>
