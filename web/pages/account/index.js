@@ -39,7 +39,7 @@ function AccountSettingsPage() {
           <div className="flex flex-row">
             <div className="avatar">
               <div className="w-24 rounded-full mr-8">
-                <img src="https://placeimg.com/192/192/people" />
+                {/* <img src="https://placeimg.com/192/192/people" /> */}
               </div>
             </div>
             <div className="my-auto">

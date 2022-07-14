@@ -135,13 +135,13 @@ export default function Home() {
 
         {/* put something cool here */}
         <div className="rounded-xl bg-stone-100 h-3/5 my-auto p-30 ml-1 mr-8 ">
-          <Player
+          {/* <Player
             autoplay={true}
-            speed={0.2}
-            loop={true}
+            speed={0.1}
+            loop={false}
             src="https://assets5.lottiefiles.com/packages/lf20_mutit5qg.json"
-            style={{ height: "500px", width: "500px" }}
-          ></Player>
+            style={{ height: "400px", width: "400px" }}
+          ></Player> */}
         </div>
       </div>
 
@@ -155,24 +155,24 @@ export default function Home() {
 
         {/* put something cool here */}
         <div className="rounded-xl bg-stone-100 h-full p-30 mx-8">
-          <Player
+          {/* <Player
             autoplay={true}
             speed={0.2}
-            loop={true}
+            // loop={true}
             src="https://assets3.lottiefiles.com/packages/lf20_3c7ghk3c.json"
-            style={{ height: "500px", width: "500px" }}
-          ></Player>
+            style={{ height: "200px", width: "520px" }}
+          ></Player> */}
         </div>
       </div>
       <div className="h-96 grid grid-cols-2">
         <div className="rounded-xl bg-stone-100 h-full p-30 mx-8">
-          <Player
+          {/* <Player
             autoplay={true}
             speed={0.2}
-            loop={true}
+            // loop={true}
             src="https://assets7.lottiefiles.com/packages/lf20_irbx8ets.json"
-            style={{ height: "500px", width: "500px" }}
-          ></Player>
+            style={{ height: "200px", width: "200px" }}
+          ></Player> */}
         </div>
 
         <div className="m-auto text-7xl font-semibold">Save</div>
@@ -181,13 +181,13 @@ export default function Home() {
         <div className="m-auto text-7xl font-semibold">Start!</div>
 
         <div className="rounded-xl bg-stone-100 h-full p-30 mx-8">
-          <Player
+          {/* <Player
             autoplay={true}
             speed={0.2}
-            loop={true}
+            // loop={true}
             src="https://assets8.lottiefiles.com/packages/lf20_yvvq3eqt.json"
-            style={{ height: "500px", width: "500px" }}
-          ></Player>
+            style={{ height: "200px", width: "200px" }}
+          ></Player> */}
         </div>
       </div>
       <div className=" grid grid-row-1 mt-48">
@@ -235,7 +235,7 @@ export default function Home() {
                 Google
               </p> */}
               <div className="w-1/2 mx-auto">
-                <GoogleLogin
+                {/* <GoogleLogin
                   className="ml-auto"
                   onSuccess={(credentialResponse) => {
                     responseGoogle(credentialResponse);
@@ -243,7 +243,7 @@ export default function Home() {
                   onError={() => {
                     console.log("Login Failed");
                   }}
-                />
+                /> */}
               </div>
 
               {/* <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
@@ -333,7 +333,7 @@ export default function Home() {
                       </Form>
                     </Formik>
                     <div className="mt-2 flex text-lg items-center ">
-                      Haven't Signed Up? &nbsp;
+                      Haven&apos;t Signed Up? &nbsp;
                       <button
                         className="underline"
                         onClick={() => {

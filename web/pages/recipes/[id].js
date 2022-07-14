@@ -12,7 +12,7 @@ import * as Yup from "yup";
 import MoreLikeThis from "../../components/moreLikeThis";
 import mixpanel from "mixpanel-browser";
 
-function selectRecipePage() {
+function SelectRecipePage() {
   const { query } = useRouter();
   const [liked, setLiked] = useState(false);
   const [showRate, setShowRate] = useState(false);
@@ -436,7 +436,7 @@ function selectRecipePage() {
                     <div className="my-2 p-3 flex flex-row">
                       <div class="avatar">
                         <div class="w-12 rounded-full mr-4">
-                          <img src="https://placeimg.com/192/192/people" />
+                          {/* <img src="https://placeimg.com/192/192/people" /> */}
                         </div>
                       </div>
                       <div className="my-auto">
@@ -469,4 +469,4 @@ function selectRecipePage() {
   );
 }
 
-export default selectRecipePage;
+export default SelectRecipePage;

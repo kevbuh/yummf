@@ -14,7 +14,9 @@ function PersonalPrivacyPage() {
 
         <p className="text-xl font-semibold mt-8">Privacy Policy</p>
         <div className="mb-8 flex flex-row">
-          <p className="mt-2">We currently aren't tracking your data. Yay!</p>
+          <p className="mt-2">
+            We currently aren&apos;t tracking your data. Yay!
+          </p>
         </div>
 
         <hr />

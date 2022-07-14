@@ -12,7 +12,7 @@ function HelpPage() {
         <div>
           <p className="text-5xl mb-2 text-light">How can we help?</p>
           <p className="font-light">
-            We're currently in beta, so let us know about anything.
+            We&apos;re currently in beta, so let us know about anything.
           </p>
         </div>
         <br />
