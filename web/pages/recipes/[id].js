@@ -55,16 +55,13 @@ function SelectRecipePage() {
 
   const fetchThisRecipe = async () => {
     // should put it into fetches file
-    const res = await fetch(
-      `http://127.0.0.1:8000/api/v1/recipes/${query.id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      }
-    );
+    const res = await fetch(`${API_URL}/api/v1/recipes/${query.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
     const data = await res.json();
     return data;
   };
