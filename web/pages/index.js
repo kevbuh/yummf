@@ -97,7 +97,7 @@ export default function Home() {
           {isSuccess && !isLoading && !isError && data?.user ? (
             <button>
               <p
-                className="rounded-xl text-xl bg-stone-100 p-2 text-center text-rosa cursor-pointer"
+                className="rounded-xl font-semibold text-xl bg-stone-100 p-2 text-center cursor-pointer"
                 onClick={() => {
                   router.push("/dashboard");
                 }}

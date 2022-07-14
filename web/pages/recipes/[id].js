@@ -63,6 +63,9 @@ function SelectRecipePage() {
       },
     });
     const data = await res.json();
+    mixpanel.track("Viewed recipe", {
+      source: "Kookie Web Client",
+    });
     return data;
   };
 

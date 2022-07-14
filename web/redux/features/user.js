@@ -140,10 +140,6 @@ export const logout = createAsyncThunk("users/logout", async (_, thunkAPI) => {
     const data = await res.json();
 
     if (res.status === 200) {
-      mixpanel.track("Successfully logged out", {
-        source: "Kookie Web Client",
-      });
-
       return res.status;
     } else {
       mixpanel.track("Failed log out", {

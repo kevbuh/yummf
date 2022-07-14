@@ -23,7 +23,7 @@ function CreateRecipePage() {
     formData.append("directions", values.directions);
     formData.append("cook_time", values.cook_time);
     formData.append("serving", values.serving);
-    formData.append("url", values.url);
+    formData.append("url", values.source_url);
     formData.append("caption", values.caption);
     // values.ingredient_list.forEach((item)=>formData.append('ingredient_list'))
     formData.append("ingredient_list", JSON.stringify(values.ingredient_list));
