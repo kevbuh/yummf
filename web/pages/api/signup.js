@@ -6,7 +6,10 @@ export default async (req, res) => {
     const { email, password } = req.body;
 
     const body = JSON.stringify({
-      client_id: process.env.CLIENT_ID, // need to make this an env variable
+      client_id:
+        process.env.NODE_ENV == "development"
+          ? process.env.CLIENT_ID
+          : process.env.PROD_CLIENT_ID,
       email,
       password,
     });
