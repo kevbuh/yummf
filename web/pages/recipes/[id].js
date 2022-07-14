@@ -392,9 +392,12 @@ function SelectRecipePage() {
 
                 <p className="font-light">
                   {data?.ingredient_list?.length > 0
-                    ? JSON.parse(data.ingredient_list).map((d) => {
+                    ? JSON.parse(data.ingredient_list).map((d, index) => {
                         return (
-                          <div className="grid grid-cols-2 border p-2 rounded-lg my-2">
+                          <div
+                            className="grid grid-cols-2 border p-2 rounded-lg my-2"
+                            key={index}
+                          >
                             <p>{d.ingredient_name}</p>
                             <p>{d.ingredient_amount}</p>
                           </div>
@@ -432,10 +435,10 @@ function SelectRecipePage() {
               isSuccess &&
               !isError ? (
                 <div>
-                  {data?.comments.map((d) => (
-                    <div className="my-2 p-3 flex flex-row">
-                      <div class="avatar">
-                        <div class="w-12 rounded-full mr-4">
+                  {data?.comments.map((d, index) => (
+                    <div className="my-2 p-3 flex flex-row" key={index}>
+                      <div className="avatar">
+                        <div className="w-12 rounded-full mr-4">
                           {/* <img src="https://placeimg.com/192/192/people" /> */}
                         </div>
                       </div>

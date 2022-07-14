@@ -38,9 +38,10 @@ function SearchResultPage() {
 
             {isSuccess && data.length > 0 ? (
               <div className="grid grid-cols-4 gap-4 ">
-                {data.map((d) => {
+                {data.map((d, index) => {
                   return (
                     <RecipeCard
+                      key={index}
                       name={d.name}
                       author={d.user_id}
                       num_saves={d.num_saves}
