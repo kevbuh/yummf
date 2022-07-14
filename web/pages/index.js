@@ -97,12 +97,12 @@ export default function Home() {
           {isSuccess && !isLoading && !isError && data?.user ? (
             <button>
               <p
-                className="mt-1 text-rosa"
+                className="rounded-xl text-xl bg-stone-100 p-2 text-center text-rosa cursor-pointer"
                 onClick={() => {
                   router.push("/dashboard");
                 }}
               >
-                dashboard
+                Dashboard
               </p>
             </button>
           ) : isLoading ? (
@@ -160,7 +160,7 @@ export default function Home() {
             speed={0.1}
             loop={true}
             src="https://assets5.lottiefiles.com/packages/lf20_mutit5qg.json"
-            style={{ height: "400px", width: "400px" }}
+            style={{ height: "500px", width: "500px" }}
           ></Player>
         </div>
       </div>
@@ -269,7 +269,7 @@ export default function Home() {
               {/* <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
                 Facebook
               </p> */}
-              <p className="text-base font-light">or</p>
+              {/* <p className="text-base font-light">or</p> */}
               <div className="bg-stone-100 px-2 rounded-xl flex flex-col ">
                 {isSuccess && !isLoading && !isError && data?.user ? (
                   <button>
@@ -280,7 +280,7 @@ export default function Home() {
                         router.push("/dashboard");
                       }}
                     >
-                      Go to Kooki dashboard
+                      Go To Dashboard
                     </p>
                   </button>
                 ) : isLoading ? (

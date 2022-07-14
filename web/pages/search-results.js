@@ -45,9 +45,20 @@ function SearchResultPage() {
                       name={d.name}
                       author={d.user_id}
                       num_saves={d.num_saves}
-                      rating={d.rating}
+                      rating={
+                        d.past_hour_average
+                          ? d.past_hour_average?.toFixed(2)
+                          : null
+                      }
                       cook_time={d.cook_time}
+                      caption={d.caption}
                       id={d.id}
+                      image={
+                        d.featured_image !== null &&
+                        d.featured_image !== undefined
+                          ? API_URL + d.featured_image?.url.split("?")[0]
+                          : null
+                      }
                     />
                   );
                 })}
