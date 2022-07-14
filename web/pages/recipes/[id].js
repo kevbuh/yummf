@@ -1,14 +1,14 @@
+import { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import { useQuery, useMutation } from "react-query";
+
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-import { getUser } from "../../fetches/allFetches";
-import Image from "next/image";
 import { API_URL } from "../../config";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useState } from "react";
-import { useRouter } from "next/router";
-import { postNewRating } from "../../fetches/allFetches";
 import * as Yup from "yup";
+import { postNewRating, getUser } from "../../fetches/allFetches";
 import MoreLikeThis from "../../components/moreLikeThis";
 import mixpanel from "mixpanel-browser";
 
@@ -16,6 +16,7 @@ function SelectRecipePage() {
   const { query } = useRouter();
   const [liked, setLiked] = useState(false);
   const [showRate, setShowRate] = useState(false);
+  const [comment, setComment] = useState(false);
   const router = useRouter();
 
   const getStars = (num_stars) => {
@@ -452,8 +453,65 @@ function SelectRecipePage() {
                   ))}
                 </div>
               ) : (
-                <div className=" mt-6">No Comments</div>
+                <div className="mt-2">No Comments</div>
               )}
+              <div>
+                {comment ? (
+                  <div className="mt-2">
+                    <Formik
+                      initialValues={{
+                        user_id: dataUser.user.id,
+                        text: "",
+                        recipe_id: data.id,
+                      }}
+                      onSubmit={(values) => {
+                        fetch(`${API_URL}/api/v1/comments`, {
+                          method: "POST",
+                          headers: {
+                            "Content-Type": "application/json",
+                          },
+                          body: JSON.stringify(values),
+                        })
+                          .then((res) => res.json())
+                          .then(() => router.reload(window.location.pathname))
+                          .catch((error) => console.log("error", error));
+                        // router.reload(window.location.pathname);
+                      }}
+                    >
+                      <Form className="p-3 flex flex-col">
+                        <Field
+                          id="text"
+                          name="text"
+                          placeholder="Comment..."
+                          className="bg-stone-100 rounded p-2 my-2"
+                        />
+
+                        <div className="flex flex-row items-end ">
+                          <button
+                            className=" p-2 mr-3 my-2 rounded  font-semibold "
+                            onClick={() => setComment((comment) => !comment)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            type="submit"
+                            className="bg-rosa p-2 my-2 rounded text-white font-semibold "
+                          >
+                            Submit
+                          </button>
+                        </div>
+                      </Form>
+                    </Formik>
+                  </div>
+                ) : (
+                  <button
+                    className="p-2 font-semibold "
+                    onClick={() => setComment((comment) => !comment)}
+                  >
+                    Comment
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         )}

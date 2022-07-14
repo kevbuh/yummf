@@ -5,6 +5,8 @@ namespace :api do
     resources :search, only: %i[index]
     resources :rating
     resources :recipes
+    post '/comments', to: 'comment#create'
+
 
     scope :users, module: :users do
       # api/v1/users POST to register user
