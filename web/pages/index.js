@@ -135,13 +135,13 @@ export default function Home() {
 
         {/* put something cool here */}
         <div className="rounded-xl bg-stone-100 h-3/5 my-auto p-30 ml-1 mr-8 ">
-          {/* <Player
+          <Player
             autoplay={true}
             speed={0.1}
-            loop={false}
+            loop={true}
             src="https://assets5.lottiefiles.com/packages/lf20_mutit5qg.json"
             style={{ height: "400px", width: "400px" }}
-          ></Player> */}
+          ></Player>
         </div>
       </div>
 
