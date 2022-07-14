@@ -10,11 +10,11 @@ export default async (req, res) => {
     const body = JSON.stringify({
       grant_type: "password",
       client_id:
-        process.env.NODE_ENV == "development"
+        process.env.NODE_ENV === "development"
           ? process.env.CLIENT_ID
           : process.env.PROD_CLIENT_ID,
       client_secret:
-        process.env.NODE_ENV == "development"
+        process.env.NODE_ENV === "development"
           ? process.env.CLIENT_SECRET
           : process.env.PROD_CLIENT_SECRET,
       email,

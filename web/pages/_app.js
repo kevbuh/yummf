@@ -21,7 +21,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
   );
 
   mixpanel.init("fe954f9cea9b43ee01a8374815b78e20", {
-    debug: process.env.NODE_ENV == "production" ? false : true,
+    debug: process.env.NODE_ENV === "development" ? true : false,
   });
 
   return (

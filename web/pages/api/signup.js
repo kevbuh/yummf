@@ -7,7 +7,7 @@ export default async (req, res) => {
 
     const body = JSON.stringify({
       client_id:
-        process.env.NODE_ENV == "development"
+        process.env.NODE_ENV === "development"
           ? process.env.CLIENT_ID
           : process.env.PROD_CLIENT_ID,
       email,
