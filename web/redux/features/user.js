@@ -21,18 +21,20 @@ export const register = createAsyncThunk(
 
       const data = await res.json();
 
-      Mixpanel.identify(email);
-      mixpanel.track("Successful Sign Up", {
-        source: "Kookie Web Client",
-        "Signed in with email": true,
-      });
-      Mixpanel.people.set({
-        $email: email,
-      });
-
       if (res.status === 200) {
+        mixpanel.identify(email);
+        mixpanel.track("Successful Sign Up", {
+          source: "Kookie Web Client",
+          "Signed in with email": true,
+        });
+        mixpanel.people.set({
+          $email: email,
+        });
         return data;
       } else {
+        mixpanel.track("Failed Sign Up", {
+          source: "Kookie Web Client",
+        });
         return thunkAPI.rejectWithValue(data);
       }
     } catch (err) {
@@ -78,6 +80,10 @@ export const login = createAsyncThunk(
 
       if (res.status === 200) {
         const { dispatch } = thunkAPI;
+
+        mixpanel.track("User log in", {
+          source: "Kookie Web Client",
+        });
 
         dispatch(getUser());
 

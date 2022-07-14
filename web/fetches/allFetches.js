@@ -18,9 +18,9 @@ export const postNewRecipe = async (values) => {
     body: values,
   });
 
-  // mixpanel.track("Created Recipe", {
-  //   source: "Kookie Web Client",
-  // });
+  mixpanel.track("Created Recipe", {
+    source: "Kookie Web Client",
+  });
 
   return apiRes2.status;
 };

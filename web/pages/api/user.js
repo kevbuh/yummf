@@ -7,7 +7,7 @@ export default async (req, res) => {
 
     const access = cookies.access ?? false;
 
-    if (access === false) {
+    if (access === false || !cookies) {
       return res.status(401).json({
         error: "User unauthorized to make this request",
       });

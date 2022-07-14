@@ -1,21 +1,26 @@
 import React from "react";
+import Link from "next/link";
 
 function Footer() {
   return (
     <footer className="footer p-10 bg-base-300 text-base-content">
       <div>
-        <span className="footer-title">Services</span>
-        <a className="link link-hover">Branding</a>
-        <a className="link link-hover">Design</a>
-        <a className="link link-hover">Marketing</a>
-        <a className="link link-hover">Advertisement</a>
+        <span className="footer-title">Kooki</span>
+        <Link href="/dashboard">
+          <a className="link link-hover">Dashboard</a>
+        </Link>
+        <Link href="/account">
+          <a className="link link-hover">Account</a>
+        </Link>
       </div>
       <div>
         <span className="footer-title">Company</span>
-        <a className="link link-hover">About us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Jobs</a>
-        <a className="link link-hover">Press kit</a>
+        <Link href="/">
+          <a className="link link-hover">About us</a>
+        </Link>
+        <Link href="/help">
+          <a className="link link-hover">Contact</a>
+        </Link>
       </div>
       <div>
         <span className="footer-title">Social</span>
