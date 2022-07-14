@@ -94,18 +94,35 @@ export default function Home() {
           <a className="text-xl font-semibold my-auto ml-auto cursor-pointer ">
             {/* About */}
           </a>
-          <button
-            className="text-xl font-semibold rounded-xl bg-stone-100 p-2 text-center cursor-pointer scroll-smooth"
-            onClick={executeScroll2}
-          >
-            Log in
-          </button>
-          <button
-            className="text-xl font-semibold rounded-xl bg-rosa text-white p-2 cursor-pointer"
-            onClick={executeScroll}
-          >
-            Sign up
-          </button>
+          {isSuccess && !isLoading && !isError && data?.user ? (
+            <button>
+              <p
+                className="mt-1 text-rosa"
+                onClick={() => {
+                  router.push("/dashboard");
+                }}
+              >
+                dashboard
+              </p>
+            </button>
+          ) : isLoading ? (
+            <div className="btn loading"></div>
+          ) : (
+            <>
+              <button
+                className="text-xl font-semibold rounded-xl bg-stone-100 p-2 text-center cursor-pointer scroll-smooth"
+                onClick={executeScroll2}
+              >
+                Log in
+              </button>
+              <button
+                className="text-xl font-semibold rounded-xl bg-rosa text-white p-2 cursor-pointer"
+                onClick={executeScroll}
+              >
+                Sign up
+              </button>
+            </>
+          )}
         </div>
       </div>
       <div className="h-screen grid grid-cols-2">
