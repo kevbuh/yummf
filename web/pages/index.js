@@ -125,7 +125,7 @@ export default function Home() {
           )}
         </div>
       </div>
-      <div className="h-screen md:grid md:grid-cols-2">
+      <div className="md:h-screen md:grid md:grid-cols-2">
         <div className="m-auto grid grid-rows-2 justify-evenly">
           <div>
             {/* The complete food solution, everything in one place */}
