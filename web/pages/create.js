@@ -25,7 +25,6 @@ function CreateRecipePage() {
     formData.append("serving", values.serving);
     formData.append("url", values.source_url);
     formData.append("caption", values.caption);
-    // values.ingredient_list.forEach((item)=>formData.append('ingredient_list'))
     formData.append("ingredient_list", JSON.stringify(values.ingredient_list));
 
     const posted = await postNewRecipe(formData);

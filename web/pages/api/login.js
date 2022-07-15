@@ -3,13 +3,6 @@ import { API_URL } from "../../config/index";
 
 export default async (req, res) => {
   if (req.method === "POST") {
-    console.log("here", req.body);
-    if (process.env.NODE_ENV === "development") {
-      console.log("in prod");
-      console.log("in prod");
-      console.log(process.env.PROD_CLIENT_ID);
-    }
-
     const { email, password } = req.body;
 
     const body = JSON.stringify({

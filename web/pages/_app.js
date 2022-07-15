@@ -20,9 +20,11 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
       })
   );
 
-  mixpanel.init("fe954f9cea9b43ee01a8374815b78e20", {
-    debug: process.env.NODE_ENV === "development" ? true : false,
-  });
+  if (process.env.NODE_ENV === "production") {
+    mixpanel.init("fe954f9cea9b43ee01a8374815b78e20", {
+      debug: process.env.NODE_ENV === "development" ? true : false,
+    });
+  }
 
   return (
     <GoogleOAuthProvider clientId="589870505728-gpdvvd2v04nq5nvlj59gere6o2ga9jk5.apps.googleusercontent.com">
