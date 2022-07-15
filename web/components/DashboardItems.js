@@ -18,7 +18,9 @@ function DashboardItems() {
   } = useInfiniteQuery("allRecipes", getAllRecipes, {
     getNextPageParam: (lastPage) => {
       // console.log("PAGES", lastPage.pagination);
-      if (lastPage.pagination.current_page < lastPage.pagination.total_pages) {
+      if (
+        lastPage?.pagination?.current_page < lastPage?.pagination?.total_pages
+      ) {
         lastPage.nextCursor = lastPage.pagination.next_page;
         return lastPage.nextCursor;
       }

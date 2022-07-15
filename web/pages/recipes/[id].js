@@ -63,6 +63,7 @@ function SelectRecipePage() {
         Accept: "application/json",
       },
     });
+    console.log("YEEE", API_URL);
     const data = await res.json();
     mixpanel.track("Viewed recipe", {
       source: "Kookie Web Client",
@@ -383,12 +384,8 @@ function SelectRecipePage() {
               <div className="text-2xl mt-6 mb-4 w-full">Ingredients</div>
               <div className="w-1/2">
                 <div className=" w-full grid grid-cols-2 mb-2">
-                  <p className="rounded-lg p-1 bg-stone-100 mr-auto font-lg">
-                    Ingredient
-                  </p>
-                  <p className="rounded-lg p-1 bg-stone-100 mr-auto font-lg">
-                    Amount
-                  </p>
+                  <p className=" p-1  mr-auto font-lg">Ingredient</p>
+                  <p className=" p-1  mr-auto font-lg">Amount</p>
                 </div>
 
                 <p className="font-light">

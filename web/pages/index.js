@@ -83,14 +83,14 @@ export default function Home() {
 
   return (
     <div>
-      <div className="grid grid-cols-2 max-w-6xl mx-auto mt-4 ">
+      <div className="grid grid-cols-2 w-full sm:max-w-6xl mx-auto mt-4 ">
         <a
           className="btn btn-ghost normal-case text-3xl text-rosa mr-auto my-auto"
           onClick={executeScroll}
         >
           kooki
         </a>
-        <div className="grid grid-cols-3 ml-auto my-auto gap-4 ">
+        <div className="grid grid-rows-1 sm:grid-cols-3 ml-auto my-auto gap-4 ">
           <a className="text-xl font-semibold my-auto ml-auto cursor-pointer ">
             {/* About */}
           </a>
@@ -110,7 +110,7 @@ export default function Home() {
           ) : (
             <>
               <button
-                className="text-xl font-semibold rounded-xl bg-stone-100 p-2 text-center cursor-pointer scroll-smooth"
+                className="text-xl font-semibold rounded-xl bg-stone-100 px-3 py-2 sm:p-2 text-center cursor-pointer scroll-smooth"
                 onClick={executeScroll2}
               >
                 Log in
@@ -125,16 +125,16 @@ export default function Home() {
           )}
         </div>
       </div>
-      <div className="h-screen grid grid-cols-2">
+      <div className="h-screen md:grid md:grid-cols-2">
         <div className="m-auto grid grid-rows-2 justify-evenly">
           <div>
             {/* The complete food solution, everything in one place */}
-            <div className="text-7xl font-semibold">Food Platform</div>
+            <div className="text-7xl font-semibold mt-20 sm:mt-1">Recipes </div>
             <div className="text-7xl font-semibold">
-              For <span className="underline">Everyone</span>
+              For <span className="underline">You</span>
             </div>
           </div>
-          <div className="mt-auto mx-auto">
+          <div className="my-auto sm:mt-auto mx-auto">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-8 w-8 m-auto cursor-pointer"
@@ -154,18 +154,18 @@ export default function Home() {
         </div>
 
         {/* put something cool here */}
-        <div className="rounded-xl bg-stone-100 h-3/5 my-auto p-30 ml-1 mr-8 ">
+        <div className="rounded-xl bg-stone-100 md:mt-20 h-2/5 mx-auto px-30 md:ml-1 md:mr-8 ">
           <Player
             autoplay={true}
             speed={0.1}
             loop={true}
             src="https://assets5.lottiefiles.com/packages/lf20_mutit5qg.json"
-            style={{ height: "500px", width: "500px" }}
+            style={{ height: "h-50", width: "500px" }}
           ></Player>
         </div>
       </div>
 
-      <div className=" grid grid-cols-1 mb-20" ref={arrowDown}>
+      <div className=" grid grid-cols-1 mt-40 sm:mt-0 mb-20" ref={arrowDown}>
         <div className="m-auto h-1/2">
           <div className="text-7xl font-semibold">Discover Recipes</div>
         </div>
@@ -212,17 +212,17 @@ export default function Home() {
       </div>
       <div className=" grid grid-row-1 mt-48">
         <div className="mx-auto mb-4">
-          <div className="text-7xl font-semibold">
+          <div className="text-5xl md:text-7xl font-semibold">
             Technology First Approach to Food
           </div>
         </div>
         <div className="mx-auto">
-          <div className="text-3xl font-light mt-2">
+          <div className="text-2xl md:text-3xl font-light mt-2">
             With a Fully Integrated Suite of Products
           </div>
         </div>
-        <div className="mx-auto grid grid-cols-4 h-80 gap-8 mt-6">
-          <div className="text-2xl font-semibold  rounded-lg bg-stone-100 w-60">
+        <div className="mx-auto grid grid-cols-2 md:grid-cols-4 h-80 gap-8 mt-6 w-10/12 ">
+          <div className="text-2xl font-semibold  rounded-lg bg-stone-100">
             Discover
           </div>
           <div className="text-2xl font-semibold  rounded-lg bg-stone-100">
@@ -236,9 +236,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="h-screen grid grid-cols-2 mt-20">
-        <div className="m-auto" ref={myRef}>
-          <p className="mt-20 mb-20 text-7xl mx-auto font-bold border-4 border-rosa text-rosa rounded-full py-24 px-12 hover:text-white hover:bg-rosa hover:cursor-pointer">
+      <div className="h-screen md:grid md:grid-cols-2 mt-20">
+        <div className="m-auto invisible md:visible" ref={myRef}>
+          <p className="md:mt-20 md:mb-20 text-7xl mx-auto font-bold border-4 border-rosa text-rosa rounded-full md:py-24 px-12 hover:text-white hover:bg-rosa hover:cursor-pointer">
             kooki
           </p>
         </div>
