@@ -19,7 +19,6 @@ export default function Home() {
     getUser
   );
   const myRef = useRef(null);
-  const myRef2 = useRef(null);
 
   const responseGoogle = (response) => {
     var token = jwt_decode(response.credential);
