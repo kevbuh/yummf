@@ -45,6 +45,10 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  recipes       Recipe[]
+  comments      Comment[]
+  createdAt     DateTime  @default(now())
+
 }
 
 model VerificationToken {
@@ -53,4 +57,37 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Recipe {
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now())
+  name        String
+  cookTime    String?
+  directions  String?
+  servingSize String?
+  sourceURL   String?
+  caption     String
+  // published  Boolean    @default(false)
+  author      User       @relation(fields: [authorId], references: [id])
+  authorId    String
+  comments    Comment[]
+  categories  Category[]
+
+}
+
+model Category {
+  id      Int      @id @default(autoincrement())
+  name    String
+  recipes Recipe[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  text      String
+  Recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
+  recipeId  Int?
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime @default(now())
 }
