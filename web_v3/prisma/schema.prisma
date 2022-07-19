@@ -68,7 +68,9 @@ model Recipe {
   servingSize String?
   sourceURL   String?
   caption     String
-  // published  Boolean    @default(false)
+  numSaves    Int        @default(0)
+  avgRating   Int
+  secret      Boolean    @default(false)
   author      User       @relation(fields: [authorId], references: [id])
   authorId    String
   comments    Comment[]

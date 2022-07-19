@@ -19,6 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       servingSize: serving,
       sourceURL: source_url,
       caption: caption,
+      avgRating: 0,
       authorId: "cl5rq9lvo0040nlv2wuf5lsgk", // this need to be dynamically read
     },
   });

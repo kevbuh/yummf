@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 function AccountSettingsPage() {
   const router = useRouter();
   const { data: session } = useSession();
+  // console.log("sess", session);
 
   return (
     <div>
@@ -28,7 +29,7 @@ function AccountSettingsPage() {
                       Welcome, {session?.user?.email}
                     </span>
                   </p>
-                  <p>Joined ??? days ago</p>
+                  {/* <p>Joined ??? days ago</p> */}
                 </>
               ) : null}
             </div>
