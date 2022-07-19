@@ -1,14 +1,13 @@
+import Head from "next/head";
 import { useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/router";
-
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
 import MoreLikeThis from "../../components/moreLikeThis";
+
+// import Image from "next/image";
+// import { useRouter } from "next/router";
+// import { Formik, Field, Form, ErrorMessage } from "formik";
+// import * as Yup from "yup";
 
 import type {
   NextPage,
@@ -24,8 +23,6 @@ const SelectRecipePage: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [showRate, setShowRate] = useState(false);
   const [comment, setComment] = useState(false);
-
-  console.log(":::", data);
 
   const getStars = (num_stars: number) => {
     const steps = [];
@@ -46,6 +43,10 @@ const SelectRecipePage: NextPage = ({
 
   return (
     <>
+      <Head>
+        <title>{data?.name}</title>
+        <meta name="description" content={data?.caption} key="desc" />
+      </Head>
       <NavBar />
 
       <div className="mt-20 rounded-lg md:w-2/3 item-center mx-4 md:mx-auto">
@@ -54,7 +55,7 @@ const SelectRecipePage: NextPage = ({
             <div className="flex flex-col-reverse lg:flex-row justify-between align-top">
               <div className="my-auto h-full">
                 <div className="lg: mt-4">
-                  <div className="text-5xl font-light mb-1">{data?.name}</div>
+                  <h1 className="text-5xl font-light mb-1">{data?.name}</h1>
                 </div>
                 <div className="mb-4">
                   <p
@@ -68,10 +69,7 @@ const SelectRecipePage: NextPage = ({
                 text-stone-400 text-sm font-light mt-1"
                   >
                     Recipe #{data?.id} submitted by{" "}
-                    <span className="underline cursor-pointer">
-                      Author {data?.authorId}
-                    </span>
-                    .
+                    <span className="underline ">Author {data?.authorId}</span>.
                     <span className="underline">
                       {" "}
                       {data?.url !== "undefined" ? data?.url : null}

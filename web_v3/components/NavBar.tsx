@@ -101,26 +101,26 @@ const NavBar = () => {
             tabIndex={0}
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
           >
-            <Link href="/notifications">
-              <li>
+            <li>
+              <Link href="/notifications">
                 <a>Notifications</a>
-              </li>
-            </Link>
-            <Link href="/saved-recipes">
-              <li>
+              </Link>
+            </li>
+            <li>
+              <Link href="/saved-recipes">
                 <a>Saved Recipes</a>
-              </li>
-            </Link>
+              </Link>
+            </li>
             {/* <Link href="/grocery-list">
               <li>
                 <a>Grocery List</a>
               </li>
             </Link> */}
-            <Link href="/create">
-              <li>
+            <li>
+              <Link href="/create">
                 <a>Create Recipe</a>
-              </li>
-            </Link>
+              </Link>
+            </li>
             <div className="divide-y">
               <li>
                 <Link href="/account/">
@@ -130,14 +130,16 @@ const NavBar = () => {
                   </a>
                 </Link>
               </li>
-              <Link href="/help">
-                <li>
+              <li>
+                <Link href="/help">
                   <a>Help</a>
-                </li>
-              </Link>
+                </Link>
+              </li>
             </div>
             <li>
-              <a onClick={() => signOut({ callbackUrl: "/" })}>Logout</a>
+              <Link href="/">
+                <a onClick={() => signOut({ callbackUrl: "/" })}>Logout</a>
+              </Link>
             </li>
           </ul>
         </div>
