@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Footer from "../../components/Footer";
 import { useSession } from "next-auth/react";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
 
 function AccountSettingsPage() {
   const router = useRouter();
   const { data: session } = useSession();
-  // console.log("sess", session);
 
   return (
     <div>
@@ -60,6 +61,29 @@ function AccountSettingsPage() {
       <Footer />
     </div>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session: session,
+    },
+  };
 }
 
 export default AccountSettingsPage;

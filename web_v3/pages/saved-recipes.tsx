@@ -1,5 +1,7 @@
+import { unstable_getServerSession } from "next-auth/next";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 function SavedRecipesPage() {
   return (
@@ -15,6 +17,29 @@ function SavedRecipesPage() {
       <Footer />
     </div>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session: session,
+    },
+  };
 }
 
 export default SavedRecipesPage;

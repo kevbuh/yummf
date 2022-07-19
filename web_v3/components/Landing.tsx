@@ -10,7 +10,6 @@ export default function Landing() {
   const myRef = useRef<null | HTMLDivElement>(null);
   const arrowDown = useRef<null | HTMLDivElement>(null);
 
-  // run this function from an event handler or an effect to execute scroll
   const executeScroll = () => myRef?.current?.scrollIntoView();
   const executeScroll2 = () => {
     setShouldShowLogin((shouldShowLogin) => !shouldShowLogin);
@@ -178,7 +177,7 @@ export default function Landing() {
             <div className="mx-auto text-2xl rounded-lg bg-stone-100 p-2 text-center space-y-4 py-8">
               <button
                 className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto "
-                onClick={() => signIn()}
+                onClick={() => signIn("google")}
               >
                 Google
               </button>

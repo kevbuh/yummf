@@ -3,6 +3,8 @@ import NavBar from "../components/NavBar";
 import Link from "next/link";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { authOptions } from "../pages/api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
 
 function HelpPage() {
   return (
@@ -94,6 +96,29 @@ function HelpPage() {
       <Footer />
     </div>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session: session,
+    },
+  };
 }
 
 export default HelpPage;

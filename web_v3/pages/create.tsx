@@ -59,6 +59,8 @@ function CreateRecipePage() {
                 body: JSON.stringify(values),
               });
 
+              router.push("/");
+
               setSubmitting(false);
             }}
           >

@@ -1,8 +1,4 @@
-import type {
-  NextPage,
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-} from "next";
+import type { NextPage, InferGetServerSidePropsType } from "next";
 import Link from "next/link";
 import NavBar from "../components/NavBar";
 import React from "react";
@@ -13,22 +9,23 @@ import Landing from "../components/Landing";
 import Sidebar from "../components/Sidebar";
 import DashboardItems from "../components/DashboardItems";
 
+import { authOptions } from "./api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
+
 const Home: NextPage = ({
   recipes,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session } = useSession();
 
-  // console.log("####", recipes);
-
   if (session) {
     return (
       <div className="mb-8">
         <NavBar />
-        <div className="flex lg:flex-row xl:mx-20">
+        <div className="flex lg:flex-row mx-auto">
           <div className="hidden sm:visible lg:w-1/5 sm:flex sm:flex-col lg:h-screen sm:sticky sm:top-20">
             <div className="sm:px-3 sm:mt-3">
               <Link href="/create">
-                <button className="rounded-xl hover:bg-rosa hover:text-white font-semibold py-2.5 text-xl w-full bg-stone-100 ">
+                <button className="rounded-xl hover:bg-rosa hover:text-white font-semibold py-2.5 text-xl w-full border border-stone-100 shadow-sm ">
                   Create
                 </button>
               </Link>
@@ -42,12 +39,23 @@ const Home: NextPage = ({
       </div>
     );
   }
+  // Else if not in session
   return <Landing />;
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export async function getServerSideProps(context: any) {
   const recipes = await prisma?.recipe?.findMany();
-  return { props: { recipes: JSON.parse(JSON.stringify(recipes)) } };
-};
+
+  return {
+    props: {
+      session: await unstable_getServerSession(
+        context.req,
+        context.res,
+        authOptions
+      ),
+      recipes: JSON.parse(JSON.stringify(recipes)),
+    },
+  };
+}
 
 export default Home;

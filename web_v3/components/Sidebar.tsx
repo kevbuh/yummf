@@ -1,6 +1,6 @@
 function Sidebar() {
   return (
-    <div className="bg-stone-100 flex flex-col p-4 m-3 rounded-lg divide-y ">
+    <div className="border border-stone-100 shadow-sm flex flex-col p-4 m-3 rounded-lg divide-y ">
       <p className="text-xl font-semibold mb-1 mx-auto">Categories</p>
       <div className="">
         <div className="flex flex-row mt-1">
@@ -99,9 +99,9 @@ function Sidebar() {
           <p className="text-lg ml-6">Nutrition</p>
         </div>
         <div className="mt-1">
-          <a className="font-semibold text-blue-600 cursor-pointer">
+          <p className="font-semibold text-blue-600 cursor-pointer">
             Show more
-          </a>
+          </p>
         </div>
       </div>
     </div>
