@@ -23,7 +23,9 @@ const SelectRecipePage: NextPage = ({
   const [showRate, setShowRate] = useState(false);
   const [comment, setComment] = useState(false);
   const { data: session } = useSession();
-  const router = useRouter();
+  const [liked, setLiked] = useState(false);
+
+  // console.log(data?.likedBy[0].email, session?.user?.email);
 
   const getStars = (num_stars: number) => {
     const steps = [];
@@ -45,7 +47,7 @@ const SelectRecipePage: NextPage = ({
   return (
     <>
       <Head>
-        <title>{data.name} | Kooki </title>
+        <title>{data?.name} | Kooki </title>
         <meta name="description" content={data?.caption} key="desc" />
       </Head>
       <NavBar />
@@ -259,38 +261,42 @@ const SelectRecipePage: NextPage = ({
                 </div>
                 <div className="flex flex-row w-40 justify-center border rounded-lg py-2">
                   <button
-                  // className={liked ? "bg-pink-600 text-black rounded" : null}
-                  // onClick={() => {
-                  //   fetch("/api/account/like_recipe", {
-                  //     method: "POST",
-                  //     headers: {
-                  //       "Content-Type": "application/json",
-                  //     },
-                  //     body: JSON.stringify({
-                  //       liked_recipe: data?.id,
-                  //       user: userID,
-                  //     }),
-                  //   }).catch((error) => console.log("error", error));
-                  //   // router.push("/");
-                  //   setLiked((liked) => !liked);
-                  // }}
+                    className={liked ? "bg-pink-600 text-black rounded" : ""}
+                    onClick={async () => {
+                      const res = await fetch("/api/save_recipe", {
+                        method: "POST",
+                        headers: {
+                          Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                          recipeId: data.id,
+                          userEmail: session?.user?.email,
+                        }),
+                      });
+                      // router.push("/");
+                      setLiked((liked) => !liked);
+                    }}
                   >
-                    <>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                        />
-                      </svg>
-                    </>
+                    {data?.likedBy[0]?.email === session?.user?.email ? (
+                      <p>Saved!</p>
+                    ) : (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                          />
+                        </svg>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
@@ -485,6 +491,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     include: {
       comments: true,
       ratings: true,
+      likedBy: true,
     },
   });
 

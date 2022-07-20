@@ -49,7 +49,7 @@ function CreateRecipePage() {
               featured_image: Yup.mixed(),
             })}
             onSubmit={(values, { setSubmitting }) => {
-              console.log("formik values:", values);
+              // console.log("formik values:", values);
 
               fetch("/api/create_recipe", {
                 method: "POST",

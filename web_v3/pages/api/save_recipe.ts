@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(400).json({ error: "Method not allowed" });
   }
 
-  const { values, recipeId, userEmail } = JSON.parse(req.body);
+  const { recipeId, userEmail } = JSON.parse(req.body);
 
   const user = await prisma.user.findUnique({
     where: {
@@ -16,13 +16,22 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  const createRating = await prisma.rating.create({
+  const saveRecipe = await prisma.recipe.update({
+    where: {
+      id: recipeId,
+    },
     data: {
-      value: values.value,
-      recipeId: recipeId,
-      authorId: user?.id as string, // this need to be dynamically read
+      likedBy: {
+        connect: {
+          id: user?.id,
+        },
+      },
+      numSaves: {
+        increment: 1,
+      },
+      // authorId: user?.id as string, // this need to be dynamically read
     },
   });
 
-  return createRating;
+  return saveRecipe;
 };

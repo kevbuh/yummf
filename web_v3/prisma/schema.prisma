@@ -47,9 +47,9 @@ model User {
   sessions      Session[]
   recipes       Recipe[]
   comments      Comment[]
+  Rating        Rating[]
   createdAt     DateTime  @default(now())
-
-  Rating Rating[]
+  savedRecipes  Recipe[]  @relation(name: "UserSaved")
 }
 
 model VerificationToken {
@@ -76,6 +76,7 @@ model Recipe {
   ratings     Rating[]
   comments    Comment[]
   categories  Category[]
+  likedBy     User[]     @relation(name: "UserSaved")
 }
 
 model Category {
