@@ -6,14 +6,16 @@ import MoreLikeThis from "../../components/moreLikeThis";
 
 // import Image from "next/image";
 // import { useRouter } from "next/router";
-// import { Formik, Field, Form, ErrorMessage } from "formik";
-// import * as Yup from "yup";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 import type {
   NextPage,
   GetServerSideProps,
   InferGetServerSidePropsType,
 } from "next";
+
+import { useSession } from "next-auth/react";
 
 import React from "react";
 import prisma from "../../utils/prisma";
@@ -23,6 +25,8 @@ const SelectRecipePage: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [showRate, setShowRate] = useState(false);
   const [comment, setComment] = useState(false);
+
+  const { data: session } = useSession();
 
   const getStars = (num_stars: number) => {
     const steps = [];
@@ -44,7 +48,7 @@ const SelectRecipePage: NextPage = ({
   return (
     <>
       <Head>
-        <title>{data?.name}</title>
+        <title>{data.name} | Kooki </title>
         <meta name="description" content={data?.caption} key="desc" />
       </Head>
       <NavBar />
@@ -376,7 +380,7 @@ const SelectRecipePage: NextPage = ({
 
           <div className="text-2xl w-full">Reviews</div>
           <div className="mb-4  my-2 border rounded p-3 shadow-sm w-full">
-            {false ? (
+            {data?.comments?.length > 0 ? (
               <div>
                 {data?.comments.map((d: any, index: number) => (
                   <div className="my-2 p-3 flex flex-row" key={index}>
@@ -386,9 +390,9 @@ const SelectRecipePage: NextPage = ({
                       </div>
                     </div>
                     <div className="my-auto">
-                      <p>{d.text}</p>
+                      <p>{d?.text}</p>
                       <p className="text-sm text-stone-400">
-                        {d.created_at.slice(5, 7)}/{d.created_at.slice(2, 4)}
+                        {d.createdAt.slice(5, 7)}/{d.createdAt.slice(2, 4)}
                       </p>
                     </div>
                   </div>
@@ -400,25 +404,24 @@ const SelectRecipePage: NextPage = ({
             <div>
               {comment ? (
                 <div className="mt-2">
-                  {/* <Formik
+                  <Formik
                     initialValues={{
-                      user_id: dataUser.user.id,
                       text: "",
-                      recipe_id: data.id,
                     }}
-                    // onSubmit={(values) => {
-                    //   fetch(`${API_URL}/api/v1/comments`, {
-                    //     method: "POST",
-                    //     headers: {
-                    //       "Content-Type": "application/json",
-                    //     },
-                    //     body: JSON.stringify(values),
-                    //   })
-                    //     .then((res) => res.json())
-                    //     .then(() => router.reload(window.location.pathname))
-                    //     .catch((error) => console.log("error", error));
-                    //   // router.reload(window.location.pathname);
-                    // }}
+                    onSubmit={async (values) => {
+                      const res = await fetch("/api/create_comment", {
+                        method: "POST",
+                        headers: {
+                          Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                          recipeId: data.id,
+                          values: values,
+                          userEmail: session?.user?.email,
+                        }),
+                      });
+                      // router.reload(window.location.pathname);
+                    }}
                   >
                     <Form className="p-3 flex flex-col">
                       <Field
@@ -443,7 +446,7 @@ const SelectRecipePage: NextPage = ({
                         </button>
                       </div>
                     </Form>
-                  </Formik> */}
+                  </Formik>
                 </div>
               ) : (
                 <button
@@ -478,6 +481,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   const thisRecipe = await prisma?.recipe.findUnique({
     where: {
       id: parseInt(query.id),
+    },
+    include: {
+      comments: true,
     },
   });
 

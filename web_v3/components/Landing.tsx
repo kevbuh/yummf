@@ -4,6 +4,40 @@ import { useState, useRef } from "react";
 import { useRouter } from "next/router";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { signIn } from "next-auth/react";
+import Image from "next/image";
+
+const GoogleSVG = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      className="w-10 h-10"
+      viewBox="0 0 48 48"
+    >
+      <defs>
+        <path
+          id="a"
+          d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
+        />
+      </defs>
+      <clipPath id="b">
+        <use xlinkHref="#a" overflow="visible" />
+      </clipPath>
+      <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
+      <path
+        clip-path="url(#b)"
+        fill="#EA4335"
+        d="M0 11l17 13 7-6.1L48 14V0H0z"
+      />
+      <path
+        clip-path="url(#b)"
+        fill="#34A853"
+        d="M0 37l30-23 7.9 1L48 0v48H0z"
+      />
+      <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
+    </svg>
+  );
+};
 
 export default function Landing() {
   const router = useRouter();
@@ -176,18 +210,44 @@ export default function Landing() {
           <div>
             <div className="mx-auto text-2xl rounded-lg bg-stone-100 p-2 text-center space-y-4 py-8">
               <button
-                className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto "
                 onClick={() => signIn("google")}
+                className="rounded-full p-2 bg-white"
               >
-                Google
+                <GoogleSVG />
               </button>
               <div className="w-1/2 mx-auto"></div>
+              <p className="text-base ">or</p>
+              <button
+                onClick={() => signIn("google")}
+                className="flex flex-row mx-auto space-evenly rounded-lg p-3 bg-white text-base font-semibold"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 my-auto mr-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                  />
+                </svg>
+                Email address
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
-              {/* <p className="bg-white rounded-lg mb-4 p-2 w-2/3 mx-auto">
-                Facebook
-              </p> */}
-              <p className="text-base font-light">or</p>
-              <div className="bg-stone-100 px-2 rounded-xl flex flex-col ">
+{
+  /* <p className="text-base font-light">or</p> 
+  <div className="bg-stone-100 px-2 rounded-xl flex flex-col ">
                 {shouldShowLogin ? (
                   <div className="p-2">
                     <Formik
@@ -334,11 +394,5 @@ export default function Landing() {
                     </div>
                   </div>
                 )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+              </div> */
 }

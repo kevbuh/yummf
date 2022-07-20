@@ -21,11 +21,11 @@ const Home: NextPage = ({
     return (
       <div className="mb-8">
         <NavBar />
-        <div className="flex lg:flex-row mx-auto">
+        <div className="flex lg:flex-row xl:mx-8">
           <div className="hidden sm:visible lg:w-1/5 sm:flex sm:flex-col lg:h-screen sm:sticky sm:top-20">
             <div className="sm:px-3 sm:mt-3">
               <Link href="/create">
-                <button className="rounded-xl hover:bg-rosa hover:text-white font-semibold py-2.5 text-xl w-full border border-stone-100 shadow-sm ">
+                <button className="rounded-xl hover:bg-rosa hover:text-white font-semibold py-3 mt-2.5 text-xl w-full border border-stone-100 shadow-sm ">
                   Create
                 </button>
               </Link>
