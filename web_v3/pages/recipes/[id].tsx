@@ -3,9 +3,7 @@ import { useState } from "react";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import MoreLikeThis from "../../components/moreLikeThis";
-
-// import Image from "next/image";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -14,19 +12,18 @@ import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
 } from "next";
-
 import { useSession } from "next-auth/react";
-
 import React from "react";
 import prisma from "../../utils/prisma";
 
 const SelectRecipePage: NextPage = ({
   data,
+  avg_rating,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const [showRate, setShowRate] = useState(false);
   const [comment, setComment] = useState(false);
-
   const { data: session } = useSession();
+  const router = useRouter();
 
   const getStars = (num_stars: number) => {
     const steps = [];
@@ -97,20 +94,20 @@ const SelectRecipePage: NextPage = ({
                 <div className="flex flex-col my-5">
                   <div className=" flex flex-row items-center">
                     <p className="text-2xl mr-1">Time </p>
-                    {/* <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg> */}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
                   </div>
                   <div className=" text-lg">
                     <p>{data?.cook_time ? data.cook_time : "N/A time"}</p>
@@ -121,79 +118,81 @@ const SelectRecipePage: NextPage = ({
                 <div className="my-5">
                   <p className="text-2xl mr-1">Rating </p>
                   <div className=" text-lg flex flex-row">
-                    <p>
-                      {data?.past_hour_average
-                        ? data.past_hour_average.toFixed(2)
-                        : "No Rating!"}{" "}
-                    </p>
+                    <p>{avg_rating ? avg_rating.toFixed(2) : "No Rating!"} </p>
                     <p className="flex flex-row my-auto">
                       {getStars(data?.past_hour_average)}
                     </p>
                   </div>
 
                   <div className="font-light text-stone-400">
-                    {/* <div>
-                        {data?.num_likes} Saves, ({data?.reviews.length})
-                        Reviews
-                      </div> */}
                     <div>
                       <>
-                        {
-                          // isSuccessUser &&
-                          // dataUser?.user?.id === data?.user_id
-                          null ? (
-                            <div className="">
-                              <button
-                                className="bg-stone-100 p-2 mr-2 rounded font-semibold"
-                                // onClick={() =>
-                                //   // setShowEdit((showEdit) => !showEdit)
-                                // }
-                              >
-                                Edit Recipe
-                              </button>
-                              <button
-                                className="bg-red-500 p-2 rounded text-white font-semibold"
-                                // onClick={() => {
-                                //   fetch(`${API_URL}/api/v1/recipes/${data.id}`, {
-                                //     method: "DELETE",
-                                //     headers: {
-                                //       "Content-Type": "application/json",
-                                //     },
-                                //     // body: JSON.stringify(data.id),
-                                //   }).catch((error) =>
-                                //     console.log("error", error)
-                                //   );
-                                //   router.push("/dashboard");
-                                // }}
-                              >
-                                Delete Recipe
-                              </button>
-                            </div>
-                          ) : (
-                            <>
-                              {showRate ? (
-                                <div className="mb-4">
-                                  {/* <Formik
+                        {null ? (
+                          // session?.user?.id === data?.authorId
+                          <div className="">
+                            <button
+                              className="bg-stone-100 p-2 mr-2 rounded font-semibold"
+                              // onClick={() =>
+                              //   // setShowEdit((showEdit) => !showEdit)
+                              // }
+                            >
+                              Edit Recipe
+                            </button>
+                            <button
+                              className="bg-red-500 p-2 rounded text-white font-semibold"
+                              // onClick={() => {
+                              //   fetch(`${API_URL}/api/v1/recipes/${data.id}`, {
+                              //     method: "DELETE",
+                              //     headers: {
+                              //       "Content-Type": "application/json",
+                              //     },
+                              //     // body: JSON.stringify(data.id),
+                              //   }).catch((error) =>
+                              //     console.log("error", error)
+                              //   );
+                              //   router.push("/dashboard");
+                              // }}
+                            >
+                              Delete Recipe
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            {showRate ? (
+                              <div className="mb-4">
+                                <Formik
                                   initialValues={{
-                                    user_id: dataUser.user.id,
                                     value: 5,
-                                    recipe_id: data.id,
                                   }}
                                   validationSchema={Yup.object({
-                                    user_id: Yup.string().required(),
-                                    recipe_id: Yup.string().required(),
                                     value: Yup.number()
                                       .min(1, "Be nice!")
                                       .max(5, "Was is really that good?")
                                       .required(),
                                   })}
-                                  onSubmit={(values, { setSubmitting }) => {
-                                    console.log("clicked", values);
-                                    mutation.mutate(values);
+                                  onSubmit={async (
+                                    values,
+                                    { setSubmitting }
+                                  ) => {
+                                    const res = await fetch(
+                                      "/api/create_rating",
+                                      {
+                                        method: "POST",
+                                        headers: {
+                                          Accept: "application/json",
+                                        },
+                                        body: JSON.stringify({
+                                          recipeId: data.id,
+                                          values: values,
+                                          userEmail: session?.user?.email,
+                                        }),
+                                      }
+                                    );
+
                                     setSubmitting(false);
                                   }}
                                 >
-                                  <Form className="p-3 flex flex-col rounded bg-stone-100 mt-6">
+                                  <Form className="p-3 flex flex-col rounded bg-stone-100 mt-6 mx-2">
                                     <label htmlFor="value" className="">
                                       Rate this recipe:
                                     </label>
@@ -225,21 +224,20 @@ const SelectRecipePage: NextPage = ({
                                       </button>
                                     </div>
                                   </Form>
-                                </Formik> */}
-                                </div>
-                              ) : (
-                                <button
-                                  className=" "
-                                  onClick={() =>
-                                    setShowRate((showRate) => !showRate)
-                                  }
-                                >
-                                  Rate this recipe
-                                </button>
-                              )}
-                            </>
-                          )
-                        }
+                                </Formik>
+                              </div>
+                            ) : (
+                              <button
+                                className=" "
+                                onClick={() =>
+                                  setShowRate((showRate) => !showRate)
+                                }
+                              >
+                                Rate this recipe
+                              </button>
+                            )}
+                          </>
+                        )}
                       </>
                     </div>
                   </div>
@@ -254,6 +252,11 @@ const SelectRecipePage: NextPage = ({
                   <div className="stat-desc">Estimated Ingredient Cost</div>
                 </div>
 
+                <div>
+                  {data?.numSaves} Saves
+                  {/* ({data?.reviews.length}) */}
+                  {/* Reviews */}
+                </div>
                 <div className="flex flex-row w-40 justify-center border rounded-lg py-2">
                   <button
                   // className={liked ? "bg-pink-600 text-black rounded" : null}
@@ -385,9 +388,7 @@ const SelectRecipePage: NextPage = ({
                 {data?.comments.map((d: any, index: number) => (
                   <div className="my-2 p-3 flex flex-row" key={index}>
                     <div className="avatar">
-                      <div className="w-12 rounded-full mr-4">
-                        {/* <img src="https://placeimg.com/192/192/people" /> */}
-                      </div>
+                      <div className="w-12 rounded-full mr-4 bg-stone-100"></div>
                     </div>
                     <div className="my-auto">
                       <p>{d?.text}</p>
@@ -420,7 +421,6 @@ const SelectRecipePage: NextPage = ({
                           userEmail: session?.user?.email,
                         }),
                       });
-                      // router.reload(window.location.pathname);
                     }}
                   >
                     <Form className="p-3 flex flex-col">
@@ -484,10 +484,25 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
     include: {
       comments: true,
+      ratings: true,
     },
   });
 
-  return { props: { data: JSON.parse(JSON.stringify(thisRecipe)) } };
+  const aggregations = await prisma?.rating.aggregate({
+    _avg: {
+      value: true,
+    },
+    where: {
+      recipeId: 9,
+    },
+  });
+
+  return {
+    props: {
+      data: JSON.parse(JSON.stringify(thisRecipe)),
+      avg_rating: aggregations?._avg.value,
+    },
+  };
 };
 
 export default SelectRecipePage;

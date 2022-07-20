@@ -11,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { name, directions, source_url, serving, cook_time, caption } =
     JSON.parse(req.body);
 
-  const createUser = await prisma.recipe.create({
+  const createRecipe = await prisma.recipe.create({
     data: {
       name: name,
       cookTime: cook_time,
@@ -19,10 +19,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       servingSize: serving,
       sourceURL: source_url,
       caption: caption,
-      avgRating: 0,
       authorId: "cl5rq9lvo0040nlv2wuf5lsgk", // this need to be dynamically read
     },
   });
 
-  return createUser;
+  return createRecipe;
 };

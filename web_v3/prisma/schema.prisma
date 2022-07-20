@@ -49,6 +49,7 @@ model User {
   comments      Comment[]
   createdAt     DateTime  @default(now())
 
+  Rating Rating[]
 }
 
 model VerificationToken {
@@ -69,13 +70,12 @@ model Recipe {
   sourceURL   String?
   caption     String
   numSaves    Int        @default(0)
-  avgRating   Int
   secret      Boolean    @default(false)
   author      User       @relation(fields: [authorId], references: [id])
   authorId    String
+  ratings     Rating[]
   comments    Comment[]
   categories  Category[]
-
 }
 
 model Category {
@@ -87,6 +87,16 @@ model Category {
 model Comment {
   id        Int      @id @default(autoincrement())
   text      String
+  Recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
+  recipeId  Int?
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime @default(now())
+}
+
+model Rating {
+  id        Int      @id @default(autoincrement())
+  value     Int
   Recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
   recipeId  Int?
   author    User     @relation(fields: [authorId], references: [id])

@@ -23,7 +23,7 @@ const DashboardItems: NextPage = ({ recipes }: any) => {
               key={index}
               name={d.name}
               author={d.authorId}
-              rating={d.avgRating ? d.avgRating?.toFixed(2) : null}
+              // rating={d.avgRating ? d.avgRating?.toFixed(2) : null}
               cook_time={d.cookTime}
               caption={d.caption}
               id={d.id}

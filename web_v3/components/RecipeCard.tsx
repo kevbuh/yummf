@@ -7,7 +7,7 @@ type RecipeProps = {
   name: string;
   author: string;
   cook_time: string;
-  rating: number;
+  // rating: number;
   id: number;
   caption: string;
 };
@@ -16,7 +16,7 @@ function RecipeCard({
   name,
   author,
   cook_time,
-  rating,
+  // rating,
   id,
   caption,
 }: RecipeProps) {
@@ -78,7 +78,7 @@ function RecipeCard({
               {cook_time}{" "}
             </div>
             <p className="font-semibold  flex flex-row ml-auto ">
-              {rating ? rating : "N/A"}
+              {/* {false ? rating : "N/A"} */}
               <span className="my-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

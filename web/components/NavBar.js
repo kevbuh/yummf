@@ -43,10 +43,6 @@ function NavBar() {
     });
 
     router.reload(window.location.pathname);
-    // if (res.) {
-    // } else {
-    //   console.log("error logging out");
-    // }
   };
 
   if (
