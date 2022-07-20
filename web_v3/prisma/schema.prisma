@@ -61,22 +61,23 @@ model VerificationToken {
 }
 
 model Recipe {
-  id          Int        @id @default(autoincrement())
-  createdAt   DateTime   @default(now())
-  name        String
-  cookTime    String?
-  directions  String?
-  servingSize String?
-  sourceURL   String?
-  caption     String
-  numSaves    Int        @default(0)
-  secret      Boolean    @default(false)
-  author      User       @relation(fields: [authorId], references: [id])
-  authorId    String
-  ratings     Rating[]
-  comments    Comment[]
-  categories  Category[]
-  likedBy     User[]     @relation(name: "UserSaved")
+  id             Int        @id @default(autoincrement())
+  createdAt      DateTime   @default(now())
+  name           String
+  cookTime       String?
+  directions     String?
+  servingSize    String?
+  sourceURL      String?
+  caption        String
+  numSaves       Int        @default(0)
+  secret         Boolean    @default(false)
+  author         User       @relation(fields: [authorId], references: [id])
+  authorId       String
+  ratings        Rating[]
+  comments       Comment[]
+  categories     Category[]
+  likedBy        User[]     @relation(name: "UserSaved")
+  ingredientList String[]
 }
 
 model Category {

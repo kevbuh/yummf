@@ -1,16 +1,19 @@
 import React from "react";
 import RecipeCard from "./RecipeCard";
 
-const MoreLikeThis = () => {
+const MoreLikeThis: any = () => {
+  // const data = await fetch("/api/get_latest");
+  // console.log("yeehhh", data);
+
   return (
-    <div>
-      <p className="text-2xl mb-4">View more recipe like this!</p>
+    <>
+      <p className="text-2xl mb-4">View the latest recipes!</p>
       <div className="grid grid-cols-3 gap-4">
         <RecipeCard recipes={null} />
         <RecipeCard recipes={null} />
         <RecipeCard recipes={null} />
       </div>
-    </div>
+    </>
   );
 };
 

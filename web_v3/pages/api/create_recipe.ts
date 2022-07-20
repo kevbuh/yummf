@@ -8,8 +8,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(400).json({ error: "Method not allowed" });
   }
 
-  const { name, directions, source_url, serving, cook_time, caption } =
-    JSON.parse(req.body);
+  const {
+    name,
+    directions,
+    source_url,
+    serving,
+    cook_time,
+    caption,
+    ingredient_list,
+  } = JSON.parse(req.body);
+
+  const ingredient_list_init: any[] = [];
+
+  ingredient_list.map((d: any) => {
+    // console.log("fff", d);
+    // console.log("hhhh", d[0]);
+    ingredient_list_init.push(JSON.stringify(d));
+    // ingredient_list_init.push(d[1])
+  });
 
   const createRecipe = await prisma.recipe.create({
     data: {
@@ -19,6 +35,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       servingSize: serving,
       sourceURL: source_url,
       caption: caption,
+      ingredientList: ingredient_list_init,
       authorId: "cl5rq9lvo0040nlv2wuf5lsgk", // this need to be dynamically read
     },
   });

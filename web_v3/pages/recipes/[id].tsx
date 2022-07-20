@@ -25,8 +25,6 @@ const SelectRecipePage: NextPage = ({
   const { data: session } = useSession();
   const [liked, setLiked] = useState(false);
 
-  // console.log(data?.likedBy[0].email, session?.user?.email);
-
   const getStars = (num_stars: number) => {
     const steps = [];
     for (let i = 1; i <= num_stars; i++) {
@@ -349,21 +347,23 @@ const SelectRecipePage: NextPage = ({
                 <p className=" p-1  mr-auto font-lg">Amount</p>
               </div>
 
-              <p className="font-light">
-                {/* {data?.ingredient_list?.length > 0
-                  ? JSON.parse(data.ingredient_list).map((d, index) => {
-                      return (
-                        <div
-                          className="grid grid-cols-2 border p-2 rounded-lg my-2"
-                          key={index}
-                        >
-                          <p>{d.ingredient_name}</p>
-                          <p>{d.ingredient_amount}</p>
-                        </div>
-                      );
-                    })
-                  : null} */}
-              </p>
+              <div className="font-light">
+                {data?.ingredientList?.length > 0
+                  ? JSON.parse(JSON.stringify(data.ingredientList)).map(
+                      (d: any, index: any) => {
+                        return (
+                          <div
+                            key={index}
+                            className="grid grid-cols-2 p-2 rounded-lg my-2"
+                          >
+                            <p>{JSON.parse(d).ingredient_name}</p>
+                            <p>{JSON.parse(d).ingredient_amount}</p>
+                          </div>
+                        );
+                      }
+                    )
+                  : null}
+              </div>
             </div>
 
             <br />
