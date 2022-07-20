@@ -1,11 +1,7 @@
 import RecipeCard from "./RecipeCard";
 import React, { useRef } from "react";
 import prisma from "../utils/prisma";
-import type {
-  NextPage,
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-} from "next";
+import type { NextPage, GetServerSideProps } from "next";
 
 const DashboardItems: NextPage = ({ recipes }: any) => {
   const myRef = useRef<null | HTMLDivElement>(null);
