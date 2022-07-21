@@ -1,28 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../utils/prisma";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "GET") {
-    res.status(400).json({ error: "Method not allowed" });
+interface Data {
+  recipes: any[];
+  nextId: number | undefined;
+}
+
+export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+  if (req.method === "GET") {
+    const limit = 6;
+    const cursor = req.query.cursor ?? "";
+    const cursorObj =
+      cursor === "" ? undefined : { id: parseInt(cursor as string, 10) };
+
+    const recipes = await prisma.recipe.findMany({
+      skip: cursor !== "" ? 1 : 0,
+      cursor: cursorObj,
+      take: limit,
+    });
+    return res.json({
+      recipes,
+      nextId: recipes.length === limit ? recipes[limit - 1].id : undefined,
+    });
   }
-
-  const limit = 5;
-  const cursor = req.query.cursor ?? "";
-
-  const cursorObj =
-    cursor === "" ? undefined : { id: parseInt(cursor as string) };
-
-  const infiniteRecipes = await prisma?.recipe.findMany({
-    take: limit,
-    cursor: cursorObj,
-    skip: cursor === "" ? 0 : 1,
-  });
-
-  return res.json({
-    infiniteRecipes,
-    nextId:
-      infiniteRecipes?.length === limit
-        ? infiniteRecipes[limit - 1].id
-        : undefined,
-  });
 };

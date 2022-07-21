@@ -1,10 +1,24 @@
 import RecipeCard from "./RecipeCard";
 import React, { useRef } from "react";
 import prisma from "../utils/prisma";
-import type { NextPage, GetServerSideProps } from "next";
+import type { NextPage } from "next";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-const DashboardItems: NextPage = ({ recipes }: any) => {
-  const myRef = useRef<null | HTMLDivElement>(null);
+const DashboardItems: NextPage = () => {
+  const myRef = useRef<HTMLDivElement>(null);
+  const { isLoading, data, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    useInfiniteQuery(
+      ["recipes"],
+      async ({ pageParam = "" }) => {
+        await new Promise((res) => setTimeout(res, 1000));
+        const apiRes = await fetch("/api/infinite_recipes?cursor=" + pageParam);
+        const data = await apiRes.json();
+        return data;
+      },
+      {
+        getNextPageParam: (lastPage) => lastPage.nextId ?? false,
+      }
+    );
 
   return (
     <div className=" flex flex-col m-3  ">
@@ -12,37 +26,55 @@ const DashboardItems: NextPage = ({ recipes }: any) => {
         <p className="text-3xl font-semibold">For You</p>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div
+        className={
+          isFetchingNextPage
+            ? "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 animate-pulse"
+            : "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+        }
+      >
         <>
-          {recipes.map((d: any, index: any) => (
-            <RecipeCard
-              key={index}
-              name={d.name}
-              author={d.authorId}
-              // rating={d.avgRating ? d.avgRating?.toFixed(2) : null}
-              cook_time={d.cookTime}
-              caption={d.caption}
-              id={d.id}
-              // image={
-              //   d.featured_image !== null && d.featured_image !== undefined
-              //     ? API_URL + d.featured_image?.url.split("?")[0]
-              //     : null
-              // }
-            />
+          {data?.pages.map((group, i) => (
+            <React.Fragment key={i}>
+              {group?.recipes?.map((d: any, index: number) => (
+                <RecipeCard
+                  key={index}
+                  name={d.name}
+                  author={d.user_id}
+                  // num_saves={d.num_saves}
+                  // rating={
+                  //   d.past_hour_average ? d.past_hour_average?.toFixed(2) : null
+                  // }
+                  cook_time={d.cook_time}
+                  caption={d.caption}
+                  id={d.id}
+                  // image={
+                  //   d.featured_image !== null && d.featured_image !== undefined
+                  //     ? API_URL + d.featured_image?.url.split("?")[0]
+                  //     : null
+                  // }
+                />
+              ))}
+            </React.Fragment>
           ))}
         </>
       </div>
 
-      <div className="mx-auto mt-4 "></div>
-
-      <div className="bg-stone-100 rounded-lg" ref={myRef}></div>
+      <button
+        onClick={() => fetchNextPage()}
+        disabled={!hasNextPage}
+        className={isFetchingNextPage ? "btn loading" : ""}
+      >
+        {isFetchingNextPage
+          ? null
+          : hasNextPage
+          ? "View More"
+          : !isLoading
+          ? "You scrolled to the bottom!"
+          : null}
+      </button>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const recipes = await prisma?.recipe?.findMany();
-  return { props: { recipes: JSON.parse(JSON.stringify(recipes)) } };
 };
 
 export default DashboardItems;
