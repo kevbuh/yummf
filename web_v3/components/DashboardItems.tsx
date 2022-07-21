@@ -1,6 +1,5 @@
 import RecipeCard from "./RecipeCard";
 import React, { useRef } from "react";
-import prisma from "../utils/prisma";
 import type { NextPage } from "next";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
@@ -10,7 +9,6 @@ const DashboardItems: NextPage = () => {
     useInfiniteQuery(
       ["recipes"],
       async ({ pageParam = "" }) => {
-        await new Promise((res) => setTimeout(res, 1000));
         const apiRes = await fetch("/api/infinite_recipes?cursor=" + pageParam);
         const data = await apiRes.json();
         return data;
@@ -41,7 +39,7 @@ const DashboardItems: NextPage = () => {
                   key={index}
                   name={d.name}
                   author={d.user_id}
-                  // num_saves={d.num_saves}
+                  // num_saves={d.numSaves}
                   // rating={
                   //   d.past_hour_average ? d.past_hour_average?.toFixed(2) : null
                   // }
@@ -63,14 +61,14 @@ const DashboardItems: NextPage = () => {
       <button
         onClick={() => fetchNextPage()}
         disabled={!hasNextPage}
-        className={isFetchingNextPage ? "btn loading" : ""}
+        className={isFetchingNextPage ? "btn btn-ghost loading" : ""}
       >
         {isFetchingNextPage
           ? null
           : hasNextPage
           ? "View More"
           : !isLoading
-          ? "You scrolled to the bottom!"
+          ? "You reached the bottom!"
           : null}
       </button>
     </div>

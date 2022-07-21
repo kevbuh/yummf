@@ -8,13 +8,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { values, recipeId, userEmail } = JSON.parse(req.body);
 
-  const user = await prisma.user.findUnique({
+  const user = await prisma?.user.findUnique({
     where: {
       email: userEmail,
     },
   });
 
-  const createComment = await prisma.comment.create({
+  const createComment = await prisma?.comment.create({
     data: {
       text: values.text,
       recipeId: recipeId,

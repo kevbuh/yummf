@@ -25,6 +25,8 @@ const SelectRecipePage: NextPage = ({
   const { data: session } = useSession();
   const [liked, setLiked] = useState(false);
 
+  console.log(avg_rating);
+
   const getStars = (num_stars: number) => {
     const steps = [];
     for (let i = 1; i <= num_stars; i++) {
@@ -120,7 +122,7 @@ const SelectRecipePage: NextPage = ({
                   <div className=" text-lg flex flex-row">
                     <p>{avg_rating ? avg_rating.toFixed(2) : "No Rating!"} </p>
                     <p className="flex flex-row my-auto">
-                      {getStars(data?.past_hour_average)}
+                      {getStars(avg_rating)}
                     </p>
                   </div>
 
@@ -500,9 +502,11 @@ export const getServerSideProps: GetServerSideProps = async ({
       value: true,
     },
     where: {
-      recipeId: 9,
+      recipeId: parseInt(query.id),
     },
   });
+
+  console.log(aggregations);
 
   return {
     props: {
