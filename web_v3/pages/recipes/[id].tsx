@@ -25,7 +25,7 @@ const SelectRecipePage: NextPage = ({
   const { data: session } = useSession();
   const [liked, setLiked] = useState(false);
 
-  console.log(avg_rating);
+  const router = useRouter();
 
   const getStars = (num_stars: number) => {
     const steps = [];
@@ -129,8 +129,7 @@ const SelectRecipePage: NextPage = ({
                   <div className="font-light text-stone-400">
                     <div>
                       <>
-                        {null ? (
-                          // session?.user?.id === data?.authorId
+                        {session?.userId == data?.authorId ? (
                           <div className="">
                             <button
                               className="bg-stone-100 p-2 mr-2 rounded font-semibold"
@@ -142,18 +141,18 @@ const SelectRecipePage: NextPage = ({
                             </button>
                             <button
                               className="bg-red-500 p-2 rounded text-white font-semibold"
-                              // onClick={() => {
-                              //   fetch(`${API_URL}/api/v1/recipes/${data.id}`, {
-                              //     method: "DELETE",
-                              //     headers: {
-                              //       "Content-Type": "application/json",
-                              //     },
-                              //     // body: JSON.stringify(data.id),
-                              //   }).catch((error) =>
-                              //     console.log("error", error)
-                              //   );
-                              //   router.push("/dashboard");
-                              // }}
+                              onClick={() => {
+                                fetch(`/api/delete_recipe`, {
+                                  method: "DELETE",
+                                  headers: {
+                                    "Content-Type": "application/json",
+                                  },
+                                  body: JSON.stringify(data.id),
+                                }).catch((error) =>
+                                  console.log("error", error)
+                                );
+                                router.push("/");
+                              }}
                             >
                               Delete Recipe
                             </button>
