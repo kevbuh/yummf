@@ -10,7 +10,6 @@ function SearchResultPage() {
   const fetchSearchResults = async (url: string) => {
     const apiRes = await fetch(`/api/search?q=${url}`);
     const data = await apiRes.json();
-    console.log("data", data);
     return data.searchResults;
   };
 
