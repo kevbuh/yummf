@@ -97,7 +97,13 @@ function Sidebar() {
             Dinner
           </button>
           <button className="p-2 rounded-xl bg-stone-100 font-medium m-1">
-            Desert
+            Dessert
+          </button>
+          <button className="p-2 rounded-xl bg-stone-100 font-medium m-1">
+            Sweet
+          </button>
+          <button className="p-2 rounded-xl bg-stone-100 font-medium m-1">
+            Savory
           </button>
         </div>
       </div>

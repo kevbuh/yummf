@@ -1,10 +1,9 @@
 import RecipeCard from "./RecipeCard";
-import React, { useRef } from "react";
+import React from "react";
 import type { NextPage } from "next";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 const DashboardItems: NextPage = () => {
-  const myRef = useRef<HTMLDivElement>(null);
   const { isLoading, data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
       ["recipes"],
@@ -35,18 +34,9 @@ const DashboardItems: NextPage = () => {
                   key={index}
                   name={d.name}
                   author={d.user_id}
-                  // num_saves={d.numSaves}
-                  // rating={
-                  //   d.past_hour_average ? d.past_hour_average?.toFixed(2) : null
-                  // }
                   cook_time={d.cook_time}
-                  caption={d.caption}
+                  caption={d.caption.slice(0, 42)}
                   id={d.id}
-                  // image={
-                  //   d.featured_image !== null && d.featured_image !== undefined
-                  //     ? API_URL + d.featured_image?.url.split("?")[0]
-                  //     : null
-                  // }
                 />
               ))}
             </React.Fragment>
@@ -59,8 +49,8 @@ const DashboardItems: NextPage = () => {
         disabled={!hasNextPage}
         className={
           isFetchingNextPage
-            ? "btn btn-ghost loading mt-4"
-            : "mt-4 w-full bg-stone-100 font-medium rounded-xl py-3"
+            ? "btn btn-ghost loading my-8"
+            : "my-8 w-1/2 mx-auto bg-stone-100 font-medium rounded-xl py-3"
         }
       >
         {isFetchingNextPage
