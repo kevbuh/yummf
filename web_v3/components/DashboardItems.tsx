@@ -19,16 +19,12 @@ const DashboardItems: NextPage = () => {
     );
 
   return (
-    <div className=" flex flex-col m-3  ">
-      <div className="mt-4 mb-6">
-        <p className="text-3xl font-semibold">For You</p>
-      </div>
-
+    <div className=" flex flex-col m-3">
       <div
         className={
           isFetchingNextPage
-            ? "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 animate-pulse"
-            : "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+            ? "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 animate-pulse"
+            : "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
         }
       >
         <>
@@ -61,14 +57,18 @@ const DashboardItems: NextPage = () => {
       <button
         onClick={() => fetchNextPage()}
         disabled={!hasNextPage}
-        className={isFetchingNextPage ? "btn btn-ghost loading" : ""}
+        className={
+          isFetchingNextPage
+            ? "btn btn-ghost loading mt-4"
+            : "mt-4 w-full bg-stone-100 font-medium rounded-xl py-3"
+        }
       >
         {isFetchingNextPage
           ? null
           : hasNextPage
-          ? "View More"
+          ? "Show More"
           : !isLoading
-          ? "You reached the bottom!"
+          ? "You've reached the bottom!"
           : null}
       </button>
     </div>

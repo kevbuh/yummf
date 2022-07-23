@@ -8,7 +8,7 @@ interface Data {
 
 export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === "GET") {
-    const limit = 6;
+    const limit = 12;
     const cursor = req.query.cursor ?? "";
     const cursorObj =
       cursor === "" ? undefined : { id: parseInt(cursor as string, 10) };
@@ -17,6 +17,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       skip: cursor !== "" ? 1 : 0,
       cursor: cursorObj,
       take: limit,
+      orderBy: {
+        id: "desc",
+      },
     });
     return res.json({
       recipes,

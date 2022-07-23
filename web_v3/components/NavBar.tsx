@@ -21,9 +21,9 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar shadow-sm bg-white sticky top-0 z-10">
+    <div className="navbar shadow-sm bg-white sticky top-0 z-10 ">
       <div className="sm:w-1/6">
-        <Link href="/">
+        <Link href="/explore">
           <a className="btn btn-ghost normal-case text-2xl text-rosa sm:mx-auto">
             kooki
           </a>

@@ -380,7 +380,7 @@ const SelectRecipePage: NextPage = ({
                                   }).catch((error) =>
                                     console.log("error", error)
                                   );
-                                  router.push("/");
+                                  router.push("/explore");
                                 }}
                               >
                                 Delete Recipe

@@ -7,19 +7,11 @@ type RecipeProps = {
   name: string;
   author: string;
   cook_time: string;
-  // rating: number;
   id: number;
   caption: string;
 };
 
-function RecipeCard({
-  name,
-  author,
-  cook_time,
-  // rating,
-  id,
-  caption,
-}: RecipeProps) {
+function RecipeCard({ name, author, cook_time, id, caption }: RecipeProps) {
   const getStars = (num_stars: Number | String) => {
     const steps = [];
     for (let i = 1; i <= num_stars; i++) {
@@ -55,9 +47,21 @@ function RecipeCard({
               />
             </div>
           ) : ( */}
-          <p className="bg-stone-100 rounded h-48"></p>
+          <p className="bg-stone-100 rounded-lg h-48"></p>
+
           {/* )} */}
-          <div className="grid grid-cols-2 justify-evenly">
+          <div className="my-2">
+            <p className="font-semibold text-md my-2 ">{name}</p>
+            <p className=" text-sm  truncate">{caption}</p>
+          </div>
+          <div className="grid grid-cols-2 justify-evenly my-2 rounded-lg px-2 py-2 bg-stone-100">
+            <div className="text-stone-800 text-sm font-semibold mb-2">
+              Cook Time
+            </div>
+            <div className="text-stone-800 text-sm font-semibold ml-auto mb-2">
+              Rating
+            </div>
+
             <div className="flex flex-row">
               <span className="my-auto">
                 <svg
@@ -91,8 +95,6 @@ function RecipeCard({
               </span>
             </p>
           </div>
-          <p className="font-semibold text-lg ">{name}</p>
-          <p className="font-light text-sm">{caption}</p>
         </div>
       </Link>
     </div>
