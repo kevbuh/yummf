@@ -14,18 +14,16 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     cook_time,
     caption,
     ingredient_list,
+    userId,
   } = JSON.parse(req.body);
 
   const ingredient_list_init: any[] = [];
 
   ingredient_list.map((d: any) => {
-    // console.log("fff", d);
-    // console.log("hhhh", d[0]);
     ingredient_list_init.push(JSON.stringify(d));
-    // ingredient_list_init.push(d[1])
   });
 
-  const createRecipe = await prisma.recipe.create({
+  const createRecipe = await prisma?.recipe.create({
     data: {
       name: name,
       cookTime: cook_time,
@@ -34,7 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       sourceURL: source_url,
       caption: caption,
       ingredientList: ingredient_list_init,
-      authorId: "cl5rq9lvo0040nlv2wuf5lsgk", // this need to be dynamically read
+      authorId: userId,
     },
   });
 

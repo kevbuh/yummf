@@ -31,13 +31,22 @@ const SelectRecipePage: NextPage = ({
       <div className="mb-4">
         <Formik
           initialValues={{
-            value: 5,
+            overallRating: null,
+            tasteRating: null,
+            presentationRating: null,
+            valueRating: null,
+            easeRating: null,
+            userId: session?.userId,
           }}
           validationSchema={Yup.object({
-            value: Yup.number()
+            overallRating: Yup.number()
               .min(1, "Be nice!")
               .max(5, "Was is really that good? Max of 5 stars :)")
               .required(),
+            tasteRating: Yup.number().min(1).max(5).required(),
+            presentationRating: Yup.number().min(1).max(5).required(),
+            valueRating: Yup.number().min(1).max(5).required(),
+            easeRating: Yup.number().min(1).max(5).required(),
           })}
           onSubmit={(values) => {
             try {
@@ -49,7 +58,6 @@ const SelectRecipePage: NextPage = ({
                 body: JSON.stringify({
                   recipeId: data.id,
                   values: values,
-                  userEmail: session?.user?.email,
                 }),
               });
               Router.reload();
@@ -64,13 +72,59 @@ const SelectRecipePage: NextPage = ({
             </label>
 
             <Field
-              id="value"
-              name="value"
+              id="overallRating"
+              name="overallRating"
               type="number"
-              placeholder="Give a rating 1-5 stars"
+              placeholder="Give an overall rating 1-5 stars"
               className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
             />
-            <ErrorMessage name="value">{(msg) => <p>{msg}</p>}</ErrorMessage>
+            <ErrorMessage name="overallRating">
+              {(msg) => <p>{msg}</p>}
+            </ErrorMessage>
+
+            <Field
+              id="tasteRating"
+              name="tasteRating"
+              type="number"
+              placeholder="Give a taste rating 1-5 stars"
+              className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
+            />
+            <ErrorMessage name="tasteRating">
+              {(msg) => <p>{msg}</p>}
+            </ErrorMessage>
+
+            <Field
+              id="presentationRating"
+              name="presentationRating"
+              type="number"
+              placeholder="Give a presentation rating 1-5 stars"
+              className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
+            />
+            <ErrorMessage name="presentationRating">
+              {(msg) => <p>{msg}</p>}
+            </ErrorMessage>
+
+            <Field
+              id="valueRating"
+              name="valueRating"
+              type="number"
+              placeholder="Give a value rating 1-5 stars"
+              className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
+            />
+            <ErrorMessage name="valueRating">
+              {(msg) => <p>{msg}</p>}
+            </ErrorMessage>
+
+            <Field
+              id="easeRating"
+              name="easeRating"
+              type="number"
+              placeholder="Give an ease of cook rating 1-5 stars"
+              className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
+            />
+            <ErrorMessage name="easeRating">
+              {(msg) => <p>{msg}</p>}
+            </ErrorMessage>
 
             <div className="flex flex-row justify-between pr-1 text-black ">
               <button
@@ -113,9 +167,13 @@ const SelectRecipePage: NextPage = ({
           <p className="bg-stone-100  font-semibold inline-flex items-center p-2 rounded ">
             {avg_rating}
           </p>
-          <p className="ml-2 font-medium text-gray-900">Excellent</p>
+          <p className="ml-2 font-medium text-gray-900">
+            {avg_rating > 4 ? "Excellent" : "Okay"}
+          </p>
           <span className="mx-2 w-1 h-1 bg-gray-900 rounded-full dark:bg-gray-500"></span>
-          <p className="text-sm font-medium text-gray-500 ">376 reviews</p>
+          <p className="text-sm font-medium text-gray-500 ">
+            {data?.ratings.length}
+          </p>
           <a href="#" className="ml-auto text-sm font-medium  hover:underline ">
             Read all reviews
           </a>
@@ -128,36 +186,44 @@ const SelectRecipePage: NextPage = ({
                 <div className="w-full bg-stone-100 rounded h-2 mr-2">
                   <div
                     className="bg-black h-2 rounded"
-                    style={{ width: "96%" }}
+                    style={{ width: `${data?.ratings[0]?.tasteRating * 20}%` }}
                   ></div>
                 </div>
-                <span className="text-sm font-medium text-gray-500 ">4.8</span>
+                <span className="text-sm font-medium text-gray-500 ">
+                  {data?.ratings[0]?.tasteRating}
+                </span>
               </dd>
             </dl>
             <dl>
-              <dt className="text-sm font-medium text-gray-500 ">Difficulty</dt>
+              <dt className="text-sm font-medium text-gray-500 ">
+                Ease of Making
+              </dt>
               <dd className="flex items-center">
                 <div className="w-full bg-stone-100 rounded h-2 mr-2">
                   <div
                     className="bg-black h-2 rounded"
-                    style={{ width: "90%" }}
+                    style={{ width: `${data?.ratings[0]?.easeRating * 20}%` }}
                   ></div>
                 </div>
-                <span className="text-sm font-medium text-gray-500 ">4.5</span>
+                <span className="text-sm font-medium text-gray-500 ">
+                  {data?.ratings[0]?.easeRating}
+                </span>
               </dd>
             </dl>
           </div>
           <div>
             <dl>
-              <dt className="text-sm font-medium text-gray-500 ">Cost</dt>
+              <dt className="text-sm font-medium text-gray-500 ">Value</dt>
               <dd className="flex items-center">
                 <div className="w-full bg-stone-100 rounded h-2 mr-2">
                   <div
                     className="bg-black h-2 rounded"
-                    style={{ width: "90%" }}
+                    style={{ width: `${data?.ratings[0]?.valueRating * 20}%` }}
                   ></div>
                 </div>
-                <span className="text-sm font-medium text-gray-500 ">4.5</span>
+                <span className="text-sm font-medium text-gray-500 ">
+                  {data?.ratings[0]?.valueRating}
+                </span>
               </dd>
             </dl>
 
@@ -169,10 +235,14 @@ const SelectRecipePage: NextPage = ({
                 <div className="w-full bg-stone-100 rounded h-2 mr-2">
                   <div
                     className="bg-black h-2 rounded"
-                    style={{ width: "82%" }}
+                    style={{
+                      width: `${data?.ratings[0]?.presentationRating * 20}%`,
+                    }}
                   ></div>
                 </div>
-                <span className="text-sm font-medium text-gray-500 ">4.1</span>
+                <span className="text-sm font-medium text-gray-500 ">
+                  {data?.ratings[0]?.presentationRating}
+                </span>
               </dd>
             </dl>
           </div>
@@ -222,7 +292,7 @@ const SelectRecipePage: NextPage = ({
   return (
     <>
       <Head>
-        <title>{data?.name} | Kooki </title>
+        <title>{`${data?.name} - Kooki`} </title>
         <meta name="description" content={data?.caption} key="desc" />
       </Head>
 
@@ -245,8 +315,6 @@ const SelectRecipePage: NextPage = ({
                 featured_image: Yup.mixed(),
               })}
               onSubmit={(values, { setSubmitting }) => {
-                // console.log("formik values:", values);
-
                 fetch("/api/update_recipe", {
                   method: "PUT",
                   headers: {
@@ -816,7 +884,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const aggregations = await prisma?.rating.aggregate({
     _avg: {
-      value: true,
+      overallRating: true,
     },
     where: {
       recipeId: parseInt(query.id),
@@ -826,7 +894,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       data: JSON.parse(JSON.stringify(thisRecipe)),
-      avg_rating: aggregations?._avg.value,
+      avg_rating: aggregations?._avg.overallRating,
     },
   };
 };

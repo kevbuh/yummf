@@ -4,10 +4,13 @@ import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 function CreateRecipePage() {
-  const [image, setImage] = useState(null);
+  // const [image, setImage] = useState(null);
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const initialValues = {
     name: "",
@@ -17,6 +20,7 @@ function CreateRecipePage() {
     cook_time: "",
     caption: "",
     featured_image: null,
+    userId: session?.userId,
 
     ingredient_list: [
       {
@@ -49,8 +53,6 @@ function CreateRecipePage() {
               featured_image: Yup.mixed(),
             })}
             onSubmit={(values, { setSubmitting }) => {
-              // console.log("formik values:", values);
-
               fetch("/api/create_recipe", {
                 method: "POST",
                 headers: {

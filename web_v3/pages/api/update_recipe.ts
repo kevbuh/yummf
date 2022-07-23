@@ -20,13 +20,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const ingredient_list_init: any[] = [];
 
-  console.log("clicked");
-
   ingredient_list.map((d: any) => {
-    // console.log("fff", d);
-    // console.log("hhhh", d[0]);
     ingredient_list_init.push(JSON.stringify(d));
-    // ingredient_list_init.push(d[1])
   });
 
   const updateRecipe = await prisma?.recipe.update({
@@ -41,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       sourceURL: source_url,
       caption: caption,
       ingredientList: ingredient_list_init,
-      authorId: authorId, // this need to be dynamically read
+      authorId: authorId,
     },
   });
 
