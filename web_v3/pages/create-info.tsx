@@ -21,13 +21,13 @@ function PlaylistInfo() {
 
       <div className="flex flex-col items-center my-16 max-w-md mx-auto">
         <p className="text-6xl font-semibold">Create your own</p>
-        <p className="text-6xl font-semibold"> Recipes</p>
+        <p className="text-6xl font-semibold">Recipe</p>
 
         <p className="font-light mt-4 text-2xl">
           Capture this and that and blah blah{" "}
         </p>
         <button className="rounded-xl bg-black text-white font-semibold p-2 w-2/5 mt-4">
-          <Link href="/create">
+          <Link href="/create-new">
             <a>Start Now</a>
           </Link>
         </button>

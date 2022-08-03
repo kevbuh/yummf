@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import RecipeCard from "../components/RecipeCard";
 import { useQuery } from "@tanstack/react-query";
 import SideNavLayout from "../components/sideNavLayout";
+import Link from "next/link";
 
 function SearchResultPage() {
   const { query } = useRouter();
@@ -30,28 +31,47 @@ function SearchResultPage() {
           {isError && <p>{(error as Error).message}</p>}
 
           {isSuccess && data.length > 0 ? (
-            <div
-              className={
-                isLoading
-                  ? "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 animate-pulse"
-                  : "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
-              }
-            >
-              {data.map((d: any, index: number) => {
-                return (
-                  <RecipeCard
-                    key={index}
-                    name={d.name}
-                    author={d.user_id}
-                    cook_time={d.cook_time}
-                    caption={d.caption}
-                    id={d.id}
-                  />
-                );
-              })}
-            </div>
+            <>
+              <div className="my-4 text-4xl font-semibold">Search Results</div>
+              <div
+                className={
+                  isLoading
+                    ? "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 animate-pulse"
+                    : "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+                }
+              >
+                {data.map((d: any, index: number) => {
+                  return (
+                    <RecipeCard
+                      key={index}
+                      name={d.name}
+                      author={d.user_id}
+                      cook_time={d.cook_time}
+                      caption={d.caption}
+                      id={d.id}
+                    />
+                  );
+                })}
+              </div>
+            </>
           ) : (
-            <p className="text-3xl mt-6 mb-96">No Search Results!</p>
+            <>
+              <div className="my-4 text-4xl font-semibold">
+                No Search Results!
+              </div>
+              <div>
+                <p className="font-light ">
+                  Sorry, there were no recipes that came up.
+                </p>
+                <p className="font-light ">
+                  If you believe there is an issue, click{" "}
+                  <Link href="/help">
+                    <a className="underline text-blue-500">here</a>
+                  </Link>{" "}
+                  to report it
+                </p>
+              </div>
+            </>
           )}
         </div>
       </SideNavLayout>
