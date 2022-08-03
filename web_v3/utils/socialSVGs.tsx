@@ -3,7 +3,7 @@ export const GoogleSVG = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      className="w-10 h-10"
+      className="w-12 h-12"
       viewBox="0 0 48 48"
     >
       <defs>
@@ -34,7 +34,7 @@ export const GoogleSVG = () => {
 export const FacebookSVG = () => {
   return (
     <svg
-      className="w-10 h-10 text-blue-600 fill-current"
+      className="w-12 text-blue-600 fill-current"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
     >
@@ -47,7 +47,7 @@ export const EmailSVG = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="h-6 w-6 my-auto mr-2"
+      className="h-6 my-auto mr-2"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

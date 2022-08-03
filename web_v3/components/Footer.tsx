@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="footer p-10 bg-base-300 text-base-content">
+    <footer className="footer px-10 pt-10 pb-24 bg-base-300 text-base-content">
       <div>
         <span className="footer-title">Kooki</span>
         <Link href="/dashboard">
