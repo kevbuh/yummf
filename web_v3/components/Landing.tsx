@@ -32,7 +32,7 @@ export default function Landing() {
 
   const SignUpFull = () => {
     return (
-      <div className="h-full md:grid md:grid-cols-2 bg-stone-100 rounded-xl mx-4 ">
+      <div className="h-full md:grid md:grid-cols-2 rounded-xl mx-4 ">
         <div className="m-auto invisible md:visible" ref={myRef}>
           <p className="md:mt-20 md:mb-20 text-7xl mx-auto font-bold border-4 border-rosa text-rosa rounded-full md:py-24 px-12 hover:text-white hover:bg-rosa hover:cursor-pointer">
             kooki
@@ -46,7 +46,7 @@ export default function Landing() {
             Start <span className="underline">Today</span>
           </div>
           <div>
-            <div className="mx-auto text-2xl rounded-lg bg-stone-200 p-2 text-center space-y-4 py-8">
+            <div className="mx-auto text-2xl rounded-lg bg-stone-100 p-2 text-center space-y-4 py-8">
               <button
                 onClick={() => signIn("google")}
                 className="rounded-full p-2 mr-4 bg-white"
@@ -207,31 +207,3 @@ export default function Landing() {
     </div>
   );
 }
-
-// <>
-//   <div className=" grid grid-cols-1 mt-40 sm:mt-0 mb-20" ref={arrowDown}>
-//     <div className="m-auto h-1/2">
-//       <div className="text-7xl font-semibold">Discover Recipes</div>
-//     </div>
-//   </div>
-//   <div className="h-96 grid grid-cols-2 my-4">
-//     <div className="m-auto text-7xl font-semibold">Search</div>
-//     <div className="rounded-xl bg-stone-100 h-full p-30 mx-8"></div>
-//   </div>
-//   <div className="h-96 grid grid-cols-2">
-//     <div className="rounded-xl bg-stone-100 h-full p-30 mx-8">
-//       {/* <Player
-//           autoplay={true}
-//           speed={0.2}
-//           // loop={true}
-//           src="https://assets7.lottiefiles.com/packages/lf20_irbx8ets.json"
-//           style={{ height: "200px", width: "200px" }}
-//         ></Player> */}
-//     </div>
-//     <div className="m-auto text-7xl font-semibold">Save</div>
-//   </div>
-//   <div className="h-96 grid grid-cols-2 my-4">
-//     <div className="m-auto text-7xl font-semibold">Start!</div>
-//     <div className="rounded-xl bg-stone-100 h-full p-30 mx-8"></div>
-//   </div>
-// </>;

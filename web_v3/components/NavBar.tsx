@@ -70,7 +70,7 @@ const NavBar = () => {
         </form>
       </div>
       <div className="justify-center w-1/3 md:w-1/6 grid grid-cols-2 content-evenly items-center">
-        {/* <Link href="/grocery-list">
+        <Link href="/forum">
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ const NavBar = () => {
               />
             </svg>
           </button>
-        </Link> */}
+        </Link>
         <div className="dropdown dropdown-end mx-auto">
           <label tabIndex={0} className="btn btn-ghost btn-circle hover:glass ">
             <div className="w-6 rounded-full">
@@ -111,6 +111,11 @@ const NavBar = () => {
             tabIndex={0}
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
           >
+            <li>
+              <Link href="/forum">
+                <a>Discuss</a>
+              </Link>
+            </li>
             <li>
               <Link href="/notifications">
                 <a>Notifications</a>

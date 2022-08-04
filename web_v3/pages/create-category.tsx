@@ -19,52 +19,30 @@ const Card = ({ name, children }: CardProps) => {
   );
 };
 
-function CreateRecipePage2() {
+function CreateNewCategory() {
   const router = useRouter();
-  const [next0, setNext0] = useState(false);
+  const [next0, setNext0] = useState(true);
   const [next1, setNext1] = useState(false);
   const [next2, setNext2] = useState(false);
   const [next3, setNext3] = useState(false);
   const [next4, setNext4] = useState(false);
-  const [next5, setNext5] = useState(false);
 
   return (
     <div>
       <NavBar />
       <div className="flex flex-col items-center my-16 max-w-md mx-auto min-h-screen">
-        {!next0 && (
-          <>
-            <p className="text-6xl font-semibold">What are you creating?</p>
-            <hr />
-            <p className="font-light text-2xl mt-8">
-              Select below what suits best.
-            </p>
-
-            <div className="my-8">
-              <Card name="Cooked">Cooked recipe</Card>
-              <Card name="Cooked">Something baked</Card>
-              <Card name="Cooked">A drink</Card>
-            </div>
-
-            <button
-              className="rounded-xl bg-black text-white font-semibold p-2 w-2/5 mt-8"
-              onClick={() => {
-                setNext0(true);
-              }}
-            >
-              <a>Next</a>
-            </button>
-          </>
-        )}
         {!next1 && next0 && (
           <>
             <p className="text-6xl font-semibold">Create your own</p>
-            <p className="text-6xl font-semibold mb-8">Recipe</p>
+            <p className="text-6xl font-semibold mb-8">Playlist</p>
             <hr />
             <p className="font-light text-2xl">Select below the categories</p>
-            <p className="font-light text-2xl">that describe your recipe</p>
+            <p className="font-light text-2xl">that describe your playlist</p>
 
             <div className="my-8">
+              <Card name="Cooked">Cooked</Card>
+              <Card name="Cooked">Baked</Card>
+              <Card name="Cooked">Drink</Card>
               <Card name="Cooked">Sweet</Card>
               <Card name="Cooked">Salty</Card>
               <Card name="Cooked">Easy to make</Card>
@@ -85,16 +63,19 @@ function CreateRecipePage2() {
               className="rounded-xl bg-black text-white font-semibold p-2 w-2/5 mt-8"
               onClick={() => {
                 setNext1(true);
+                // setNext1(true);
               }}
             >
-              <a>Next</a>
+              <Link href="/create-new">
+                <a>Next</a>
+              </Link>
             </button>
           </>
         )}
         {!next2 && next1 && next0 && (
           <>
             <p className="text-6xl font-semibold">Create your own</p>
-            <p className="text-6xl font-semibold mb-8">Recipe</p>
+            <p className="text-6xl font-semibold mb-8">playlist</p>
             <hr />
             <p className="font-light text-2xl">Input your ingredients below</p>
             <p>Ingredient</p>
@@ -104,14 +85,16 @@ function CreateRecipePage2() {
               className="rounded-xl bg-black text-white font-semibold p-2 w-2/5 mt-8"
               onClick={(next2) => setNext2(true)}
             >
-              <a>Next</a>
+              <Link href="/create-new">
+                <a>Next</a>
+              </Link>
             </button>
           </>
         )}
         {!next3 && next2 && next1 && next0 && (
           <>
             <p className="text-6xl font-semibold">Create your own</p>
-            <p className="text-6xl font-semibold mb-8">Recipe</p>
+            <p className="text-6xl font-semibold mb-8">playlist</p>
             <hr />
             <p className="font-light text-2xl">What are the directions? </p>
             <p>Step</p>
@@ -130,35 +113,18 @@ function CreateRecipePage2() {
         {!next4 && next3 && next2 && next1 && next0 && (
           <>
             <p className="text-6xl font-semibold">Create your own</p>
-            <p className="text-6xl font-semibold mb-8">Recipe</p>
-            <hr />
-            <p className="font-light text-2xl">Whats the cook time? </p>
-            <p>Prep</p>
-            <p>Cook</p>
-            <p>Total</p>
-
-            <button
-              className="rounded-xl bg-black text-white font-semibold p-2 w-2/5 mt-8"
-              onClick={() => setNext4(true)}
-            >
-              <a>Next</a>
-            </button>
-          </>
-        )}
-        {!next5 && next4 && next3 && next2 && next1 && next0 && (
-          <>
-            <p className="text-6xl font-semibold">Create your own</p>
-            <p className="text-6xl font-semibold mb-8">Recipe</p>
+            <p className="text-6xl font-semibold mb-8">playlist</p>
             <hr />
             <p className="font-light text-2xl">
-              Final step. What's the recipe name?{" "}
+              Final step. What's the playlist name?{" "}
             </p>
             <p>Recipe name</p>
 
             <button
               className="rounded-xl bg-black text-white font-semibold p-2 w-2/5 mt-8"
-              onClick={() => {
-                setNext5(true);
+              onClick={(next3) => {
+                setNext3(true);
+                // router.push("/explore");
               }}
             >
               <Link href="/confirm-recipe">
@@ -172,4 +138,4 @@ function CreateRecipePage2() {
   );
 }
 
-export default CreateRecipePage2;
+export default CreateNewCategory;

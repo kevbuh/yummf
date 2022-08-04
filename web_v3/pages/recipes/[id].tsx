@@ -22,7 +22,13 @@ const test: NextPage = ({
       <div className="flex flex-row">
         {/* left side */}
         <div className="w-8/12 mx-8">
-          <div className="h-2/5 rounded-xl bg-stone-100 my-8"></div>
+          <div className="h-2/5 grid grid-cols-2 gap-2 rounded-xl  my-8">
+            <div className=" rounded-xl bg-stone-100"></div>
+            <div className="gap-2 grid grid-rows-2">
+              <div className="rounded-xl bg-stone-100"></div>
+              <div className="rounded-xl bg-stone-100"></div>
+            </div>
+          </div>
           <div className="mb-8">
             <div>
               <p className="text-2xl mt-4 font-semibold">Description</p>
@@ -86,7 +92,6 @@ const test: NextPage = ({
             )}
           </div>
         </div>
-
         {/* right */}
         <div className="w-4/12">
           <RecipeSidebar data={data} />

@@ -1,4 +1,4 @@
-import { GitHubForkSVG } from "../utils/socialSVGs";
+import { GitHubForkSVG, SaveSVG, ShareSVG, StarSVG } from "../utils/socialSVGs";
 
 type ComponentProps = {
   data: any;
@@ -43,38 +43,12 @@ function RecipeSidebar({ data }: ComponentProps) {
       <hr />
       <div className="grid grid-cols-4 gap-4 my-8">
         <button className="flex flex-row text-gray-500 my-auto">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 my-auto mr-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-            />
-          </svg>
-          {data?.numSaves}
+          <SaveSVG />
+          {data?.numSaves} Saves
         </button>
 
         <button className="flex flex-row text-gray-500 my-auto">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 my-auto mr-1"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-            />
-          </svg>
+          <ShareSVG />
           Share
         </button>
         <button className="flex flex-row text-gray-500 my-auto">
@@ -93,14 +67,7 @@ function RecipeSidebar({ data }: ComponentProps) {
           </button>
         </div>
         <div className="flex flex-row mb-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 my-auto"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
+          <StarSVG />
 
           <p className="font-semibold text-lg">
             4.88 - {data?.ratings.length > 0 ? data?.ratings.length : "No"}{" "}
