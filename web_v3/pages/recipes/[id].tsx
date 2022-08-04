@@ -39,6 +39,11 @@ const test: NextPage = ({
           <div className="mb-8">
             <div>
               <p className="text-2xl mt-4 font-semibold">Ingredients</p>
+              <div className="grid grid-cols-2 mt-4 font-semibold">
+                <p className="">Ingredient</p>
+                <p className=" mr-auto">Amount</p>
+              </div>
+
               <p className="font-light">
                 {data?.ingredientList?.length > 0
                   ? JSON.parse(JSON.stringify(data.ingredientList)).map(
@@ -46,10 +51,12 @@ const test: NextPage = ({
                         return (
                           <div
                             key={index}
-                            className="grid grid-cols-2 p-2 rounded-lg my-2"
+                            className="grid grid-cols-2 rounded-lg "
                           >
                             <p>{JSON.parse(d).ingredient_name}</p>
-                            <p>{JSON.parse(d).ingredient_amount}</p>
+                            <p className="mr-auto">
+                              {JSON.parse(d).ingredient_amount}
+                            </p>
                           </div>
                         );
                       }

@@ -32,7 +32,7 @@ const DashboardItems: NextPage = () => {
               {group?.recipes?.map((d: any, index: number) => (
                 <RecipeCard
                   key={index}
-                  name={d.name}
+                  name={d.name.slice(0, 36)}
                   author={d.user_id}
                   cook_time={d.cook_time}
                   caption={d.caption.slice(0, 42)}

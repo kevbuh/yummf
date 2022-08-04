@@ -31,7 +31,7 @@ function RecipeSidebar({ data }: ComponentProps) {
 
   return (
     <div className="p-6">
-      <p className="text-4xl font-semibold mb-4">{data?.name}</p>
+      <p className="text-4xl font-semibold mb-4 ">{data?.name.slice(0, 100)}</p>
 
       <div className="flex flex-row mb-4">
         <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
@@ -86,7 +86,9 @@ function RecipeSidebar({ data }: ComponentProps) {
         <p className="text-xl font-semibold mb-4">Time</p>
         <div className="bg-stone-100 rounded-xl p-2 mb-4">
           <p className="text-lg">Total</p>
-          <p className="font-semibold text-2xl ">{data?.cookTime}</p>
+          <p className="font-semibold text-2xl ">
+            {data?.cookTime.slice(0, 36)}
+          </p>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-stone-100 rounded-xl p-2">
@@ -104,7 +106,9 @@ function RecipeSidebar({ data }: ComponentProps) {
         <p className="text-xl font-semibold mb-4">Serving Size</p>
         <div className="bg-stone-100 rounded-xl p-2 mb-4">
           <p className="text-lg">Servings</p>
-          <p className="font-semibold text-2xl ">{data?.servingSize}</p>
+          <p className="font-semibold text-2xl truncate">
+            {data?.servingSize.slice(0, 36)}
+          </p>
         </div>
       </div>
       <hr />

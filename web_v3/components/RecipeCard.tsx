@@ -51,7 +51,7 @@ function RecipeCard({ name, author, cook_time, id, caption }: RecipeProps) {
 
           {/* )} */}
           <div className="my-2">
-            <p className="font-semibold text-md my-2 ">{name}</p>
+            <p className="font-semibold text-md my-2 truncate">{name}</p>
             <p className=" text-sm  truncate">{caption}</p>
           </div>
           <div className="grid grid-cols-2 justify-evenly my-2 rounded-lg px-2 py-2 bg-stone-100">
