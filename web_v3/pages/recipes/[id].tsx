@@ -22,7 +22,7 @@ const test: NextPage = ({
       <div className="flex flex-row">
         {/* left side */}
         <div className="w-8/12 mx-8">
-          <div className="h-3/5 rounded-xl bg-stone-100 my-8"></div>
+          <div className="h-2/5 rounded-xl bg-stone-100 my-8"></div>
           <div className="mb-8">
             <div>
               <p className="text-2xl mt-4 font-semibold">Description</p>
@@ -59,6 +59,31 @@ const test: NextPage = ({
               <p className="text-2xl mt-4 font-semibold">Instructions</p>
               <p className="font-light"> {data?.directions}</p>
             </div>
+          </div>
+          <hr />
+
+          <div>
+            <p className="text-2xl mt-4 font-semibold">Comments</p>
+
+            {data?.comments?.length > 0 ? (
+              <div>
+                {data?.comments.map((d: any, index: number) => (
+                  <div className="my-2 p-3 flex flex-row" key={index}>
+                    <div className="avatar">
+                      <div className="w-12 rounded-full mr-4 bg-stone-100"></div>
+                    </div>
+                    <div className="my-auto">
+                      <p>{d?.text}</p>
+                      <p className="text-sm text-stone-400">
+                        {d.createdAt.slice(5, 7)}/{d.createdAt.slice(2, 4)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-2">No Comments</div>
+            )}
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { GitHubForkSVG } from "../utils/socialSVGs";
 
 type ComponentProps = {
   data: any;
@@ -10,7 +10,7 @@ function RecipeSidebar({ data }: ComponentProps) {
     rating: number;
   };
 
-  console.log("@@", data);
+  // console.log("@@", data);
 
   const Rating = ({ category, rating }: RatingProps) => {
     return (
@@ -36,12 +36,12 @@ function RecipeSidebar({ data }: ComponentProps) {
       <div className="flex flex-row mb-4">
         <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
         <div>
-          <p className="text-stone-400 text-sm">Creator</p>
+          <p className="text-stone-400 text-sm">Author</p>
           <p className="font-semibold ">{data?.authorId}</p>
         </div>
       </div>
       <hr />
-      <div className="grid grid-cols-3 gap-4 my-8">
+      <div className="grid grid-cols-4 gap-4 my-8">
         <button className="flex flex-row text-gray-500 my-auto">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -77,6 +77,10 @@ function RecipeSidebar({ data }: ComponentProps) {
           </svg>
           Share
         </button>
+        <button className="flex flex-row text-gray-500 my-auto">
+          <GitHubForkSVG /> Fork
+        </button>
+
         <button className="flex flex-row text-gray-500 my-auto">...</button>
       </div>
       <hr />
