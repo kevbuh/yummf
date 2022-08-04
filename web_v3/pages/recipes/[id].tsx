@@ -11,11 +11,13 @@ import type {
 import { useSession } from "next-auth/react";
 import React from "react";
 import prisma from "../../utils/prisma";
+import SignUpBanner from "../../components/SignUpBanner";
 
 const test: NextPage = ({
   data,
   avg_rating,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const { data: session } = useSession();
   return (
     <>
       <NavBar />
@@ -104,7 +106,7 @@ const test: NextPage = ({
           <RecipeSidebar data={data} />
         </div>
       </div>
-
+      {!session && <SignUpBanner />}
       <Footer />
     </>
   );

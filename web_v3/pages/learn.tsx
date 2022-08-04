@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
+import SignUpBanner from "../components/SignUpBanner";
 
 type CardProps = {
   name: string;
@@ -19,34 +20,50 @@ function LearnHome() {
     <div>
       <NavBar />
 
-      <div className="flex flex-col items-center my-16 max-w-md mx-auto">
-        <p className="text-6xl font-semibold">Learn How to </p>
-        <p className="text-6xl font-semibold">Create </p>
+      <div className="flex flex-col items-center my-16  mx-auto">
+        <p className="text-6xl font-semibold">Recipe Questions, </p>
+        <p className="text-6xl font-semibold">Answered </p>
 
-        <p className="font-light mt-4 text-2xl">Ingredient Information</p>
-        <p className="font-light mt-4 text-2xl">The best tools</p>
-        <p className="font-light mt-4 text-2xl">Time saving techniques</p>
+        <p className="font-light mt-4 text-lg">
+          Beginner guides, practical tips, the basics for first-timers, and
+          ingredient information.
+        </p>
 
-        <button className="rounded-xl bg-black text-white font-semibold p-2 w-2/5 mt-4">
+        {/* <button className="rounded-xl bg-black text-white font-semibold p-2 w-2/5 mt-4">
           <Link href="/create-new">
             <a>Start Now</a>
           </Link>
-        </button>
+        </button> */}
+      </div>
+      <div className="flex flex-col items-center mb-16 mt-40  mx-auto">
+        <p className="text-6xl font-semibold mx-auto flex align-center">
+          Cooking Basics
+        </p>
       </div>
       <div className="p-6 mx-4  grid grid-cols-3 gap-4 rounded-xl">
-        <Card name="Step One" />
-        <Card name="Step Two" />
-        <Card name="Step Three" />
+        <Card name="Cooking Basics" />
+        <Card name="Please, Don't Under Salt" />
+        <Card name="How To Make Fluffy Pancakes" />
+      </div>
+      <br />
+      <br />
+      <br />
+      <div className="flex flex-col items-center mb-16 mt-40  mx-auto">
+        <p className="text-6xl font-semibold mx-auto flex align-center">
+          Ingredient Information
+        </p>
+      </div>
+      <div className="p-6 mx-4  grid grid-cols-3 gap-4 rounded-xl">
+        <Card name="Most Common" />
+        <Card name="How to Master Cooking Chicken " />
+        <Card name="Art of Salt" />
       </div>
       <br />
       <br />
       <br />
       <br />
       <br />
-      <br />
-      <br />
-      <br />
-      <div>sign up here</div>
+      <SignUpBanner />
       <Footer />
     </div>
   );
