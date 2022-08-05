@@ -4,23 +4,12 @@ import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useState } from "react";
-
-type CardProps = {
-  name: string;
-  children: any;
-};
-
-const Card = ({ name, children }: CardProps) => {
-  return (
-    <button className="p-3 rounded-xl bg-stone-100 font-medium m-1">
-      {children}
-    </button>
-  );
-};
+import { MouseEventHandler, useEffect, useState } from "react";
 
 function CreateRecipePage2() {
   const router = useRouter();
+
+  // used for which state the user is on
   const [next0, setNext0] = useState(false);
   const [next1, setNext1] = useState(false);
   const [next2, setNext2] = useState(false);
@@ -28,10 +17,39 @@ function CreateRecipePage2() {
   const [next4, setNext4] = useState(false);
   const [next5, setNext5] = useState(false);
 
+  const [selectionCooked, setSelectionCooked] = useState(false);
+  const [selectionBaked, setSelectionBaked] = useState(false);
+  const [selectionDrink, setSelectionDrink] = useState(false);
+
+  // handle drink or baked
+  const handleCooked = () => {
+    setSelectionCooked((selectionCooked) => !selectionCooked);
+    return Card;
+  };
+
+  type CardProps = {
+    name: string;
+    children: string;
+  };
+
+  const Card = ({ name, children }: CardProps) => {
+    return (
+      <button
+        className={
+          selectionCooked
+            ? "bg-black text-white p-3 rounded-xl font-medium m-1"
+            : "p-3 rounded-xl bg-stone-100 font-medium m-1"
+        }
+      >
+        <p onClick={handleCooked}>{children}</p>
+      </button>
+    );
+  };
+
   return (
     <div>
       <NavBar />
-      <div className="flex flex-col items-center my-16 max-w-md mx-auto min-h-screen">
+      <div className="flex flex-col items-center my-16 max-w-2xl mx-auto min-h-screen">
         {!next0 && (
           <>
             <p className="text-6xl font-semibold">What are you creating?</p>
@@ -42,8 +60,8 @@ function CreateRecipePage2() {
 
             <div className="my-8">
               <Card name="Cooked">Cooked recipe</Card>
-              <Card name="Cooked">Something baked</Card>
-              <Card name="Cooked">A drink</Card>
+              <Card name="Baked">Something baked</Card>
+              <Card name="Drink">A drink</Card>
             </div>
 
             <button

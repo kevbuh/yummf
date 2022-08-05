@@ -21,10 +21,10 @@ function LearnHome() {
       <NavBar />
 
       <div className="flex flex-col items-center my-16  mx-auto">
-        <p className="text-6xl font-semibold">Recipe Questions, </p>
-        <p className="text-6xl font-semibold">Answered </p>
+        <p className="text-6xl font-semibold">Learn How To Cook</p>
+        {/* <p className="text-6xl font-semibold">Cook </p> */}
 
-        <p className="font-light mt-4 text-lg">
+        <p className="font-light mt-8 text-lg">
           Beginner guides, practical tips, the basics for first-timers, and
           ingredient information.
         </p>

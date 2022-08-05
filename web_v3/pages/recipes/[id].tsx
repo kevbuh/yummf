@@ -21,14 +21,14 @@ const test: NextPage = ({
   return (
     <>
       <NavBar />
-      <div className="flex flex-row">
+      <div className="flex flex-col-reverse md:flex-row">
         {/* left side */}
-        <div className="w-8/12 mx-8">
-          <div className="h-2/5 grid grid-cols-2 gap-2 rounded-xl  my-8">
-            <div className=" rounded-xl bg-stone-100"></div>
-            <div className="gap-2 grid grid-rows-2">
-              <div className="rounded-xl bg-stone-100"></div>
-              <div className="rounded-xl bg-stone-100"></div>
+        <div className="md:w-8/12 mx-8">
+          <div className="h-48 md:h-2/5 grid grid-cols-2 gap-2 rounded-xl md:my-8">
+            <div className="rounded-xl bg-stone-100 "></div>
+            <div className=" gap-2 grid grid-rows-2">
+              <div className=" rounded-xl bg-stone-100"></div>
+              <div className=" rounded-xl bg-stone-100"></div>
             </div>
           </div>
           <div className="mb-8">
@@ -40,10 +40,11 @@ const test: NextPage = ({
           <hr />
           <div className="mb-8">
             <div>
-              <p className="text-2xl mt-4 font-semibold">Ingredients</p>
-              <div className="grid grid-cols-2 mt-4 font-semibold">
+              <p className="text-2xl mt-4 font-semibold pr-4">Ingredients</p>
+
+              <div className="grid grid-cols-2 gap-4 mt-4 font-semibold">
                 <p className="">Ingredient</p>
-                <p className=" mr-auto">Amount</p>
+                <p className="mr-auto">Amount</p>
               </div>
 
               <p className="font-light">
@@ -53,7 +54,7 @@ const test: NextPage = ({
                         return (
                           <div
                             key={index}
-                            className="grid grid-cols-2 rounded-lg "
+                            className="grid grid-cols-2 gap-4 rounded-lg "
                           >
                             <p>{JSON.parse(d).ingredient_name}</p>
                             <p className="mr-auto">
@@ -77,7 +78,7 @@ const test: NextPage = ({
           </div>
           <hr />
 
-          <div>
+          <div className="mb-16">
             <p className="text-2xl mt-4 font-semibold">Comments</p>
 
             {data?.comments?.length > 0 ? (
@@ -102,7 +103,7 @@ const test: NextPage = ({
           </div>
         </div>
         {/* right */}
-        <div className="w-4/12">
+        <div className="md:w-4/12">
           <RecipeSidebar data={data} />
         </div>
       </div>

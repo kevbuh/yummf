@@ -30,7 +30,7 @@ function RecipeSidebar({ data }: ComponentProps) {
   };
 
   return (
-    <div className="p-6">
+    <div className="px-6 sm:pt-6">
       <p className="text-4xl font-semibold mb-4 ">{data?.name.slice(0, 100)}</p>
 
       <div className="flex flex-row mb-4">
@@ -41,28 +41,28 @@ function RecipeSidebar({ data }: ComponentProps) {
         </div>
       </div>
       <hr />
-      <div className="grid grid-cols-4 gap-4 my-8">
-        <button className="flex flex-row text-gray-500 my-auto">
+      <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
+        <button className="mr-auto my-auto flex flex-row text-gray-500">
           <SaveSVG />
           {data?.numSaves} Saves
         </button>
 
-        <button className="flex flex-row text-gray-500 my-auto">
+        <button className="mr-auto my-auto flex flex-row text-gray-500 ">
           <ShareSVG />
           Share
         </button>
-        <button className="flex flex-row text-gray-500 my-auto">
+        <button className="mr-auto my-auto flex flex-row text-gray-500">
           <GitHubForkSVG /> Fork
         </button>
 
-        <button className="flex flex-row text-gray-500 my-auto">...</button>
+        <button className="mr-auto my-auto text-gray-500 font-bold">...</button>
       </div>
       <hr />
       <div className="my-8">
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 ">
           <p className="text-xl font-semibold mb-2">Rating</p>
 
-          <button className="text-sm  text-gray-500 ml-auto">
+          <button className="text-sm text-gray-500 ml-auto">
             Show all reviews
           </button>
         </div>
@@ -86,18 +86,18 @@ function RecipeSidebar({ data }: ComponentProps) {
         <p className="text-xl font-semibold mb-4">Time</p>
         <div className="bg-stone-100 rounded-xl p-2 mb-4">
           <p className="text-lg">Total</p>
-          <p className="font-semibold text-2xl ">
+          <p className="font-semibold text-xl ">
             {data?.cookTime.slice(0, 36)}
           </p>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-stone-100 rounded-xl p-2">
             <p className="text-lg">Prep</p>
-            <p className="font-semibold text-2xl">25 mins</p>
+            <p className="font-semibold text-xl">25 mins</p>
           </div>
           <div className="bg-stone-100 rounded-xl p-2">
             <p className="text-lg">Cook</p>
-            <p className="font-semibold text-2xl">40 mins</p>
+            <p className="font-semibold text-xl">40 mins</p>
           </div>
         </div>
       </div>
@@ -106,7 +106,7 @@ function RecipeSidebar({ data }: ComponentProps) {
         <p className="text-xl font-semibold mb-4">Serving Size</p>
         <div className="bg-stone-100 rounded-xl p-2 mb-4">
           <p className="text-lg">Servings</p>
-          <p className="font-semibold text-2xl truncate">
+          <p className="font-semibold text-xl truncate">
             {data?.servingSize.slice(0, 36)}
           </p>
         </div>

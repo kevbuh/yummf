@@ -91,7 +91,7 @@ export const GitHubForkSVG = () => {
       height="1024.000000pt"
       viewBox="0 0 640.000000 1024.000000"
       preserveAspectRatio="xMidYMid meet"
-      className="w-5 h-5 text-gray-500 bg-gray-500 mr-1"
+      className="w-5 h-5 text-gray-500 bg-gray-500 mr-1 "
     >
       <g
         transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)"

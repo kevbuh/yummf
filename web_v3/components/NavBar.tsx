@@ -71,7 +71,7 @@ const NavBar = () => {
       </div>
       <div className="justify-center w-1/3 md:w-1/6 grid grid-cols-3 content-evenly items-center">
         <Link href="/learn">
-          <button className="font-semibold">Learn</button>
+          <button className="text-lg mt-1">Learn</button>
         </Link>
         {/* <Link href="/forum">
           <button>Discuss</button>
