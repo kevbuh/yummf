@@ -19,7 +19,10 @@ function AccountSettingsPage() {
           <div className="flex flex-row">
             <div className="avatar">
               <div className="w-24 rounded-full mr-8">
-                <img src={session?.user?.image} alt="User profile image" />
+                <img
+                  src={session?.user?.image as string}
+                  alt="User profile image"
+                />
               </div>
             </div>
             <div className="my-auto">
