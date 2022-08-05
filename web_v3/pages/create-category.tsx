@@ -116,7 +116,7 @@ function CreateNewCategory() {
             <p className="text-6xl font-semibold mb-8">playlist</p>
             <hr />
             <p className="font-light text-2xl">
-              Final step. What's the playlist name?{" "}
+              Final step. What&apos;s the playlist name?{" "}
             </p>
             <p>Recipe name</p>
 

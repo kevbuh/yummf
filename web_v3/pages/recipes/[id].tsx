@@ -13,7 +13,7 @@ import React from "react";
 import prisma from "../../utils/prisma";
 import SignUpBanner from "../../components/SignUpBanner";
 
-const test: NextPage = ({
+const NewIDPage: NextPage = ({
   data,
   avg_rating,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -144,4 +144,4 @@ export const getServerSideProps: GetServerSideProps = async ({
   };
 };
 
-export default test;
+export default NewIDPage;

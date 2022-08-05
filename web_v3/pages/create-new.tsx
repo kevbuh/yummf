@@ -169,7 +169,7 @@ function CreateRecipePage2() {
             <p className="text-6xl font-semibold mb-8">Recipe</p>
             <hr />
             <p className="font-light text-2xl">
-              Final step. What's the recipe name?{" "}
+              Final step. What&apos;s the recipe name?{" "}
             </p>
             <p>Recipe name</p>
 

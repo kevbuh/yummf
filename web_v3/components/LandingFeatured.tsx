@@ -15,7 +15,7 @@ const Card = ({ name }: CardProps) => {
 function LandingFeatured() {
   return (
     <div className="p-6  mx-4 rounded-xl">
-      <p className="text-2xl font-semibold mb-8">Recipes you'll love</p>
+      <p className="text-2xl font-semibold mb-8">Recipes you&apos;ll love</p>
       <div className="rounded-xl grid grid-cols-3 gap-4 mb-4">
         <Card name="Tacos Al Pastor" />
         <Card name="Pineapple Upside Down Pancakes" />

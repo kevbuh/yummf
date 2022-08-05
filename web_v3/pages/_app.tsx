@@ -30,17 +30,17 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           content="Find your next favorite meal"
           key="desc"
         />
-        <Script
-          id="Adsense-id"
-          data-ad-client="ca-pub-7158717683717233"
-          async
-          strategy="afterInteractive"
-          onError={(e) => {
-            console.error("Google AdSense Script failed to load", e);
-          }}
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        />
       </Head>
+      <Script
+        id="Adsense-id"
+        data-ad-client="ca-pub-7158717683717233"
+        async
+        strategy="afterInteractive"
+        onError={(e) => {
+          console.error("Google AdSense Script failed to load", e);
+        }}
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+      />
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
