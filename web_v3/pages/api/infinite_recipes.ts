@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     const cursorObj =
       cursor === "" ? undefined : { id: parseInt(cursor as string, 10) };
 
-    const recipes = await prisma.recipe.findMany({
+    const recipes = await prisma?.recipe.findMany({
       skip: cursor !== "" ? 1 : 0,
       cursor: cursorObj,
       take: limit,
