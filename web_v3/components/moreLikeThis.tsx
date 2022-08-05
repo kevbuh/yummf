@@ -9,9 +9,9 @@ const MoreLikeThis: any = () => {
     <>
       <p className="text-2xl mb-4">View the latest recipes!</p>
       <div className="grid grid-cols-3 gap-4">
+        {/* <RecipeCard recipes={null} />
         <RecipeCard recipes={null} />
-        <RecipeCard recipes={null} />
-        <RecipeCard recipes={null} />
+        <RecipeCard recipes={null} /> */}
       </div>
     </>
   );
