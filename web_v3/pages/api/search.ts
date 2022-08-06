@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../utils/prisma";
 
 interface Data {
-  searchResults: any[];
+  searchResults: any[] | undefined;
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
