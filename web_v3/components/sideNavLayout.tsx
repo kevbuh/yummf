@@ -21,6 +21,7 @@ const SideNavLayout = ({ children }: Props) => {
               >
                 Create
               </button>
+
               <ul
                 tabIndex={0}
                 className="dropdown-content menu p-2 px-8 shadow bg-white rounded-box w-60"

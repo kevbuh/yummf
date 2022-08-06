@@ -17,7 +17,7 @@ function LandingShow() {
     <div className="rounded-xl  mx-4 px-6 py-16 flex flex-row justify-around">
       <div className="grid grid-cols-1 my-auto mr-4 max-w-xs">
         <div className="flex flex-row">
-          <p className="text-4xl font-semibold italic mb-2">Playlists</p>
+          <p className="text-4xl font-semibold mb-2">📚 Playlists</p>
           <p className="text-4xl font-medium mb-2 not-italic">
             &nbsp;for food{" "}
           </p>

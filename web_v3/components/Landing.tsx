@@ -9,6 +9,7 @@ import LandingFeatured from "./LandingFeatured";
 import Head from "next/head";
 import LandingLearn from "./LandingLearn";
 import SignUpPage from "../pages/signup";
+import Link from "next/link";
 
 declare global {
   interface Window {
@@ -75,23 +76,29 @@ export default function Landing() {
             {/* The complete food solution, everything in one place */}
             <div
               className="text-7xl font-semibold mt-20 sm:mt-1 
+          "
+            >
+              The{" "}
+              <span
+                className="text-7xl font-semibold mt-20 sm:mt-1 
             bg-gradient-to-r bg-clip-text  text-transparent 
             from-rosa to-pink-400
             animate-text"
-            >
-              Recipes{" "}
+              >
+                Complete{" "}
+              </span>
             </div>
-            <div className="text-7xl font-semibold">For You</div>
+            <div className="text-7xl font-semibold">Food Solution</div>
             {/* <svg
-              className="fill-secondary col-start-1 row-start-1 h-auto w-full bg-rosa "
-              width="1600"
-              height="595"
-              viewBox="0 0 1600 595"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M0 338L53.3 349.2C106.7 360.3 213.3 382.7 320 393.8C426.7 405 533.3 405 640 359.3C746.7 313.7 853.3 222.3 960 189.2C1066.7 156 1173.3 181 1280 159.2C1386.7 137.3 1493.3 68.7 1546.7 34.3L1600 0V595H1546.7C1493.3 595 1386.7 595 1280 595C1173.3 595 1066.7 595 960 595C853.3 595 746.7 595 640 595C533.3 595 426.7 595 320 595C213.3 595 106.7 595 53.3 595H0V338Z"></path>
-            </svg> */}
+                className="fill-secondary col-start-1 row-start-1 h-auto w-full bg-rosa "
+                width="1600"
+                height="595"
+                viewBox="0 0 1600 595"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 338L53.3 349.2C106.7 360.3 213.3 382.7 320 393.8C426.7 405 533.3 405 640 359.3C746.7 313.7 853.3 222.3 960 189.2C1066.7 156 1173.3 181 1280 159.2C1386.7 137.3 1493.3 68.7 1546.7 34.3L1600 0V595H1546.7C1493.3 595 1386.7 595 1280 595C1173.3 595 1066.7 595 960 595C853.3 595 746.7 595 640 595C533.3 595 426.7 595 320 595C213.3 595 106.7 595 53.3 595H0V338Z"></path>
+              </svg> */}
           </div>
           <div className="w-3/4 lg:w-1/2 mx-auto mb-10">
             <form className="w-full mx-auto">
@@ -123,7 +130,7 @@ export default function Landing() {
                 <input
                   type="search"
                   id="default-search"
-                  className="block p-4 pl-10 w-full  text-black rounded-lg border-rosa border-4 "
+                  className="block p-4 pl-10 w-full  text-black rounded-lg border-stone-100 border-4 "
                   placeholder="Search Recipes, Ingredients..."
                   onChange={(e) => setSearchField(e.target.value)}
                   onFocus={onFocus}
@@ -132,6 +139,33 @@ export default function Landing() {
                 />
               </div>
             </form>
+            <div className="flex flex-row mt-4">
+              <p className="font-semibold text-lg m-auto">
+                Today's Popular Searches
+              </p>
+              <div className="grid grid-cols-4 gap-4 m-auto w-3/5">
+                <Link href="/search-results?result=tacos">
+                  <button className="font-semibold px-3 py-1 rounded-xl bg-stone-100 text-blue-400 ">
+                    tacos
+                  </button>
+                </Link>
+                <Link href="/search-results?result=fried rice">
+                  <button className="font-semibold px-3 py-1 rounded-xl bg-stone-100 text-blue-400 ">
+                    fried rice
+                  </button>
+                </Link>
+                <Link href="/search-results?result=mexican">
+                  <button className="font-semibold px-3 py-1 rounded-xl bg-stone-100 text-blue-400 ">
+                    mexican
+                  </button>
+                </Link>
+                <Link href="/search-results?result=pasta">
+                  <button className="font-semibold px-3 py-1 rounded-xl bg-stone-100 text-blue-400 ">
+                    pasta
+                  </button>
+                </Link>
+              </div>
+            </div>
           </div>
           <div className=" mx-auto my-16">
             <svg
@@ -151,7 +185,6 @@ export default function Landing() {
             </svg>
           </div>
         </div>
-        {/* put something cool here */}
       </div>
       <LandingFeatured />
       <br />

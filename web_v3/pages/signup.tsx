@@ -42,7 +42,7 @@ export default function SignUpPage() {
             {!shouldShowLogin ? "Sign Up " : "Log In "}&
           </div>
           <div className="text-5xl font-semibold mb-2">
-            Start <span className="underline">Today</span>
+            Start <span className="underline">Today!</span>
           </div>
           <div>
             <div className="mx-auto text-2xl rounded-lg bg-stone-100 p-2 text-center space-y-4 py-8">
@@ -92,10 +92,10 @@ export default function SignUpPage() {
         <div className="flex my-auto flex-col w-full">
           <div className="mx-auto flex flex-col">
             <div className="text-7xl font-semibold">
-              {!shouldShowLogin ? "Sign Up " : "Log In "}&
+              {!shouldShowLogin ? "Sign up " : "log In "} and
             </div>
             <div className="text-7xl font-semibold mb-2">
-              Start <span className="underline">Today</span>
+              start <span className="underline">today!</span>
             </div>
           </div>
           <div>
