@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="footer px-10 pt-10 pb-8 ">
+    <footer className="footer px-10 pt-10 pb-8 bg-white">
       <Link href="/explore">
         <a className="font-semibold text-4xl m-auto text-rosa">kooki</a>
       </Link>

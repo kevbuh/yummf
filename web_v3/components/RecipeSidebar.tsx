@@ -47,7 +47,7 @@ function RecipeSidebar({ data, session }: ComponentProps) {
   };
 
   return (
-    <div className="px-6 sm:py-6 mb-8">
+    <div className="px-6 sm:py-6 mb-8 ">
       {session?.userId == data?.authorId && <OwnRecipeButtons />}
 
       <p className="text-4xl font-semibold mb-4 ">{data?.name.slice(0, 100)}</p>
