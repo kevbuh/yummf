@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../utils/prisma";
 
 interface Data {
-  recipes: any[];
+  recipes: any[] | undefined;
   nextId: number | undefined;
 }
 
