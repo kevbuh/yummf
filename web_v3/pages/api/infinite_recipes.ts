@@ -23,7 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     });
     return res.json({
       recipes,
-      nextId: recipes.length === limit ? recipes[limit - 1].id : undefined,
+      nextId: recipes?.length === limit ? recipes[limit - 1].id : undefined,
     });
   }
 };
