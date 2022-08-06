@@ -11,12 +11,7 @@ const NavBar = () => {
   const router = useRouter();
 
   const onSubmit = async (e: any) => {
-    // mixpanel.track(`Searched for recipe ${searchField}`, {
-    //   source: "Kookie Web Client",
-    // });
-
     e.preventDefault();
-
     router.push(`/search-results?result=${searchField}`);
   };
 
@@ -24,7 +19,7 @@ const NavBar = () => {
     <div className="navbar shadow-sm bg-white sticky top-0 z-10 ">
       <div className="sm:w-1/6">
         <Link href="/explore">
-          <a className="btn btn-ghost normal-case text-2xl text-rosa sm:mx-auto">
+          <a className="btn btn-ghost normal-case text-2xl text-rosa sm:ml-4">
             kooki
           </a>
         </Link>
@@ -59,7 +54,7 @@ const NavBar = () => {
             <input
               type="search"
               id="default-search"
-              className="block p-4 pl-10 w-full text-sm text-black rounded-lg dark:bg-stone-100 bg-stone-100"
+              className="block p-4 pl-10 w-full text-sm text-black rounded-xl bg-stone-100"
               placeholder="Search Recipes, Ingredients..."
               onChange={(e) => setSearchField(e.target.value)}
               onFocus={onFocus}
@@ -71,10 +66,10 @@ const NavBar = () => {
       </div>
       <div className="justify-center w-1/3 md:w-1/6 grid grid-cols-3 content-evenly items-center">
         <Link href="/learn">
-          <button className="text-lg mt-1">Learn</button>
+          <button className="text-lg font-medium mt-1">Learn</button>
         </Link>
         <Link href="/forum">
-          <button className="text-lg mt-1">Discuss</button>
+          <button className="text-lg font-medium mt-1">Discuss</button>
         </Link>
         <div className="dropdown dropdown-end mx-auto">
           <label tabIndex={0} className="btn btn-ghost btn-circle hover:glass ">

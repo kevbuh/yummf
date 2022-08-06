@@ -6,7 +6,7 @@ type CardProps = {
 
 const Card = ({ name }: CardProps) => {
   return (
-    <div className="h-80 rounded-xl bg-red-400 p-4 flex cursor-pointer w-full">
+    <div className="h-80 rounded-xl bg-stone-100  p-4 flex cursor-pointer w-full">
       <p className="font-semibold text-xl mr-auto mt-auto">{name}</p>
     </div>
   );
@@ -14,12 +14,12 @@ const Card = ({ name }: CardProps) => {
 
 function LandingShow() {
   return (
-    <div className="rounded-xl bg-red-200 mx-4 px-6 py-16 flex flex-row justify-around">
+    <div className="rounded-xl  mx-4 px-6 py-16 flex flex-row justify-around">
       <div className="grid grid-cols-1 my-auto mr-4 max-w-xs">
         <div className="flex flex-row">
           <p className="text-4xl font-semibold italic mb-2">Playlists</p>
           <p className="text-4xl font-medium mb-2 not-italic">
-            &nbsp; For Food{" "}
+            &nbsp;for food{" "}
           </p>
         </div>
         {/* <hr /> */}

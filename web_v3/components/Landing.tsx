@@ -7,6 +7,8 @@ import LandingCategories from "./LandingCategories";
 import Footer from "./Footer";
 import LandingFeatured from "./LandingFeatured";
 import Head from "next/head";
+import LandingLearn from "./LandingLearn";
+import SignUpPage from "../pages/signup";
 
 declare global {
   interface Window {
@@ -39,9 +41,9 @@ export default function Landing() {
 
   const SignUpFull = () => {
     return (
-      <div className="h-full md:grid md:grid-cols-2 rounded-xl mx-4 ">
-        <div className="m-auto invisible md:visible" ref={myRef}>
-          <p className="md:mt-20 md:mb-20 text-7xl mx-auto font-bold border-4 border-rosa text-rosa rounded-full md:py-24 px-12 hover:text-white hover:bg-rosa hover:cursor-pointer">
+      <div className="h-full md:grid md:grid-cols-2 rounded-xl mx-4">
+        <div className="m-auto invisible md:visible">
+          <p className="md:mt-20 md:mb-20 text-7xl mx-auto font-bold border-4 border-stone text-rosa rounded-full md:py-24 px-12 hover:text-white hover:bg-rosa hover:cursor-pointer">
             kooki
           </p>
         </div>
@@ -83,9 +85,25 @@ export default function Landing() {
     );
   };
 
+  const Test = () => {
+    return (
+      <svg
+        className="fill-secondary col-start-1 row-start-1 h-auto w-full bg-rosa "
+        width="1600"
+        height="595"
+        viewBox="0 0 1600 595"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M0 338L53.3 349.2C106.7 360.3 213.3 382.7 320 393.8C426.7 405 533.3 405 640 359.3C746.7 313.7 853.3 222.3 960 189.2C1066.7 156 1173.3 181 1280 159.2C1386.7 137.3 1493.3 68.7 1546.7 34.3L1600 0V595H1546.7C1493.3 595 1386.7 595 1280 595C1173.3 595 1066.7 595 960 595C853.3 595 746.7 595 640 595C533.3 595 426.7 595 320 595C213.3 595 106.7 595 53.3 595H0V338Z"></path>
+      </svg>
+    );
+  };
+
   return (
     <div>
-      <div className="grid grid-cols-2 w-full sm:max-w-6xl mx-auto mt-8 ">
+      {/* <Test /> */}
+      <div className="grid grid-cols-2 w-full mt-8 px-6">
         <a
           className="btn btn-ghost normal-case text-3xl text-rosa mr-auto my-auto"
           onClick={executeScroll}
@@ -95,7 +113,7 @@ export default function Landing() {
             &nbsp; beta
           </span>
         </a>
-        <div className="grid grid-cols-2 mr-2 gap-2 sm:grid-cols-3 ml-auto my-auto sm:gap-4 ">
+        <div className="grid grid-cols-2 mr-2 gap-2 sm:grid-cols-2 ml-auto my-auto sm:gap-4">
           <>
             <button
               className="text-xl font-semibold rounded-xl bg-stone-100 px-3 py-2 sm:p-2 text-center cursor-pointer scroll-smooth"
@@ -112,20 +130,29 @@ export default function Landing() {
           </>
         </div>
       </div>
-
-      <div className="space-x-20 my-auto w-full">
-        <div className="m-auto flex flex-col justify-evenly h-3/4 w-full">
+      <div className="space-x-20 my-auto w-full bg-[url('../public/swirl.svg')]">
+        <div className="m-auto flex flex-col justify-evenly  w-full">
           <div className="m-auto mt-20 mb-10">
             {/* The complete food solution, everything in one place */}
             <div
               className="text-7xl font-semibold mt-20 sm:mt-1 
             bg-gradient-to-r bg-clip-text  text-transparent 
-            from-rosa via-pink-500 to-orange-500
+            from-rosa to-pink-400
             animate-text"
             >
               Recipes{" "}
             </div>
             <div className="text-7xl font-semibold">For You</div>
+            {/* <svg
+              className="fill-secondary col-start-1 row-start-1 h-auto w-full bg-rosa "
+              width="1600"
+              height="595"
+              viewBox="0 0 1600 595"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0 338L53.3 349.2C106.7 360.3 213.3 382.7 320 393.8C426.7 405 533.3 405 640 359.3C746.7 313.7 853.3 222.3 960 189.2C1066.7 156 1173.3 181 1280 159.2C1386.7 137.3 1493.3 68.7 1546.7 34.3L1600 0V595H1546.7C1493.3 595 1386.7 595 1280 595C1173.3 595 1066.7 595 960 595C853.3 595 746.7 595 640 595C533.3 595 426.7 595 320 595C213.3 595 106.7 595 53.3 595H0V338Z"></path>
+            </svg> */}
           </div>
           <div className="w-3/4 lg:w-1/2 mx-auto mb-10">
             <form className="w-full mx-auto">
@@ -157,7 +184,7 @@ export default function Landing() {
                 <input
                   type="search"
                   id="default-search"
-                  className="block p-4 pl-10 w-full text-sm text-black rounded-lg dark:bg-stone-100 bg-stone-100"
+                  className="block p-4 pl-10 w-full  text-black rounded-lg border-rosa border-4 "
                   placeholder="Search Recipes, Ingredients..."
                   onChange={(e) => setSearchField(e.target.value)}
                   onFocus={onFocus}
@@ -187,7 +214,6 @@ export default function Landing() {
         </div>
         {/* put something cool here */}
       </div>
-
       <LandingFeatured />
       <br />
       <br />
@@ -198,19 +224,20 @@ export default function Landing() {
       <br />
       <br />
       <br />
+      <LandingLearn />
+      <br />
+      <br />
+      <br />
+      <br />
       <LandingCategories />
       <br />
       <br />
       <br />
       <br />
       {/* Sign up */}
-      <SignUpFull />
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <Footer />
+      <div ref={myRef}></div>
+      <SignUpPage />
+      {/* <Footer /> */}
     </div>
   );
 }
