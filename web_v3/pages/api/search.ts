@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === "GET") {
     const queryParam: string | string[] = req.query.q ?? "";
 
-    const searchResults = await prisma.recipe.findMany({
+    const searchResults = await prisma?.recipe.findMany({
       where: {
         name: {
           search: `${queryParam}`,
