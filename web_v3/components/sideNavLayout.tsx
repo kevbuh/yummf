@@ -27,7 +27,7 @@ const SideNavLayout = ({ children }: Props) => {
                 className="dropdown-content menu p-2 px-8 shadow bg-white rounded-box w-60"
               >
                 <li>
-                  <Link href="/create-new">
+                  <Link href="/create">
                     <a>Create Recipe</a>
                   </Link>
                 </li>

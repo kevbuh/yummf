@@ -1,10 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import SignUpBanner from "./SignUpBanner";
 
 function Footer() {
   return (
-    <footer className="footer px-10 pt-10 pb-8 bg-base-300 text-base-content">
+    <footer className="footer px-10 pt-10 pb-8 ">
       <Link href="/explore">
         <a className="font-semibold text-4xl m-auto text-rosa">kooki</a>
       </Link>

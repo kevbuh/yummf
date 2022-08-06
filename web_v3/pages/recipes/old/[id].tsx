@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { useState } from "react";
-import Footer from "../../components/Footer";
-import MoreLikeThis from "../../components/moreLikeThis";
+import Footer from "../../../components/Footer";
+import MoreLikeThis from "../../../components/moreLikeThis";
 import Router, { useRouter } from "next/router";
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
-import SideNavLayout from "../../components/sideNavLayout";
+import SideNavLayout from "../../../components/sideNavLayout";
 
 import type {
   NextPage,
@@ -14,7 +14,7 @@ import type {
 } from "next";
 import { useSession } from "next-auth/react";
 import React from "react";
-import prisma from "../../utils/prisma";
+import prisma from "../../../utils/prisma";
 
 const SelectRecipePage: NextPage = ({
   data,

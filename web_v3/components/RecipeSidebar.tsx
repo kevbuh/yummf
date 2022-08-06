@@ -1,3 +1,6 @@
+import Link from "next/link";
+import Router, { useRouter } from "next/router";
+
 import { GitHubForkSVG, SaveSVG, ShareSVG, StarSVG } from "../utils/socialSVGs";
 
 type ComponentProps = {
@@ -11,7 +14,7 @@ function RecipeSidebar({ data, session }: ComponentProps) {
     rating: number;
   };
 
-  // console.log("@@", data);
+  const router = useRouter();
 
   const Rating = ({ category, rating }: RatingProps) => {
     return (
@@ -43,37 +46,101 @@ function RecipeSidebar({ data, session }: ComponentProps) {
     );
   };
 
-  console.log(session, data?.authorId);
-
   return (
-    <div className="px-6 sm:py-6">
+    <div className="px-6 sm:py-6 mb-8">
       {session?.userId == data?.authorId && <OwnRecipeButtons />}
 
       <p className="text-4xl font-semibold mb-4 ">{data?.name.slice(0, 100)}</p>
 
-      <div className="flex flex-row mb-4">
-        <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
-        <div>
-          <p className="text-stone-400 text-sm">Author</p>
-          <p className="font-semibold ">{data?.authorId}</p>
+      <Link href="/chef/1">
+        <div className="flex flex-row mb-4 cursor-pointer">
+          <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
+          <div>
+            <p className="text-stone-400 text-sm">Author</p>
+            <p className="font-semibold ">{data?.authorId}</p>
+          </div>
         </div>
-      </div>
+      </Link>
       <hr />
       <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
-        <button className="mr-auto my-auto flex flex-row text-gray-500">
-          <SaveSVG />
-          {data?.numSaves} Saves
-        </button>
+        {data?.likedBy[0]?.email === session?.user?.email ? (
+          <p className="mr-auto my-auto flex flex-row text-gray-500">Saved!</p>
+        ) : (
+          <button
+            className="mr-auto my-auto flex flex-row text-gray-500"
+            onClick={() => {
+              try {
+                fetch("/api/save_recipe", {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                  },
+                  body: JSON.stringify({
+                    recipeId: data.id,
+                    userEmail: session?.user?.email,
+                  }),
+                });
+                console.log("success");
+                router.reload();
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          >
+            <SaveSVG />
+            <p>{data?.numSaves} Saves</p>
+          </button>
+        )}
 
-        <button className="mr-auto my-auto flex flex-row text-gray-500 ">
-          <ShareSVG />
-          Share
-        </button>
-        <button className="mr-auto my-auto flex flex-row text-gray-500">
+        <div className="dropdown">
+          <button
+            className="mr-auto my-auto flex flex-row text-gray-500"
+            tabIndex={0}
+          >
+            <ShareSVG />
+            Share
+          </button>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
+          >
+            <li>
+              <a className="p-1 text-gray-500">Email</a>
+            </li>
+            <li>
+              <a className="p-1 text-gray-500">Link</a>
+            </li>
+            <li>
+              <a className="p-1 text-gray-500">Pinterest</a>
+            </li>
+          </ul>
+        </div>
+
+        <button
+          className="mr-auto my-auto flex flex-row text-gray-500"
+          onClick={() => router.push(`fork/${data.id}`)}
+        >
           <GitHubForkSVG /> Fork
         </button>
 
-        <button className="mr-auto my-auto text-gray-500 font-bold">...</button>
+        <div className="dropdown">
+          <button
+            className="mr-auto my-auto text-gray-500 font-bold"
+            tabIndex={0}
+          >
+            ...
+          </button>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
+          >
+            <li>
+              <Link href="/help">
+                <a className="p-1 text-gray-500">Report</a>
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
       <hr />
       <div className="my-8">

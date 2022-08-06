@@ -56,17 +56,11 @@ const Chef: NextPage = ({
             return (
               <RecipeCard
                 key={index}
-                name={d.name}
-                author={d.authorId}
-                // rating={d.avgRating ? d.avgRating?.toFixed(2) : null}
-                cook_time={d.cookTime}
-                caption={d.caption}
+                name={d.name.slice(0, 36)}
+                author={d.user_id}
+                cook_time={d.cook_time}
+                caption={d.caption.slice(0, 42)}
                 id={d.id}
-                // image={
-                //   d.featured_image !== null && d.featured_image !== undefined
-                //     ? API_URL + d.featured_image?.url.split("?")[0]
-                //     : null
-                // }
               />
             );
           })}

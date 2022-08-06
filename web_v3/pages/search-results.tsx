@@ -75,14 +75,14 @@ function SearchResultPage() {
               <div>
                 <div className="bg-stone-100 p-3 rounded-xl w-full flex flex-row">
                   <div>
-                    <p>Sorry, there were no recipes that came up.</p>
-                    <p>
-                      If you believe there is an issue, click{" "}
+                    <p className="my-2 font-semibold">
+                      Sorry, there were no recipes that came up. If you believe
+                      there is an issue, click{" "}
                       <Link href="/help">
-                        <a className="underline text-blue-500">here</a>
+                        <a className="underline text-blue-500">here.</a>
                       </Link>{" "}
-                      to report it
                     </p>
+                    <p>Maybe the recipes below suit your needs?</p>
                   </div>
                 </div>
               </div>
