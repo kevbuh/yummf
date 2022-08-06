@@ -37,16 +37,6 @@ export default function Landing() {
     router.push(`/search-results?result=${searchField}`);
   };
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     (window.adsbygoogle = window.adsbygoogle || []).push({});
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   (window.adsbygoogle = window.adsbygoogle || []).push({});
-  // }, []);
-
   const SignUpFull = () => {
     return (
       <div className="h-full md:grid md:grid-cols-2 rounded-xl mx-4 ">
@@ -94,162 +84,133 @@ export default function Landing() {
   };
 
   return (
-    <>
-      {/* <Head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-               (adsbygoogle = window.adsbygoogle || []).push({
-                   google_ad_client: "ca-pub-7158717683717233",
-                   enable_page_level_ads: true
-              });
-                `,
-          }}
-        />
-      </Head> */}
-      <div>
-        <div className="grid grid-cols-2 w-full sm:max-w-6xl mx-auto mt-8 ">
-          <a
-            className="btn btn-ghost normal-case text-3xl text-rosa mr-auto my-auto"
-            onClick={executeScroll}
-          >
-            kooki{" "}
-            <span className="text-stone-300 italic text-sm mb-auto">
-              &nbsp; beta
-            </span>
-          </a>
-          <div className="grid grid-cols-2 mr-2 gap-2 sm:grid-cols-3 ml-auto my-auto sm:gap-4 ">
-            <>
-              <button
-                className="text-xl font-semibold rounded-xl bg-stone-100 px-3 py-2 sm:p-2 text-center cursor-pointer scroll-smooth"
-                onClick={executeScroll2}
-              >
-                Log in
-              </button>
-              <button
-                className="text-xl font-semibold rounded-xl bg-rosa text-white p-2 cursor-pointer"
-                onClick={executeScroll}
-              >
-                Sign up
-              </button>
-            </>
-          </div>
+    <div>
+      <div className="grid grid-cols-2 w-full sm:max-w-6xl mx-auto mt-8 ">
+        <a
+          className="btn btn-ghost normal-case text-3xl text-rosa mr-auto my-auto"
+          onClick={executeScroll}
+        >
+          kooki{" "}
+          <span className="text-stone-300 italic text-sm mb-auto">
+            &nbsp; beta
+          </span>
+        </a>
+        <div className="grid grid-cols-2 mr-2 gap-2 sm:grid-cols-3 ml-auto my-auto sm:gap-4 ">
+          <>
+            <button
+              className="text-xl font-semibold rounded-xl bg-stone-100 px-3 py-2 sm:p-2 text-center cursor-pointer scroll-smooth"
+              onClick={executeScroll2}
+            >
+              Log in
+            </button>
+            <button
+              className="text-xl font-semibold rounded-xl bg-rosa text-white p-2 cursor-pointer"
+              onClick={executeScroll}
+            >
+              Sign up
+            </button>
+          </>
         </div>
+      </div>
 
-        <div className="space-x-20 my-auto w-full">
-          <div className="m-auto flex flex-col justify-evenly h-3/4 w-full">
-            <div className="m-auto mt-20 mb-10">
-              {/* The complete food solution, everything in one place */}
-              <div
-                className="text-7xl font-semibold mt-20 sm:mt-1 
+      <div className="space-x-20 my-auto w-full">
+        <div className="m-auto flex flex-col justify-evenly h-3/4 w-full">
+          <div className="m-auto mt-20 mb-10">
+            {/* The complete food solution, everything in one place */}
+            <div
+              className="text-7xl font-semibold mt-20 sm:mt-1 
             bg-gradient-to-r bg-clip-text  text-transparent 
             from-rosa via-pink-500 to-orange-500
             animate-text"
-              >
-                Recipes{" "}
-              </div>
-              <div className="text-7xl font-semibold">For You</div>
+            >
+              Recipes{" "}
             </div>
-            <div className="w-3/4 lg:w-1/2 mx-auto mb-10">
-              <form className="w-full mx-auto">
-                <label
-                  htmlFor="default-search"
-                  className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
-                >
-                  Search
-                </label>
-                <div className="relative ">
-                  <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                    <svg
-                      className="w-5 h-5 text-gray-500 dark:text-zine-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                      ></path>
-                    </svg>
-                    {/* @ts-ignore */}
-                    <button onClick={onSubmit}></button>
-                  </div>
-                  <input
-                    type="search"
-                    id="default-search"
-                    className="block p-4 pl-10 w-full text-sm text-black rounded-lg dark:bg-stone-100 bg-stone-100"
-                    placeholder="Search Recipes, Ingredients..."
-                    onChange={(e) => setSearchField(e.target.value)}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    required
-                  />
-                </div>
-              </form>
-            </div>
-            <div className=" mx-auto mt-20 mb-32">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 m-auto cursor-pointer"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-                onClick={executeScrollArrow}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
-              </svg>
-            </div>
+            <div className="text-7xl font-semibold">For You</div>
           </div>
-          {/* put something cool here */}
+          <div className="w-3/4 lg:w-1/2 mx-auto mb-10">
+            <form className="w-full mx-auto">
+              <label
+                htmlFor="default-search"
+                className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
+              >
+                Search
+              </label>
+              <div className="relative ">
+                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                  <svg
+                    className="w-5 h-5 text-gray-500 dark:text-zine-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    ></path>
+                  </svg>
+                  {/* @ts-ignore */}
+                  <button onClick={onSubmit}></button>
+                </div>
+                <input
+                  type="search"
+                  id="default-search"
+                  className="block p-4 pl-10 w-full text-sm text-black rounded-lg dark:bg-stone-100 bg-stone-100"
+                  placeholder="Search Recipes, Ingredients..."
+                  onChange={(e) => setSearchField(e.target.value)}
+                  onFocus={onFocus}
+                  onBlur={onBlur}
+                  required
+                />
+              </div>
+            </form>
+          </div>
+          <div className=" mx-auto my-16">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 m-auto cursor-pointer"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+              onClick={executeScrollArrow}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
+          </div>
         </div>
-
-        <div className="adsbygoogle">
-          <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-7158717683717233"
-            data-ad-slot="1363309015"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-        </div>
-
-        <LandingFeatured />
-        <br />
-        <br />
-        <br />
-        <br />
-        <LandingShow />
-        <br />
-        <br />
-        <br />
-        <br />
-        <LandingCategories />
-        <br />
-        <br />
-        <br />
-        <br />
-        {/* Sign up */}
-        <SignUpFull />
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <Footer />
+        {/* put something cool here */}
       </div>
-    </>
+
+      <LandingFeatured />
+      <br />
+      <br />
+      <br />
+      <br />
+      <LandingShow />
+      <br />
+      <br />
+      <br />
+      <br />
+      <LandingCategories />
+      <br />
+      <br />
+      <br />
+      <br />
+      {/* Sign up */}
+      <SignUpFull />
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <Footer />
+    </div>
   );
 }

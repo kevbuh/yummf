@@ -773,7 +773,7 @@ const SelectRecipePage: NextPage = ({
               <div className="text-2xl w-full mb-4">Reviews</div>
               <ReviewView />
 
-              <div className="mb-4 mt-8 border rounded p-3 shadow-sm w-full">
+              <div className="mb-8 mt-8 border rounded p-3 shadow-sm w-full">
                 {data?.comments?.length > 0 ? (
                   <div>
                     {data?.comments.map((d: any, index: number) => (

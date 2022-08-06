@@ -10,7 +10,7 @@ const NavBar = () => {
   const onFocus = () => setFocused(true);
   const router = useRouter();
 
-  const onSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSubmit = async (e: any) => {
     // mixpanel.track(`Searched for recipe ${searchField}`, {
     //   source: "Kookie Web Client",
     // });
@@ -54,7 +54,7 @@ const NavBar = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 ></path>
               </svg>
-              <button onClick={() => onSubmit}></button>
+              <button onClick={(e) => onSubmit(e)}></button>
             </div>
             <input
               type="search"
@@ -73,9 +73,9 @@ const NavBar = () => {
         <Link href="/learn">
           <button className="text-lg mt-1">Learn</button>
         </Link>
-        {/* <Link href="/forum">
-          <button>Discuss</button>
-        </Link> */}
+        <Link href="/forum">
+          <button className="text-lg mt-1">Discuss</button>
+        </Link>
         <div className="dropdown dropdown-end mx-auto">
           <label tabIndex={0} className="btn btn-ghost btn-circle hover:glass ">
             <div className="w-6 rounded-full">

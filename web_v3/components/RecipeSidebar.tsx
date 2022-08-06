@@ -2,9 +2,10 @@ import { GitHubForkSVG, SaveSVG, ShareSVG, StarSVG } from "../utils/socialSVGs";
 
 type ComponentProps = {
   data: any;
+  session: any;
 };
 
-function RecipeSidebar({ data }: ComponentProps) {
+function RecipeSidebar({ data, session }: ComponentProps) {
   type RatingProps = {
     category: string;
     rating: number;
@@ -29,8 +30,25 @@ function RecipeSidebar({ data }: ComponentProps) {
     );
   };
 
+  const OwnRecipeButtons = () => {
+    return (
+      <div className="grid grid-cols-2 gap-4 mb-2">
+        <button className="p-2 bg-stone-100 hover:bg-fresh hover:text-white font-semibold rounded-xl">
+          Edit
+        </button>
+        <button className="p-2 bg-stone-100 hover:bg-red-500 hover:text-white font-semibold rounded-xl">
+          Delete
+        </button>
+      </div>
+    );
+  };
+
+  console.log(session, data?.authorId);
+
   return (
-    <div className="px-6 sm:pt-6">
+    <div className="px-6 sm:py-6">
+      {session?.userId == data?.authorId && <OwnRecipeButtons />}
+
       <p className="text-4xl font-semibold mb-4 ">{data?.name.slice(0, 100)}</p>
 
       <div className="flex flex-row mb-4">

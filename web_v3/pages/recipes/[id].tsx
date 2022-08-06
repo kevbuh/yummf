@@ -98,13 +98,20 @@ const NewIDPage: NextPage = ({
                 ))}
               </div>
             ) : (
-              <div className="mt-2">No Comments</div>
+              <div className="mt-2 ">
+                <p>
+                  No comments
+                  <button className="p-2 ml-4 bg-stone-100 hover:bg-rosa hover:text-white font-semibold rounded-xl">
+                    Comment
+                  </button>
+                </p>{" "}
+              </div>
             )}
           </div>
         </div>
         {/* right */}
         <div className="md:w-4/12">
-          <RecipeSidebar data={data} />
+          <RecipeSidebar data={data} session={session} />
         </div>
       </div>
       {!session && <SignUpBanner />}

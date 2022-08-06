@@ -4,6 +4,7 @@ import RecipeCard from "../components/RecipeCard";
 import { useQuery } from "@tanstack/react-query";
 import SideNavLayout from "../components/sideNavLayout";
 import Link from "next/link";
+import { SaveSVG } from "../utils/socialSVGs";
 
 function SearchResultPage() {
   const { query } = useRouter();
@@ -36,20 +37,32 @@ function SearchResultPage() {
               <div
                 className={
                   isLoading
-                    ? "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 animate-pulse"
-                    : "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+                    ? "grid grid-cols-1 mt-2.5 animate-pulse"
+                    : "grid grid-cols-1 gap-3 mt-2.5 cursor-pointer"
                 }
               >
                 {data.map((d: any, index: number) => {
+                  console.log("@", d);
                   return (
-                    <RecipeCard
-                      key={index}
-                      name={d.name}
-                      author={d.user_id}
-                      cook_time={d.cook_time}
-                      caption={d.caption}
-                      id={d.id}
-                    />
+                    // <RecipeCard
+                    //   key={index}
+                    //   name={d.name}
+                    //   author={d.user_id}
+                    //   cook_time={d.cook_time}
+                    //   caption={d.caption}
+                    //   id={d.id}
+                    // />
+                    <Link href={"/recipes/" + d.id}>
+                      <div className="bg-stone-100 p-3 rounded-xl w-full flex flex-row">
+                        <div className="my-auto ml-2 mr-4">
+                          <SaveSVG />
+                        </div>
+                        <div>
+                          <p className="font-semibold">{d.name}</p>
+                          <p className="my-auto">{d.authorId}</p>
+                        </div>
+                      </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -60,16 +73,18 @@ function SearchResultPage() {
                 No Search Results!
               </div>
               <div>
-                <p className="font-light ">
-                  Sorry, there were no recipes that came up.
-                </p>
-                <p className="font-light ">
-                  If you believe there is an issue, click{" "}
-                  <Link href="/help">
-                    <a className="underline text-blue-500">here</a>
-                  </Link>{" "}
-                  to report it
-                </p>
+                <div className="bg-stone-100 p-3 rounded-xl w-full flex flex-row">
+                  <div>
+                    <p>Sorry, there were no recipes that came up.</p>
+                    <p>
+                      If you believe there is an issue, click{" "}
+                      <Link href="/help">
+                        <a className="underline text-blue-500">here</a>
+                      </Link>{" "}
+                      to report it
+                    </p>
+                  </div>
+                </div>
               </div>
             </>
           )}
