@@ -33,7 +33,9 @@ function AccountSettingsPage() {
                       Welcome, {session?.user?.email}
                     </span>
                   </p>
-                  {/* <p>Joined ??? days ago</p> */}
+                  <Link href="/chef/1">
+                    <a className="text-gray-500">View public profile</a>
+                  </Link>
                 </>
               ) : null}
             </div>

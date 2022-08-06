@@ -39,67 +39,6 @@ export default function Landing() {
     router.push(`/search-results?result=${searchField}`);
   };
 
-  const SignUpFull = () => {
-    return (
-      <div className="h-full md:grid md:grid-cols-2 rounded-xl mx-4">
-        <div className="m-auto invisible md:visible">
-          <p className="md:mt-20 md:mb-20 text-7xl mx-auto font-bold border-4 border-stone text-rosa rounded-full md:py-24 px-12 hover:text-white hover:bg-rosa hover:cursor-pointer">
-            kooki
-          </p>
-        </div>
-        <div className="m-auto">
-          <div className="text-5xl font-semibold">
-            {!shouldShowLogin ? "Sign Up " : "Log In "}&
-          </div>
-          <div className="text-5xl font-semibold mb-2">
-            Start <span className="underline">Today</span>
-          </div>
-          <div>
-            <div className="mx-auto text-2xl rounded-lg bg-stone-100 p-2 text-center space-y-4 py-8">
-              <button
-                onClick={() => signIn("google")}
-                className="rounded-full p-2 mr-4 bg-white"
-              >
-                <GoogleSVG />
-              </button>
-              <button
-                onClick={() => signIn("facebook")}
-                className="rounded-full p-2 ml-4 bg-white"
-              >
-                <FacebookSVG />
-              </button>
-
-              <div className="w-1/2 mx-auto"></div>
-              <p className="text-base ">or</p>
-              <button
-                onClick={() => signIn("google")}
-                className="flex flex-row mx-auto space-evenly rounded-lg p-3 bg-white text-base font-semibold"
-              >
-                <EmailSVG />
-                Email address
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const Test = () => {
-    return (
-      <svg
-        className="fill-secondary col-start-1 row-start-1 h-auto w-full bg-rosa "
-        width="1600"
-        height="595"
-        viewBox="0 0 1600 595"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M0 338L53.3 349.2C106.7 360.3 213.3 382.7 320 393.8C426.7 405 533.3 405 640 359.3C746.7 313.7 853.3 222.3 960 189.2C1066.7 156 1173.3 181 1280 159.2C1386.7 137.3 1493.3 68.7 1546.7 34.3L1600 0V595H1546.7C1493.3 595 1386.7 595 1280 595C1173.3 595 1066.7 595 960 595C853.3 595 746.7 595 640 595C533.3 595 426.7 595 320 595C213.3 595 106.7 595 53.3 595H0V338Z"></path>
-      </svg>
-    );
-  };
-
   return (
     <div>
       {/* <Test /> */}
@@ -130,7 +69,7 @@ export default function Landing() {
           </>
         </div>
       </div>
-      <div className="space-x-20 my-auto w-full bg-[url('../public/swirl.svg')]">
+      <div className="space-x-20 my-auto w-full  ">
         <div className="m-auto flex flex-col justify-evenly  w-full">
           <div className="m-auto mt-20 mb-10">
             {/* The complete food solution, everything in one place */}
@@ -241,3 +180,49 @@ export default function Landing() {
     </div>
   );
 }
+
+// const SignUpFull = () => {
+//   return (
+//     <div className="h-full md:grid md:grid-cols-2 rounded-xl mx-4">
+//       <div className="m-auto invisible md:visible">
+//         <p className="md:mt-20 md:mb-20 text-7xl mx-auto font-bold border-4 border-stone text-rosa rounded-full md:py-24 px-12 hover:text-white hover:bg-rosa hover:cursor-pointer">
+//           kooki
+//         </p>
+//       </div>
+//       <div className="m-auto">
+//         <div className="text-5xl font-semibold">
+//           {!shouldShowLogin ? "Sign Up " : "Log In "}&
+//         </div>
+//         <div className="text-5xl font-semibold mb-2">
+//           Start <span className="underline">Today</span>
+//         </div>
+//         <div>
+//           <div className="mx-auto text-2xl rounded-lg bg-stone-100 p-2 text-center space-y-4 py-8">
+//             <button
+//               onClick={() => signIn("google")}
+//               className="rounded-full p-2 mr-4 bg-white"
+//             >
+//               <GoogleSVG />
+//             </button>
+//             <button
+//               onClick={() => signIn("facebook")}
+//               className="rounded-full p-2 ml-4 bg-white"
+//             >
+//               <FacebookSVG />
+//             </button>
+
+//             <div className="w-1/2 mx-auto"></div>
+//             <p className="text-base ">or</p>
+//             <button
+//               onClick={() => signIn("google")}
+//               className="flex flex-row mx-auto space-evenly rounded-lg p-3 bg-white text-base font-semibold"
+//             >
+//               <EmailSVG />
+//               Email address
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
