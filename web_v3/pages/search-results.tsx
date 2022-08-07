@@ -45,7 +45,6 @@ function SearchResultPage() {
                   console.log("@", d);
                   return (
                     // <RecipeCard
-                    //   key={index}
                     //   name={d.name}
                     //   author={d.user_id}
                     //   cook_time={d.cook_time}
@@ -53,7 +52,10 @@ function SearchResultPage() {
                     //   id={d.id}
                     // />
                     <Link href={"/recipes/" + d.id}>
-                      <div className="bg-stone-100 p-3 rounded-xl w-full flex flex-row">
+                      <div
+                        className="bg-stone-100 p-3 rounded-xl w-full flex flex-row"
+                        key={index}
+                      >
                         <div className="my-auto ml-2 mr-4">
                           <SaveSVG />
                         </div>

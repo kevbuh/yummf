@@ -141,7 +141,7 @@ export default function Landing() {
             </form>
             <div className="flex flex-row mt-4">
               <p className="font-semibold text-lg m-auto">
-                Today's Popular Searches
+                Today&apos;s Popular Searches
               </p>
               <div className="grid grid-cols-4 gap-4 m-auto w-3/5">
                 <Link href="/search-results?result=tacos">

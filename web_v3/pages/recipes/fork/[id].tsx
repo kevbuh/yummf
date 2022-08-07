@@ -29,9 +29,9 @@ const Fork: NextPage = ({
             What does fork mean?
           </p>
           <p className="font-light">
-            According to github.com, "A fork is a copy of a (recipe). Forking a
-            (recipe) allows you to freely experiment with changes without
-            affecting the original (recipe)".{" "}
+            According to github.com, &quot;A fork is a copy of a (recipe).
+            Forking a (recipe) allows you to freely experiment with changes
+            without affecting the original (recipe)&quot;.{" "}
           </p>
           <p className=" font-semibold mt-8">
             This will allow you to freely experiment with this recipe, and add

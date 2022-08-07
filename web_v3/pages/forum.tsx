@@ -27,7 +27,7 @@ function ForumHome() {
           <p className="text-xl font-semibold mb-4">Top Conversations</p>
           <div className="grid gap-4 grid-cols-2">
             <button className="bg-stone-100 font-semibold p-8 w-full rounded-xl">
-              What's the best way to cook eggs?
+              What&apos;s the best way to cook eggs?
             </button>
             <button className="bg-stone-100 font-semibold p-8 w-full rounded-xl">
               Please never forget to salt your meals!

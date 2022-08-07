@@ -163,7 +163,7 @@ function CreateRecipePage() {
 
                   <div className="my-8">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
-                      What's the cook time?{" "}
+                      What&apos;s the cook time?{" "}
                     </p>
                     <Field
                       name="cook_time"
