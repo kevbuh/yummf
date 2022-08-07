@@ -51,7 +51,7 @@ function SearchResultPage() {
                     //   caption={d.caption}
                     //   id={d.id}
                     // />
-                    <Link href={"/recipes/" + d.id}>
+                    <Link href={"/recipes/" + d.id} key={index}>
                       <div
                         className="bg-stone-100 p-3 rounded-xl w-full flex flex-row"
                         key={index}
