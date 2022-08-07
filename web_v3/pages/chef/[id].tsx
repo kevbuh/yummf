@@ -14,6 +14,7 @@ import Link from "next/link";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import RecipeCard from "../../components/RecipeCard";
+import { PrismaPromise, Recipe } from "@prisma/client";
 
 const Chef: NextPage = ({
   data,
@@ -115,8 +116,9 @@ export async function getServerSideProps(context: any) {
     },
   });
 
-  const result =
-    await prisma.$queryRaw`SELECT * FROM "Recipe" WHERE "authorId"=${savedRecipes.id}`;
+  const result = prisma
+    ? await prisma.$queryRaw`SELECT * FROM "Recipe" WHERE "authorId"=${savedRecipes?.id};`
+    : null;
 
   return {
     props: {
