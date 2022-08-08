@@ -39,8 +39,7 @@ const Home: NextPage = () => {
               <br />
               <span className="italic">find something to eat</span>
             </p>
-            {/* <span className="mx-auto font-semibold text-6xl mt-4">🍪🍪🍪</span> */}
-            <form className="w-full mx-auto">
+            <form className="w-full sm:mx-auto">
               <div className="relative ">
                 <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                   <svg
@@ -114,7 +113,7 @@ const Home: NextPage = () => {
             Beef
           </button>
         </div>
-        <p className="font-semibold text-5xl text-center mb-8">
+        <p className="font-semibold text-5xl text-center mb-8 max-w-lg">
           Find millions of the best recipes, categories, and ingredients
         </p>
 
@@ -142,7 +141,7 @@ const Home: NextPage = () => {
         />
       </svg>
 
-      <div className="items-center flex flex-col my-40 justify-center align-center text-center">
+      <div className="items-center flex flex-col my-40 justify-center align-center text-center max-w-lg mx-auto">
         <p className="font-semibold text-5xl mb-4">Fork your favorites</p>
         <p className="mx-auto font-medium text-2xl text-gray-500 px-6 sm:px-0 mb-6">
           Kooki makes it super easy to fork recipes make them your own
@@ -176,7 +175,7 @@ const Home: NextPage = () => {
         <p className="font-semibold text-5xl my-4 text-center">
           Get <span className="text-fresh">paid</span> for top content
         </p>
-        <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6">
+        <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6 max-w-lg">
           Kooki allows the best chefs all over the world, from professional to
           home kitchens, to reap rewards from their recipes and articles.
         </p>
@@ -208,7 +207,7 @@ const Home: NextPage = () => {
         <p className="font-semibold text-5xl my-4 text-center">
           Improve your cooking skills
         </p>
-        <p className="mx-auto font-medium text-2xl text-gray-500 mb-8">
+        <p className="mx-auto font-medium text-2xl text-gray-500 mb-8 max-w-lg">
           Kooki has some of the best cooks in all of planet earth. Get help with
           cooking, or learn from the community.
         </p>
