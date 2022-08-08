@@ -3,7 +3,7 @@ import NewCard from "../pages/ArticleComponent";
 
 function LandingLearn() {
   return (
-    <div className="rounded-xl bg-stone-200 mx-4 px-6 py-16 flex flex-row justify-around">
+    <div className="rounded-xl mx-4 px-6 py-16 flex flex-row justify-around bg-yellow-100">
       <div className="grid grid-cols-1 my-auto mr-4 max-w-xs">
         <div className="flex flex-row">
           <p className="text-4xl font-semibold mb-2">👨‍🍳 Learn </p>

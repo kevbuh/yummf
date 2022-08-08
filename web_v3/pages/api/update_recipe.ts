@@ -18,6 +18,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     authorId,
   } = JSON.parse(req.body);
 
+  console.log("$$", id);
+
   const ingredient_list_init: any[] = [];
 
   ingredient_list.map((d: any) => {

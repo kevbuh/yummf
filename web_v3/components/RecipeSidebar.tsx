@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
+import { useState } from "react";
 
 import { GitHubForkSVG, SaveSVG, ShareSVG, StarSVG } from "../utils/socialSVGs";
 
@@ -36,10 +37,27 @@ function RecipeSidebar({ data, session }: ComponentProps) {
   const OwnRecipeButtons = () => {
     return (
       <div className="grid grid-cols-2 gap-4 mb-2">
-        <button className="p-2 bg-stone-100 hover:bg-fresh hover:text-white font-semibold rounded-xl">
+        <button
+          className="p-2 bg-stone-100 hover:bg-fresh hover:text-white font-semibold rounded-xl"
+          onClick={() => {
+            router.push(`/create?edit=${data.id}`);
+          }}
+        >
           Edit
         </button>
-        <button className="p-2 bg-stone-100 hover:bg-red-500 hover:text-white font-semibold rounded-xl">
+        <button
+          className="p-2 bg-stone-100 hover:bg-red-500 hover:text-white font-semibold rounded-xl"
+          onClick={() => {
+            fetch(`/api/delete_recipe`, {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data.id),
+            }).catch((error) => console.log("error", error));
+            router.push("/explore");
+          }}
+        >
           Delete
         </button>
       </div>

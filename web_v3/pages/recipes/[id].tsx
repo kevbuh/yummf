@@ -20,6 +20,7 @@ const NewIDPage: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session } = useSession();
   const [comment, setComment] = useState(false);
+  const [clickedEdit, setClickedEdit] = useState(false);
 
   return (
     <>

@@ -43,6 +43,7 @@ export default function Landing() {
   return (
     <div>
       {/* <Test /> */}
+
       <div className="grid grid-cols-2 w-full mt-8 px-6">
         <a
           className="btn btn-ghost normal-case text-3xl text-rosa mr-auto my-auto"
@@ -70,7 +71,7 @@ export default function Landing() {
           </>
         </div>
       </div>
-      <div className="space-x-20 my-auto w-full  ">
+      <div className="my-auto w-full ">
         <div className="m-auto flex flex-col justify-evenly  w-full">
           <div className="m-auto mt-20 mb-10">
             {/* The complete food solution, everything in one place */}
@@ -186,29 +187,35 @@ export default function Landing() {
           </div>
         </div>
       </div>
+
       <LandingFeatured />
+
       <br />
       <br />
       <br />
       <br />
+
       <LandingShow />
+
       <br />
       <br />
       <br />
       <br />
+
       <LandingLearn />
+
       <br />
       <br />
       <br />
       <br />
+
       <LandingCategories />
-      <br />
-      <br />
-      <br />
-      <br />
+
       {/* Sign up */}
       <div ref={myRef}></div>
+
       <SignUpPage />
+
       {/* <Footer /> */}
     </div>
   );

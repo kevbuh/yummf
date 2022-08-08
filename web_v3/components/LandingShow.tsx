@@ -14,7 +14,7 @@ const Card = ({ name }: CardProps) => {
 
 function LandingShow() {
   return (
-    <div className="rounded-xl  mx-4 px-6 py-16 flex flex-row justify-around">
+    <div className="rounded-xl  mx-4 px-6 py-16 flex flex-row justify-around h-screen bg-purple-100">
       <div className="grid grid-cols-1 my-auto mr-4 max-w-xs">
         <div className="flex flex-row">
           <p className="text-4xl font-semibold mb-2">📚 Playlists</p>

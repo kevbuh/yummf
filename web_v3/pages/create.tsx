@@ -7,24 +7,31 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
+import prisma from "../utils/prisma";
+import { InferGetServerSidePropsType } from "next";
 
-function CreateRecipePage() {
+function CreateRecipePage({
+  data,
+  edit,
+  yee,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   // const [image, setImage] = useState(null);
   const router = useRouter();
 
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  console.log("@@@", session);
+  console.log("@@yee,", data.id);
 
   const initialValues = {
-    name: "",
-    directions: "",
-    source_url: "",
-    serving: "",
-    cook_time: "",
-    caption: "",
+    name: edit ? data.name : "",
+    directions: edit ? data.name : "",
+    source_url: edit ? data.name : "",
+    serving: edit ? data.name : "",
+    cook_time: edit ? data.name : "",
+    caption: edit ? data.name : "",
     featured_image: null,
-    userId: session?.userId,
+    authorId: yee,
+    id: data.id,
 
     ingredient_list: [
       {
@@ -58,17 +65,31 @@ function CreateRecipePage() {
               featured_image: Yup.mixed(),
             })}
             onSubmit={(values, { setSubmitting }) => {
-              fetch("/api/create_recipe", {
-                method: "POST",
-                headers: {
-                  Accept: "application/json",
-                },
-                body: JSON.stringify(values),
-              });
+              if (edit) {
+                fetch("/api/update_recipe", {
+                  method: "PUT",
+                  headers: {
+                    Accept: "application/json",
+                  },
+                  body: JSON.stringify(values),
+                });
 
-              router.push("/confirm-recipe");
+                router.reload();
 
-              setSubmitting(false);
+                setSubmitting(false);
+              } else {
+                fetch("/api/create_recipe", {
+                  method: "POST",
+                  headers: {
+                    Accept: "application/json",
+                  },
+                  body: JSON.stringify(values),
+                });
+
+                router.push("/confirm-recipe");
+
+                setSubmitting(false);
+              }
             }}
           >
             {({ values }) => (
@@ -290,12 +311,9 @@ function CreateRecipePage() {
 }
 
 export async function getServerSideProps(context: any) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const { query, req, res } = context;
 
+  const session = await unstable_getServerSession(req, res, authOptions);
   if (!session) {
     return {
       redirect: {
@@ -306,9 +324,30 @@ export async function getServerSideProps(context: any) {
     };
   }
 
+  console.log("2", session.userId);
+
+  let edit = false;
+  let thisRecipe = null;
+
+  if (query.edit) {
+    edit = true;
+    thisRecipe = await prisma?.recipe.findUnique({
+      where: {
+        id: parseInt(query.edit),
+      },
+      include: {
+        comments: true,
+        ratings: true,
+        likedBy: true,
+      },
+    });
+  }
+
   return {
     props: {
-      session: session,
+      yee: session.userId,
+      edit: edit,
+      data: JSON.parse(JSON.stringify(thisRecipe)),
     },
   };
 }
