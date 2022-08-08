@@ -20,7 +20,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <div className="">
+      <div className="px-6 sm:px-0">
         <div className="grid grid-cols-2 bg-white p-6">
           <p className="text-2xl font-bold">kooki</p>
           <div className="ml-auto grid grid-cols-2 gap-4">
@@ -35,8 +35,8 @@ const Home: NextPage = () => {
         <div className="max-w-xl mt-40 mb-32 m-auto align-center justify-center items-center">
           <div className="flex flex-col h-full my-auto align-center justify-center">
             <p className="mx-auto font-semibold text-5xl text-center mb-16">
-              <span className="text-rosa">kooki</span> is the easiest way
-              to&nbsp;
+              <span className="text-rosa">kooki</span>
+              <br />
               <span className="italic">find something to eat</span>
             </p>
             {/* <span className="mx-auto font-semibold text-6xl mt-4">🍪🍪🍪</span> */}
@@ -63,7 +63,7 @@ const Home: NextPage = () => {
                 <input
                   type="search"
                   id="default-search"
-                  className="text-center block p-4 pl-10 w-full text-black font-normal placeholder-gray-400 text-lg rounded-xl border-stone-100 border-4 "
+                  className="text-center block p-4 pl-14 md:pl-0 w-full text-black italic  placeholder-gray-400 text-lg rounded-xl border-stone-100 border-4 "
                   placeholder="Search Recipes, Categories, Ingredients, Chefs..."
                   onChange={(e) => setSearchField(e.target.value)}
                   onFocus={onFocus}
@@ -95,7 +95,7 @@ const Home: NextPage = () => {
       </svg>
 
       <div className="items-center flex flex-col my-40 justify-center align-center">
-        <div className="grid grid-cols-3 gap-4 mb-8 max-w-lg w-full h-1/2">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8 max-w-lg w-full h-1/2 px-6 sm:px-0">
           <button className="bg-stone-100 rounded-xl h-full w-full py-4 font-semibold text-xl">
             Tacos
             <br />
@@ -115,9 +115,7 @@ const Home: NextPage = () => {
           </button>
         </div>
         <p className="font-semibold text-5xl text-center mb-8">
-          Find millions of the best
-          <br />
-          recipes, categories, and ingredients
+          Find millions of the best recipes, categories, and ingredients
         </p>
 
         <Link href="/explore">
@@ -144,15 +142,12 @@ const Home: NextPage = () => {
         />
       </svg>
 
-      <div className="items-center flex flex-col my-40 justify-center align-center">
+      <div className="items-center flex flex-col my-40 justify-center align-center text-center">
         <p className="font-semibold text-5xl mb-4">Fork your favorites</p>
-        <p className="mx-auto font-medium text-2xl text-gray-500">
-          Kooki makes it super easy to fork recipes
+        <p className="mx-auto font-medium text-2xl text-gray-500 px-6 sm:px-0 mb-6">
+          Kooki makes it super easy to fork recipes make them your own
         </p>
 
-        <p className="mx-auto font-medium text-2xl mb-4 text-gray-500">
-          make them your own
-        </p>
         <Link href="/explore">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
             Start Forking
@@ -181,14 +176,9 @@ const Home: NextPage = () => {
         <p className="font-semibold text-5xl my-4 text-center">
           Get <span className="text-fresh">paid</span> for top content
         </p>
-        <p className="mx-auto font-medium text-2xl text-gray-500">
-          Kooki allows the best chefs all over the world
-        </p>
-        <p className="mx-auto font-medium text-2xl text-gray-500">
-          from professional to home kitchens
-        </p>
-        <p className="mx-auto mb-4 font-medium text-2xl text-gray-500">
-          to reap rewards from their recipes
+        <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6">
+          Kooki allows the best chefs all over the world from professional to
+          home kitchens to reap rewards from their recipes and articles.
         </p>
         <Link href="/earn">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
@@ -220,7 +210,7 @@ const Home: NextPage = () => {
         </p>
         <p className="mx-auto font-medium text-2xl text-gray-500 mb-8">
           Kooki has some of the best cooks in all of planet earth. Get help with
-          cooking, or learn from the best.
+          cooking, or learn from the community.
         </p>
 
         <Link href="/learn">

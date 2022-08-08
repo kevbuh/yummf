@@ -7,7 +7,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        rosa: "#e4007c",
+        rosa: "#FF385C",
+        rosalight: "#f76a84",
         fresh: "#50e3c2 ",
       },
     },

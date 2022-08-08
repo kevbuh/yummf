@@ -11,7 +11,7 @@ function SignUpBanner() {
         <div className="mx-auto">
           <p className="mx-auto text-4xl  mb-4">Get Started Today</p>
           <Link href="/signup">
-            <button className="rounded-xl p-4 bg-pink-400 text-xl italic  mx-auto w-full">
+            <button className="rounded-xl p-4 bg-rosalight text-xl italic  mx-auto w-full">
               Sign Up
             </button>
           </Link>
