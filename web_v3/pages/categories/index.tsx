@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import SideNavLayout from "../../components/sideNavLayout";
@@ -10,9 +11,11 @@ type CardProps = {
 
 const Card = ({ name }: CardProps) => {
   return (
-    <div className="h-80 rounded-xl bg-stone-100 p-4 flex cursor-pointer">
-      <p className="font-semibold text-xl mr-auto mt-auto">{name}</p>
-    </div>
+    <Link href={`/search-results?result=cat_${name}`}>
+      <div className="h-80 rounded-xl bg-stone-100 p-4 flex cursor-pointer">
+        <p className="font-semibold text-xl mr-auto mt-auto">{name}</p>
+      </div>
+    </Link>
   );
 };
 
@@ -21,9 +24,7 @@ function CategoriesAll() {
 
   return (
     <SideNavLayout>
-      {/* <NavBar /> */}
-
-      <div className="flex flex-col items-center mt-16 mb-8  mx-auto">
+      <div className="flex flex-col items-center my-8  mx-auto">
         <p className="text-6xl font-semibold">Categories</p>
       </div>
 
@@ -43,7 +44,6 @@ function CategoriesAll() {
       </div>
 
       {!session && <SignUpBanner />}
-      {/* <Footer /> */}
     </SideNavLayout>
   );
 }

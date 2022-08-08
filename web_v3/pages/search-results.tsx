@@ -1,6 +1,5 @@
 import Footer from "../components/Footer";
 import { useRouter } from "next/router";
-import RecipeCard from "../components/RecipeCard";
 import { useQuery } from "@tanstack/react-query";
 import SideNavLayout from "../components/sideNavLayout";
 import Link from "next/link";
@@ -12,7 +11,14 @@ function SearchResultPage() {
   const fetchSearchResults = async (url: string) => {
     const apiRes = await fetch(`/api/search?q=${url}`);
     const data = await apiRes.json();
-    return data.searchResults;
+
+    const cat_search = query.result?.slice(0, 4) == "cat_";
+
+    if (cat_search) {
+      return data.searchResults[0].recipes;
+    } else {
+      return data.searchResults;
+    }
   };
 
   const { isLoading, isError, data, error, isSuccess } = useQuery(
@@ -42,15 +48,9 @@ function SearchResultPage() {
                 }
               >
                 {data.map((d: any, index: number) => {
-                  console.log("@", d);
+                  // console.log("@", d.recipes);
+
                   return (
-                    // <RecipeCard
-                    //   name={d.name}
-                    //   author={d.user_id}
-                    //   cook_time={d.cook_time}
-                    //   caption={d.caption}
-                    //   id={d.id}
-                    // />
                     <Link href={"/recipes/" + d.id} key={index}>
                       <div
                         className="bg-stone-100 p-3 rounded-xl w-full flex flex-row"

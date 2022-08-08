@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     cook_time,
     caption,
     ingredient_list,
-    userId,
+    authorId,
   } = JSON.parse(req.body);
 
   const ingredient_list_init: any[] = [];
@@ -32,7 +32,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       sourceURL: source_url,
       caption: caption,
       ingredientList: ingredient_list_init,
-      authorId: userId,
+      authorId: authorId,
     },
   });
 

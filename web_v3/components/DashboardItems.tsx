@@ -19,7 +19,7 @@ const DashboardItems: NextPage = () => {
 
   return (
     <div className=" flex flex-col m-3">
-      <div className="flex flex-col items-center mt-16 mb-8  mx-auto">
+      <div className="flex flex-col items-center my-8  mx-auto">
         <p className="text-6xl font-semibold">Recipes</p>
       </div>
       <div

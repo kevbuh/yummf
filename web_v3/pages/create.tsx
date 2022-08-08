@@ -15,12 +15,7 @@ function CreateRecipePage({
   edit,
   yee,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  // const [image, setImage] = useState(null);
   const router = useRouter();
-
-  // const { data: session } = useSession();
-
-  console.log("@@yee,", data.id);
 
   const initialValues = {
     name: edit ? data.name : "",
@@ -31,7 +26,7 @@ function CreateRecipePage({
     caption: edit ? data.name : "",
     featured_image: null,
     authorId: yee,
-    id: data.id,
+    id: edit ? data.id : null,
 
     ingredient_list: [
       {
@@ -47,7 +42,6 @@ function CreateRecipePage({
       <div className="flex flex-col items-center my-16 mx-auto min-h-screen">
         <div>
           <p className="text-6xl font-semibold mb-4">Create your own recipe</p>
-          <hr />
 
           <Formik
             initialValues={initialValues}
