@@ -1,4 +1,5 @@
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import SideNavLayout from "../../components/sideNavLayout";
@@ -10,9 +11,11 @@ type CardProps = {
 
 const Card = ({ name }: CardProps) => {
   return (
-    <div className="h-80 rounded-xl bg-stone-100 p-4 flex cursor-pointer">
-      <p className="font-semibold text-xl mr-auto mt-auto">{name}</p>
-    </div>
+    <Link href="ingredients/salt">
+      <div className="h-80 rounded-xl bg-stone-100 p-4 flex cursor-pointer">
+        <p className="font-semibold text-xl mr-auto mt-auto">{name}</p>
+      </div>
+    </Link>
   );
 };
 

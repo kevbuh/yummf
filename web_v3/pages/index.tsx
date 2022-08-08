@@ -95,7 +95,7 @@ const Home: NextPage = () => {
       </svg>
 
       <div className="items-center flex flex-col my-40 justify-center align-center">
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8 max-w-lg w-full h-1/2 px-6 sm:px-0">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8 max-w-lg w-full px-6 sm:px-0">
           <button className="bg-stone-100 rounded-xl h-full w-full py-4 font-semibold text-xl">
             Tacos
             <br />
