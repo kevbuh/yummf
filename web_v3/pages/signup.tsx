@@ -5,6 +5,7 @@ import { FacebookSVG, EmailSVG, GoogleSVG } from "../utils/socialSVGs";
 import Link from "next/link";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "./api/auth/[...nextauth]";
+import Footer from "../components/Footer";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -77,7 +78,7 @@ export default function SignUpPage() {
 
   return (
     <div>
-      <div className="md:grid md:grid-cols-2 flex flex-col-reverse w-full  h-screen">
+      <div className="md:grid md:grid-cols-2 flex flex-col w-full h-screen">
         <div className="bg-rosa flex md:p-0 py-12">
           {" "}
           <Link href="/">
@@ -89,13 +90,13 @@ export default function SignUpPage() {
             </a>
           </Link>
         </div>
-        <div className="flex my-auto flex-col w-full">
+        <div className="flex my-auto flex-col w-full px-6 sm:px-0 text-center">
           <div className="mx-auto flex flex-col">
-            <div className="text-7xl font-semibold">
+            {/* <div className="text-7xl font-semibold">
               {!shouldShowLogin ? "Sign up " : "log In "} and
-            </div>
+            </div> */}
             <div className="text-7xl font-semibold mb-2">
-              start <span className="underline">today!</span>
+              Start <span className="underline">today!</span>
             </div>
           </div>
           <div>
@@ -126,6 +127,7 @@ export default function SignUpPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

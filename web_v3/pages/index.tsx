@@ -22,7 +22,7 @@ const Home: NextPage = () => {
     <>
       <div className="px-6 sm:px-0">
         <div className="flex flex-row sm:grid sm:grid-cols-2 bg-white py-6 sm:p-6">
-          <p className="text-2xl font-bold my-auto">kooki</p>
+          <p className="text-2xl font-bold my-auto">supayum</p>
           <div className="ml-auto grid grid-cols-2 sm:gap-4">
             <button className="text-lg sm:text-xl font-semibold p-2 rounded-xl ">
               Log in
@@ -35,8 +35,10 @@ const Home: NextPage = () => {
         <div className="max-w-xl mt-40 mb-32 m-auto align-center justify-center items-center">
           <div className="flex flex-col h-full my-auto align-center justify-center">
             <p className="mx-auto font-semibold text-5xl text-center mb-16">
-              <span className="text-rosa">kooki</span>
+              <span className="text-rosa">supayum</span>
               <br />
+              <br />
+
               <span className="italic">find something to eat</span>
             </p>
             <form className="w-full sm:mx-auto">
@@ -52,7 +54,7 @@ const Home: NextPage = () => {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      strokeWidth="2"
+                      strokeWidth="2.5"
                       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                     ></path>
                   </svg>
@@ -62,7 +64,7 @@ const Home: NextPage = () => {
                 <input
                   type="search"
                   id="default-search"
-                  className="text-center block p-4 pl-14 md:pl-0 w-full text-black italic  placeholder-gray-400 text-lg rounded-lg sm:rounded-xl border-stone-100 border-4 "
+                  className="text-center block p-4 pl-14 md:pl-0 w-full text-black  font-medium placeholder-gray-400 text-lg rounded sm:rounded-xl border-stone-100 border-4 "
                   placeholder="Search Recipes, Categories, Ingredients, Chefs..."
                   onChange={(e) => setSearchField(e.target.value)}
                   onFocus={onFocus}
@@ -108,9 +110,9 @@ const Home: NextPage = () => {
             </p>
           </button>
           <button className="bg-stone-100 rounded-xl font-semibold text-xl">
-            Wagyu
+            Boiling
             <br />
-            Beef
+            Info
           </button>
         </div>
         <p className="font-semibold text-5xl text-center mb-8 max-w-lg">
@@ -125,16 +127,16 @@ const Home: NextPage = () => {
       </div>
       <svg
         width="38"
-        height="223"
-        viewBox="0 0 38 223"
+        height="312"
+        viewBox="0 0 38 312"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="mx-auto"
       >
         <path
-          d="M25.4809 219.161C23.9541 213.011 27.7304 208.765 34.2918 203.748M25.4809 219.161C24.0684 212.646 18.3757 207.246 10.6418 206.705M25.4809 219.161C26.1675 218.796 21.8009 208.128 20.1159 194.762M18.2908 183.075L16.5123 170.829M15.3193 159.965L14.0558 149.941M12.726 139.706L11.3267 127.954M10.5869 118.669L9.29062 107.361M8.22171 98.0244L7.32813 86.931M6.48445 76.5851L5.39417 66.1661M4.61286 57.0806L4.24838 46.3665M4.06022 36.5649C3.79505 34.1508 3.30035 28.5623 3.44291 25.5213M3.16687 17.0945L3.5658 3.9624"
+          d="M3.99478 278.485C5.93218 288.053 12.5788 299.24 17.2591 307.972M17.2591 307.972C17.3496 308.14 19.2034 306.611 19.3443 306.489C25.6719 301 32.2974 287.509 33.8114 279.728M17.2591 307.972C21.1041 256.117 20.459 197.305 20.0306 139.224C19.685 92.3594 19.4806 45.9704 21.89 4.09583"
           stroke="black"
-          strokeWidth={6.29803}
+          strokeWidth="7.63695"
           strokeMiterlimit="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -144,12 +146,12 @@ const Home: NextPage = () => {
       <div className="items-center flex flex-col my-40 justify-center align-center text-center max-w-lg mx-auto">
         <p className="font-semibold text-5xl mb-4">Fork your favorites</p>
         <p className="mx-auto font-medium text-2xl text-gray-500 px-6 sm:px-0 mb-6">
-          Kooki makes it super easy to fork recipes make them your own
+          Clone your favorite recipes, and start freely adding your own tweaks
         </p>
 
         <Link href="/explore">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
-            Start Forking
+            Start a fork
           </button>
         </Link>
       </div>
@@ -175,7 +177,7 @@ const Home: NextPage = () => {
         <p className="font-semibold text-5xl my-4 text-center">
           Get <span className="text-fresh">paid</span> for top content
         </p>
-        <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6 max-w-lg">
+        <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
           Kooki allows the best chefs all over the world, from professional to
           home kitchens, to reap rewards from their recipes and articles.
         </p>
@@ -207,7 +209,7 @@ const Home: NextPage = () => {
         <p className="font-semibold text-5xl my-4 text-center">
           Improve your cooking skills
         </p>
-        <p className="mx-auto font-medium text-2xl text-gray-500 mb-8 max-w-lg">
+        <p className="mx-auto font-medium text-2xl text-gray-500 mb-8 max-w-lg px-6 sm:px-0">
           Kooki has some of the best cooks in all of planet earth. Get help with
           cooking, or learn from the community.
         </p>
@@ -238,7 +240,7 @@ const Home: NextPage = () => {
       <div className="items-center flex flex-col mt-24 mb-40 justify-center align-center">
         <p className="font-semibold text-5xl my-4">Start cooking</p>
 
-        <p className="mx-auto font-medium text-2xl mb-8 text-gray-500 text-center">
+        <p className="mx-auto font-medium text-2xl mb-8 text-gray-500 text-center px-6 sm:px-0">
           Get personalized recommendations,
           <br />
           so you always know what to cook
