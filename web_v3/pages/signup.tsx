@@ -90,7 +90,7 @@ export default function SignUpPage() {
             </a>
           </Link>
         </div>
-        <div className="flex my-auto flex-col w-full px-6 sm:px-0 text-center">
+        <div className="flex my-auto flex-col w-full px-6 py-6 sm:p-0 text-center">
           <div className="mx-auto flex flex-col">
             {/* <div className="text-7xl font-semibold">
               {!shouldShowLogin ? "Sign up " : "log In "} and

@@ -7,7 +7,7 @@ import type {
   InferGetServerSidePropsType,
 } from "next";
 import { useSession } from "next-auth/react";
-import React from "react";
+import React, { useState } from "react";
 import prisma from "../../utils/prisma";
 import SignUpBanner from "../../components/SignUpBanner";
 import Link from "next/link";
@@ -21,6 +21,8 @@ const Chef: NextPage = ({
   createdPosts,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session } = useSession();
+  const [created, setCreated] = useState(true);
+  const [liked, setLiked] = useState(false);
 
   return (
     <>
@@ -40,50 +42,108 @@ const Chef: NextPage = ({
             </li>
           </ul>
         </div>
-        <p className="text-4xl font-semibold mb-8">Public Profile</p>
-
-        <div className="avatar">
-          <div className="w-24 rounded-full mr-8">
+        <div className="avatar mt-4 mb-8">
+          <div className="w-28 rounded-full mr-8">
             <img
               src={session?.user?.image as string}
               alt="User profile image"
             />
           </div>
-          <p className="text-3xl font-semibold mb-8">{session?.user?.name}</p>
+          <span className="flex flex-col">
+            <p className="text-4xl font-semibold">{session?.user?.name}</p>
+            <p className="text-lg font-medium text-gray-500 ">
+              {session?.user?.name}
+            </p>
+            <button className="p-1 bg-rosa text-white font-semibold rounded mt-auto">
+              Follow
+            </button>
+          </span>
         </div>
-        <p className="text-2xl font-semibold mt-8 mb-4">Liked Posts</p>
-        <div className="grid grid-cols-4 gap-4 mb-8">
-          {data?.savedRecipes?.map((d: any, index: number) => {
-            return (
-              <RecipeCard
-                key={index}
-                name={d.name.slice(0, 36)}
-                author={d.user_id}
-                cook_time={d.cook_time}
-                caption={d.caption.slice(0, 42)}
-                id={d.id}
-              />
-            );
-          })}
+        <div className=" grid grid-cols-3 gap-4 w-3/5">
+          {" "}
+          <p className="text-lg  text-gray-500 ">
+            <span className="font-bold">32</span> Recipes
+          </p>
+          <p className="text-lg  text-gray-500 ">
+            <span className="font-bold">12</span> Helps
+          </p>
+          <p className="text-lg  text-gray-500 ">
+            <span className="font-bold">1,023,703</span> Views
+          </p>
         </div>
-        <p className="text-2xl font-semibold mb-8">Liked Playlists</p>
-        <p className="text-2xl font-semibold mb-8">Created Recipes</p>
-        <div className="grid grid-cols-4 gap-4 mb-8">
-          {createdPosts?.map((d: any, index: number) => {
-            return (
-              <RecipeCard
-                key={index}
-                name={d.name.slice(0, 36)}
-                author={d.user_id}
-                cook_time={d.cook_time}
-                caption={d.caption.slice(0, 42)}
-                id={d.id}
-              />
-            );
-          })}
+        <p className="text-lg mt-6">
+          Shout out to my restaurant El Taco Tote and Snooze.
+        </p>
+        <div>
+          <div className="grid grid-cols-4 mt-8 mb-4">
+            <p
+              className={
+                created
+                  ? "text-xl font-semibold mx-2 py-4 underline cursor-pointer"
+                  : "text-xl font-semibold mx-2 py-4 text-gray-500 cursor-pointer"
+              }
+              onClick={() => {
+                setCreated(true);
+                setLiked(false);
+              }}
+            >
+              Created Recipes
+            </p>
+            <p
+              className={
+                liked
+                  ? "text-xl font-semibold mx-2 py-4 underline cursor-pointer"
+                  : "text-xl font-semibold mx-2 py-4 text-gray-500 cursor-pointer"
+              }
+              onClick={() => {
+                setLiked(true);
+                setCreated(false);
+              }}
+            >
+              Liked Posts
+            </p>
+            <p className="text-xl font-semibold ml-4 py-4 text-gray-500 cursor-pointer">
+              Created Playlists
+            </p>
+            <p className="text-xl font-semibold mx-2 py-4 text-gray-500 cursor-pointer">
+              Liked Playlists
+            </p>
+          </div>
+          {liked && (
+            <div className="grid grid-cols-4 gap-4 mb-8">
+              {data?.savedRecipes?.map((d: any, index: number) => {
+                return (
+                  <RecipeCard
+                    key={index}
+                    name={d.name.slice(0, 36)}
+                    author={d.user_id}
+                    cook_time={d.cook_time}
+                    caption={d.caption.slice(0, 42)}
+                    id={d.id}
+                  />
+                );
+              })}
+            </div>
+          )}
+          {created && (
+            <div className="grid grid-cols-4 gap-4 mb-8">
+              {createdPosts?.map((d: any, index: number) => {
+                return (
+                  <RecipeCard
+                    key={index}
+                    name={d.name.slice(0, 36)}
+                    author={d.user_id}
+                    cook_time={d.cook_time}
+                    caption={d.caption.slice(0, 42)}
+                    id={d.id}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
-        <p className="text-2xl font-semibold mb-8">Created Playlists</p>
       </div>
+
       {!session && <SignUpBanner />}
       <Footer />
     </>
