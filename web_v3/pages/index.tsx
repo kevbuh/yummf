@@ -63,7 +63,7 @@ const Home: NextPage = () => {
                 <input
                   type="search"
                   id="default-search"
-                  className="text-center block p-4 pl-14 md:pl-0 w-full text-black italic  placeholder-gray-400 text-lg rounded-xl border-stone-100 border-4 "
+                  className="text-center block p-4 pl-14 md:pl-0 w-full text-black italic  placeholder-gray-400 text-lg rounded-lg sm:rounded-xl border-stone-100 border-4 "
                   placeholder="Search Recipes, Categories, Ingredients, Chefs..."
                   onChange={(e) => setSearchField(e.target.value)}
                   onFocus={onFocus}
@@ -96,19 +96,19 @@ const Home: NextPage = () => {
 
       <div className="items-center flex flex-col my-40 justify-center align-center">
         <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8 max-w-lg w-full px-6 sm:px-0">
-          <button className="bg-stone-100 rounded-xl h-full w-full py-4 font-semibold text-xl">
+          <button className="bg-stone-100 rounded-xl py-4 font-semibold text-xl">
             Tacos
             <br />
             Al Pastor{" "}
           </button>
-          <button className="bg-stone-100 rounded-xl  h-full w-full  text-center font-semibold text-xl ">
+          <button className="bg-stone-100 rounded-xl text-center font-semibold text-xl ">
             <p>
               Dinner
               <br />
               Recipes
             </p>
           </button>
-          <button className="bg-stone-100 rounded-xl  h-full w-full font-semibold text-xl">
+          <button className="bg-stone-100 rounded-xl font-semibold text-xl">
             Wagyu
             <br />
             Beef
@@ -177,8 +177,8 @@ const Home: NextPage = () => {
           Get <span className="text-fresh">paid</span> for top content
         </p>
         <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6">
-          Kooki allows the best chefs all over the world from professional to
-          home kitchens to reap rewards from their recipes and articles.
+          Kooki allows the best chefs all over the world, from professional to
+          home kitchens, to reap rewards from their recipes and articles.
         </p>
         <Link href="/earn">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
@@ -240,7 +240,7 @@ const Home: NextPage = () => {
         <p className="font-semibold text-5xl my-4">Start cooking</p>
 
         <p className="mx-auto font-medium text-2xl mb-8 text-gray-500 text-center">
-          Get personalized recommendations
+          Get personalized recommendations,
           <br />
           so you always know what to cook
         </p>
