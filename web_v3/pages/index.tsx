@@ -21,13 +21,13 @@ const Home: NextPage = () => {
   return (
     <>
       <div className="px-6 sm:px-0">
-        <div className="grid grid-cols-2 bg-white p-6">
-          <p className="text-2xl font-bold">kooki</p>
-          <div className="ml-auto grid grid-cols-2 gap-4">
-            <button className="text-xl font-semibold p-2 rounded-xl ">
+        <div className="flex flex-row sm:grid sm:grid-cols-2 bg-white py-6 sm:p-6">
+          <p className="text-2xl font-bold my-auto">kooki</p>
+          <div className="ml-auto grid grid-cols-2 sm:gap-4">
+            <button className="text-lg sm:text-xl font-semibold p-2 rounded-xl ">
               Log in
             </button>
-            <button className="text-xl font-semibold p-2 rounded-xl bg-rosa text-white">
+            <button className="text-lg sm:text-xl font-semibold p-2 rounded-xl bg-rosa text-white">
               Sign up
             </button>
           </div>
