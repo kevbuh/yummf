@@ -5,10 +5,10 @@ function Footer() {
   return (
     <footer className="footer px-10 pt-10 pb-8 bg-white">
       <Link href="/explore">
-        <a className="font-semibold text-4xl m-auto text-rosa">kooki</a>
+        <a className="font-semibold text-4xl m-auto text-rosa">yummf</a>
       </Link>
       <div>
-        <span className="footer-title">Kooki</span>
+        <span className="footer-title">yummf</span>
         <Link href="/dashboard">
           <a className="link link-hover">Dashboard</a>
         </Link>

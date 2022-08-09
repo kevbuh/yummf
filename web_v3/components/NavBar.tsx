@@ -20,7 +20,7 @@ const NavBar = () => {
       <div className="sm:w-1/6">
         <Link href="/explore">
           <a className="btn btn-ghost normal-case text-2xl text-rosa sm:ml-4">
-            kooki
+            yummf
           </a>
         </Link>
       </div>
@@ -64,7 +64,7 @@ const NavBar = () => {
           </div>
         </form>
       </div>
-      <div className="justify-center w-1/3 md:w-1/6 grid grid-cols-3 content-evenly items-center">
+      <div className="justify-center w-1/6 grid grid-cols-3 content-evenly items-center">
         <Link href="/learn">
           <button className="text-lg font-medium mt-1">Learn</button>
         </Link>

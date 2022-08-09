@@ -49,7 +49,7 @@ export default function Landing() {
           className="btn btn-ghost normal-case text-3xl text-rosa mr-auto my-auto"
           onClick={executeScroll}
         >
-          kooki{" "}
+          yummf{" "}
           <span className="text-stone-300 italic text-sm mb-auto">
             &nbsp; beta
           </span>

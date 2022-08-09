@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
       <Head>
-        <title>Kooki | Find Recipes</title>
+        <title>Yummf | Find Recipes</title>
         <meta
           name="description"
           content="Find your next favorite meal"

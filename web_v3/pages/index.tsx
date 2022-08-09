@@ -22,7 +22,7 @@ const Home: NextPage = () => {
     <>
       <div className="px-6 sm:px-0">
         <div className="flex flex-row sm:grid sm:grid-cols-2 bg-white py-6 sm:p-6">
-          <p className="text-2xl font-bold my-auto">supayum</p>
+          <p className="text-2xl font-bold my-auto">yummf</p>
           <div className="ml-auto grid grid-cols-2 sm:gap-4">
             <button className="text-lg sm:text-xl font-semibold p-2 rounded-xl ">
               Log in
@@ -35,7 +35,7 @@ const Home: NextPage = () => {
         <div className="max-w-xl mt-40 mb-32 m-auto align-center justify-center items-center">
           <div className="flex flex-col h-full my-auto align-center justify-center">
             <p className="mx-auto font-semibold text-5xl text-center mb-16">
-              <span className="text-rosa">supayum</span>
+              <span className="text-rosa">yummf</span>
               <br />
               <br />
 
@@ -175,10 +175,10 @@ const Home: NextPage = () => {
 
       <div className="items-center flex flex-col my-40 justify-center align-center">
         <p className="font-semibold text-5xl my-4 text-center">
-          Get <span className="text-fresh">paid</span> for top content
+          Get <span className="text-fresh">rewards</span> with yummf
         </p>
         <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
-          Kooki allows the best chefs all over the world, from professional to
+          Yummf allows the best chefs all over the world, from professional to
           home kitchens, to reap rewards from their recipes and articles.
         </p>
         <Link href="/earn">
@@ -210,7 +210,7 @@ const Home: NextPage = () => {
           Improve your cooking skills
         </p>
         <p className="mx-auto font-medium text-2xl text-gray-500 mb-8 max-w-lg px-6 sm:px-0">
-          Kooki has some of the best cooks in all of planet earth. Get help with
+          Yummf has some of the best cooks in all of planet earth. Get help with
           cooking, or learn from the community.
         </p>
 
@@ -247,7 +247,7 @@ const Home: NextPage = () => {
         </p>
         <Link href="/signup">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-rosa text-white font-semibold">
-            Get started with Kooki
+            Get started with Yummf
           </button>
         </Link>
       </div>

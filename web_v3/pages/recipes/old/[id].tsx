@@ -292,7 +292,7 @@ const SelectRecipePage: NextPage = ({
   return (
     <>
       <Head>
-        <title>{`${data?.name} - Kooki`} </title>
+        <title>{`${data?.name} - Yummf`} </title>
         <meta name="description" content={data?.caption} key="desc" />
       </Head>
 

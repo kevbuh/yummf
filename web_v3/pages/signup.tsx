@@ -35,7 +35,7 @@ export default function SignUpPage() {
       <div className="h-full md:grid md:grid-cols-2 rounded-xl mx-4 ">
         <div className="m-auto invisible md:visible" ref={myRef}>
           <p className="md:mt-20 md:mb-20 text-7xl mx-auto font-bold border-4 border-rosa text-rosa rounded-full md:py-24 px-12 hover:text-white hover:bg-rosa hover:cursor-pointer">
-            kooki
+            yummf
           </p>
         </div>
         <div className="m-auto">
@@ -86,7 +86,7 @@ export default function SignUpPage() {
               className="px-12 py-24 font-semibold bg-white normal-case text-5xl text-rosa rounded-full flex m-auto cursor-pointer"
               onClick={executeScroll}
             >
-              kooki <span className=" italic text-sm mb-auto">&nbsp; beta</span>
+              yummf <span className=" italic text-sm mb-auto">&nbsp; beta</span>
             </a>
           </Link>
         </div>
