@@ -68,7 +68,6 @@ model Recipe {
   createdAt      DateTime   @default(now())
   name           String
   cookTime       String?
-  directions     String?
   servingSize    String?
   sourceURL      String?
   caption        String
@@ -81,6 +80,7 @@ model Recipe {
   categories     Category[]
   likedBy        User[]     @relation(name: "UserSaved")
   ingredientList String[]
+  directions     String[]
 }
 
 model Article {

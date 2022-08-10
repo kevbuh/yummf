@@ -18,7 +18,8 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       cursor: cursorObj,
       take: limit,
       orderBy: {
-        id: "desc",
+        // id: "desc",
+        numSaves: "desc",
       },
     });
     return res.json({

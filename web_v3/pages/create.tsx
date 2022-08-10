@@ -34,6 +34,12 @@ function CreateRecipePage({
         ingredient_amount: "",
       },
     ],
+
+    direction_list: [
+      {
+        direction_description: "",
+      },
+    ],
   };
 
   return (
@@ -47,7 +53,7 @@ function CreateRecipePage({
             initialValues={initialValues}
             validationSchema={Yup.object({
               name: Yup.string().required("Please enter a recipe title!"),
-              directions: Yup.string().required("Please enter directions"),
+              // directions: Yup.string().required("Please enter directions"),
               source_url: Yup.string(),
               serving: Yup.string().required("Please enter serving size!"),
               cook_time: Yup.string().required(
@@ -127,7 +133,7 @@ function CreateRecipePage({
                     </ErrorMessage>
                   </div>
 
-                  <div className="my-8">
+                  {/* <div className="my-8">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       Next, enter detailed directions{" "}
                     </p>
@@ -140,6 +146,100 @@ function CreateRecipePage({
                     <ErrorMessage name="directions">
                       {(msg) => <p>{msg}</p>}
                     </ErrorMessage>
+                  </div> */}
+
+                  <div className="my-8">
+                    <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
+                      Next, enter detailed directions{" "}
+                    </p>
+                    <FieldArray name="direction_list">
+                      {({ insert, remove, push }) => (
+                        <div className="">
+                          {values.direction_list.length > 0 &&
+                            values.direction_list.map(
+                              (direction_list, index) => (
+                                <div key={index}>
+                                  <div className="grid grid-cols-3 gap-4 my-4">
+                                    <div className="">
+                                      <Field
+                                        name={`direction_list.${index}.direction_description`}
+                                        placeholder="Ingredient"
+                                        type="text"
+                                        className="text bg-stone-100 rounded-xl p-3 w-full"
+                                      />
+                                      <ErrorMessage
+                                        name={`direction_list.${index}.direction_description`}
+                                        component=""
+                                        className=""
+                                      />
+                                    </div>
+                                    {/* <div className="">
+                                      <Field
+                                        name={`direction_list.${index}.ingredient_amount`}
+                                        placeholder="Amount"
+                                        className="text bg-stone-100 rounded-xl p-3 w-full"
+                                      />
+                                      <ErrorMessage
+                                        name={`direction_list.${index}.ingredient_name`}
+                                        component=""
+                                        className="f"
+                                      />
+                                    </div> */}
+                                    <div className="flex flex-row">
+                                      <button
+                                        type="button"
+                                        className="p-2 my-1"
+                                        onClick={() => remove(index)}
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="h-6 w-6"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                          strokeWidth={2}
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="M6 18L18 6M6 6l12 12"
+                                          />
+                                        </svg>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )
+                            )}
+                          <button
+                            type="button"
+                            className="p-2 my-1 rounded-xl bg-stone-100 font-semibold flex flex-row"
+                            onClick={() =>
+                              push({
+                                direction_description: "",
+                                // ingredient_amount: "",
+                              })
+                            }
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-6 w-6"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                              />
+                            </svg>
+                            Add Step
+                          </button>
+                        </div>
+                      )}
+                    </FieldArray>
                   </div>
 
                   <div className="my-8">
@@ -318,7 +418,7 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  console.log("2", session.userId);
+  // console.log("2", session.userId);
 
   let edit = false;
   let thisRecipe = null;

@@ -47,7 +47,7 @@ const NewIDPage: NextPage = ({
             <div className="mb-8">
               <div>
                 <p className="text-2xl mt-4 font-semibold">Description</p>
-                <p className="font-light">{data?.caption}</p>
+                <p className="font-light">Caption</p>
               </div>
             </div>
             <hr />
@@ -60,7 +60,7 @@ const NewIDPage: NextPage = ({
                   <p className="mr-auto">Amount</p>
                 </div>
 
-                <p className="font-light">
+                {/* <p className="font-light">
                   {data?.ingredientList?.length > 0
                     ? JSON.parse(JSON.stringify(data.ingredientList)).map(
                         (d: any, index: any) => {
@@ -78,7 +78,7 @@ const NewIDPage: NextPage = ({
                         }
                       )
                     : null}
-                </p>
+                </p> */}
               </div>
             </div>
             <hr />
@@ -90,7 +90,7 @@ const NewIDPage: NextPage = ({
                 <div className=" mt-4 font-semibold">
                   <p className="">Steps</p>
                 </div>
-
+                {/* 
                 <ol className="ml-4 space-y-2">
                   {data?.directions?.length > 0
                     ? JSON.parse(JSON.stringify(data.directions)).map(
@@ -107,7 +107,7 @@ const NewIDPage: NextPage = ({
                         }
                       )
                     : null}
-                </ol>
+                </ol> */}
               </div>
             </div>
             <hr />
@@ -115,7 +115,7 @@ const NewIDPage: NextPage = ({
             <div className="">
               <p className="text-2xl mt-4 font-semibold">Comments</p>
 
-              {data?.comments?.length > 0 ? (
+              {-1 > 0 ? (
                 <div>
                   {data?.comments.slice(0, 6).map((d: any, index: number) => (
                     <div className="my-2 p-3 flex flex-row" key={index}>
@@ -137,7 +137,7 @@ const NewIDPage: NextPage = ({
                 </div>
               )}
               <div className=" h-full ">
-                {data.comments.length > 3 && (
+                {1 > 3 && (
                   <p className="mb-4 font-medium text-gray-500 ml-3 cursor-pointer">
                     View all comments
                   </p>
@@ -202,7 +202,7 @@ const NewIDPage: NextPage = ({
           </div>
           {/* right */}
           <div className="md:w-4/12">
-            <RecipeSidebar data={data} session={session} />
+            {/* <RecipeSidebar data={data} session={session} /> */}
           </div>
         </div>
 

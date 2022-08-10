@@ -8,7 +8,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const {
     name,
-    directions,
+    direction_list,
     source_url,
     serving,
     cook_time,
@@ -19,9 +19,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   } = JSON.parse(req.body);
 
   const ingredient_list_init: any[] = [];
+  const direction_list_init: any[] = [];
 
   ingredient_list.map((d: any) => {
     ingredient_list_init.push(JSON.stringify(d));
+  });
+
+  direction_list.map((d: any) => {
+    direction_list_init.push(JSON.stringify(d));
   });
 
   const updateRecipe = await prisma?.recipe.update({
@@ -31,7 +36,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     data: {
       name: name,
       cookTime: cook_time,
-      directions: directions,
+      directions: direction_list_init,
       servingSize: serving,
       sourceURL: source_url,
       caption: caption,
