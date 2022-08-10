@@ -78,7 +78,7 @@ export default function SignUpPage() {
 
   return (
     <div>
-      <div className="md:grid md:grid-cols-2 flex flex-col w-full h-screen">
+      <div className="md:grid md:grid-cols-2 flex flex-col w-full h-screen bg-stone-100 md:bg-white">
         <div className="bg-rosa flex md:p-0 py-12">
           {" "}
           <Link href="/">

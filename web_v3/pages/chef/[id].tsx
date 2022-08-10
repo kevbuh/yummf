@@ -59,7 +59,7 @@ const Chef: NextPage = ({
             </button>
           </span>
         </div>
-        <div className=" grid grid-cols-3 gap-4 w-3/5">
+        <div className=" grid grid-cols-3 gap-4 md:w-3/5">
           {" "}
           <p className="text-lg  text-gray-500 ">
             <span className="font-bold">32</span> Recipes
@@ -75,7 +75,7 @@ const Chef: NextPage = ({
           Shout out to my restaurant El Taco Tote and Snooze.
         </p>
         <div>
-          <div className="grid grid-cols-4 mt-8 mb-4">
+          <div className="grid grid-cols-2 mt-8 mb-4">
             <p
               className={
                 created
@@ -100,17 +100,17 @@ const Chef: NextPage = ({
                 setCreated(false);
               }}
             >
-              Liked Posts
+              Saved Posts
             </p>
-            <p className="text-xl font-semibold ml-4 py-4 text-gray-500 cursor-pointer">
+            {/* <p className="text-xl font-semibold ml-4 py-4 text-gray-500 cursor-pointer">
               Created Playlists
             </p>
             <p className="text-xl font-semibold mx-2 py-4 text-gray-500 cursor-pointer">
               Liked Playlists
-            </p>
+            </p> */}
           </div>
           {liked && (
-            <div className="grid grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {data?.savedRecipes?.map((d: any, index: number) => {
                 return (
                   <RecipeCard
@@ -126,7 +126,7 @@ const Chef: NextPage = ({
             </div>
           )}
           {created && (
-            <div className="grid grid-cols-4 gap-4 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {createdPosts?.map((d: any, index: number) => {
                 return (
                   <RecipeCard

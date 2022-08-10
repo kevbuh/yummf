@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 
@@ -5,7 +6,19 @@ function PersonalSecurityPage() {
   return (
     <div>
       <NavBar />
-      <div className="mt-8 rounded-lg w-2/3 item-center mx-auto">
+      <div className="mt-8 rounded-lg px-6 md:w-2/3 item-center mx-auto">
+        <div className="text-sm breadcrumbs">
+          <ul>
+            <li>
+              <Link href="/account">
+                <a>Account</a>
+              </Link>
+            </li>
+            <li>
+              <p>Security</p>
+            </li>
+          </ul>
+        </div>
         <div>
           <p className="text-4xl my-8">Account Security</p>
         </div>

@@ -64,13 +64,18 @@ const NavBar = () => {
           </div>
         </form>
       </div>
-      <div className="justify-center w-1/6 grid grid-cols-3 content-evenly items-center">
+      <div className="justify-center w-1/6 md:w-1/4 lg:w-1/6 grid grid-cols-1 gap-4 md:grid-cols-3 content-evenly items-center">
         <Link href="/learn">
-          <button className="text-lg font-medium mt-1">Learn</button>
+          <button className="text-lg font-medium mt-1 hidden md:block">
+            Learn
+          </button>
         </Link>
         <Link href="/forum">
-          <button className="text-lg font-medium mt-1">Discuss</button>
+          <button className="text-lg font-medium mt-1 hidden md:block">
+            Discuss
+          </button>
         </Link>
+
         <div className="dropdown dropdown-end mx-auto">
           <label tabIndex={0} className="btn btn-ghost btn-circle hover:glass ">
             <div className="w-6 rounded-full">
@@ -94,11 +99,18 @@ const NavBar = () => {
             tabIndex={0}
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
           >
-            <li>
+            <li className=" md:hidden">
               <Link href="/forum">
                 <a>Discuss</a>
               </Link>
             </li>
+
+            <li className=" md:hidden">
+              <Link href="/learn">
+                <a>Learn</a>
+              </Link>
+            </li>
+
             <li>
               <Link href="/notifications">
                 <a>Notifications</a>

@@ -98,7 +98,6 @@ function RecipeSidebar({ data, session }: ComponentProps) {
                     userEmail: session?.user?.email,
                   }),
                 });
-                console.log("success");
                 router.reload();
               } catch (error) {
                 console.log(error);

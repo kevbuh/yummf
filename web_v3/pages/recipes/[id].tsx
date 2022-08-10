@@ -22,6 +22,7 @@ const NewIDPage: NextPage = ({
   const { data: session } = useSession();
   const [comment, setComment] = useState(false);
   const [clickedEdit, setClickedEdit] = useState(false);
+  const [clickedExpand, setClickedExpand] = useState(false);
 
   return (
     <>
@@ -201,8 +202,28 @@ const NewIDPage: NextPage = ({
             <br />
           </div>
           {/* right */}
-          <div className="md:w-4/12">
-            <RecipeSidebar data={data} session={session} />
+          <div className="md:w-4/12 ">
+            {/* big */}
+            <div className="sm:visible hidden">
+              <RecipeSidebar data={data} session={session} />
+            </div>
+
+            {/* mobile */}
+            <div className="sm:hidden ">
+              <div className="px-6 my-4">
+                <button
+                  onClick={() => setClickedExpand(!clickedExpand)}
+                  className="font-semibold p-2 bg-stone-100 w-full rounded-xl"
+                >
+                  <p className="mx-auto">
+                    {clickedExpand ? "Less Info" : "More Info"}
+                  </p>
+                </button>
+              </div>
+              {clickedExpand ? (
+                <RecipeSidebar data={data} session={session} />
+              ) : null}
+            </div>
           </div>
         </div>
 
@@ -216,6 +237,18 @@ const NewIDPage: NextPage = ({
 export const getServerSideProps: GetServerSideProps = async ({
   query,
 }: any) => {
+  // uncomment when you want to track number of views
+  // const updatePosts = await prisma?.recipe.update({
+  //   where: {
+  //     id: parseInt(query.id),
+  //   },
+  //   data: {
+  //     numViews: {
+  //       increment: 1,
+  //     },
+  //   },
+  // });
+
   const thisRecipe = await prisma?.recipe.findUnique({
     where: {
       id: parseInt(query.id),

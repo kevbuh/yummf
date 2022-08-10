@@ -418,8 +418,6 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  // console.log("2", session.userId);
-
   let edit = false;
   let thisRecipe = null;
 

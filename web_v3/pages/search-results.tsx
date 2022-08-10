@@ -63,7 +63,10 @@ function SearchResultPage() {
 
           {isSuccess && data.length > 0 ? (
             <>
-              <div className="my-4 text-4xl font-semibold">Search Results</div>
+              <div className="flex flex-col items-center my-8 mx-auto">
+                <p className="text-6xl font-semibold">{query.result}</p>
+              </div>
+
               <div
                 className={
                   isLoading
@@ -72,8 +75,6 @@ function SearchResultPage() {
                 }
               >
                 {data.map((d: any, index: number) => {
-                  // console.log("@", d.recipes);
-
                   return (
                     <Link href={"/recipes/" + d.id} key={index}>
                       <div
@@ -95,8 +96,8 @@ function SearchResultPage() {
             </>
           ) : (
             <>
-              <div className="my-4 text-4xl font-semibold">
-                No Search Results!
+              <div className="flex flex-col items-center my-8  mx-auto">
+                <p className="text-6xl font-semibold">No Search Results!</p>
               </div>
               <div>
                 <div className="bg-stone-100 p-3 rounded-xl w-full flex flex-row">

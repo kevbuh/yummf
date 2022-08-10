@@ -72,6 +72,7 @@ model Recipe {
   sourceURL      String?
   caption        String
   numSaves       Int        @default(0)
+  numViews       Int        @default(0)
   secret         Boolean    @default(false)
   author         User       @relation(fields: [authorId], references: [id])
   authorId       String

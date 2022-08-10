@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       take: limit,
       orderBy: {
         // id: "desc",
-        numSaves: "desc",
+        numViews: "desc",
       },
     });
     return res.json({
