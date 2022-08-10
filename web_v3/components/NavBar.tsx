@@ -111,11 +111,11 @@ const NavBar = () => {
               </Link>
             </li>
 
-            <li>
+            {/* <li>
               <Link href="/notifications">
                 <a>Notifications</a>
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/saved-recipes">
                 <a>Saved Recipes</a>

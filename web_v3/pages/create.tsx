@@ -159,12 +159,13 @@ function CreateRecipePage({
                             values.direction_list.map(
                               (direction_list, index) => (
                                 <div key={index}>
-                                  <div className="grid grid-cols-3 gap-4 my-4">
-                                    <div className="">
+                                  <div className="flex flex-row my-4 w-full">
+                                    <div className="w-full">
                                       <Field
                                         name={`direction_list.${index}.direction_description`}
-                                        placeholder="Ingredient"
+                                        placeholder={`Step ${index + 1}`}
                                         type="text"
+                                        component="textarea"
                                         className="text bg-stone-100 rounded-xl p-3 w-full"
                                       />
                                       <ErrorMessage
@@ -173,18 +174,7 @@ function CreateRecipePage({
                                         className=""
                                       />
                                     </div>
-                                    {/* <div className="">
-                                      <Field
-                                        name={`direction_list.${index}.ingredient_amount`}
-                                        placeholder="Amount"
-                                        className="text bg-stone-100 rounded-xl p-3 w-full"
-                                      />
-                                      <ErrorMessage
-                                        name={`direction_list.${index}.ingredient_name`}
-                                        component=""
-                                        className="f"
-                                      />
-                                    </div> */}
+
                                     <div className="flex flex-row">
                                       <button
                                         type="button"
