@@ -122,7 +122,7 @@ const EarnInfo: NextPage = () => {
       <div className="items-center flex flex-col my-40 justify-center align-center text-center max-w-lg mx-auto">
         <p className="font-semibold text-5xl mb-4">Am I eligible?</p>
         <p className="mx-auto font-medium text-2xl text-gray-500 px-6 sm:px-0 mb-6">
-          Once a recipe reaches 50,000 views, you can earn $1 per 10,0000 unique
+          Once a recipe reaches 50,000 views, you can earn $1 per 1,0000 unique
           visitors to your recipe.
         </p>
       </div>

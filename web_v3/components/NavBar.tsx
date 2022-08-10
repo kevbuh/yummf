@@ -70,9 +70,9 @@ const NavBar = () => {
             Learn
           </button>
         </Link>
-        <Link href="/forum">
+        <Link href="/community">
           <button className="text-lg font-medium mt-1 hidden md:block">
-            Discuss
+            Community
           </button>
         </Link>
 
@@ -100,8 +100,8 @@ const NavBar = () => {
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-white rounded-box w-52"
           >
             <li className=" md:hidden">
-              <Link href="/forum">
-                <a>Discuss</a>
+              <Link href="/community">
+                <a>Community</a>
               </Link>
             </li>
 
