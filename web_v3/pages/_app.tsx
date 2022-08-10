@@ -30,10 +30,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           content="Find your next favorite meal"
           key="desc"
         />
-        <link
-          rel="shortcut icon"
-          href="https://raw.githubusercontent.com/kevbuh/kooki/db3841fde911794d493a60dd8df5a1099d498309/web/public/favicon.svg"
-        />
+        <link rel="shortcut icon" href="/yummf_v2_favico.svg" />
       </Head>
       <Script
         id="Adsense-id"
