@@ -6,6 +6,21 @@ import { useSession } from "next-auth/react";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { unstable_getServerSession } from "next-auth/next";
 
+type CardProps = {
+  name: string;
+  url: string;
+};
+
+const Card = ({ name, url }: CardProps) => {
+  return (
+    <Link href={url}>
+      <div className="hover:shadow-lg w-full rounded-xl bg-stone-100 px-4 py-12 cursor-pointer flex flex-col">
+        <p className="mx-auto truncate font-semibold text-xl my-2">{name}</p>
+      </div>
+    </Link>
+  );
+};
+
 function AccountSettingsPage() {
   const router = useRouter();
   const { data: session } = useSession();
@@ -15,7 +30,8 @@ function AccountSettingsPage() {
       <NavBar />
       <div className="mt-8 rounded-lg sm:w-2/3 item-center mx-4 sm:mx-auto">
         <div>
-          <p className="text-4xl mb-8">Account</p>
+          <p className="font-semibold text-5xl mb-4">Account</p>
+
           <div className="flex flex-row">
             <div className="avatar">
               <div className="w-24 rounded-full mr-8">
@@ -42,24 +58,10 @@ function AccountSettingsPage() {
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-14 sm:mx-auto">
-          <Link href="/account/info">
-            <button className="py-6 rounded-lg shadow border">
-              Personal Info
-            </button>
-          </Link>
-          <Link href="/account/security">
-            <button className="py-6 rounded-lg shadow border">
-              Login & Security
-            </button>
-          </Link>
-          <Link href="/account/privacy">
-            <button className="py-6 rounded-lg shadow border">Privacy</button>
-          </Link>
-          <Link href="/account/preferences">
-            <button className="py-6 rounded-lg shadow border">
-              Preferences
-            </button>
-          </Link>
+          <Card name="Personal Info" url="/account/info" />
+          <Card name="Account Security" url="/account/security" />
+          <Card name="Privacy" url="/account/privacy" />
+          <Card name="Preferences" url="/account/preferences" />
         </div>
         <div className="h-40"></div>
       </div>

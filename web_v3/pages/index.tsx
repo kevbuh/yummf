@@ -121,7 +121,7 @@ const Home: NextPage = () => {
         </Link>
       </div>
 
-      <ForkArrow />
+      <DottedArrow />
 
       <div className="items-center flex flex-col my-40 justify-center align-center">
         <p className="font-semibold text-5xl my-4 text-center">
@@ -138,7 +138,7 @@ const Home: NextPage = () => {
         </Link>
       </div>
 
-      <CurlyArrow />
+      <CurveRightArrow />
 
       <div className="items-center flex flex-col my-40 text-center justify-center align-center">
         <p className="font-semibold text-5xl my-4 text-center">
@@ -157,7 +157,7 @@ const Home: NextPage = () => {
         </Link>
       </div>
 
-      <CurveRightArrow />
+      <ForkArrow />
 
       <div className="items-center flex flex-col my-40 justify-center align-center text-center max-w-lg mx-auto">
         <p className="font-semibold text-5xl mb-4">
@@ -175,7 +175,7 @@ const Home: NextPage = () => {
         </Link>
       </div>
 
-      <DottedArrow />
+      <CurlyArrow />
 
       <div
         className="items-center flex flex-col mt-24 mb-40 justify-center align-center"

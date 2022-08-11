@@ -1,12 +1,10 @@
 import Link from "next/link";
 import router from "next/router";
 import { useState } from "react";
-import CommunityNavBar from "../components/CommunityNavbar";
-import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
-import SignUpBanner from "../components/SignUpBanner";
-import { CurlyArrow, DottedArrow, NormalBoldArrow } from "../utils/arrows";
-import { SearchIcon } from "../utils/icons";
+import CommunityNavBar from "../../components/CommunityNavbar";
+import Footer from "../../components/Footer";
+import { CurlyArrow, DottedArrow, NormalBoldArrow } from "../../utils/arrows";
+import { SearchIcon } from "../../utils/icons";
 
 type CardProps = {
   name: string;
@@ -88,9 +86,11 @@ function CommunityPage() {
             </form>
 
             <div className="flex flex-row mt-8">
-              <button className=" flex  max-w-xs text-xl p-3 rounded-xl font-semibold mr-4">
-                View all
-              </button>
+              <Link href="/community/questions">
+                <button className=" flex  max-w-xs text-xl p-3 rounded-xl font-semibold mr-4">
+                  View all
+                </button>
+              </Link>
               <button className=" flex max-w-xs text-xl p-3 rounded-xl bg-black text-white font-semibold">
                 Ask a Question
               </button>
@@ -108,8 +108,6 @@ function CommunityPage() {
                 <p className="m-auto text-4xl text-black mb-4">
                   Thanks for being a part of our community.
                 </p>
-
-                {/* <p>Lets put your learnings into action!</p> */}
                 <Link href="/explore">
                   <button className=" flex max-w-xs w-full text-xl p-3 rounded-xl bg-rosa text-white font-semibold text-center">
                     <p className="mx-auto">Start exploring recipes</p>
@@ -127,41 +125,3 @@ function CommunityPage() {
 }
 
 export default CommunityPage;
-
-{
-  /* <div className="p-6">
-  <div className="flex flex-col my-8">
-    <p className="text-6xl font-semibold">Discussion</p>
-  </div>
-  <div className="my-8">
-    <p className="text-xl font-semibold mb-4">Top Conversations</p>
-    <div className="grid gap-4 grid-cols-2">
-      <button className="bg-stone-100 font-semibold p-8 w-full rounded-xl">
-        What&apos;s the best way to cook eggs?
-      </button>
-      <button className="bg-stone-100 font-semibold p-8 w-full rounded-xl">
-        Please never forget to salt your meals!
-      </button>
-    </div>
-  </div>
-
-  <div className="grid grid-cols-4 gap-4">
-    <Card name="Test"></Card>
-    <Card name="Test"></Card>
-    <Card name="Test"></Card>
-    <Card name="Test"></Card>
-  </div>
-
-  <div className="my-8 bg-stone-100 rounded-xl p-6">
-    <p className="text-xl font-semibold mb-6">Create New Conversation</p>
-    <div className="h-2/5 bg-white rounded-xl p-6 mb-4">
-      <p className="text-gray-500 text-xl font-semibold mb-2">Title</p>
-      <p className="text-gray-500 ">Start typing here...</p>
-    </div>
-
-    <button className="rounded-xl bg-black text-white font-semibold p-2 max-w-xs">
-      Post
-    </button>
-  </div>
-</div> */
-}
