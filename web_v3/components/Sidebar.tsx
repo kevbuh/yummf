@@ -35,6 +35,10 @@ function Sidebar() {
         </div>
       </div>
 
+      <div className="px-3 mt-4">
+        <hr />
+      </div>
+
       <div className="grid grid-cols-2 md:grid-cols-1 my-4 mx-2">
         <Link href="/explore">
           <button

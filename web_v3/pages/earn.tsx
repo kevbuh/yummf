@@ -94,7 +94,7 @@ const EarnInfo: NextPage = () => {
           <span className="text-fresh">cash</span>
         </p>
 
-        <Link href="/learn">
+        <Link href="/explore">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
             Learn more
           </button>

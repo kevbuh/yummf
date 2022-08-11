@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 
-const NavBar = () => {
+const CommunityNavBar = () => {
   const [searchField, setSearchField] = useState("");
   const [focused, setFocused] = useState(false);
   const onBlur = () => setFocused(false);
@@ -19,13 +19,18 @@ const NavBar = () => {
     <div className="navbar shadow-sm bg-white sticky top-0 z-10 ">
       <div className="sm:w-1/6">
         <Link href="/explore">
-          <a className="btn btn-ghost normal-case text-2xl text-rosa sm:ml-4">
+          <a className="font-semibold py-2 normal-case text-2xl text-rosa sm:ml-4">
             yummf
+          </a>
+        </Link>
+        <Link href="/community">
+          <a className="font-semibold py-2 normal-case text-2xl sm:ml-4">
+            community
           </a>
         </Link>
       </div>
 
-      <div className="w-1/2 mx-auto">
+      {/* <div className="w-1/2 mx-auto">
         <form className="w-full mx-auto">
           <label
             htmlFor="default-search"
@@ -63,8 +68,8 @@ const NavBar = () => {
             />
           </div>
         </form>
-      </div>
-      <div className="justify-center w-1/6 md:w-1/4 lg:w-1/6 grid grid-cols-2 md:gap-4 md:grid-cols-3 content-evenly items-center">
+      </div> */}
+      <div className="justify-center ml-auto w-1/6 md:w-1/4 lg:w-1/6 grid grid-cols-2 md:gap-4 md:grid-cols-2 content-evenly items-center">
         {/* <Link href="/learn">
           <button className="text-lg font-medium mt-1 hidden md:block">
             Learn
@@ -118,11 +123,11 @@ const NavBar = () => {
               </Link>
             </li>
 
-            {/* <li className=" md:hidden">
+            <li className=" md:hidden">
               <Link href="/learn">
                 <a>Learn</a>
               </Link>
-            </li> */}
+            </li>
 
             {/* <li>
               <Link href="/notifications">
@@ -171,4 +176,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default CommunityNavBar;

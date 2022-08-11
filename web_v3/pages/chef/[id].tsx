@@ -36,9 +36,7 @@ const Chef: NextPage = ({
               </Link>
             </li>
             <li>
-              <Link href="/learn">
-                <a>Chefs</a>
-              </Link>
+              <p>Chefs</p>
             </li>
           </ul>
         </div>

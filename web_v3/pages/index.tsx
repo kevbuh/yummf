@@ -68,7 +68,7 @@ const Home: NextPage = () => {
                 <input
                   type="search"
                   id="default-search"
-                  className="text-center block p-4 pl-14 md:pl-0 w-full text-black  font-medium placeholder-gray-400 text-lg rounded sm:rounded-xl border-stone-100 border-4 "
+                  className=" block p-4 pl-14  w-full text-black  font-medium placeholder-gray-400 text-lg rounded sm:rounded-xl border-stone-100 border-4 "
                   placeholder="Search Recipes, Categories, Ingredients, Chefs..."
                   onChange={(e) => setSearchField(e.target.value)}
                   onFocus={onFocus}
@@ -109,7 +109,7 @@ const Home: NextPage = () => {
         </p>
         <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
           Finding top quality recipes and cooking information takes a lot of
-          time. Yummf's recommendation algorithm places extreme emphasis
+          time. Yummf&apos;s recommendation algorithm places extreme emphasis
           on&nbsp;
           <span className="italic">quality</span> through community ratings.
         </p>

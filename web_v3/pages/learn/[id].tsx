@@ -28,9 +28,7 @@ const NewIDPage: NextPage = ({
               </Link>
             </li>
             <li>
-              <Link href="/learn">
-                <a>Learn</a>
-              </Link>
+              <p>Learn</p>
             </li>
             <li>
               <a className="truncate">{data.title}</a>
