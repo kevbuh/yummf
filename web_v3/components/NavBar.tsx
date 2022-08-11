@@ -78,9 +78,12 @@ const NavBar = () => {
           className="modal cursor-pointer bg-smoke-light"
         >
           <label
-            className="modal-box relative py-16 border bg-white md:w-full "
+            className="modal-box relative py-8 border bg-white md:w-full "
             htmlFor=""
           >
+            <p className="mb-4 font-semibold text-4xl flex justify-center ">
+              Search
+            </p>
             <form className="w-full mx-auto">
               <label
                 htmlFor="default-search"
