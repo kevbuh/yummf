@@ -78,7 +78,7 @@ export default function SignUpPage() {
 
   return (
     <div>
-      <div className="md:grid md:grid-cols-2 flex flex-col w-full h-screen bg-stone-100 md:bg-white">
+      <div className="md:grid md:grid-cols-2 flex flex-col w-full h-screen ">
         <div className="bg-rosa flex md:p-0 py-12">
           {" "}
           <Link href="/">
@@ -92,9 +92,6 @@ export default function SignUpPage() {
         </div>
         <div className="flex my-auto flex-col w-full px-6 py-6 sm:p-0 text-center">
           <div className="mx-auto flex flex-col">
-            {/* <div className="text-7xl font-semibold">
-              {!shouldShowLogin ? "Sign up " : "log In "} and
-            </div> */}
             <div className="text-7xl font-semibold mb-2">
               Start <span className="underline">today!</span>
             </div>

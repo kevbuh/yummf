@@ -29,26 +29,24 @@ const NavBar = () => {
   const [communityButton, setCommunityButton] = useState(false);
   const [categoryButton, setCategoryButton] = useState(false);
 
-  // console.log("1", searchField);
-
   return (
     <div className="navbar shadow-sm bg-white sticky top-0 z-10 ">
       <div className="sm:w-1/6">
         <Link href="/explore">
-          <a className="btn btn-ghost normal-case text-2xl text-rosa sm:ml-4">
+          <a className="p-1 font-semibold normal-case text-2xl text-rosa sm:ml-4">
             yummf
           </a>
         </Link>
       </div>
 
-      <div className="w-1/2 mx-auto">
+      <div className="w-full px-2 md:px-0 max-w-lg mx-auto">
         <label
           htmlFor="my-modal-4"
-          className="block p-4 w-full text-sm text-black rounded-xl bg-stone-100"
+          className="block py-4 px-2 sm:p-4 w-full text-sm text-black rounded-xl bg-stone-100"
         >
           {/* open modal */}
           <div className="relative ">
-            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <div className="flex absolute inset-y-0 left-0 items-center sm:pl-3 pointer-events-none">
               <svg
                 className="w-5 h-5 text-gray-500"
                 fill="none"
@@ -65,7 +63,7 @@ const NavBar = () => {
               </svg>
               {/* <button onClick={(e) => onSubmit(e)}></button> */}
             </div>
-            <p className="block pl-14 w-full text-sm text-gray-500 rounded-xl bg-stone-100 cursor-text truncate">
+            <p className="block pl-7 sm:pl-14 w-full text-sm text-gray-500 rounded-xl bg-stone-100 cursor-text truncate">
               Search Recipes, Ingredients...
             </p>
           </div>
@@ -121,7 +119,7 @@ const NavBar = () => {
                 />
               </div>
             </form>
-            <div className="grid grid-cols-2 gap-1 sm:gap-4 mt-4">
+            <div className="ml-1 sm:ml-0 grid grid-cols-2 gap-1 sm:gap-4 mt-4">
               <button
                 className={
                   recipesButton
@@ -183,12 +181,20 @@ const NavBar = () => {
                 Categories
               </button>
             </div>
+            <button
+              className="p-2 mt-4 w-full rounded-xl font-semibold bg-stone-100 hover:bg-rosalight hover:text-white"
+              onClick={(e) => {
+                onSubmit(e);
+              }}
+            >
+              Search
+            </button>
           </label>
         </label>
       </div>
-      <div className="justify-center w-1/6 md:w-1/4 lg:w-1/6 grid grid-cols-2 md:gap-4 md:grid-cols-3 content-evenly items-center">
+      <div className="justify-center w-1/6 ml-1 sm:w-1/12 grid grid-cols-2 gap-4 md:ml-auto max-w-xs content-evenly items-center">
         <Link href="/community">
-          <button className="text-lg font-medium mt-1 ">
+          <button className="text-lg font-medium mt-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 mx-auto"
