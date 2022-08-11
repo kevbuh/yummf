@@ -5,17 +5,25 @@ interface Data {
   searchResults: any[] | undefined;
 }
 
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === "GET") {
     const queryParam: string | string[] = req.query.q ?? "";
     let searchResults = null;
 
     const cat_search = queryParam.slice(0, 4) == "cat_";
+    const search_query: string | string[] = queryParam.slice(
+      4,
+      queryParam.length
+    );
 
     if (cat_search) {
       searchResults = await prisma?.category.findMany({
         where: {
-          name: `${queryParam.slice(4, queryParam.length)}`,
+          name: capitalizeFirstLetter(search_query as string),
         },
         select: {
           name: true,

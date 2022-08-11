@@ -12,8 +12,24 @@ const NavBar = () => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    router.push(`/search-results?result=${searchField}`);
+    console.log("2 clicked");
+    if (recipesButton) {
+      router.push(`/search-results?result=${searchField}`);
+    } else if (ingredientsButton) {
+      router.push(`/search-results?result=ing_${searchField}`);
+    } else if (categoryButton) {
+      router.push(`/search-results?result=cat_${searchField}`);
+    } else {
+      router.push(`/search-results?result=com_${searchField}`);
+    }
   };
+
+  const [recipesButton, setRecipesButton] = useState(true);
+  const [ingredientsButton, setIngredientsButton] = useState(false);
+  const [communityButton, setCommunityButton] = useState(false);
+  const [categoryButton, setCategoryButton] = useState(false);
+
+  // console.log("1", searchField);
 
   return (
     <div className="navbar shadow-sm bg-white sticky top-0 z-10 ">
@@ -26,17 +42,15 @@ const NavBar = () => {
       </div>
 
       <div className="w-1/2 mx-auto">
-        <form className="w-full mx-auto">
-          <label
-            htmlFor="default-search"
-            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
-          >
-            Search
-          </label>
+        <label
+          htmlFor="my-modal-4"
+          className="block p-4 w-full text-sm text-black rounded-xl bg-stone-100"
+        >
+          {/* open modal */}
           <div className="relative ">
             <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-500 dark:text-zine-400"
+                className="w-5 h-5 text-gray-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -49,27 +63,127 @@ const NavBar = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 ></path>
               </svg>
-              <button onClick={(e) => onSubmit(e)}></button>
+              {/* <button onClick={(e) => onSubmit(e)}></button> */}
             </div>
-            <input
-              type="search"
-              id="default-search"
-              className="block p-4 pl-10 w-full text-sm text-black rounded-xl bg-stone-100"
-              placeholder="Search Recipes, Ingredients..."
-              onChange={(e) => setSearchField(e.target.value)}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              required
-            />
+            <p className="block pl-14 w-full text-sm text-gray-500 rounded-xl bg-stone-100 cursor-text truncate">
+              Search Recipes, Ingredients...
+            </p>
           </div>
-        </form>
+        </label>
+
+        {/* actual */}
+        <input type="checkbox" id="my-modal-4" className="modal-toggle t" />
+        <label
+          htmlFor="my-modal-4"
+          className="modal cursor-pointer bg-smoke-light"
+        >
+          <label
+            className="modal-box relative py-16 border bg-white md:w-full "
+            htmlFor=""
+          >
+            <form className="w-full mx-auto">
+              <label
+                htmlFor="default-search"
+                className="mb-2 text-sm font-medium text-gray-900 sr-only"
+              >
+                Search
+              </label>
+              <div className="relative ">
+                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                  <svg
+                    className="w-5 h-5 text-gray-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    ></path>
+                  </svg>
+                  <button onClick={(e) => onSubmit(e)}></button>
+                </div>
+                <input
+                  type="search"
+                  id="default-search"
+                  className="block p-4 pl-10 w-full text-sm text-black rounded-xl bg-stone-100"
+                  placeholder="Search Recipes, Ingredients..."
+                  onChange={(e) => setSearchField(e.target.value)}
+                  onFocus={onFocus}
+                  onBlur={onBlur}
+                  required
+                />
+              </div>
+            </form>
+            <div className="grid grid-cols-2 gap-1 sm:gap-4 mt-4">
+              <button
+                className={
+                  recipesButton
+                    ? "p-2 rounded-xl font-semibold bg-rosalight text-white"
+                    : "p-2 rounded-xl font-semibold bg-stone-100"
+                }
+                onClick={() => {
+                  setRecipesButton(true);
+                  setIngredientsButton(false);
+                  setCommunityButton(false);
+                  setCategoryButton(false);
+                }}
+              >
+                Recipes
+              </button>
+              <button
+                className={
+                  ingredientsButton
+                    ? "p-2 rounded-xl font-semibold bg-rosalight text-white"
+                    : "p-2 rounded-xl font-semibold bg-stone-100"
+                }
+                onClick={() => {
+                  setRecipesButton(false);
+                  setIngredientsButton(true);
+                  setCommunityButton(false);
+                  setCategoryButton(false);
+                }}
+              >
+                Ingredients
+              </button>
+              <button
+                className={
+                  communityButton
+                    ? "p-2 rounded-xl font-semibold bg-rosalight text-white"
+                    : "p-2 rounded-xl font-semibold bg-stone-100"
+                }
+                onClick={() => {
+                  setRecipesButton(false);
+                  setIngredientsButton(false);
+                  setCommunityButton(true);
+                  setCategoryButton(false);
+                }}
+              >
+                Discussions
+              </button>
+              <button
+                className={
+                  categoryButton
+                    ? "p-2 rounded-xl font-semibold bg-rosalight text-white"
+                    : "p-2 rounded-xl font-semibold bg-stone-100"
+                }
+                onClick={() => {
+                  setRecipesButton(false);
+                  setIngredientsButton(false);
+                  setCommunityButton(false);
+                  setCategoryButton(true);
+                }}
+              >
+                Categories
+              </button>
+            </div>
+          </label>
+        </label>
       </div>
       <div className="justify-center w-1/6 md:w-1/4 lg:w-1/6 grid grid-cols-2 md:gap-4 md:grid-cols-3 content-evenly items-center">
-        {/* <Link href="/learn">
-          <button className="text-lg font-medium mt-1 hidden md:block">
-            Learn
-          </button>
-        </Link> */}
         <Link href="/community">
           <button className="text-lg font-medium mt-1 ">
             <svg
@@ -118,27 +232,12 @@ const NavBar = () => {
               </Link>
             </li>
 
-            {/* <li className=" md:hidden">
-              <Link href="/learn">
-                <a>Learn</a>
-              </Link>
-            </li> */}
-
-            {/* <li>
-              <Link href="/notifications">
-                <a>Notifications</a>
-              </Link>
-            </li> */}
             <li>
               <Link href="/saved-recipes">
                 <a>Saved Recipes</a>
               </Link>
             </li>
-            {/* <Link href="/grocery-list">
-              <li>
-                <a>Grocery List</a>
-              </li>
-            </Link> */}
+
             <li>
               <Link href="/create">
                 <a>Create Recipe</a>

@@ -50,21 +50,25 @@ function SearchResultPage() {
     () => fetchSearchResults(query.result as string)
   );
 
-  if (isError) {
-    return <span>Error: {(error as Error).message}</span>;
-  }
+  // if (isError) {
+  //   return <span>Error: {(error as Error).message}</span>;
+  // }
 
   return (
     <>
       <SideNavLayout>
         <div className="flex flex-col m-3">
           {isLoading && <Spinner />}
-          {isError && <p>{(error as Error).message}</p>}
+          {isError && null}
 
           {isSuccess && data.length > 0 ? (
             <>
               <div className="flex flex-col items-center my-8 mx-auto">
-                <p className="text-6xl font-semibold">{query.result}</p>
+                <p className="text-6xl font-semibold">
+                  {query?.result?.slice(0, 4) == "cat_"
+                    ? query.result.slice(4, query.result.length)
+                    : query.result}
+                </p>
               </div>
 
               <div
