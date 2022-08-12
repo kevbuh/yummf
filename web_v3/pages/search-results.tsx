@@ -58,7 +58,6 @@ function SearchResultPage() {
     <>
       <SideNavLayout>
         <div className="flex flex-col m-3">
-          {isLoading && <Spinner />}
           {isError && null}
 
           {isSuccess && data.length > 0 ? (
@@ -70,7 +69,6 @@ function SearchResultPage() {
                     : query.result}
                 </p>
               </div>
-
               <div
                 className={
                   isLoading
@@ -119,6 +117,7 @@ function SearchResultPage() {
               </div>
             </>
           )}
+          {isLoading && <Spinner />}
         </div>
       </SideNavLayout>
       <Footer />

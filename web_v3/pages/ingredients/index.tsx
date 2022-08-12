@@ -39,7 +39,30 @@ function IngredientsAll() {
         <Card name="Milk" />
         <Card name="Rice" />
         <Card name="Water" />
-        <Card name="Oil" />
+        <Card name="Canola Oil" />
+        <Card name="Balsamic" />
+        <Card name="Red Wine" />
+        <Card name="Ketchup" />
+        <Card name="Mayonnaise" />
+        <Card name="Dijon Mustard" />
+        <Card name="Soy Sauce" />
+        <Card name="Chili Paste" />
+        <Card name="Hot Sauce" />
+        <Card name="Worcestershire" />
+        <Card name="Peppercorns" />
+        <Card name="Bay Leaves" />
+        <Card name="Cayenne Pepper" />
+        <Card name="Vanilla" />
+        <Card name="Beans" />
+        <Card name="Capers" />
+        <Card name="Olives" />
+        <Card name="Peanut Butter" />
+        <Card name="Tomatoes" />
+        <Card name="Salsa" />
+        <Card name="Tuna" />
+        <Card name="Couscous" />
+        <Card name="Pasta" />
+        <Card name="Rice" />
       </div>
 
       {!session && <SignUpBanner />}
