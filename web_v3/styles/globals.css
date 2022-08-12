@@ -7,3 +7,13 @@
     @apply scroll-smooth;
   }
 }
+
+@font-face {
+  font-family: "Cereal";
+  src: url("../public/airbnb-cereal-font/AirbnbCereal_W_Bd.otf");
+}
+
+@font-face {
+  font-family: "Cereal_light";
+  src: url("../public/airbnb-cereal-font/AirbnbCereal_W_Md.otf");
+}

@@ -14,7 +14,13 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ["Segoe UI", "-apple-system", "BlinkMacSystemFont", "Roboto"],
+      sans: [
+        "Cereal_light",
+        "Segoe UI",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Roboto",
+      ],
     },
   },
   plugins: [require("daisyui")],
