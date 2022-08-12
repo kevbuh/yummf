@@ -6,11 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(400).json({ error: "Method not allowed" });
   }
 
-  console.log("here 1.5");
-
   const { values, recipeId } = JSON.parse(req.body);
-
-  console.log(values);
 
   const createRating = await prisma?.rating.create({
     data: {
@@ -33,5 +29,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  return 201;
+  return res.status(201);
 };

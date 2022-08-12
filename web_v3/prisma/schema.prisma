@@ -105,7 +105,8 @@ model Question {
   comments   Comment[]
   categories Category[]
   createdAt  DateTime   @default(now())
-  User       User[]
+  author     User       @relation(fields: [authorId], references: [id])
+  authorId   String
 }
 
 model Category {

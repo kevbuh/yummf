@@ -66,7 +66,8 @@ function SearchResultPage() {
               <div className="flex flex-col items-center my-8 mx-auto">
                 <p className="text-6xl font-semibold">
                   {query?.result?.slice(0, 4) == "cat_" ||
-                  query?.result?.slice(0, 4) == "ing_"
+                  query?.result?.slice(0, 4) == "ing_" ||
+                  query?.result?.slice(0, 4) == "qas_"
                     ? query.result.slice(4, query.result.length)
                     : query.result}
                 </p>

@@ -53,7 +53,6 @@ function CreateRecipePage({
             initialValues={initialValues}
             validationSchema={Yup.object({
               name: Yup.string().required("Please enter a recipe title!"),
-              // directions: Yup.string().required("Please enter directions"),
               source_url: Yup.string(),
               serving: Yup.string().required("Please enter serving size!"),
               cook_time: Yup.string().required(
@@ -64,7 +63,7 @@ function CreateRecipePage({
               ),
               featured_image: Yup.mixed(),
             })}
-            onSubmit={(values, { setSubmitting }) => {
+            onSubmit={async (values, { setSubmitting }) => {
               if (edit) {
                 fetch("/api/update_recipe", {
                   method: "PUT",
@@ -78,7 +77,7 @@ function CreateRecipePage({
 
                 setSubmitting(false);
               } else {
-                fetch("/api/create_recipe", {
+                const apiRes = await fetch("/api/create_recipe", {
                   method: "POST",
                   headers: {
                     Accept: "application/json",
@@ -86,8 +85,9 @@ function CreateRecipePage({
                   body: JSON.stringify(values),
                 });
 
-                router.push("/confirm-recipe");
+                const data = await apiRes.json();
 
+                router.push(`/confirm-recipe?type=${data.data}`);
                 setSubmitting(false);
               }
             }}
@@ -132,21 +132,6 @@ function CreateRecipePage({
                       {(msg) => <p>{msg}</p>}
                     </ErrorMessage>
                   </div>
-
-                  {/* <div className="my-8">
-                    <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
-                      Next, enter detailed directions{" "}
-                    </p>
-                    <Field
-                      name="directions"
-                      component="textarea"
-                      placeholder="Enter directions of this recipe"
-                      className="text bg-stone-100 rounded-xl p-3 w-full mt-1 mb-8"
-                    />
-                    <ErrorMessage name="directions">
-                      {(msg) => <p>{msg}</p>}
-                    </ErrorMessage>
-                  </div> */}
 
                   <div className="my-8">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
@@ -207,7 +192,6 @@ function CreateRecipePage({
                             onClick={() =>
                               push({
                                 direction_description: "",
-                                // ingredient_amount: "",
                               })
                             }
                           >
@@ -246,9 +230,6 @@ function CreateRecipePage({
                     </ErrorMessage>
                   </div>
 
-                  {/* <label htmlFor="serving" className="mt-4 text-xl">
-                    Serving
-                  </label> */}
                   <div className="my-8">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       How many servings does this create?{" "}
@@ -262,9 +243,6 @@ function CreateRecipePage({
                       {(msg) => <p>{msg}</p>}
                     </ErrorMessage>
                   </div>
-                  {/* <label htmlFor="cook_time" className="mt-4 text-xl">
-                    Cook Time
-                  </label> */}
 
                   <div className="my-8">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
@@ -279,9 +257,6 @@ function CreateRecipePage({
                       {(msg) => <p>{msg}</p>}
                     </ErrorMessage>
                   </div>
-                  {/* <label htmlFor="ingredients" className="mt-4 text-xl">
-                    Ingredients
-                  </label> */}
 
                   <div className="my-8">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">

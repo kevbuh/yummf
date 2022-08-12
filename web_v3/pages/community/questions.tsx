@@ -31,7 +31,7 @@ function CommunityPage() {
 
   const onSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    router.push(`/search-results?result=${searchField}`);
+    router.push(`/search-results?result=qas_${searchField}`);
   };
 
   return (
@@ -70,7 +70,10 @@ function CommunityPage() {
               <button className=" flex  max-w-xs text-xl p-3 rounded-xl font-semibold mr-4">
                 View all
               </button>
-              <button className=" flex max-w-xs text-xl p-3 rounded-xl bg-black text-white font-semibold">
+              <button
+                className=" flex max-w-xs text-xl p-3 rounded-xl bg-black text-white font-semibold"
+                onClick={() => router.push("/community/create")}
+              >
                 Ask a Question
               </button>
             </div>
@@ -116,7 +119,7 @@ function CommunityPage() {
 
           <div className=" border-stone-100 border-4 rounded-xl px-6 py-12 text-rosa font-semibold my-16">
             <div className="grid grid-cols-1 sm:grid-cols-2">
-              <p className="mx-auto px-8 py-12 text-3xl bg-black rounded-full text-white hidden sm:block">
+              <p className="m-auto px-6 py-14 text-3xl bg-black rounded-full text-white hidden sm:block">
                 yummf
               </p>
               <div className="m-auto">

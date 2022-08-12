@@ -1112,9 +1112,9 @@ const NewIDPage: NextPage = ({
                     <div className="flex flex-row mb-4">
                       <p className="font-semibold text-lg">
                         <span className="flex flex-row">
-                          {data?.overallRating > 0 ? data.overallRating : null}
+                          {data?.overallRating > 0 ? data.overallRating : "0"}
                           <StarSVG />
-                          ,&nbsp;
+                          ,&nbsp;&nbsp;
                           {data?.ratings.length > 0
                             ? data.ratings.length
                             : "No "}{" "}

@@ -41,5 +41,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  return createRecipe;
+  return res.status(201).json({ data: createRecipe?.id });
 };
