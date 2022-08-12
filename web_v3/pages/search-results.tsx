@@ -37,7 +37,6 @@ function SearchResultPage() {
     const data = await apiRes.json();
 
     const cat_search = query.result?.slice(0, 4) == "cat_";
-    const qas_search = query.result?.slice(0, 4) == "qas_";
 
     if (cat_search) {
       return data.searchResults[0].recipes;
@@ -81,7 +80,14 @@ function SearchResultPage() {
               >
                 {data.map((d: any, index: number) => {
                   return (
-                    <Link href={"/recipes/" + d.id} key={index}>
+                    <Link
+                      href={
+                        query.result?.slice(0, 4) == "qas_"
+                          ? `/community/discussion/${d.id}`
+                          : `/recipes/${d.id}`
+                      }
+                      key={index}
+                    >
                       <div
                         className="bg-stone-100 p-3 rounded-xl w-full flex flex-row"
                         key={index}

@@ -100,12 +100,6 @@ const Chef: NextPage = ({
             >
               Saved Posts
             </p>
-            {/* <p className="text-xl font-semibold ml-4 py-4 text-gray-500 cursor-pointer">
-              Created Playlists
-            </p>
-            <p className="text-xl font-semibold mx-2 py-4 text-gray-500 cursor-pointer">
-              Liked Playlists
-            </p> */}
           </div>
           {liked && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -114,10 +108,14 @@ const Chef: NextPage = ({
                   <RecipeCard
                     key={index}
                     name={d.name.slice(0, 36)}
-                    author={d.user_id}
-                    cook_time={d.cook_time}
                     caption={d.caption.slice(0, 42)}
                     id={d.id}
+                    rating={
+                      d.ratings?.length > 0
+                        ? d.overallRating / d.ratings?.length
+                        : 0
+                    }
+                    length={d.ratings?.length}
                   />
                 );
               })}
@@ -130,10 +128,14 @@ const Chef: NextPage = ({
                   <RecipeCard
                     key={index}
                     name={d.name.slice(0, 36)}
-                    author={d.user_id}
-                    cook_time={d.cook_time}
                     caption={d.caption.slice(0, 42)}
                     id={d.id}
+                    rating={
+                      d.ratings?.length > 0
+                        ? d.overallRating / d.ratings?.length
+                        : 0
+                    }
+                    length={d.ratings?.length}
                   />
                 );
               })}
