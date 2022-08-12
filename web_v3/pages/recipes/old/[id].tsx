@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import Footer from "../../../components/Footer";
-import MoreLikeThis from "../../../components/moreLikeThis";
+// import MoreLikeThis from "../../../components/moreLikeThis";
 import Router, { useRouter } from "next/router";
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import * as Yup from "yup";
@@ -857,7 +857,7 @@ const SelectRecipePage: NextPage = ({
           <hr />
           <br />
           <br />
-          <MoreLikeThis />
+          {/* <MoreLikeThis /> */}
 
           <div className="h-40"></div>
         </div>
@@ -882,19 +882,19 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
   });
 
-  const aggregations = await prisma?.rating.aggregate({
-    _avg: {
-      overallRating: true,
-    },
-    where: {
-      recipeId: parseInt(query.id),
-    },
-  });
+  // const aggregations = await prisma?.rating.aggregate({
+  //   _avg: {
+  //     overallRating: true,
+  //   },
+  //   where: {
+  //     recipeId: parseInt(query.id),
+  //   },
+  // });
 
   return {
     props: {
       data: JSON.parse(JSON.stringify(thisRecipe)),
-      avg_rating: aggregations?._avg.overallRating,
+      // avg_rating: aggregations?._avg.overallRating,
     },
   };
 };
