@@ -33,7 +33,7 @@ const NavBar = () => {
     <div className="navbar shadow-sm bg-white sticky top-0 z-10 ">
       <div className="sm:w-1/6">
         <Link href="/explore">
-          <a className="p-1 font-semibold normal-case text-2xl text-rosa sm:ml-4">
+          <a className="p-1 font-bold font-serif normal-case text-2xl text-rosa sm:ml-4">
             yummf
           </a>
         </Link>

@@ -15,7 +15,16 @@ module.exports = {
     },
     fontFamily: {
       sans: [
+        "Cereal",
         "Cereal_light",
+        "Segoe UI",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Roboto",
+      ],
+      serif: [
+        "Cereal",
+        // "Cereal_light",
         "Segoe UI",
         "-apple-system",
         "BlinkMacSystemFont",

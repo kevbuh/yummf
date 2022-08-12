@@ -60,7 +60,7 @@ function CommunityPage() {
           <DottedArrow />
           <div className="rounded-xl w-full my-16">
             <p className="font-semibold text-5xl mb-4">Questions & Answers</p>
-            <p className="font-medium text-xl mb-8 max-w-lg px-6 sm:px-0">
+            <p className="font-medium text-xl mb-8 max-w-lg">
               Get help with your recipe, learn about ingredients, or ask any
               cooking related question.
             </p>
