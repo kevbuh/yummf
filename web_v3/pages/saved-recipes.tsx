@@ -26,17 +26,15 @@ const SavedRecipesPage: NextPage = ({
             return (
               <RecipeCard
                 key={index}
-                name={d.name}
-                author={d.authorId}
-                // rating={d.avgRating ? d.avgRating?.toFixed(2) : null}
-                cook_time={d.cookTime}
-                caption={d.caption}
+                name={d.name.slice(0, 36)}
+                caption={d.caption.slice(0, 42)}
                 id={d.id}
-                // image={
-                //   d.featured_image !== null && d.featured_image !== undefined
-                //     ? API_URL + d.featured_image?.url.split("?")[0]
-                //     : null
-                // }
+                rating={
+                  d.ratings?.length > 0
+                    ? d.overallRating / d.ratings?.length
+                    : 0
+                }
+                length={d.ratings?.length}
               />
             );
           })}
