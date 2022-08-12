@@ -15,6 +15,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     let searchResults = null;
 
     const cat_search = queryParam.slice(0, 4) == "cat_";
+    const ing_search = queryParam.slice(0, 4) == "ing_";
+    const qas_search = queryParam.slice(0, 4) == "qas_";
+
     const search_query: string | string[] = queryParam.slice(
       4,
       queryParam.length
@@ -33,6 +36,22 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
               id: true,
               authorId: true,
             },
+          },
+        },
+      });
+    } else if (ing_search) {
+      searchResults = await prisma?.ingredient.findMany({
+        where: {
+          name: {
+            contains: capitalizeFirstLetter(search_query as string),
+          },
+        },
+      });
+    } else if (qas_search) {
+      searchResults = await prisma?.question.findMany({
+        where: {
+          title: {
+            contains: search_query as string,
           },
         },
       });

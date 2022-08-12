@@ -288,8 +288,6 @@ const NewIDPage: NextPage = ({
     direction_list: JSON.parse(direction_list_1),
   };
 
-  console.log("$$$$$", JSON.parse(JSON.stringify(data.ingredientList[0])));
-
   return (
     <>
       <NavBar />

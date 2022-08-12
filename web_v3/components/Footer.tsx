@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="footer px-10 pt-10 pb-8 md:bg-white bg-stone-100">
+    <footer className="footer px-10 pt-10 pb-8  bg-stone-100">
       <Link href="/explore">
         <a className="font-semibold text-4xl md:m-auto text-rosa">yummf</a>
       </Link>

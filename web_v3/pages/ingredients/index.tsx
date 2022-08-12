@@ -61,8 +61,6 @@ function IngredientsAll() {
         <Card name="Salsa" />
         <Card name="Tuna" />
         <Card name="Couscous" />
-        <Card name="Pasta" />
-        <Card name="Rice" />
       </div>
 
       {!session && <SignUpBanner />}

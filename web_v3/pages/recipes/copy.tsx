@@ -262,8 +262,6 @@ const NewIDPage: NextPage = ({
     );
   };
 
-  console.log(session, data);
-
   const initialValues = {
     name: edit ? data.name : "",
     directions: edit ? data.name : "",

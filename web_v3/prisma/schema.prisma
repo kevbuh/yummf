@@ -39,19 +39,20 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  questions     Question[]
   recipes       Recipe[]
   comments      Comment[]
   Rating        Rating[]
-  createdAt     DateTime  @default(now())
-  savedRecipes  Recipe[]  @relation(name: "UserSaved")
-  Article       Article?  @relation(fields: [articleId], references: [id])
+  createdAt     DateTime   @default(now())
+  savedRecipes  Recipe[]   @relation(name: "UserSaved")
+  Article       Article?   @relation(fields: [articleId], references: [id])
   articleId     Int?
 }
 
@@ -94,24 +95,44 @@ model Article {
   User       User[]
 }
 
+model Question {
+  id         Int        @id @default(autoincrement())
+  title      String
+  body       String
+  comments   Comment[]
+  categories Category[]
+  createdAt  DateTime   @default(now())
+  User       User[]
+}
+
 model Category {
+  id         Int       @id @default(autoincrement())
+  name       String
+  recipes    Recipe[]
+  Article    Article?  @relation(fields: [articleId], references: [id])
+  articleId  Int?
+  Question   Question? @relation(fields: [questionId], references: [id])
+  questionId Int?
+}
+
+model Ingredient {
   id        Int      @id @default(autoincrement())
   name      String
-  recipes   Recipe[]
-  Article   Article? @relation(fields: [articleId], references: [id])
-  articleId Int?
+  createdAt DateTime @default(now())
 }
 
 model Comment {
-  id        Int      @id @default(autoincrement())
-  text      String
-  Recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
-  recipeId  Int?
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
-  createdAt DateTime @default(now())
-  Article   Article? @relation(fields: [articleId], references: [id])
-  articleId Int?
+  id         Int       @id @default(autoincrement())
+  text       String
+  Recipe     Recipe?   @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
+  recipeId   Int?
+  author     User      @relation(fields: [authorId], references: [id])
+  authorId   String
+  createdAt  DateTime  @default(now())
+  Article    Article?  @relation(fields: [articleId], references: [id])
+  articleId  Int?
+  Question   Question? @relation(fields: [questionId], references: [id])
+  questionId Int?
 }
 
 model Rating {

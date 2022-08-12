@@ -37,6 +37,7 @@ function SearchResultPage() {
     const data = await apiRes.json();
 
     const cat_search = query.result?.slice(0, 4) == "cat_";
+    const qas_search = query.result?.slice(0, 4) == "qas_";
 
     if (cat_search) {
       return data.searchResults[0].recipes;
@@ -64,7 +65,8 @@ function SearchResultPage() {
             <>
               <div className="flex flex-col items-center my-8 mx-auto">
                 <p className="text-6xl font-semibold">
-                  {query?.result?.slice(0, 4) == "cat_"
+                  {query?.result?.slice(0, 4) == "cat_" ||
+                  query?.result?.slice(0, 4) == "ing_"
                     ? query.result.slice(4, query.result.length)
                     : query.result}
                 </p>
@@ -86,10 +88,17 @@ function SearchResultPage() {
                         <div className="my-auto ml-2 mr-4">
                           <SaveSVG />
                         </div>
-                        <div>
-                          <p className="font-semibold">{d.name}</p>
-                          <p className="my-auto">{d.authorId}</p>
-                        </div>
+                        {query.result?.slice(0, 4) == "qas_" ? (
+                          <div>
+                            <p className="font-semibold">{d.title}</p>
+                            <p className="my-auto">{d.createdAt}</p>
+                          </div>
+                        ) : (
+                          <div>
+                            <p className="font-semibold">{d.name}</p>
+                            <p className="my-auto">{d.authorId}</p>
+                          </div>
+                        )}
                       </div>
                     </Link>
                   );

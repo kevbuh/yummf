@@ -12,7 +12,6 @@ const NavBar = () => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("2 clicked");
     if (recipesButton) {
       router.push(`/search-results?result=${searchField}`);
     } else if (ingredientsButton) {
@@ -20,7 +19,7 @@ const NavBar = () => {
     } else if (categoryButton) {
       router.push(`/search-results?result=cat_${searchField}`);
     } else {
-      router.push(`/search-results?result=com_${searchField}`);
+      router.push(`/search-results?result=qas_${searchField}`);
     }
   };
 
