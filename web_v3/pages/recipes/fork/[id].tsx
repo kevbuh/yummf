@@ -62,19 +62,19 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
   });
 
-  const aggregations = await prisma?.rating.aggregate({
-    _avg: {
-      overallRating: true,
-    },
-    where: {
-      recipeId: parseInt(query.id),
-    },
-  });
+  // const aggregations = await prisma?.rating.aggregate({
+  //   _avg: {
+  //     overallRating: true,
+  //   },
+  //   where: {
+  //     recipeId: parseInt(query.id),
+  //   },
+  // });
 
   return {
     props: {
       data: JSON.parse(JSON.stringify(thisRecipe)),
-      avg_rating: aggregations?._avg.overallRating,
+      // avg_rating: aggregations?._avg.overallRating,
     },
   };
 };
