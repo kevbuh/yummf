@@ -6,19 +6,32 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(400).json({ error: "Method not allowed" });
   }
 
+  console.log("here 1.5");
+
   const { values, recipeId } = JSON.parse(req.body);
+
+  console.log(values);
 
   const createRating = await prisma?.rating.create({
     data: {
-      overallRating: values.overallRating,
-      tasteRating: values.tasteRating,
-      presentationRating: values.presentationRating,
-      valueRating: values.valueRating,
-      easeRating: values.easeRating,
       recipeId: recipeId,
       authorId: values.userId,
     },
   });
 
-  return createRating;
+  const updateRecipe = await prisma?.recipe.updateMany({
+    data: {
+      overallRating: {
+        increment: values.overallRating,
+      },
+      qualityRating: {
+        increment: values.qualityRating,
+      },
+      tasteRating: {
+        increment: values.tasteRating,
+      },
+    },
+  });
+
+  return 201;
 };

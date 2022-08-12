@@ -11,7 +11,6 @@ import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import prisma from "../../utils/prisma";
 import SignUpBanner from "../../components/SignUpBanner";
-import { MiniNormalBoldArrow } from "../../utils/arrows";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -27,8 +26,129 @@ const NewIDPage: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session } = useSession();
   const [comment, setComment] = useState(false);
+  const [showRate, setShowRate] = useState(false);
+
   const [edit, setEdit] = useState(false);
   const [clickedExpand, setClickedExpand] = useState(false);
+
+  const RatingModal = () => {
+    return (
+      <div className="mb-4">
+        <Formik
+          initialValues={{
+            overallRating: undefined,
+            qualityRating: undefined,
+            tasteRating: undefined,
+            userId: session?.userId,
+          }}
+          validationSchema={Yup.object({
+            overallRating: Yup.number()
+              .min(1, "Be nice! Give a rating of at least 1 stars")
+              .max(5, "Was is really that good? Max of 5 stars :)")
+              .required(),
+            qualityRating: Yup.number().min(1).max(5).required(),
+            tasteRating: Yup.number().min(1).max(5).required(),
+          })}
+          onSubmit={(values) => {
+            try {
+              fetch("/api/create_rating", {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                },
+                body: JSON.stringify({
+                  recipeId: data.id,
+                  values: values,
+                }),
+              });
+
+              // router.reload();
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        >
+          <Form className="p-3 flex flex-col ">
+            <label htmlFor="value" className="text-black font-semibold">
+              &nbsp;
+            </label>
+            <p className="mb-4 font-semibold text-4xl flex justify-center ">
+              Rate Recipe
+            </p>
+
+            <Field
+              id="overallRating"
+              name="overallRating"
+              type="number"
+              placeholder="Give an overall rating 1-5 stars"
+              className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
+            />
+            <ErrorMessage name="overallRating">
+              {(msg) => <p>{msg}</p>}
+            </ErrorMessage>
+
+            <Field
+              id="tasteRating"
+              name="tasteRating"
+              type="number"
+              placeholder="Give a taste rating 1-5 stars"
+              className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
+            />
+            <ErrorMessage name="tasteRating">
+              {(msg) => <p>{msg}</p>}
+            </ErrorMessage>
+
+            <Field
+              id="qualityRating"
+              name="qualityRating"
+              type="number"
+              placeholder="Give a quality rating 1-5 stars"
+              className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
+            />
+            <ErrorMessage name="presentationRating">
+              {(msg) => <p>{msg}</p>}
+            </ErrorMessage>
+
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                onClick={() => {
+                  setShowRate((showRate) => !showRate);
+                }}
+                className="p-2 mt-4 w-full rounded-xl font-semibold "
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="p-2 mt-4 w-full rounded-xl font-semibold bg-stone-100 hover:bg-rosalight hover:text-white"
+              >
+                Submit
+              </button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
+    );
+  };
+
+  const RatingModalTest = () => {
+    return (
+      <>
+        <label
+          htmlFor="my-modal"
+          className="ml-auto text-sm text-gray-500 my-auto cursor-pointer"
+        >
+          Create Rating
+        </label>
+        <input type="checkbox" id="my-modal" className="modal-toggle" />
+        <div className="modal  bg-smoke-light">
+          <div className="modal-box bg-white">
+            <RatingModal />
+          </div>
+        </div>
+      </>
+    );
+  };
 
   type ComponentProps = {
     data: any;
@@ -98,7 +218,17 @@ const NewIDPage: NextPage = ({
   const RecipeSidebar = ({ data, session, edit }: ComponentProps) => {
     return (
       <div className="px-6 sm:py-6 mb-8 ">
-        {session?.userId == data?.authorId && <OwnRecipeButtons />}
+        {session?.userId == data?.authorId ? (
+          <OwnRecipeButtons />
+        ) : (
+          <div className="mb-4">
+            <p>test</p>
+          </div>
+        )}
+
+        <div className="mb-4">
+          <p>test</p>
+        </div>
 
         <p className="text-4xl font-semibold mb-4 ">
           {data?.name.slice(0, 100)}
@@ -283,9 +413,9 @@ const NewIDPage: NextPage = ({
     authorId: session?.userId,
     id: edit ? data.id : null,
 
-    ingredient_list: JSON.parse(ingredient_list_1),
+    ingredient_list: ingredient_list_1,
 
-    direction_list: JSON.parse(direction_list_1),
+    direction_list: direction_list_1,
   };
 
   return (
@@ -367,7 +497,7 @@ const NewIDPage: NextPage = ({
                           <p className="mr-auto">Amount</p>
                         </div>
 
-                        <FieldArray name="ingredient_list">
+                        {/* <FieldArray name="ingredient_list">
                           {({ insert, remove, push }) => (
                             <div>
                               {values.ingredient_list.length > 0 &&
@@ -456,7 +586,7 @@ const NewIDPage: NextPage = ({
                               </button>
                             </div>
                           )}
-                        </FieldArray>
+                        </FieldArray> */}
                       </div>
                     </div>
                     <hr />
@@ -472,7 +602,7 @@ const NewIDPage: NextPage = ({
                           <p className="">Steps</p>
                         </div>
 
-                        <FieldArray name="direction_list">
+                        {/* <FieldArray name="direction_list">
                           {({ insert, remove, push }) => (
                             <div className="">
                               {values.direction_list.length > 0 &&
@@ -549,7 +679,7 @@ const NewIDPage: NextPage = ({
                               </button>
                             </div>
                           )}
-                        </FieldArray>
+                        </FieldArray> */}
                       </div>
                     </div>
                     <hr />
@@ -770,7 +900,6 @@ const NewIDPage: NextPage = ({
                                   <li className="mr-4 font-bold">{index}.</li>
                                   <li>{JSON.parse(d).direction_description}</li>
                                 </div>
-                                <MiniNormalBoldArrow />
                               </div>
                             );
                           }
@@ -981,20 +1110,46 @@ const NewIDPage: NextPage = ({
                       </button>
                     </div>
                     <div className="flex flex-row mb-4">
-                      <StarSVG />
-
                       <p className="font-semibold text-lg">
-                        4.88 -{" "}
-                        {data?.ratings.length > 0 ? data?.ratings.length : "No"}{" "}
-                        reviews
+                        <span className="flex flex-row">
+                          {data?.overallRating > 0 ? data.overallRating : null}
+                          <StarSVG />
+                          ,&nbsp;
+                          {data?.ratings.length > 0
+                            ? data.ratings.length
+                            : "No "}{" "}
+                          Ratings
+                        </span>
                       </p>
-                      <button className="ml-auto text-sm text-gray-500 my-auto">
-                        Create review
-                      </button>
+
+                      {session?.userId !== data?.authorId && (
+                        <RatingModalTest />
+                      )}
                     </div>
-                    <Rating category="Taste" rating={4.5} />
-                    <Rating category="Presentation" rating={3.8} />
-                    <Rating category="Value" rating={4.8} />
+                    <Rating
+                      category="Overall"
+                      rating={
+                        data?.ratings?.length > 0
+                          ? data.overallRating / data.ratings?.length
+                          : 0
+                      }
+                    />
+                    <Rating
+                      category="Quality"
+                      rating={
+                        data?.ratings?.length > 0
+                          ? data.qualityRating / data.ratings?.length
+                          : 0
+                      }
+                    />
+                    <Rating
+                      category="Taste"
+                      rating={
+                        data?.ratings?.length > 0
+                          ? data.tasteRating / data.ratings?.length
+                          : 0
+                      }
+                    />
                   </div>
                   <hr />
                   <div className="my-8">
@@ -1094,19 +1249,19 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
   });
 
-  const aggregations = await prisma?.rating.aggregate({
-    _avg: {
-      overallRating: true,
-    },
-    where: {
-      recipeId: parseInt(query.id),
-    },
-  });
+  // const aggregations = await prisma?.rating.aggregate({
+  //   _avg: {
+  //     overallRating: true,
+  //   },
+  //   where: {
+  //     recipeId: parseInt(query.id),
+  //   },
+  // });
 
   return {
     props: {
       data: JSON.parse(JSON.stringify(thisRecipe)),
-      avg_rating: aggregations?._avg.overallRating,
+      // avg_rating: aggregations?._avg.overallRating,
     },
   };
 };

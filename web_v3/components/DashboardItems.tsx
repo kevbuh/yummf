@@ -36,10 +36,10 @@ const DashboardItems: NextPage = () => {
                 <RecipeCard
                   key={index}
                   name={d.name.slice(0, 36)}
-                  author={d.user_id}
-                  cook_time={d.cook_time}
                   caption={d.caption.slice(0, 42)}
                   id={d.id}
+                  rating={d.overallRating / d.ratings?.length}
+                  length={d.ratings?.length}
                 />
               ))}
             </React.Fragment>

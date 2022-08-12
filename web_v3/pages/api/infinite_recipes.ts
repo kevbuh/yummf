@@ -21,6 +21,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
         // id: "desc",
         numViews: "desc",
       },
+      include: {
+        ratings: true,
+      },
     });
     return res.json({
       recipes,

@@ -5,7 +5,6 @@ import Link from "next/link";
 
 type RecipeProps = {
   name: string;
-  author: string;
   cook_time: string;
   id: number;
   caption: string;
@@ -14,7 +13,6 @@ type RecipeProps = {
 
 function RecipeCardLanding({
   name,
-  author,
   cook_time,
   id,
   caption,

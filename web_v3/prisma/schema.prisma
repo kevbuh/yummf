@@ -78,6 +78,9 @@ model Recipe {
   author         User       @relation(fields: [authorId], references: [id])
   authorId       String
   ratings        Rating[]
+  overallRating  Int        @default(0)
+  tasteRating    Int        @default(0)
+  qualityRating  Int        @default(0)
   comments       Comment[]
   categories     Category[]
   likedBy        User[]     @relation(name: "UserSaved")
@@ -136,15 +139,10 @@ model Comment {
 }
 
 model Rating {
-  id                 Int      @id @default(autoincrement())
-  overallRating      Int
-  tasteRating        Int
-  presentationRating Int
-  easeRating         Int
-  valueRating        Int
-  Recipe             Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
-  recipeId           Int?
-  author             User     @relation(fields: [authorId], references: [id])
-  authorId           String
-  createdAt          DateTime @default(now())
+  id        Int      @id @default(autoincrement())
+  Recipe    Recipe?  @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
+  recipeId  Int?
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime @default(now())
 }
