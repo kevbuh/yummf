@@ -16,6 +16,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   const updateRecipe = await prisma?.recipe.updateMany({
+    where: {
+      id: recipeId,
+    },
     data: {
       overallRating: {
         increment: values.overallRating,

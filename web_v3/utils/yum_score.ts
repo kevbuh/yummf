@@ -21,30 +21,9 @@ still need to include:
 - normalize to 100
  */
 }
-
-// export const YumScore = (
-//   // chef_following: number,
-//   // chef_days_active: number,
-//   taste_rating: number,
-//   overall_rating: number,
-//   quality_rating: number,
-//   rating_length: number,
-//   num_saves: number,
-//   num_views: number
-// ) => {
-//   const score =
-//     // 0.05 * chef_following *
-//     // (0.05 * chef_days_active) *
-//     (0.8 *
-//       taste_rating *
-//       (0.8 * overall_rating) *
-//       (0.3 * quality_rating) *
-//       (0.9 * rating_length) *
-//       100000000 +
-//       (0.8 * num_saves + 0.3 * (num_views + 1))) /
-//     100000000;
-//   return String(Math.abs(score + 60)).slice(0, 2);
-// };
+const getBaseLog = (x: number, y: number) => {
+  return Math.log(y) / Math.log(x);
+};
 
 export const YumScore = (
   // chef_following: number,
@@ -56,30 +35,48 @@ export const YumScore = (
   num_saves: number,
   num_views: number
 ) => {
-  if (
-    taste_rating == 0 ||
-    overall_rating == 0 ||
-    quality_rating == 0 ||
-    rating_length == 0 ||
-    num_saves == 0 ||
-    num_views == 0
-  ) {
+  if (rating_length == 0) {
     return 60;
   }
 
   const defaultVal = 60;
+  let ratingScore = 0;
 
-  const ratingVal = quality_rating;
+  if (rating_length == 0) {
+    ratingScore = 60;
+  } else if (
+    overall_rating / rating_length >= 4.7 &&
+    overall_rating / rating_length <= 5 &&
+    rating_length > 6
+  ) {
+    ratingScore = 80 * defaultVal + overall_rating / (0.3 * rating_length);
+  } else if (overall_rating / rating_length >= 4.5) {
+    ratingScore = 4 * defaultVal + overall_rating / rating_length;
+  } else if (
+    overall_rating / rating_length >= 4 &&
+    overall_rating / rating_length < 4.5
+  ) {
+    ratingScore = defaultVal + overall_rating / rating_length;
+  } else if (
+    overall_rating / rating_length >= 3.5 &&
+    overall_rating / rating_length < 4
+  ) {
+    ratingScore = 0.3 * defaultVal + overall_rating / rating_length;
+  } else if (
+    overall_rating / rating_length >= 3 &&
+    overall_rating / rating_length < 3.5
+  ) {
+    ratingScore = 0.2 * defaultVal + overall_rating / rating_length;
+  } else {
+    ratingScore = 0.1 * defaultVal + overall_rating / rating_length;
+  }
 
-  //     1 +
-  //     (4 * overall_rating) / (rating_length + 1) +
-  //     1 +
-  //     (5 * taste_rating) / (rating_length + 1) +
-  //     1) +
+  let score = 0.5 * getBaseLog(Math.exp(1), ratingScore);
 
-  const viewSavesVal = (num_saves * 7) / num_views;
+  score += 0.3 * getBaseLog(Math.exp(1), num_views + 1);
+  score += 0.15 * getBaseLog(Math.exp(1), num_saves + 1);
 
-  const score = defaultVal + ratingVal + viewSavesVal;
+  const total = 100 / (1 + Math.exp(-(score - 0.2)));
 
-  return String(Math.abs(score)).slice(0, 2);
+  return String(Math.min(total, 99)).slice(0, 2);
 };

@@ -78,8 +78,6 @@ const NewIDPage: NextPage = ({
                   values: values,
                 }),
               });
-
-              // router.reload();
             } catch (error) {
               console.log(error);
             }
@@ -1162,8 +1160,10 @@ const NewIDPage: NextPage = ({
                         <div className="flex flex-row w-full my-auto">
                           <p className="flex flex-row my-auto">
                             {" "}
-                            {data?.overallRating > 0
-                              ? data.overallRating / data.ratings.length
+                            {data?.overallRating > 0 && data?.ratings
+                              ? String(
+                                  data.overallRating / data.ratings.length
+                                ).slice(0, 3)
                               : "0"}
                             <StarSVG />
                             ,&nbsp;&nbsp;
@@ -1178,7 +1178,11 @@ const NewIDPage: NextPage = ({
                           category="Overall"
                           rating={
                             data?.ratings?.length > 0
-                              ? data.overallRating / data.ratings?.length
+                              ? parseInt(
+                                  String(
+                                    data.overallRating / data.ratings?.length
+                                  ).slice(0, 3)
+                                )
                               : 0
                           }
                         />
@@ -1186,7 +1190,11 @@ const NewIDPage: NextPage = ({
                           category="Quality"
                           rating={
                             data?.ratings?.length > 0
-                              ? data.qualityRating / data.ratings?.length
+                              ? parseInt(
+                                  String(
+                                    data.qualityRating / data.ratings?.length
+                                  ).slice(0, 3)
+                                )
                               : 0
                           }
                         />
@@ -1194,7 +1202,11 @@ const NewIDPage: NextPage = ({
                           category="Taste"
                           rating={
                             data?.ratings?.length > 0
-                              ? data.tasteRating / data.ratings?.length
+                              ? parseInt(
+                                  String(
+                                    data.tasteRating / data.ratings?.length
+                                  ).slice(0, 3)
+                                )
                               : 0
                           }
                         />
