@@ -10,6 +10,7 @@ module.exports = {
         rosa: "#FF385C",
         rosalight: "#f76a84",
         fresh: "#50e3c2 ",
+        freshdark: "#4edebd",
         "smoke-light": "rgba(0, 0, 0, 0.4)",
       },
     },

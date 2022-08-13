@@ -152,15 +152,9 @@ const Home: NextPage = () => {
         </p>
         <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
           Knowing exactly which recipes are good is hard. This is why Yummf has
-          developed its own <span className="text-fresh">Yum score</span>, which
-          incorporates a perfect blend of many different factors so you know
-          what to cook.
+          developed its own Yum score, which incorporates a perfect blend of
+          many different factors so you know what to cook.
         </p>
-        <Link href="/yum-score">
-          <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
-            More info
-          </button>
-        </Link>
       </div>
 
       <CurveRightArrow />
@@ -189,8 +183,8 @@ const Home: NextPage = () => {
           <span className="text-rosa">Fork</span> your favorites
         </p>
         <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 px-6 sm:px-0 mb-6">
-          Copy and edit your favorite recipes to start freely adding your own
-          tweaks.
+          Liked a recipe, but it needs some tweaks? Copy & edit your favorite
+          recipes, and start freely making them your own.
         </p>
 
         <Link href="/explore">
