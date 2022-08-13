@@ -9,6 +9,19 @@ type YumScoreProps = {
   num_views: number;
 };
 
+{
+  /*
+YUM SCORE:
+Needs to maxed at 100
+Ratings above 4.5 need to be more valuable than ones around 4
+
+still need to include:
+- comments
+- pos neg review ratio
+- normalize to 100
+ */
+}
+
 export const YumScore = (
   // chef_following: number,
   // chef_days_active: number,
@@ -27,11 +40,8 @@ export const YumScore = (
       (0.8 * overall_rating) *
       (0.3 * quality_rating) *
       (0.9 * rating_length) *
+      100000000 +
       (0.8 * num_saves + 0.3 * (num_views + 1))) /
     100000000;
-  return String(Math.abs(score - 73)).slice(0, 2);
+  return String(Math.abs(score + 60)).slice(0, 2);
 };
-
-// comments
-// pos neg review ratio
-// normalize to 100

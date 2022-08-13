@@ -1,7 +1,5 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { StarSVG } from "../utils/socialSVGs";
 import { YumScore } from "../utils/yum_score";
 // import mixpanel from "mixpanel-browser";
 
@@ -45,6 +43,15 @@ function RecipeCard({
     return steps;
   };
 
+  const YumScoreCalc = YumScore(
+    tasteRating,
+    overallRating,
+    qualityRating,
+    ratingsLength,
+    numViews,
+    numSaves
+  );
+
   return (
     <div className="rounded-lg p-1 border border-stone-100 shadow-sm cursor-pointer">
       <Link href={"/recipes/" + id}>
@@ -67,20 +74,18 @@ function RecipeCard({
 
           {/* )} */}
           <div className="my-2 flex flex-row">
-            <div className="w-3/4">
+            <div className="w-9/12">
               <p className="font-semibold text-md mt-2 truncate">{name}</p>
               <p className=" text-sm mb-2  text-gray-500 truncate">{caption}</p>
             </div>
-            <div className="w-1/4 rounded-lg p-2 bg-stone-100 flex m-auto">
+            <div
+              className="w-3/12 rounded-lg p-2 bg-stone-100 flex m-auto tooltip"
+              data-tip={
+                parseInt(YumScoreCalc) > 72 ? "Good Yum Score" : "Bad Yum Score"
+              }
+            >
               <p className="text-xl flex flex-row text-center m-auto">
-                {YumScore(
-                  tasteRating,
-                  overallRating,
-                  qualityRating,
-                  ratingsLength,
-                  numViews,
-                  numSaves
-                )}
+                {YumScoreCalc}
               </p>
             </div>
           </div>

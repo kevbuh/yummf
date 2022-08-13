@@ -86,7 +86,7 @@ function Sidebar() {
             <button
               className={
                 router.pathname == "/explore"
-                  ? "p-2 rounded-xl bg-rosa font-medium m-1 text-white"
+                  ? "p-2 rounded-xl bg-black font-medium m-1 text-white"
                   : "p-2 rounded-xl bg-stone-100 font-medium m-1"
               }
             >
@@ -97,7 +97,7 @@ function Sidebar() {
             <button
               className={
                 router.pathname == "/playlists"
-                  ? "p-2 rounded-xl bg-rosa font-medium m-1 text-white"
+                  ? "p-2 rounded-xl bg-black font-medium m-1 text-white"
                   : "p-2 rounded-xl bg-stone-100 font-medium m-1"
               }
             >
@@ -109,7 +109,7 @@ function Sidebar() {
             <button
               className={
                 router.pathname == "/ingredients"
-                  ? "p-2 rounded-xl bg-rosa font-medium m-1 text-white"
+                  ? "p-2 rounded-xl bg-black font-medium m-1 text-white"
                   : "p-2 rounded-xl bg-stone-100 font-medium m-1"
               }
             >
@@ -121,7 +121,7 @@ function Sidebar() {
             <button
               className={
                 router.pathname == "/categories"
-                  ? "p-2 rounded-xl bg-rosa font-medium m-1 text-white"
+                  ? "p-2 rounded-xl bg-black font-medium m-1 text-white"
                   : "p-2 rounded-xl bg-stone-100 font-medium m-1"
               }
             >

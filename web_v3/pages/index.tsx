@@ -22,8 +22,11 @@ const Home: NextPage = () => {
   const onBlur = () => setFocused(false);
   const onFocus = () => setFocused(true);
   const myRef = useRef<null | HTMLDivElement>(null);
+  const myRef2 = useRef<null | HTMLDivElement>(null);
 
   const executeScroll = () => myRef?.current?.scrollIntoView();
+
+  const executeScroll2 = () => myRef2?.current?.scrollIntoView();
 
   const onSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -114,10 +117,17 @@ const Home: NextPage = () => {
           info
         </p>
         <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0 ">
-          Finding top quality recipes and cooking information takes a lot of
-          time. Yummf&apos;s recommendation algorithm places extreme emphasis
-          on&nbsp;
-          <span className="italic">quality</span> through community ratings.
+          Finding worthwhile recipes and cooking information takes a lot of
+          time. Yummf&apos;s{" "}
+          <span
+            className="underline cursor-pointer"
+            onClick={() => executeScroll2()}
+          >
+            new ranking system
+          </span>{" "}
+          places extreme emphasis on&nbsp;
+          <span className="italic">quality</span>&nbsp; through community
+          ratings.
         </p>
 
         <Link href="/explore">
@@ -145,15 +155,17 @@ const Home: NextPage = () => {
       </div>
 
       <CurlyArrow />
+      <div ref={myRef2}>&nbsp;</div>
 
       <div className="items-center flex flex-col my-40 justify-center align-center">
         <p className="font-semibold text-5xl my-4 text-center">
-          An <span className="text-rosa">innovative</span> ranking system
+          A <span className="text-rosa">fresh</span> ranking system
         </p>
         <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
           Knowing exactly which recipes are good is hard. This is why Yummf has
-          developed its own Yum score, which incorporates a perfect blend of
-          many different factors so you know what to cook.
+          developed its own Yum Score, which incorporates a{" "}
+          <span>perfect blend of several factors</span> so you know what to
+          cook.
         </p>
       </div>
 
