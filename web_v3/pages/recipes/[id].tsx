@@ -20,6 +20,7 @@ import {
   StarSVG,
 } from "../../utils/socialSVGs";
 import { YumScore } from "../../utils/yum_score";
+import { ThumbsDown, ThumbsUp } from "../../utils/icons";
 
 const NewIDPage: NextPage = ({
   data,
@@ -28,6 +29,7 @@ const NewIDPage: NextPage = ({
   const { data: session } = useSession();
   const [comment, setComment] = useState(false);
   const [showRate, setShowRate] = useState(false);
+  const [showRateInfo, setShowRateInfo] = useState(false);
 
   const [edit, setEdit] = useState(false);
   const [clickedExpand, setClickedExpand] = useState(false);
@@ -44,7 +46,7 @@ const NewIDPage: NextPage = ({
   //   )
   // );
 
-  // console.log("2", YumScore(5, 5, 5, 1000, 1000000, 1000));
+  console.log("2", YumScore(5, 5, 5, 1000, 1000000, 1000));
 
   const RatingModal = () => {
     return (
@@ -1111,8 +1113,8 @@ const NewIDPage: NextPage = ({
                   </div>
                   <hr />
                   <div className="my-8">
-                    <div>
-                      <div className="flex flex-row mb-4">
+                    <div className="flex flex-row">
+                      <div className="flex flex-row mb-4 w-3/5">
                         <p className="font-semibold text-3xl">
                           <span className="flex flex-row text-fresh">
                             {data.ratings
@@ -1128,57 +1130,78 @@ const NewIDPage: NextPage = ({
                           </span>
                         </p>
                         <p className="text-3xl font-semibold ">
-                          &nbsp;Yum Score
+                          &nbsp;&nbsp;Yum Score
                         </p>
                       </div>
+                      <div className="w-2/5 grid grid-cols-2 gap-4 mx-auto">
+                        {/* <p>thumbs up</p> */}
+                        <ThumbsUp />
+                        <ThumbsDown />
+                        {/* <p>thumbs down</p> */}
+                      </div>
                     </div>
-                    <div className="mb-2 grid grid-cols-2 text-lg">
+                    <div className="mb-2 grid grid-cols-3 text-lg">
                       <div>
                         {session?.userId !== data?.authorId && (
                           <RatingModalTest />
                         )}
                       </div>
+                      <button
+                        className="text-sm text-gray-500 mx-auto"
+                        onClick={() => setShowRateInfo(!showRateInfo)}
+                      >
+                        Show Info
+                      </button>
                       <button className="text-sm text-gray-500 ml-auto">
-                        Show all reviews
+                        All reviews
                       </button>
                     </div>
 
-                    <div className="flex flex-row w-full my-auto">
-                      <p className="flex flex-row my-auto">
-                        {" "}
-                        {data?.overallRating > 0 ? data.overallRating : "0"}
-                        <StarSVG />
-                        ,&nbsp;&nbsp;
-                        {data?.ratings.length > 0 ? data.ratings.length : "No "}
-                        &nbsp; Ratings
-                      </p>
-                    </div>
+                    {showRateInfo && (
+                      <>
+                        <div className="flex flex-row w-full my-auto">
+                          <p className="flex flex-row my-auto">
+                            {" "}
+                            {data?.overallRating > 0
+                              ? data.overallRating / data.ratings.length
+                              : "0"}
+                            <StarSVG />
+                            ,&nbsp;&nbsp;
+                            {data?.ratings.length > 0
+                              ? data.ratings.length
+                              : "No "}
+                            &nbsp; Ratings
+                          </p>
+                        </div>
 
-                    <Rating
-                      category="Overall"
-                      rating={
-                        data?.ratings?.length > 0
-                          ? data.overallRating / data.ratings?.length
-                          : 0
-                      }
-                    />
-                    <Rating
-                      category="Quality"
-                      rating={
-                        data?.ratings?.length > 0
-                          ? data.qualityRating / data.ratings?.length
-                          : 0
-                      }
-                    />
-                    <Rating
-                      category="Taste"
-                      rating={
-                        data?.ratings?.length > 0
-                          ? data.tasteRating / data.ratings?.length
-                          : 0
-                      }
-                    />
+                        <Rating
+                          category="Overall"
+                          rating={
+                            data?.ratings?.length > 0
+                              ? data.overallRating / data.ratings?.length
+                              : 0
+                          }
+                        />
+                        <Rating
+                          category="Quality"
+                          rating={
+                            data?.ratings?.length > 0
+                              ? data.qualityRating / data.ratings?.length
+                              : 0
+                          }
+                        />
+                        <Rating
+                          category="Taste"
+                          rating={
+                            data?.ratings?.length > 0
+                              ? data.tasteRating / data.ratings?.length
+                              : 0
+                          }
+                        />
+                      </>
+                    )}
                   </div>
+
                   <hr />
                   <div className="my-8">
                     <p className="text-xl font-semibold mb-4">Time</p>
