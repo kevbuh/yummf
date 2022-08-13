@@ -31,5 +31,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  return saveRecipe;
+  if (saveRecipe?.id) {
+    return res.status(201).json({ data: 201 });
+  } else {
+    return res.status(400).json({ data: 400 });
+  }
 };

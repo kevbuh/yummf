@@ -22,5 +22,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  return createComment;
+  if (createComment?.id) {
+    return res.status(201).json({ data: 201 });
+  } else {
+    return res.status(400).json({ data: 400 });
+  }
 };

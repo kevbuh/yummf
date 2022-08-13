@@ -20,7 +20,7 @@ import {
   StarSVG,
 } from "../../utils/socialSVGs";
 import { YumScore } from "../../utils/yum_score";
-import { ThumbsDown, ThumbsUp } from "../../utils/icons";
+// import { ThumbsDown, ThumbsUp } from "../../utils/icons";
 
 const NewIDPage: NextPage = ({
   data,
@@ -166,8 +166,8 @@ const NewIDPage: NextPage = ({
   };
 
   type ComponentProps = {
-    data: any;
-    session: any;
+    // data: any;
+    // session: any;
     edit: any;
   };
 
@@ -230,182 +230,513 @@ const NewIDPage: NextPage = ({
     );
   };
 
-  const RecipeSidebar = ({ data, session, edit }: ComponentProps) => {
+  const MobileRecipeSidebar = () => {
     return (
-      <div className="px-6 sm:py-6 mb-8 ">
-        {session?.userId == data?.authorId ? (
-          <OwnRecipeButtons />
-        ) : (
-          <div className="mb-4">{/* <p>test</p> */}</div>
-        )}
+      <div className="md:w-4/12 ">
+        {/* big */}
+        <div className="">
+          <div className="px-6 sm:py-6 mb-8 ">
+            {session?.userId == data?.authorId && <OwnRecipeButtons />}
 
-        <p className="text-4xl font-semibold mb-4 ">
-          {data?.name.slice(0, 100)}
-        </p>
+            <p className="text-4xl font-semibold mb-4 ">
+              {data?.name.slice(0, 100)}
+            </p>
 
-        <Link href="/chef/1">
-          <div className="flex flex-row mb-4 cursor-pointer">
-            <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
-            <div>
-              <p className="text-stone-400 text-sm">Author</p>
-              <p className="font-semibold ">{data?.authorId}</p>
+            <Link href="/chef/1">
+              <div className="flex flex-row mb-4 cursor-pointer">
+                <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
+                <div>
+                  <p className="text-stone-400 text-sm">Author</p>
+                  <p className="font-semibold ">{data?.authorId}</p>
+                </div>
+              </div>
+            </Link>
+            <hr />
+            <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
+              {data?.likedBy[0]?.email === session?.user?.email ? (
+                <p className="mr-auto my-auto flex flex-row text-gray-500">
+                  Saved!
+                </p>
+              ) : (
+                <button
+                  className="mr-auto my-auto flex flex-row text-gray-500"
+                  onClick={async () => {
+                    const apiRes = await fetch("/api/save_recipe", {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                      },
+                      body: JSON.stringify({
+                        recipeId: data.id,
+                        userEmail: session?.user?.email,
+                      }),
+                    });
+                    router.reload();
+
+                    const response = await apiRes.json();
+
+                    if (response.data == 201) {
+                      router.reload();
+                    } else {
+                      console.log("failed to comment");
+                    }
+                  }}
+                >
+                  <SaveSVG />
+                  <p>{data?.numSaves} Saves</p>
+                </button>
+              )}
+
+              <div className="dropdown">
+                <button
+                  className="mr-auto my-auto flex flex-row text-gray-500"
+                  tabIndex={0}
+                >
+                  <ShareSVG />
+                  Share
+                </button>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
+                >
+                  <li>
+                    <a className="p-1 text-gray-500">Email</a>
+                  </li>
+                  <li>
+                    <a className="p-1 text-gray-500">Link</a>
+                  </li>
+                  <li>
+                    <a className="p-1 text-gray-500">Pinterest</a>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                className="mr-auto my-auto flex flex-row text-gray-500"
+                onClick={() => router.push(`fork/${data.id}`)}
+              >
+                <GitHubForkSVG /> Fork
+              </button>
+
+              <div className="dropdown">
+                <button
+                  className="mr-auto my-auto text-gray-500 font-bold"
+                  tabIndex={0}
+                >
+                  ...
+                </button>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
+                >
+                  <li>
+                    <Link href="/help">
+                      <a className="p-1 text-gray-500">Report</a>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </Link>
-        <hr />
-        <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
-          {data?.likedBy[0]?.email === session?.user?.email ? (
-            <p className="mr-auto my-auto flex flex-row text-gray-500">
-              Saved!
-            </p>
-          ) : (
-            <button
-              className="mr-auto my-auto flex flex-row text-gray-500"
-              onClick={() => {
-                try {
-                  fetch("/api/save_recipe", {
-                    method: "POST",
-                    headers: {
-                      Accept: "application/json",
-                    },
-                    body: JSON.stringify({
-                      recipeId: data.id,
-                      userEmail: session?.user?.email,
-                    }),
-                  });
-                  router.reload();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
-            >
-              <SaveSVG />
-              <p>{data?.numSaves} Saves</p>
-            </button>
-          )}
+            <hr />
+            <div className="my-8">
+              <div className="flex flex-row">
+                <div className="flex flex-row mb-4 w-3/5">
+                  <p className="font-semibold text-3xl">
+                    <span className="flex flex-row text-fresh">
+                      {data.ratings
+                        ? YumScore(
+                            data.tasteRating,
+                            data.overallRating,
+                            data.qualityRating,
+                            data.ratings.length,
+                            data.numViews,
+                            data.numSaves
+                          )
+                        : "No"}
+                    </span>
+                  </p>
+                  <p className="text-3xl font-semibold ">
+                    &nbsp;&nbsp;Yum Score
+                  </p>
+                </div>
+                {/* <div className="w-2/5 grid grid-cols-2 gap-4 mx-auto"> */}
+                {/* <p>thumbs up</p> */}
+                {/* <ThumbsUp /> */}
+                {/* <ThumbsDown /> */}
+                {/* <p>thumbs down</p> */}
+                {/* </div> */}
+              </div>
+              <div className="mb-2 grid grid-cols-3 text-lg">
+                <div>
+                  {session?.userId !== data?.authorId && <RatingModalTest />}
+                </div>
+                <button
+                  className="text-sm text-gray-500 mx-auto"
+                  onClick={() => setShowRateInfo(!showRateInfo)}
+                >
+                  Show Info
+                </button>
+                {/* <button className="text-sm text-gray-500 ml-auto">
+                  All reviews
+                </button> */}
+              </div>
 
-          <div className="dropdown">
-            <button
-              className="mr-auto my-auto flex flex-row text-gray-500"
-              tabIndex={0}
-            >
-              <ShareSVG />
-              Share
-            </button>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
-            >
-              <li>
-                <a className="p-1 text-gray-500">Email</a>
-              </li>
-              <li>
-                <a className="p-1 text-gray-500">Link</a>
-              </li>
-              <li>
-                <a className="p-1 text-gray-500">Pinterest</a>
-              </li>
-            </ul>
-          </div>
+              {showRateInfo && (
+                <>
+                  <div className="flex flex-row w-full my-auto">
+                    <p className="flex flex-row my-auto">
+                      {" "}
+                      {data?.overallRating > 0 && data?.ratings
+                        ? String(
+                            data.overallRating / data.ratings.length
+                          ).slice(0, 3)
+                        : "0"}
+                      <StarSVG />
+                      ,&nbsp;&nbsp;
+                      {data?.ratings.length > 0 ? data.ratings.length : "No "}
+                      &nbsp; Ratings
+                    </p>
+                  </div>
 
-          <button
-            className="mr-auto my-auto flex flex-row text-gray-500"
-            onClick={() => router.push(`fork/${data.id}`)}
-          >
-            <GitHubForkSVG /> Fork
-          </button>
-
-          <div className="dropdown">
-            <button
-              className="mr-auto my-auto text-gray-500 font-bold"
-              tabIndex={0}
-            >
-              ...
-            </button>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
-            >
-              <li>
-                <Link href="/help">
-                  <a className="p-1 text-gray-500">Report</a>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <hr />
-        <div className="my-8">
-          <div className="grid grid-cols-2 ">
-            <p className="text-xl font-semibold mb-2">Rating</p>
-
-            <button className="text-sm text-gray-500 ml-auto">
-              Show all reviews
-            </button>
-          </div>
-          <div className="flex flex-row mb-4">
-            <StarSVG />
-
-            <p className="font-semibold text-lg">
-              4.88 - {data?.ratings.length > 0 ? data?.ratings.length : "No"}{" "}
-              reviews
-            </p>
-            <button className="ml-auto text-sm text-gray-500 my-auto">
-              Create review
-            </button>
-          </div>
-          <Rating category="Taste" rating={4.5} />
-          <Rating category="Presentation" rating={3.8} />
-          <Rating category="Value" rating={4.8} />
-        </div>
-        <hr />
-        <div className="my-8">
-          <p className="text-xl font-semibold mb-4">Time</p>
-          <div className="bg-stone-100 rounded-xl p-2 mb-4">
-            <p className="text-lg">Total</p>
-            <p className="font-semibold text-xl ">
-              {data?.cookTime.slice(0, 36)}
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-stone-100 rounded-xl p-2">
-              <p className="text-lg">Prep</p>
-              <p className="font-semibold text-xl">25 mins</p>
+                  <Rating
+                    category="Overall"
+                    rating={
+                      data?.ratings?.length > 0
+                        ? parseInt(
+                            String(
+                              data.overallRating / data.ratings?.length
+                            ).slice(0, 3)
+                          )
+                        : 0
+                    }
+                  />
+                  <Rating
+                    category="Quality"
+                    rating={
+                      data?.ratings?.length > 0
+                        ? parseInt(
+                            String(
+                              data.qualityRating / data.ratings?.length
+                            ).slice(0, 3)
+                          )
+                        : 0
+                    }
+                  />
+                  <Rating
+                    category="Taste"
+                    rating={
+                      data?.ratings?.length > 0
+                        ? parseInt(
+                            String(
+                              data.tasteRating / data.ratings?.length
+                            ).slice(0, 3)
+                          )
+                        : 0
+                    }
+                  />
+                </>
+              )}
             </div>
-            <div className="bg-stone-100 rounded-xl p-2">
-              <p className="text-lg">Cook</p>
-              <p className="font-semibold text-xl">40 mins</p>
+
+            <hr />
+            <div className="my-8">
+              <p className="text-xl font-semibold mb-4">Time</p>
+              <div className="bg-stone-100 rounded-xl p-2 mb-4">
+                <p className="text-lg">Total</p>
+                <p className="font-semibold text-xl ">
+                  {data?.cookTime.slice(0, 36)}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-stone-100 rounded-xl p-2">
+                  <p className="text-lg">Prep</p>
+                  <p className="font-semibold text-xl">25 mins</p>
+                </div>
+                <div className="bg-stone-100 rounded-xl p-2">
+                  <p className="text-lg">Cook</p>
+                  <p className="font-semibold text-xl">40 mins</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <hr />
-        <div className="my-8">
-          <p className="text-xl font-semibold mb-4">Serving Size</p>
-          <div className="bg-stone-100 rounded-xl p-2 mb-4">
-            <p className="text-lg">Servings</p>
-            <p className="font-semibold text-xl truncate">
-              {data?.servingSize.slice(0, 36)}
-            </p>
-          </div>
-        </div>
-        <hr />
-        <div className="my-8">
-          <p className="text-xl font-semibold mb-4">Tags</p>
-          <div>
-            <button className="p-2 rounded-xl bg-stone-100 font-medium ">
-              Vegetarian
-            </button>
-            <button className="p-2 rounded-xl bg-stone-100 font-medium m-1">
-              Fast
-            </button>
+            <hr />
+            <div className="my-8">
+              <p className="text-xl font-semibold mb-4">Serving Size</p>
+              <div className="bg-stone-100 rounded-xl p-2 mb-4">
+                <p className="text-lg">Servings</p>
+                <p className="font-semibold text-xl truncate">
+                  {data?.servingSize.slice(0, 36)}
+                </p>
+              </div>
+            </div>
+            <hr />
+            <div className="my-8">
+              <p className="text-xl font-semibold mb-4">Tags</p>
+              <div>
+                <button className="p-2 rounded-xl bg-stone-100 font-medium ">
+                  Vegetarian
+                </button>
+                <button className="p-2 rounded-xl bg-stone-100 font-medium m-1">
+                  Fast
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     );
   };
 
-  const ingredient_list_init: any[] = [];
-  const direction_list_init: any[] = [];
+  const RecipeSidebar = () => {
+    return (
+      <div className="md:w-4/12 hidden sm:block">
+        {/* big */}
+        <div className="">
+          <div className="px-6 sm:py-6 mb-8 ">
+            {session?.userId == data?.authorId && <OwnRecipeButtons />}
+
+            <p className="text-4xl font-semibold mb-4 ">
+              {data?.name.slice(0, 100)}
+            </p>
+
+            <Link href="/chef/1">
+              <div className="flex flex-row mb-4 cursor-pointer">
+                <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
+                <div>
+                  <p className="text-stone-400 text-sm">Author</p>
+                  <p className="font-semibold ">{data?.authorId}</p>
+                </div>
+              </div>
+            </Link>
+            <hr />
+            <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
+              {data?.likedBy[0]?.email === session?.user?.email ? (
+                <p className="mr-auto my-auto flex flex-row text-gray-500">
+                  Saved!
+                </p>
+              ) : (
+                <button
+                  className="mr-auto my-auto flex flex-row text-gray-500"
+                  onClick={() => {
+                    try {
+                      fetch("/api/save_recipe", {
+                        method: "POST",
+                        headers: {
+                          Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                          recipeId: data.id,
+                          userEmail: session?.user?.email,
+                        }),
+                      });
+                      router.reload();
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }}
+                >
+                  <SaveSVG />
+                  <p>{data?.numSaves} Saves</p>
+                </button>
+              )}
+
+              <div className="dropdown">
+                <button
+                  className="mr-auto my-auto flex flex-row text-gray-500"
+                  tabIndex={0}
+                >
+                  <ShareSVG />
+                  Share
+                </button>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
+                >
+                  <li>
+                    <a className="p-1 text-gray-500">Email</a>
+                  </li>
+                  <li>
+                    <a className="p-1 text-gray-500">Link</a>
+                  </li>
+                  <li>
+                    <a className="p-1 text-gray-500">Pinterest</a>
+                  </li>
+                </ul>
+              </div>
+
+              <button
+                className="mr-auto my-auto flex flex-row text-gray-500"
+                onClick={() => router.push(`fork/${data.id}`)}
+              >
+                <GitHubForkSVG /> Fork
+              </button>
+
+              <div className="dropdown">
+                <button
+                  className="mr-auto my-auto text-gray-500 font-bold"
+                  tabIndex={0}
+                >
+                  ...
+                </button>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
+                >
+                  <li>
+                    <Link href="/help">
+                      <a className="p-1 text-gray-500">Report</a>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <hr />
+            <div className="my-8">
+              <div className="flex flex-row">
+                <div className="flex flex-row mb-4 w-3/5">
+                  <p className="font-semibold text-3xl">
+                    <span className="flex flex-row text-fresh">
+                      {data.ratings
+                        ? YumScore(
+                            data.tasteRating,
+                            data.overallRating,
+                            data.qualityRating,
+                            data.ratings.length,
+                            data.numViews,
+                            data.numSaves
+                          )
+                        : "No"}
+                    </span>
+                  </p>
+                  <p className="text-3xl font-semibold ">
+                    &nbsp;&nbsp;Yum Score
+                  </p>
+                </div>
+                {/* <div className="w-2/5 grid grid-cols-2 gap-4 mx-auto"> */}
+                {/* <p>thumbs up</p> */}
+                {/* <ThumbsUp /> */}
+                {/* <ThumbsDown /> */}
+                {/* <p>thumbs down</p> */}
+                {/* </div> */}
+              </div>
+              <div className="mb-2 grid grid-cols-3 text-lg">
+                <div>
+                  {session?.userId !== data?.authorId && <RatingModalTest />}
+                </div>
+                <button
+                  className="text-sm text-gray-500 mx-auto"
+                  onClick={() => setShowRateInfo(!showRateInfo)}
+                >
+                  Show Info
+                </button>
+                {/* <button className="text-sm text-gray-500 ml-auto">
+                  All reviews
+                </button> */}
+              </div>
+
+              {showRateInfo && (
+                <>
+                  <div className="flex flex-row w-full my-auto">
+                    <p className="flex flex-row my-auto">
+                      {" "}
+                      {data?.overallRating > 0 && data?.ratings
+                        ? String(
+                            data.overallRating / data.ratings.length
+                          ).slice(0, 3)
+                        : "0"}
+                      <StarSVG />
+                      ,&nbsp;&nbsp;
+                      {data?.ratings.length > 0 ? data.ratings.length : "No "}
+                      &nbsp; Ratings
+                    </p>
+                  </div>
+
+                  <Rating
+                    category="Overall"
+                    rating={
+                      data?.ratings?.length > 0
+                        ? parseInt(
+                            String(
+                              data.overallRating / data.ratings?.length
+                            ).slice(0, 3)
+                          )
+                        : 0
+                    }
+                  />
+                  <Rating
+                    category="Quality"
+                    rating={
+                      data?.ratings?.length > 0
+                        ? parseInt(
+                            String(
+                              data.qualityRating / data.ratings?.length
+                            ).slice(0, 3)
+                          )
+                        : 0
+                    }
+                  />
+                  <Rating
+                    category="Taste"
+                    rating={
+                      data?.ratings?.length > 0
+                        ? parseInt(
+                            String(
+                              data.tasteRating / data.ratings?.length
+                            ).slice(0, 3)
+                          )
+                        : 0
+                    }
+                  />
+                </>
+              )}
+            </div>
+
+            <hr />
+            <div className="my-8">
+              <p className="text-xl font-semibold mb-4">Time</p>
+              <div className="grid grid-cols-3 gap-4 mb-4">
+                <div className="bg-stone-100 rounded-xl p-2">
+                  <p className="text-lg">Total</p>
+                  <p className="font-semibold text-xl ">
+                    {data?.cookTime.slice(0, 36)}
+                  </p>
+                </div>
+                <div className="bg-stone-100 rounded-xl p-2">
+                  <p className="text-lg">Prep</p>
+                  <p className="font-semibold text-xl">25 mins</p>
+                </div>
+                <div className="bg-stone-100 rounded-xl p-2">
+                  <p className="text-lg">Cook</p>
+                  <p className="font-semibold text-xl">40 mins</p>
+                </div>
+              </div>
+            </div>
+            {/* <hr /> */}
+            {/* <div className="my-8">
+              <p className="text-xl font-semibold mb-4">Serving Size</p>
+              <div className="bg-stone-100 rounded-xl p-2 mb-4">
+                <p className="text-lg">Servings</p>
+                <p className="font-semibold text-xl truncate">
+                  {data?.servingSize.slice(0, 36)}
+                </p>
+              </div>
+            </div> */}
+            {/* <hr />
+            <div className="my-8">
+              <p className="text-xl font-semibold mb-4">Tags</p>
+              <div>
+                <button className="p-2 rounded-xl bg-stone-100 font-medium ">
+                  Vegetarian
+                </button>
+                <button className="p-2 rounded-xl bg-stone-100 font-medium m-1">
+                  Fast
+                </button>
+              </div>
+            </div> */}
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const ingredient_list_1: string = data?.ingredientList;
 
@@ -920,11 +1251,13 @@ const NewIDPage: NextPage = ({
               <hr />
 
               <div className="">
-                <p className="text-2xl mt-4 font-semibold">Comments</p>
+                <p className="text-2xl mt-4 font-semibold">
+                  {data?.comments?.length} Comments
+                </p>
 
                 {data?.comments?.length > 0 ? (
                   <div>
-                    {data?.comments.slice(0, 6).map((d: any, index: number) => (
+                    {data?.comments.slice(0, 3).map((d: any, index: number) => (
                       <div className="my-2 p-3 flex flex-row" key={index}>
                         <div className="avatar">
                           <div className="w-12 rounded-full mr-4 bg-stone-100"></div>
@@ -956,17 +1289,29 @@ const NewIDPage: NextPage = ({
                           text: "",
                         }}
                         onSubmit={async (values) => {
-                          const res = await fetch("/api/create_comment", {
-                            method: "POST",
-                            headers: {
-                              Accept: "application/json",
-                            },
-                            body: JSON.stringify({
-                              recipeId: data.id,
-                              values: values,
-                              userEmail: session?.user?.email,
-                            }),
-                          });
+                          console.log("er");
+                          const apiRes: any = await fetch(
+                            "/api/create_comment",
+                            {
+                              method: "POST",
+                              headers: {
+                                Accept: "application/json",
+                              },
+                              body: JSON.stringify({
+                                recipeId: data.id,
+                                values: values,
+                                userEmail: session?.user?.email,
+                              }),
+                            }
+                          );
+
+                          const response = await apiRes.json();
+
+                          if (response.data == 201) {
+                            router.reload();
+                          } else {
+                            console.log("failed to comment");
+                          }
                         }}
                       >
                         <Form className="p-3 flex flex-col">
@@ -1008,274 +1353,23 @@ const NewIDPage: NextPage = ({
               <br />
             </div>
             {/* right sidebar */}
-            <div className="md:w-4/12 ">
-              {/* big */}
-              <div className="hidden sm:block">
-                <div className="px-6 sm:py-6 mb-8 ">
-                  {session?.userId == data?.authorId && <OwnRecipeButtons />}
+            {/* mobile */}
 
-                  <p className="text-4xl font-semibold mb-4 ">
-                    {data?.name.slice(0, 100)}
+            <div className="sm:hidden">
+              <div className="px-6 my-4">
+                <button
+                  onClick={() => setClickedExpand(!clickedExpand)}
+                  className="font-semibold p-2 bg-stone-100 w-full rounded-xl"
+                >
+                  <p className="mx-auto">
+                    {clickedExpand ? "Less Info" : "More Info"}
                   </p>
-
-                  <Link href="/chef/1">
-                    <div className="flex flex-row mb-4 cursor-pointer">
-                      <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
-                      <div>
-                        <p className="text-stone-400 text-sm">Author</p>
-                        <p className="font-semibold ">{data?.authorId}</p>
-                      </div>
-                    </div>
-                  </Link>
-                  <hr />
-                  <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
-                    {data?.likedBy[0]?.email === session?.user?.email ? (
-                      <p className="mr-auto my-auto flex flex-row text-gray-500">
-                        Saved!
-                      </p>
-                    ) : (
-                      <button
-                        className="mr-auto my-auto flex flex-row text-gray-500"
-                        onClick={() => {
-                          try {
-                            fetch("/api/save_recipe", {
-                              method: "POST",
-                              headers: {
-                                Accept: "application/json",
-                              },
-                              body: JSON.stringify({
-                                recipeId: data.id,
-                                userEmail: session?.user?.email,
-                              }),
-                            });
-                            router.reload();
-                          } catch (error) {
-                            console.log(error);
-                          }
-                        }}
-                      >
-                        <SaveSVG />
-                        <p>{data?.numSaves} Saves</p>
-                      </button>
-                    )}
-
-                    <div className="dropdown">
-                      <button
-                        className="mr-auto my-auto flex flex-row text-gray-500"
-                        tabIndex={0}
-                      >
-                        <ShareSVG />
-                        Share
-                      </button>
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
-                      >
-                        <li>
-                          <a className="p-1 text-gray-500">Email</a>
-                        </li>
-                        <li>
-                          <a className="p-1 text-gray-500">Link</a>
-                        </li>
-                        <li>
-                          <a className="p-1 text-gray-500">Pinterest</a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <button
-                      className="mr-auto my-auto flex flex-row text-gray-500"
-                      onClick={() => router.push(`fork/${data.id}`)}
-                    >
-                      <GitHubForkSVG /> Fork
-                    </button>
-
-                    <div className="dropdown">
-                      <button
-                        className="mr-auto my-auto text-gray-500 font-bold"
-                        tabIndex={0}
-                      >
-                        ...
-                      </button>
-                      <ul
-                        tabIndex={0}
-                        className="dropdown-content menu p-3 shadow w-full rounded-box bg-white"
-                      >
-                        <li>
-                          <Link href="/help">
-                            <a className="p-1 text-gray-500">Report</a>
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="my-8">
-                    <div className="flex flex-row">
-                      <div className="flex flex-row mb-4 w-3/5">
-                        <p className="font-semibold text-3xl">
-                          <span className="flex flex-row text-fresh">
-                            {data.ratings
-                              ? YumScore(
-                                  data.tasteRating,
-                                  data.overallRating,
-                                  data.qualityRating,
-                                  data.ratings.length,
-                                  data.numViews,
-                                  data.numSaves
-                                )
-                              : "No"}
-                          </span>
-                        </p>
-                        <p className="text-3xl font-semibold ">
-                          &nbsp;&nbsp;Yum Score
-                        </p>
-                      </div>
-                      <div className="w-2/5 grid grid-cols-2 gap-4 mx-auto">
-                        {/* <p>thumbs up</p> */}
-                        <ThumbsUp />
-                        <ThumbsDown />
-                        {/* <p>thumbs down</p> */}
-                      </div>
-                    </div>
-                    <div className="mb-2 grid grid-cols-3 text-lg">
-                      <div>
-                        {session?.userId !== data?.authorId && (
-                          <RatingModalTest />
-                        )}
-                      </div>
-                      <button
-                        className="text-sm text-gray-500 mx-auto"
-                        onClick={() => setShowRateInfo(!showRateInfo)}
-                      >
-                        Show Info
-                      </button>
-                      <button className="text-sm text-gray-500 ml-auto">
-                        All reviews
-                      </button>
-                    </div>
-
-                    {showRateInfo && (
-                      <>
-                        <div className="flex flex-row w-full my-auto">
-                          <p className="flex flex-row my-auto">
-                            {" "}
-                            {data?.overallRating > 0 && data?.ratings
-                              ? String(
-                                  data.overallRating / data.ratings.length
-                                ).slice(0, 3)
-                              : "0"}
-                            <StarSVG />
-                            ,&nbsp;&nbsp;
-                            {data?.ratings.length > 0
-                              ? data.ratings.length
-                              : "No "}
-                            &nbsp; Ratings
-                          </p>
-                        </div>
-
-                        <Rating
-                          category="Overall"
-                          rating={
-                            data?.ratings?.length > 0
-                              ? parseInt(
-                                  String(
-                                    data.overallRating / data.ratings?.length
-                                  ).slice(0, 3)
-                                )
-                              : 0
-                          }
-                        />
-                        <Rating
-                          category="Quality"
-                          rating={
-                            data?.ratings?.length > 0
-                              ? parseInt(
-                                  String(
-                                    data.qualityRating / data.ratings?.length
-                                  ).slice(0, 3)
-                                )
-                              : 0
-                          }
-                        />
-                        <Rating
-                          category="Taste"
-                          rating={
-                            data?.ratings?.length > 0
-                              ? parseInt(
-                                  String(
-                                    data.tasteRating / data.ratings?.length
-                                  ).slice(0, 3)
-                                )
-                              : 0
-                          }
-                        />
-                      </>
-                    )}
-                  </div>
-
-                  <hr />
-                  <div className="my-8">
-                    <p className="text-xl font-semibold mb-4">Time</p>
-                    <div className="bg-stone-100 rounded-xl p-2 mb-4">
-                      <p className="text-lg">Total</p>
-                      <p className="font-semibold text-xl ">
-                        {data?.cookTime.slice(0, 36)}
-                      </p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-stone-100 rounded-xl p-2">
-                        <p className="text-lg">Prep</p>
-                        <p className="font-semibold text-xl">25 mins</p>
-                      </div>
-                      <div className="bg-stone-100 rounded-xl p-2">
-                        <p className="text-lg">Cook</p>
-                        <p className="font-semibold text-xl">40 mins</p>
-                      </div>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="my-8">
-                    <p className="text-xl font-semibold mb-4">Serving Size</p>
-                    <div className="bg-stone-100 rounded-xl p-2 mb-4">
-                      <p className="text-lg">Servings</p>
-                      <p className="font-semibold text-xl truncate">
-                        {data?.servingSize.slice(0, 36)}
-                      </p>
-                    </div>
-                  </div>
-                  <hr />
-                  <div className="my-8">
-                    <p className="text-xl font-semibold mb-4">Tags</p>
-                    <div>
-                      <button className="p-2 rounded-xl bg-stone-100 font-medium ">
-                        Vegetarian
-                      </button>
-                      <button className="p-2 rounded-xl bg-stone-100 font-medium m-1">
-                        Fast
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                </button>
               </div>
-
-              {/* mobile */}
-              <div className="sm:hidden">
-                <div className="px-6 my-4">
-                  <button
-                    onClick={() => setClickedExpand(!clickedExpand)}
-                    className="font-semibold p-2 bg-stone-100 w-full rounded-xl"
-                  >
-                    <p className="mx-auto">
-                      {clickedExpand ? "Less Info" : "More Info"}
-                    </p>
-                  </button>
-                </div>
-                {clickedExpand ? (
-                  <RecipeSidebar data={data} session={session} edit={edit} />
-                ) : null}
-              </div>
+              {clickedExpand ? <MobileRecipeSidebar /> : null}
             </div>
+
+            <RecipeSidebar />
           </div>
 
           {!session && <SignUpBanner />}

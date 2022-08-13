@@ -1,82 +1,104 @@
-import type {
-  NextPage,
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-} from "next";
+import { InferGetServerSidePropsType } from "next";
+import { unstable_getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
-import React from "react";
+import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
+
 import Footer from "../../../components/Footer";
 import NavBar from "../../../components/NavBar";
-import RecipeSidebar from "../../../components/RecipeSidebar";
 import prisma from "../../../utils/prisma";
+import { authOptions } from "../../api/auth/[...nextauth]";
 
-const Fork: NextPage = ({
+function CreateCommunityQuestion({
   data,
-  avg_rating,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (!session) {
+    router.push("/signup");
+  }
+
   return (
-    <>
+    <div>
       <NavBar />
-      <div className="flex flex-col items-center my-16 max-w-2xl mx-auto ">
-        <p className="text-2xl font-medium">
-          Create a new fork for:{" "}
-          <span className="font-2xl italic font-light ">
-            {data.name.slice(0, 10)}
-          </span>
-        </p>
-        <div>
-          <p className="mt-8 mb-2 mr-auto font-semibold">
-            What does fork mean?
-          </p>
-          <p className="font-light">
-            According to github.com, &quot;A fork is a copy of a (recipe).
-            Forking a (recipe) allows you to freely experiment with changes
-            without affecting the original (recipe)&quot;.{" "}
-          </p>
-          <p className=" font-semibold mt-8">
-            This will allow you to freely experiment with this recipe, and add
-            your own touches to it.
-          </p>
+      <div className="max-w-6xl px-6 mx-auto mb-4 min-h-screen">
+        <div className=" px-6 mt-8">
+          <div className="rounded-xl w-full mt-16 mb-8">
+            <p className="font-semibold text-5xl mb-4">Start a fork </p>
+            <p className="font-medium text-xl mb-8 max-w-lg">
+              Forking allow you to copy and edit your favorite recipes to start
+              freely making your own edits to them.
+            </p>
+          </div>
+          <button
+            className="flex max-w-xs text-xl p-3 rounded-xl font-semibold  bg-rosa text-white"
+            onClick={async () => {
+              const apiRes: any = await fetch("/api/create_fork", {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                },
+                body: JSON.stringify({
+                  name: data.name,
+                  cookTime: data.cookTime,
+                  servingSize: data.servingSize,
+                  caption: data.caption,
+                  sourceURL: data.sourceURL,
+                  ingredientList: data.ingredientList,
+                  directions: data.directions,
+                  authorId: session?.userId,
+                }),
+              });
+
+              const response = await apiRes.json();
+
+              if (response?.data !== 400) {
+                router.push(`/confirm-recipe?type=${response.data}`);
+              } else {
+                console.log("failed to fork");
+              }
+            }}
+          >
+            Confirm
+          </button>
         </div>
-        <button className="rounded-xl bg-fresh text-white font-semibold p-2 max-w-xs my-12">
-          <a>Create Fork</a>
-        </button>
       </div>
 
       <Footer />
-    </>
+    </div>
   );
-};
+}
 
-export const getServerSideProps: GetServerSideProps = async ({
-  query,
-}: any) => {
+export const getServerSideProps = async ({ query }: any) => {
+  // const session = await unstable_getServerSession(
+  //   context.req,
+  //   context.res,
+  //   authOptions
+  // );
+
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       destination: "/signup",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
+
   const thisRecipe = await prisma?.recipe.findUnique({
     where: {
       id: parseInt(query.id),
     },
-    include: {
-      comments: true,
-      ratings: true,
-      likedBy: true,
-    },
   });
 
-  // const aggregations = await prisma?.rating.aggregate({
-  //   _avg: {
-  //     overallRating: true,
-  //   },
-  //   where: {
-  //     recipeId: parseInt(query.id),
-  //   },
-  // });
+  // console.log("q", thisRecipe);
 
   return {
     props: {
       data: JSON.parse(JSON.stringify(thisRecipe)),
-      // avg_rating: aggregations?._avg.overallRating,
     },
   };
 };
 
-export default Fork;
+export default CreateCommunityQuestion;
