@@ -13,6 +13,7 @@ import {
   NormalBoldArrow,
 } from "../utils/arrows";
 import { SearchIcon } from "../utils/icons";
+import { YumScore } from "../utils/yum_score";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -28,6 +29,9 @@ const Home: NextPage = () => {
     e.preventDefault();
     router.push(`/search-results?result=${searchField}`);
   };
+
+  // console.log("1", YumScore(76, 234, 4.2, 4.5, 4.7, 96, 139, 13279));
+  // console.log("2", YumScore(2, 1, 3.4, 2.3, 1.4, 100, 139, 13279));
 
   return (
     <>
@@ -136,6 +140,25 @@ const Home: NextPage = () => {
         <Link href="/earn">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
             Learn more
+          </button>
+        </Link>
+      </div>
+
+      <CurlyArrow />
+
+      <div className="items-center flex flex-col my-40 justify-center align-center">
+        <p className="font-semibold text-5xl my-4 text-center">
+          An <span className="text-rosa">innovative</span> ranking system
+        </p>
+        <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
+          Knowing exactly which recipes are good is hard. This is why Yummf has
+          developed its own <span className="text-fresh">Yum score</span>, which
+          incorporates a perfect blend of many different factors so you know
+          what to cook.
+        </p>
+        <Link href="/yum-score">
+          <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
+            More info
           </button>
         </Link>
       </div>

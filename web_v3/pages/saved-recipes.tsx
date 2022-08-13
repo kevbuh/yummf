@@ -29,12 +29,17 @@ const SavedRecipesPage: NextPage = ({
                 name={d.name.slice(0, 36)}
                 caption={d.caption.slice(0, 42)}
                 id={d.id}
-                rating={
-                  d.ratings?.length > 0
-                    ? d.overallRating / d.ratings?.length
-                    : 0
-                }
-                length={d.ratings?.length}
+                // rating={
+                //   d.ratings?.length > 0
+                //     ? d.overallRating / d.ratings?.length
+                //     : 0
+                // }
+                qualityRating={d.qualityRating}
+                tasteRating={d.tasteRating}
+                overallRating={d.overallRating}
+                numSaves={d.numSaves}
+                numViews={d.numViews}
+                ratingsLength={d.ratings?.length}
               />
             );
           })}

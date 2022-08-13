@@ -2,17 +2,32 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { StarSVG } from "../utils/socialSVGs";
+import { YumScore } from "../utils/yum_score";
 // import mixpanel from "mixpanel-browser";
 
 type RecipeProps = {
   name: string;
   id: number;
   caption: string;
-  rating: number;
-  length: number;
+  ratingsLength: number;
+  qualityRating: number;
+  tasteRating: number;
+  overallRating: number;
+  numViews: number;
+  numSaves: number;
 };
 
-function RecipeCard({ name, id, caption, rating, length }: RecipeProps) {
+function RecipeCard({
+  name,
+  id,
+  caption,
+  ratingsLength,
+  qualityRating,
+  overallRating,
+  tasteRating,
+  numSaves,
+  numViews,
+}: RecipeProps) {
   const getStars = (num_stars: Number | String) => {
     const steps = [];
     for (let i = 1; i <= num_stars; i++) {
@@ -51,17 +66,23 @@ function RecipeCard({ name, id, caption, rating, length }: RecipeProps) {
           <p className="bg-stone-100 rounded-lg h-48"></p>
 
           {/* )} */}
-          <div className="my-2">
-            <p className="font-semibold text-md mt-2 truncate">{name}</p>
-            <p className=" text-sm mb-2  text-gray-500 truncate">{caption}</p>
-          </div>
-          <div className=" my-2 rounded-lg px-2 py-2 bg-stone-100">
-            <p className="mx-auto text-center text-sm flex flex-row">
-              {rating}
-              <StarSVG />
-              ,&nbsp;&nbsp;
-              {length > 0 ? length : "No "} Ratings
-            </p>
+          <div className="my-2 flex flex-row">
+            <div className="w-3/4">
+              <p className="font-semibold text-md mt-2 truncate">{name}</p>
+              <p className=" text-sm mb-2  text-gray-500 truncate">{caption}</p>
+            </div>
+            <div className="w-1/4 rounded-lg p-2 bg-stone-100 flex m-auto">
+              <p className="text-xl flex flex-row text-center m-auto">
+                {YumScore(
+                  tasteRating,
+                  overallRating,
+                  qualityRating,
+                  ratingsLength,
+                  numViews,
+                  numSaves
+                )}
+              </p>
+            </div>
           </div>
         </div>
       </Link>

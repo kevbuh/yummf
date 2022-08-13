@@ -19,6 +19,7 @@ import {
   GitHubForkSVG,
   StarSVG,
 } from "../../utils/socialSVGs";
+import { YumScore } from "../../utils/yum_score";
 
 const NewIDPage: NextPage = ({
   data,
@@ -30,6 +31,20 @@ const NewIDPage: NextPage = ({
 
   const [edit, setEdit] = useState(false);
   const [clickedExpand, setClickedExpand] = useState(false);
+
+  // console.log(
+  //   "1",
+  //   YumScore(
+  //     data.tasteRating,
+  //     data.overallRating,
+  //     data.qualityRating,
+  //     data.ratings.length,
+  //     data.numViews,
+  //     data.numSaves
+  //   )
+  // );
+
+  // console.log("2", YumScore(5, 5, 5, 1000, 1000000, 1000));
 
   const RatingModal = () => {
     return (
@@ -221,14 +236,8 @@ const NewIDPage: NextPage = ({
         {session?.userId == data?.authorId ? (
           <OwnRecipeButtons />
         ) : (
-          <div className="mb-4">
-            <p>test</p>
-          </div>
+          <div className="mb-4">{/* <p>test</p> */}</div>
         )}
-
-        <div className="mb-4">
-          <p>test</p>
-        </div>
 
         <p className="text-4xl font-semibold mb-4 ">
           {data?.name.slice(0, 100)}
@@ -1102,30 +1111,49 @@ const NewIDPage: NextPage = ({
                   </div>
                   <hr />
                   <div className="my-8">
-                    <div className="grid grid-cols-2 ">
-                      <p className="text-xl font-semibold mb-2">Rating</p>
-
+                    <div>
+                      <div className="flex flex-row mb-4">
+                        <p className="font-semibold text-3xl">
+                          <span className="flex flex-row text-fresh">
+                            {data.ratings
+                              ? YumScore(
+                                  data.tasteRating,
+                                  data.overallRating,
+                                  data.qualityRating,
+                                  data.ratings.length,
+                                  data.numViews,
+                                  data.numSaves
+                                )
+                              : "No"}
+                          </span>
+                        </p>
+                        <p className="text-3xl font-semibold ">
+                          &nbsp;Yum Score
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mb-2 grid grid-cols-2 text-lg">
+                      <div>
+                        {session?.userId !== data?.authorId && (
+                          <RatingModalTest />
+                        )}
+                      </div>
                       <button className="text-sm text-gray-500 ml-auto">
                         Show all reviews
                       </button>
                     </div>
-                    <div className="flex flex-row mb-4">
-                      <p className="font-semibold text-lg">
-                        <span className="flex flex-row">
-                          {data?.overallRating > 0 ? data.overallRating : "0"}
-                          <StarSVG />
-                          ,&nbsp;&nbsp;
-                          {data?.ratings.length > 0
-                            ? data.ratings.length
-                            : "No "}{" "}
-                          Ratings
-                        </span>
-                      </p>
 
-                      {session?.userId !== data?.authorId && (
-                        <RatingModalTest />
-                      )}
+                    <div className="flex flex-row w-full my-auto">
+                      <p className="flex flex-row my-auto">
+                        {" "}
+                        {data?.overallRating > 0 ? data.overallRating : "0"}
+                        <StarSVG />
+                        ,&nbsp;&nbsp;
+                        {data?.ratings.length > 0 ? data.ratings.length : "No "}
+                        &nbsp; Ratings
+                      </p>
                     </div>
+
                     <Rating
                       category="Overall"
                       rating={
