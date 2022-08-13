@@ -80,9 +80,7 @@ function RecipeCard({
             </div>
             <div
               className="w-3/12 rounded-lg p-2 bg-stone-100 flex m-auto tooltip"
-              data-tip={
-                parseInt(YumScoreCalc) > 72 ? "Good Yum Score" : "Bad Yum Score"
-              }
+              data-tip={YumScoreCalc > 72 ? "Good Yum Score" : "Bad Yum Score"}
             >
               <p className="text-xl flex flex-row text-center m-auto">
                 {YumScoreCalc}
