@@ -1,15 +1,8 @@
-import type {
-  NextPage,
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-} from "next";
+import type { InferGetServerSidePropsType } from "next";
 import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import Footer from "../../../components/Footer";
-import NavBar from "../../../components/NavBar";
-import RecipeCard from "../../../components/RecipeCard";
-import SignUpBanner from "../../../components/SignUpBanner";
 import prisma from "../../../utils/prisma";
 import { CurlyArrow } from "../../../utils/arrows";
 import CommunityNavBar from "../../../components/CommunityNavbar";
@@ -19,16 +12,15 @@ import router from "next/router";
 const UniqueDiscussion = ({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  console.log(data);
   const { data: session } = useSession();
 
   return (
     <div>
       <CommunityNavBar />
 
-      <div className="max-w-6xl px-6 mx-auto mb-4">
-        <div className=" px-6 mt-8">
-          <div className="text-sm breadcrumbs">
+      <div className="max-w-6xl px-4 mx-auto mb-4">
+        <div className="mt-8">
+          <div className=" breadcrumbs">
             <ul>
               <li>
                 <Link href="/community">
@@ -42,7 +34,7 @@ const UniqueDiscussion = ({
             </ul>
           </div>
 
-          <div className="rounded-xl w-full my-16">
+          <div className="rounded-xl w-full mt-8 mb-16 bg-stone-100 py-8 px-4 max-w-xl">
             <p className="font-semibold text-5xl mb-4">{data.title}</p>
             <p className="font-medium text-xl  max-w-lg">{data.body}</p>
             <p className=" mb-8 text-gray-500">{data.createdAt}</p>

@@ -1,3 +1,4 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 import Link from "next/link";
 import router from "next/router";
 import { useState } from "react";
@@ -5,25 +6,31 @@ import CommunityNavBar from "../../components/CommunityNavbar";
 import Footer from "../../components/Footer";
 import { CurlyArrow } from "../../utils/arrows";
 import { SearchIcon } from "../../utils/icons";
+import prisma from "../../utils/prisma";
 
 type CardProps = {
   name: string;
+  id: number;
 };
 
-const Card = ({ name }: CardProps) => {
+const Card = ({ name, id }: CardProps) => {
   return (
-    <div className="my-4 w-full rounded-xl bg-stone-100 p-4 cursor-pointer hover:shadow-lg flex flex-col">
-      <p className="truncate font-semibold text-xl my-2">{name}</p>
-      <div className="md:w-1/2 grid grid-cols-3 divide-x-4">
-        <p className="px-8 ">10 answers </p>
-        <p className="px-8 ">7 months ago </p>
-        <p className="px-8 ">By Author </p>
+    <Link href={`discussion/${id}`}>
+      <div className="my-4 w-full rounded-xl bg-stone-100 p-4 cursor-pointer hover:shadow-lg flex flex-col">
+        <p className="truncate font-semibold text-xl my-2">{name}</p>
+        <div className="md:w-1/2 grid grid-cols-3 divide-x-4">
+          <p className="px-8 ">10 answers </p>
+          <p className="px-8 ">7 months ago </p>
+          <p className="px-8 ">By Author </p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
-function CommunityPage() {
+function CommunityPage({
+  data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [searchField, setSearchField] = useState("");
   const [focused, setFocused] = useState(false);
   const onBlur = () => setFocused(false);
@@ -37,8 +44,8 @@ function CommunityPage() {
   return (
     <div>
       <CommunityNavBar />
-      <div className="max-w-6xl px-6 mx-auto mb-4">
-        <div className=" px-6 mt-8">
+      <div className="max-w-6xl px-3 mx-auto mb-4">
+        <div className=" mt-8">
           <div className="rounded-xl w-full my-16">
             <p className="font-semibold text-5xl mb-4">Questions & Answers</p>
             <p className="font-medium text-xl mb-8 max-w-lg">
@@ -86,12 +93,13 @@ function CommunityPage() {
               <p className="font-semibold text-5xl mb-4">Featured Questions</p>
               <button className="ml-auto font-semibold">View All</button>
             </div>
-            <Card name="superlongitle " />
-            <Card name="test" />
+            {data.map((d: any, index: number) => {
+              return <Card name={d.title} id={d.id} />;
+            })}
           </div>
-          <hr />
+          {/* <hr /> */}
 
-          <div className="rounded-xl w-full my-16">
+          {/* <div className="rounded-xl w-full my-16">
             <div className="flex flex-row">
               <p className="font-semibold text-5xl mb-4">
                 Most Recent Questions
@@ -113,7 +121,7 @@ function CommunityPage() {
             </div>
             <Card name="superlongitle " />
             <Card name="test" />
-          </div>
+          </div> */}
 
           <CurlyArrow />
 
@@ -141,5 +149,21 @@ function CommunityPage() {
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+}: any) => {
+  const thisRecipe = await prisma?.question.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return {
+    props: {
+      data: JSON.parse(JSON.stringify(thisRecipe)),
+    },
+  };
+};
 
 export default CommunityPage;

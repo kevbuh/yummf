@@ -12,7 +12,7 @@ type CardProps = {
 
 const Card = ({ name }: CardProps) => {
   return (
-    <div className="h-64 rounded-xl bg-stone-100 p-4 flex cursor-pointer">
+    <div className="h-64 rounded-xl bg-white p-4 flex cursor-pointer">
       <p className="font-semibold text-xl mr-auto ">{name}</p>
     </div>
   );
@@ -32,7 +32,7 @@ function CommunityPage() {
   return (
     <div>
       <CommunityNavBar />
-      <div className="max-w-6xl px-6 mx-auto mb-4">
+      <div className="max-w-6xl px-4 mx-auto mb-4">
         <div className="flex flex-col">
           <p className="m-auto font-semibold text-center text-6xl mt-32 mb-8">
             Welcome to the <span className="text-rosa">Yummf</span> community
@@ -45,8 +45,8 @@ function CommunityPage() {
 
         <NormalBoldArrow />
 
-        <div className=" px-6 mt-8">
-          <div className="rounded-xl w-full  py-12 mt-4 mb-16">
+        <div className="mt-8">
+          <div className="rounded-xl w-full p-6 mt-4 mb-16 bg-stone-100">
             <p className="font-semibold text-5xl mb-8">Tutorials</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card name="How to cook" />
@@ -58,7 +58,7 @@ function CommunityPage() {
             </button>
           </div>
           <DottedArrow />
-          <div className="rounded-xl w-full my-16">
+          <div className="rounded-xl w-full my-16 bg-stone-100 p-6">
             <p className="font-semibold text-5xl mb-4">Questions & Answers</p>
             <p className="font-medium text-xl mb-8 max-w-lg">
               Get help with your recipe, learn about ingredients, or ask any

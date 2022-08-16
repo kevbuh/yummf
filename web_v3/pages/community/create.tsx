@@ -43,8 +43,8 @@ function CreateCommunityQuestion() {
   return (
     <div>
       <CommunityNavBar />
-      <div className="max-w-6xl px-6 mx-auto mb-4">
-        <div className=" px-6 mt-8">
+      <div className="max-w-6xl px-4 mx-auto mb-4">
+        <div className="mt-8">
           <div className="rounded-xl w-full mt-16 mb-8">
             <p className="font-semibold text-5xl mb-4">Create a Discussion</p>
             <p className="font-medium text-xl mb-8 max-w-lg">
@@ -93,9 +93,11 @@ function CreateCommunityQuestion() {
               <ErrorMessage name="body" />
 
               <div className="flex flex-row mt-8">
-                <button className=" flex  max-w-xs text-xl p-3 rounded-xl font-semibold mr-4">
-                  Cancel
-                </button>
+                <Link href="/community/questions">
+                  <button className=" flex  max-w-xs text-xl p-3 rounded-xl font-semibold mr-4">
+                    Cancel
+                  </button>
+                </Link>
                 <button
                   className=" flex max-w-xs text-xl p-3 rounded-xl bg-rosa text-white font-semibold"
                   type="submit"
