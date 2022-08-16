@@ -19,6 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       text: values.text,
       recipeId: recipeId,
       authorId: user?.id as string,
+      authorDisplayName: user?.displayName as string,
     },
   });
 

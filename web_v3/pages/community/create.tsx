@@ -58,6 +58,7 @@ function CreateCommunityQuestion() {
               title: "",
               body: "",
               authorId: session?.userId,
+              authorDisplayName: session?.displayName,
             }}
             onSubmit={async (values) => {
               const apiRes = await fetch("/api/create_question", {

@@ -103,7 +103,7 @@ function SearchResultPage() {
                         ) : (
                           <div>
                             <p className="font-semibold">{d.name}</p>
-                            <p className="my-auto">{d.authorId}</p>
+                            <p className="my-auto">{d.authorDisplayName}</p>
                           </div>
                         )}
                       </div>

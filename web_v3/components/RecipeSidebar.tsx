@@ -75,7 +75,7 @@ function RecipeSidebar({ data, session }: ComponentProps) {
           <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
           <div>
             <p className="text-stone-400 text-sm">Author</p>
-            <p className="font-semibold ">{data?.authorId}</p>
+            <p className="font-semibold ">{data?.authorDisplayName}</p>
           </div>
         </div>
       </Link>

@@ -58,6 +58,7 @@ const UniqueDiscussion = ({
                   recipeId: data.id,
                   values: values,
                   userEmail: session?.user?.email,
+                  authorDisplayName: session?.displayName,
                 }),
               });
 

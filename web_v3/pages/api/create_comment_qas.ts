@@ -19,6 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       text: values.text,
       questionId: recipeId,
       authorId: user?.id as string, // this need to be dynamically read
+      authorDisplayName: user?.displayName as string,
     },
   });
 

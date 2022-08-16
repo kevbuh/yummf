@@ -13,6 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       title: values.title,
       body: values.body,
       authorId: values.authorId,
+      authorDisplayName: values.authorDisplayName,
     },
   });
 

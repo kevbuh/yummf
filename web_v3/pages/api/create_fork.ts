@@ -15,6 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     ingredientList,
     directions,
     authorId,
+    authorDisplayName,
   } = JSON.parse(req.body);
 
   // console.log("vals", req.body);
@@ -40,6 +41,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       caption: caption,
       ingredientList: ingredientList,
       authorId: authorId,
+      authorDisplayName: authorDisplayName,
     },
   });
 

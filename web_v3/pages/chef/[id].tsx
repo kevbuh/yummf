@@ -15,6 +15,8 @@ import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import RecipeCard from "../../components/RecipeCard";
 import { PrismaPromise, Recipe } from "@prisma/client";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import router from "next/router";
 
 const Chef: NextPage = ({
   data,
@@ -23,6 +25,8 @@ const Chef: NextPage = ({
   const { data: session } = useSession();
   const [created, setCreated] = useState(true);
   const [liked, setLiked] = useState(false);
+
+  // console.log(data);
 
   return (
     <>
@@ -42,16 +46,94 @@ const Chef: NextPage = ({
         </div>
         <div className="avatar mt-4 mb-8">
           <div className="w-28 rounded-full mr-8">
-            <img
-              src={session?.user?.image as string}
-              alt="User profile image"
-            />
+            <img src={data?.image as string} alt="User profile image" />
           </div>
           <span className="flex flex-col">
-            <p className="text-4xl font-semibold">{session?.user?.name}</p>
-            <p className="text-lg font-medium text-gray-500 ">
-              {session?.user?.name}
+            {data?.displayName == null && (
+              <>
+                <label
+                  htmlFor="my-modal-5"
+                  className="block py-4 px-2 mx-auto text-sm text-black rounded-xl bg-stone-100"
+                >
+                  {/* open modal */}
+                  Choose a name you like....
+                </label>
+
+                {/* actual */}
+                <input
+                  type="checkbox"
+                  id="my-modal-5"
+                  className="modal-toggle t"
+                />
+                <label
+                  htmlFor="my-modal-5"
+                  className="modal cursor-pointer bg-smoke-light"
+                >
+                  <label
+                    className="modal-box relative py-8 border bg-white md:w-full "
+                    htmlFor=""
+                  >
+                    <p className="mb-4 font-semibold text-4xl flex justify-center ">
+                      Welcome to Yummf
+                    </p>
+                    <Formik
+                      initialValues={{
+                        displayName: "",
+                        authorId: session?.userId,
+                      }}
+                      onSubmit={async (values) => {
+                        console.log("er");
+                        const apiRes: any = await fetch(
+                          "/api/update_displayname",
+                          {
+                            method: "PUT",
+                            headers: {
+                              Accept: "application/json",
+                            },
+                            body: JSON.stringify({
+                              values: values,
+                              userEmail: session?.user?.email,
+                            }),
+                          }
+                        );
+
+                        const response = await apiRes.json();
+
+                        if (response.data == 201) {
+                          router.reload();
+                        } else {
+                          console.log("failed to update username");
+                        }
+                      }}
+                    >
+                      <Form className=" mt-8">
+                        <Field
+                          id="displayName"
+                          name="displayName"
+                          placeholder="Choose a username..."
+                          className="block p-4 mx-auto placeholder-gray-400 text-lg rounded-xl border-stone-100 border-4  "
+                        />
+                        <ErrorMessage name="displayName" />
+
+                        <button
+                          className="p-3 mt-8 w-full rounded-xl font-semibold bg-stone-100 hover:bg-rosalight hover:text-white"
+                          type="submit"
+                        >
+                          <p className="m-auto">Next</p>
+                        </button>
+                      </Form>
+                    </Formik>
+                  </label>
+                </label>
+              </>
+            )}
+
+            <p className="text-4xl font-semibold">
+              {data?.displayName !== null
+                ? (data?.displayName as string)
+                : data?.name}
             </p>
+            <p className="text-lg font-medium text-gray-500 ">{data?.name}</p>
             <button className="p-1 bg-rosa text-white font-semibold rounded mt-auto">
               Follow
             </button>
@@ -70,7 +152,9 @@ const Chef: NextPage = ({
           </p>
         </div>
         <p className="text-lg mt-6">
-          Shout out to my restaurant El Taco Tote and Snooze.
+          {data?.description !== null
+            ? (data?.description as string)
+            : "Shout out to my restaurant El Taco Tote and Snooze."}
         </p>
         <div>
           <div className="grid grid-cols-2 mt-8 mb-4">
@@ -101,6 +185,7 @@ const Chef: NextPage = ({
               Saved Posts
             </p>
           </div>
+
           {liked && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {data?.savedRecipes?.map((d: any, index: number) => {
@@ -110,22 +195,18 @@ const Chef: NextPage = ({
                     name={d.name.slice(0, 36)}
                     caption={d.caption.slice(0, 42)}
                     id={d.id}
-                    // rating={
-                    //   d.ratings?.length > 0
-                    //     ? d.overallRating / d.ratings?.length
-                    //     : 0
-                    // }
-                    qualityRating={d.qualityRating}
-                    tasteRating={d.tasteRating}
-                    overallRating={d.overallRating}
-                    numSaves={d.numSaves}
-                    numViews={d.numViews}
-                    ratingsLength={d.ratings?.length}
+                    qualityRating={4}
+                    tasteRating={4}
+                    overallRating={4}
+                    numSaves={4}
+                    numViews={4}
+                    ratingsLength={4}
                   />
                 );
               })}
             </div>
           )}
+
           {created && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {createdPosts?.map((d: any, index: number) => {
@@ -135,11 +216,6 @@ const Chef: NextPage = ({
                     name={d.name.slice(0, 36)}
                     caption={d.caption.slice(0, 42)}
                     id={d.id}
-                    // rating={
-                    //   d.ratings?.length > 0
-                    //     ? d.overallRating / d.ratings?.length
-                    //     : 0
-                    // }
                     qualityRating={d.qualityRating}
                     tasteRating={d.tasteRating}
                     overallRating={d.overallRating}
@@ -177,24 +253,23 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const savedRecipes = await prisma?.user.findUnique({
+  const thisUser = await prisma?.user.findUnique({
     where: {
       email: session?.user?.email as string,
     },
-    include: {
-      savedRecipes: true,
-    },
   });
 
+  // console.log(savedRecipes);
+
   const result = prisma
-    ? await prisma.$queryRaw`SELECT * FROM "Recipe" WHERE "authorId"=${savedRecipes?.id};`
+    ? await prisma.$queryRaw`SELECT * FROM "Recipe" WHERE "authorId"=${thisUser?.id};`
     : null;
 
   return {
     props: {
       session: session,
       createdPosts: JSON.parse(JSON.stringify(result)),
-      data: JSON.parse(JSON.stringify(savedRecipes)),
+      data: JSON.parse(JSON.stringify(thisUser)),
     },
   };
 }

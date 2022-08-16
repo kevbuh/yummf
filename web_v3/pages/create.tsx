@@ -1,6 +1,13 @@
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
+import {
+  Formik,
+  Field,
+  Form,
+  ErrorMessage,
+  FieldArray,
+  yupToFormErrors,
+} from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -14,6 +21,7 @@ function CreateRecipePage({
   data,
   edit,
   yee,
+  yoo,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
@@ -26,6 +34,7 @@ function CreateRecipePage({
     caption: edit ? data.name : "",
     featured_image: null,
     authorId: yee,
+    authorDisplayName: yoo,
     id: edit ? data.id : null,
 
     ingredient_list: [
@@ -403,6 +412,7 @@ export async function getServerSideProps(context: any) {
   return {
     props: {
       yee: session.userId,
+      yoo: session.displayName,
       edit: edit,
       data: JSON.parse(JSON.stringify(thisRecipe)),
     },

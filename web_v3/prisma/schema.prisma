@@ -41,6 +41,8 @@ model Session {
 model User {
   id              String            @id @default(cuid())
   name            String?
+  displayName     String?
+  description     String?
   email           String?           @unique
   emailVerified   DateTime?
   image           String?
@@ -66,27 +68,28 @@ model VerificationToken {
 }
 
 model Recipe {
-  id             Int        @id @default(autoincrement())
-  createdAt      DateTime   @default(now())
-  name           String
-  cookTime       String?
-  servingSize    String?
-  sourceURL      String?
-  caption        String
-  numSaves       Int        @default(0)
-  numViews       Int        @default(0)
-  secret         Boolean    @default(false)
-  author         User       @relation(fields: [authorId], references: [id])
-  authorId       String
-  ratings        Rating[]
-  overallRating  Int        @default(0)
-  tasteRating    Int        @default(0)
-  qualityRating  Int        @default(0)
-  comments       Comment[]
-  categories     Category[]
-  likedBy        User[]     @relation(name: "UserSaved")
-  ingredientList String[]
-  directions     String[]
+  id                Int        @id @default(autoincrement())
+  createdAt         DateTime   @default(now())
+  name              String
+  cookTime          String?
+  servingSize       String?
+  sourceURL         String?
+  caption           String
+  numSaves          Int        @default(0)
+  numViews          Int        @default(0)
+  secret            Boolean    @default(false)
+  author            User       @relation(fields: [authorId], references: [id])
+  authorId          String
+  authorDisplayName String?
+  ratings           Rating[]
+  overallRating     Int        @default(0)
+  tasteRating       Int        @default(0)
+  qualityRating     Int        @default(0)
+  comments          Comment[]
+  categories        Category[]
+  likedBy           User[]     @relation(name: "UserSaved")
+  ingredientList    String[]
+  directions        String[]
 }
 
 model Article {
@@ -100,15 +103,16 @@ model Article {
 }
 
 model Question {
-  id              Int               @id @default(autoincrement())
-  title           String
-  body            String
-  comments        Comment[]
-  categories      Category[]
-  createdAt       DateTime          @default(now())
-  author          User              @relation(fields: [authorId], references: [id])
-  authorId        String
-  QuestionComment QuestionComment[]
+  id                Int               @id @default(autoincrement())
+  title             String
+  body              String
+  comments          Comment[]
+  categories        Category[]
+  createdAt         DateTime          @default(now())
+  author            User              @relation(fields: [authorId], references: [id])
+  authorId          String
+  authorDisplayName String?
+  QuestionComment   QuestionComment[]
 }
 
 model Category {
@@ -128,27 +132,29 @@ model Ingredient {
 }
 
 model Comment {
-  id         Int       @id @default(autoincrement())
-  text       String
-  Recipe     Recipe?   @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
-  recipeId   Int?
-  author     User      @relation(fields: [authorId], references: [id])
-  authorId   String
-  createdAt  DateTime  @default(now())
-  Article    Article?  @relation(fields: [articleId], references: [id])
-  articleId  Int?
-  Question   Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
-  questionId Int?
+  id                Int       @id @default(autoincrement())
+  text              String
+  Recipe            Recipe?   @relation(fields: [recipeId], references: [id], onDelete: Cascade) // A comment can have one post
+  recipeId          Int?
+  author            User      @relation(fields: [authorId], references: [id])
+  authorId          String
+  createdAt         DateTime  @default(now())
+  Article           Article?  @relation(fields: [articleId], references: [id])
+  articleId         Int?
+  Question          Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId        Int?
+  authorDisplayName String?
 }
 
 model QuestionComment {
-  id         Int       @id @default(autoincrement())
-  text       String
-  author     User      @relation(fields: [authorId], references: [id])
-  authorId   String
-  createdAt  DateTime  @default(now())
-  Question   Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
-  questionId Int?
+  id                Int       @id @default(autoincrement())
+  text              String
+  author            User      @relation(fields: [authorId], references: [id])
+  authorId          String
+  authorDisplayName String?
+  createdAt         DateTime  @default(now())
+  Question          Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId        Int?
 }
 
 model Rating {
