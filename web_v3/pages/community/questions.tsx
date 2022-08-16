@@ -94,7 +94,7 @@ function CommunityPage({
               <button className="ml-auto font-semibold">View All</button>
             </div>
             {data.map((d: any, index: number) => {
-              return <Card name={d.title} id={d.id} />;
+              return <Card key={index} name={d.title} id={d.id} />;
             })}
           </div>
           {/* <hr /> */}
