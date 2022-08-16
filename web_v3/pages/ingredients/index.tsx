@@ -12,8 +12,10 @@ type CardProps = {
 const Card = ({ name }: CardProps) => {
   return (
     <Link href="ingredients/salt">
-      <div className="h-80 rounded-xl bg-stone-100 p-4 flex cursor-pointer">
-        <p className="font-semibold text-xl mr-auto mt-auto">{name}</p>
+      <div className="h-40 sm:h-80 rounded-xl bg-stone-100 p-4 flex cursor-pointer">
+        <p className="font-semibold sm:text-xl mr-auto mt-auto truncate">
+          {name}
+        </p>
       </div>
     </Link>
   );
@@ -30,7 +32,7 @@ function IngredientsAll() {
         <p className="text-6xl font-semibold">Ingredients</p>
       </div>
 
-      <div className="p-6 mx-4  grid grid-cols-3 gap-4 rounded-xl">
+      <div className="py-6 mx-4 grid grid-cols-3 gap-4 rounded-xl">
         <Card name="Salt" />
         <Card name="Pepper" />
         <Card name="Kale" />

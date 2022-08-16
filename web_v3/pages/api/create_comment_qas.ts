@@ -17,8 +17,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const createComment = await prisma?.comment.create({
     data: {
       text: values.text,
-      recipeId: recipeId,
-      authorId: user?.id as string,
+      questionId: recipeId,
+      authorId: user?.id as string, // this need to be dynamically read
     },
   });
 

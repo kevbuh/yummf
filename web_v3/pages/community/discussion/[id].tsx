@@ -44,33 +44,40 @@ const UniqueDiscussion = ({
 
           <Formik
             initialValues={{
-              body: "",
+              text: "",
               authorId: session?.userId,
             }}
             onSubmit={async (values) => {
-              const apiRes = await fetch("/api/create_question", {
+              console.log("er");
+              const apiRes: any = await fetch("/api/create_comment_qas", {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
                 },
                 body: JSON.stringify({
+                  recipeId: data.id,
                   values: values,
+                  userEmail: session?.user?.email,
                 }),
               });
 
-              const data = await apiRes.json();
+              const response = await apiRes.json();
 
-              router.push(`/confirm-recipe?type=qas_${data.data}`);
+              if (response.data == 201) {
+                router.reload();
+              } else {
+                console.log("failed to comment");
+              }
             }}
           >
-            <Form className=" flex flex-row mb-32 mt-16">
+            <Form className=" flex flex-row mt-8">
               <Field
-                id="body"
-                name="body"
+                id="text"
+                name="text"
                 placeholder="Leave a comment..."
                 className=" block p-4 pl-4 w-3/4 font-medium placeholder-gray-400 text-lg rounded sm:rounded-xl border-stone-100 border-4  "
               />
-              <ErrorMessage name="body" />
+              <ErrorMessage name="text" />
 
               <button
                 className="flex ml-2 max-w-xs text-xl p-3 rounded-xl bg-rosa text-white font-semibold"
@@ -80,6 +87,34 @@ const UniqueDiscussion = ({
               </button>
             </Form>
           </Formik>
+
+          <div className=" mb-32 mt-8">
+            <p className="text-2xl mt-4 font-semibold">
+              {data?.comments?.length} Comments
+            </p>
+
+            {data?.comments?.length > 0 ? (
+              <div>
+                {data?.comments.slice(0, 3).map((d: any, index: number) => (
+                  <div className="my-2 p-3 flex flex-row" key={index}>
+                    <div className="avatar">
+                      <div className="w-12 rounded-full mr-4 bg-stone-100"></div>
+                    </div>
+                    <div className="my-auto">
+                      <p>{d?.text}</p>
+                      <p className="text-sm text-stone-400">
+                        {d.createdAt.slice(5, 7)}/{d.createdAt.slice(2, 4)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-2 ">
+                <p>No comments</p>{" "}
+              </div>
+            )}
+          </div>
 
           <CurlyArrow />
           <div className=" border-stone-100 border-4 rounded-xl px-6 py-12 text-rosa font-semibold my-16">
@@ -111,6 +146,9 @@ export async function getServerSideProps({ query }: any) {
   const thisDiscussion = await prisma?.question.findUnique({
     where: {
       id: parseInt(query.id),
+    },
+    include: {
+      comments: true,
     },
   });
 
