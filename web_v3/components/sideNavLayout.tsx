@@ -12,7 +12,7 @@ const SideNavLayout = ({ children }: Props) => {
     <>
       <NavBar />
 
-      <div className="md:flex md:flex-row">
+      <div className=" md:flex-row flex flex-col mx-auto">
         <div className="md:w-1/5 ">
           <Sidebar />
         </div>

@@ -53,33 +53,18 @@ function RecipeCard({
   );
 
   return (
-    <div className="rounded-lg p-1 border border-stone-100 shadow-sm cursor-pointer">
+    <div className="rounded-lg p-2 border border-stone-100 shadow-sm cursor-pointer ">
       <Link href={"/recipes/" + id}>
-        <div className="m-1">
-          {/* {image && image !== null && image !== undefined ? (
-            <div className=" rounded relative">
-              <Image
-                className="rounded-lg cursor-pointer"
-                loader={() => image}
-                src={image}
-                objectFit="cover"
-                unoptimized={true}
-                width={300}
-                height={300}
-                // position="relative"
-              />
-            </div>
-          ) : ( */}
+        <div>
           <p className="bg-stone-100 rounded-lg h-48"></p>
 
-          {/* )} */}
-          <div className="my-2 flex flex-row">
-            <div className="w-9/12">
-              <p className="font-semibold text-md mt-2 truncate">{name}</p>
-              <p className=" text-sm mb-2  text-gray-500 truncate">{caption}</p>
+          <div className="my-2 sm:flex sm:flex-row grid grid-cols-2 gap-1">
+            <div className="sm:w-9/12 ">
+              <p className="font-semibold mt-2 truncate">{name}</p>
+              <p className="text-sm mb-2  text-gray-500 truncate">{caption}</p>
             </div>
             <div
-              className="w-3/12 rounded-lg p-2 bg-stone-100 flex m-auto tooltip"
+              className="sm:w-3/12 rounded-lg p-2 bg-stone-100 flex  sm:m-auto tooltip"
               data-tip={YumScoreCalc > 72 ? "Good Yum Score" : "Bad Yum Score"}
             >
               <p className="text-xl flex flex-row text-center m-auto">

@@ -32,16 +32,16 @@ const NavBar = () => {
     <div className="navbar shadow-sm bg-white sticky top-0 z-10 ">
       <div className="sm:w-1/6">
         <Link href="/explore">
-          <a className="p-1 font-bold font-serif normal-case text-2xl text-rosa sm:ml-4">
+          <a className="p-1 font-bold font-serif normal-case text-xl sm:text-2xl text-rosa sm:ml-4">
             yummf
           </a>
         </Link>
       </div>
 
-      <div className="w-full px-2 md:px-0 max-w-lg mx-auto">
+      <div className=" max-w-lg mx-auto">
         <label
           htmlFor="my-modal-4"
-          className="block py-4 px-2 sm:p-4 w-full text-sm text-black rounded-xl bg-stone-100"
+          className="block py-4 px-2 sm:p-4 w-4/5 sm:w-full mx-auto text-sm text-black rounded-xl bg-stone-100"
         >
           {/* open modal */}
           <div className="relative ">
@@ -191,7 +191,7 @@ const NavBar = () => {
           </label>
         </label>
       </div>
-      <div className="justify-center w-1/6 ml-1 sm:w-1/12 grid grid-cols-2 gap-4 md:ml-auto max-w-xs content-evenly items-center">
+      <div className="justify-center   grid grid-cols-2 gap-4 md:ml-auto max-w-xs content-evenly items-center">
         <Link href="/community">
           <button className="text-lg font-medium mt-1">
             <svg
@@ -211,8 +211,8 @@ const NavBar = () => {
           </button>
         </Link>
 
-        <div className="dropdown dropdown-end mx-auto">
-          <label tabIndex={0} className="btn btn-ghost btn-circle hover:glass ">
+        <div className="dropdown dropdown-end sm:mx-auto">
+          <label tabIndex={0} className="text-lg font-medium mt-1 ">
             <div className="w-6 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -26,7 +26,7 @@ const DashboardItems: NextPage = () => {
         className={
           isFetchingNextPage
             ? "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 animate-pulse"
-            : "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+            : "grid grid-cols-2 mt-2.5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3"
         }
       >
         <>
@@ -38,11 +38,6 @@ const DashboardItems: NextPage = () => {
                   name={d.name.slice(0, 36)}
                   caption={d.caption.slice(0, 42)}
                   id={d.id}
-                  // rating={
-                  //   d.ratings?.length > 0
-                  //     ? d.overallRating / d.ratings?.length
-                  //     : 0
-                  // }
                   qualityRating={d.qualityRating}
                   tasteRating={d.tasteRating}
                   overallRating={d.overallRating}
