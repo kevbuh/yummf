@@ -218,7 +218,7 @@ const NewIDPage: NextPage = ({
               {data?.name.slice(0, 100)}
             </p>
 
-            <Link href="/chef/1">
+            <Link href={`/chef/${data.authorId}`}>
               <div className="flex flex-row mb-4 cursor-pointer">
                 <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
                 <div>
@@ -474,7 +474,7 @@ const NewIDPage: NextPage = ({
               {data?.name.slice(0, 100)}
             </p>
 
-            <Link href="/chef/1">
+            <Link href={`/chef/${data.authorId}`}>
               <div className="flex flex-row mb-4 cursor-pointer">
                 <div className="h-12 w-12 bg-stone-100 rounded-full mr-2"></div>
                 <div>

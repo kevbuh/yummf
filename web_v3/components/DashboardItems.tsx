@@ -19,7 +19,7 @@ const DashboardItems: NextPage = () => {
 
   return (
     <div className=" flex flex-col m-3">
-      <div className="flex flex-col items-center mb-8 md:my-8 mx-auto">
+      <div className="flex flex-col items-center my-8 mx-auto">
         <p className="text-6xl font-semibold">Recipes</p>
       </div>
       <div
@@ -44,6 +44,7 @@ const DashboardItems: NextPage = () => {
                   numSaves={d.numSaves}
                   numViews={d.numViews}
                   ratingsLength={d.ratings?.length}
+                  authorName={d.authorDisplayName}
                 />
               ))}
             </React.Fragment>

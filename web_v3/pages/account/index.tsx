@@ -49,7 +49,7 @@ function AccountSettingsPage() {
                       Welcome, {session?.user?.email}
                     </span>
                   </p>
-                  <Link href="/chef/1">
+                  <Link href={`/chef/${session.userId}`}>
                     <a className="text-gray-500">View public profile</a>
                   </Link>
                 </>

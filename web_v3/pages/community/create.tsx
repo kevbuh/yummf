@@ -1,4 +1,3 @@
-import { prisma } from "@prisma/client";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { unstable_getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
@@ -8,30 +7,10 @@ import { useState } from "react";
 import CommunityNavBar from "../../components/CommunityNavbar";
 import Footer from "../../components/Footer";
 import { CurlyArrow } from "../../utils/arrows";
-import { SearchIcon } from "../../utils/icons";
 import { authOptions } from "../api/auth/[...nextauth]";
-import CreateRecipePage from "../create";
-
-type CardProps = {
-  name: string;
-};
-
-const Card = ({ name }: CardProps) => {
-  return (
-    <div className="my-4 w-full rounded-xl bg-stone-100 p-4 cursor-pointer hover:shadow-lg flex flex-col">
-      <p className="truncate font-semibold text-xl my-2">{name}</p>
-      <div className="md:w-1/2 grid grid-cols-3 divide-x-4">
-        <p className="px-8 ">10 answers </p>
-        <p className="px-8 ">7 months ago </p>
-        <p className="px-8 ">By Author </p>
-      </div>
-    </div>
-  );
-};
 
 function CreateCommunityQuestion() {
   const [searchField, setSearchField] = useState("");
-  const [focused, setFocused] = useState(false);
 
   const { data: session } = useSession();
 
@@ -39,6 +18,8 @@ function CreateCommunityQuestion() {
     e.preventDefault();
     router.push(`/search-results?result=qas_${searchField}`);
   };
+
+  console.log(session);
 
   return (
     <div>

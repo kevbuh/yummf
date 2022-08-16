@@ -20,7 +20,10 @@ function ConfirmRecipe() {
           <Link
             href={
               type_question
-                ? `/community/discussion/${query.type}`
+                ? `/community/discussion/${query.type?.slice(
+                    4,
+                    query.type.length
+                  )}`
                 : `/recipes/${query.type}`
             }
           >

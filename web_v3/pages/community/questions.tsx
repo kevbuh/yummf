@@ -11,17 +11,21 @@ import prisma from "../../utils/prisma";
 type CardProps = {
   name: string;
   id: number;
+  authorDisplayName: string;
+  createdAt: string;
 };
 
-const Card = ({ name, id }: CardProps) => {
+const Card = ({ name, id, authorDisplayName, createdAt }: CardProps) => {
   return (
     <Link href={`discussion/${id}`}>
       <div className="my-4 w-full rounded-xl bg-stone-100 p-4 cursor-pointer hover:shadow-lg flex flex-col">
         <p className="truncate font-semibold text-xl my-2">{name}</p>
-        <div className="md:w-1/2 grid grid-cols-3 divide-x-4">
-          <p className="px-8 ">10 answers </p>
-          <p className="px-8 ">7 months ago </p>
-          <p className="px-8 ">By Author </p>
+        <div className="md:w-1/2 grid grid-cols-3 divide-x-4 mt-2">
+          <p className="pr-8 ">10 answers </p>
+          <p className="px-8 text-center ">
+            {createdAt.slice(5, 7)}/{createdAt.slice(2, 4)}
+          </p>
+          <p className="px-8 ">{authorDisplayName} </p>
         </div>
       </div>
     </Link>
@@ -40,6 +44,8 @@ function CommunityPage({
     e.preventDefault();
     router.push(`/search-results?result=qas_${searchField}`);
   };
+
+  console.log(data);
 
   return (
     <div>
@@ -94,7 +100,15 @@ function CommunityPage({
               <button className="ml-auto font-semibold">View All</button>
             </div>
             {data.map((d: any, index: number) => {
-              return <Card key={index} name={d.title} id={d.id} />;
+              return (
+                <Card
+                  key={index}
+                  name={d.title}
+                  id={d.id}
+                  authorDisplayName={d.authorDisplayName}
+                  createdAt={d.createdAt}
+                />
+              );
             })}
           </div>
           {/* <hr /> */}

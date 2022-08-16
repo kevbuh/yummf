@@ -1,32 +1,22 @@
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
-
-import type {
-  NextPage,
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-} from "next";
+import type { NextPage, InferGetServerSidePropsType } from "next";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 import prisma from "../../utils/prisma";
 import SignUpBanner from "../../components/SignUpBanner";
 import Link from "next/link";
-import { unstable_getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]";
 import RecipeCard from "../../components/RecipeCard";
-import { PrismaPromise, Recipe } from "@prisma/client";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import router from "next/router";
 
-const Chef: NextPage = ({
+const Chef = ({
   data,
   createdPosts,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session } = useSession();
   const [created, setCreated] = useState(true);
   const [liked, setLiked] = useState(false);
-
-  // console.log(data);
 
   return (
     <>
@@ -142,7 +132,10 @@ const Chef: NextPage = ({
         <div className=" grid grid-cols-3 gap-4 md:w-3/5">
           {" "}
           <p className="text-lg  text-gray-500 ">
-            <span className="font-bold">32</span> Recipes
+            <span className="font-bold">
+              {createdPosts.length > 0 ? createdPosts.length : 0}
+            </span>{" "}
+            Recipes
           </p>
           <p className="text-lg  text-gray-500 ">
             <span className="font-bold">12</span> Helps
@@ -195,12 +188,13 @@ const Chef: NextPage = ({
                     name={d.name.slice(0, 36)}
                     caption={d.caption.slice(0, 42)}
                     id={d.id}
-                    qualityRating={4}
-                    tasteRating={4}
-                    overallRating={4}
-                    numSaves={4}
-                    numViews={4}
-                    ratingsLength={4}
+                    qualityRating={d.qualityRating}
+                    tasteRating={d.tasteRating}
+                    overallRating={d.overallRating}
+                    numSaves={d.numSaves}
+                    numViews={d.numViews}
+                    ratingsLength={d.ratings?.length}
+                    authorName={d.authorDisplayName}
                   />
                 );
               })}
@@ -222,6 +216,7 @@ const Chef: NextPage = ({
                     numSaves={d.numSaves}
                     numViews={d.numViews}
                     ratingsLength={d.ratings?.length}
+                    authorName={d.authorDisplayName}
                   />
                 );
               })}
@@ -236,26 +231,10 @@ const Chef: NextPage = ({
   );
 };
 
-export async function getServerSideProps(context: any) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/signup",
-
-        permanent: false,
-      },
-    };
-  }
-
+export async function getServerSideProps({ query }: any) {
   const thisUser = await prisma?.user.findUnique({
     where: {
-      email: session?.user?.email as string,
+      id: query.id,
     },
   });
 
@@ -267,7 +246,6 @@ export async function getServerSideProps(context: any) {
 
   return {
     props: {
-      session: session,
       createdPosts: JSON.parse(JSON.stringify(result)),
       data: JSON.parse(JSON.stringify(thisUser)),
     },

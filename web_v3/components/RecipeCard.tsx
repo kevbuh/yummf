@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import { YumScore } from "../utils/yum_score";
-// import mixpanel from "mixpanel-browser";
 
 type RecipeProps = {
   name: string;
   id: number;
   caption: string;
+  authorName: string;
   ratingsLength: number;
   qualityRating: number;
   tasteRating: number;
@@ -25,6 +25,7 @@ function RecipeCard({
   tasteRating,
   numSaves,
   numViews,
+  authorName,
 }: RecipeProps) {
   const YumScoreCalc = YumScore(
     tasteRating,
@@ -44,7 +45,7 @@ function RecipeCard({
           <div className="my-2 px-2 sm:flex sm:flex-row grid grid-cols-2 gap-1">
             <div className="mb-2 truncate">
               <p className="font-semibold mt-2 truncate">{name}</p>
-              <p className="text-sm text-gray-500 truncate">{caption}</p>
+              <p className="text-sm text-gray-500 truncate">{authorName}</p>
             </div>
             <div
               className="rounded-lg p-2 bg-stone-100 my-auto ml-auto tooltip"
