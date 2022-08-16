@@ -21,7 +21,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
     data: {
       overallRating: {
-        increment: values.overallRating,
+        increment: (values.qualityRating + values.tasteRating) / 2,
       },
       qualityRating: {
         increment: values.qualityRating,

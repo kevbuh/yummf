@@ -71,11 +71,17 @@ export const YumScore = (
     ratingScore = 0.1 * defaultVal + overall_rating / rating_length;
   }
 
-  let score = 0.5 * getBaseLog(Math.exp(1), ratingScore);
+  let score = 0;
 
-  if (overall_rating / rating_length < 3) {
+  if (overall_rating / rating_length <= 3) {
+    score = 0.075 * getBaseLog(Math.exp(1), ratingScore);
+  } else {
+    score = 0.5 * getBaseLog(Math.exp(1), ratingScore);
+  }
+
+  if (overall_rating / rating_length <= 3) {
     score -= 0.3 * getBaseLog(Math.exp(1), num_views + 1);
-    score -= 0.15 * getBaseLog(Math.exp(1), num_saves + 1);
+    score -= 0.85 * getBaseLog(Math.exp(1), num_saves + 1);
   } else {
     score += 0.3 * getBaseLog(Math.exp(1), num_views + 1);
     score += 0.15 * getBaseLog(Math.exp(1), num_saves + 1);

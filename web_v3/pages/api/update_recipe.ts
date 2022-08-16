@@ -45,5 +45,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  return updateRecipe;
+  if (updateRecipe?.id) {
+    return res.status(201).json({ data: updateRecipe?.id });
+  } else {
+    return res.status(400).json({ data: 400 });
+  }
 };

@@ -38,7 +38,7 @@ const NavBar = () => {
         </Link>
       </div>
 
-      <div className="mx-auto">
+      <div className="mx-auto md:w-full max-w-lg">
         <label
           htmlFor="my-modal-4"
           className="block py-4 px-2 sm:p-4 w-4/5 sm:w-full mx-auto text-sm text-black rounded-xl bg-stone-100"
@@ -191,7 +191,7 @@ const NavBar = () => {
           </label>
         </label>
       </div>
-      <div className="justify-center  grid grid-cols-2 gap-2 sm:gap-4 mr-auto md:ml-auto max-w-xs">
+      <div className="grid grid-cols-2 gap-2 sm:gap-4 ">
         <Link href="/community">
           <button className="text-lg font-medium mt-1">
             <svg
@@ -212,7 +212,10 @@ const NavBar = () => {
         </Link>
 
         <div className="dropdown dropdown-end sm:mx-auto">
-          <label tabIndex={0} className="text-lg font-medium mt-1 ">
+          <label
+            tabIndex={0}
+            className="text-lg font-medium mt-1 cursor-pointer "
+          >
             <div className="w-6 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

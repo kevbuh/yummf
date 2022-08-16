@@ -20,7 +20,6 @@ import {
   StarSVG,
 } from "../../utils/socialSVGs";
 import { YumScore } from "../../utils/yum_score";
-// import { ThumbsDown, ThumbsUp } from "../../utils/icons";
 
 const NewIDPage: NextPage = ({
   data,
@@ -34,26 +33,14 @@ const NewIDPage: NextPage = ({
   const [edit, setEdit] = useState(false);
   const [clickedExpand, setClickedExpand] = useState(false);
 
-  // console.log(
-  //   "1",
-  //   YumScore(
-  //     data.tasteRating,
-  //     data.overallRating,
-  //     data.qualityRating,
-  //     data.ratings.length,
-  //     data.numViews,
-  //     data.numSaves
-  //   )
-  // );
-
-  console.log("2", YumScore(5, 5, 5, 1000, 1000000, 1000));
+  // console.log("2", YumScore(5, 5, 5, 1000, 1000000, 1000));
 
   const RatingModal = () => {
     return (
       <div className="mb-4">
         <Formik
           initialValues={{
-            overallRating: undefined,
+            // overallRating: undefined,
             qualityRating: undefined,
             tasteRating: undefined,
             userId: session?.userId,
@@ -90,17 +77,6 @@ const NewIDPage: NextPage = ({
             <p className="mb-4 font-semibold text-4xl flex justify-center ">
               Rate Recipe
             </p>
-
-            <Field
-              id="overallRating"
-              name="overallRating"
-              type="number"
-              placeholder="Give an overall rating 1-5 stars"
-              className="rounded p-2 my-2 bg-stone-100 text-black font-semibold"
-            />
-            <ErrorMessage name="overallRating">
-              {(msg) => <p>{msg}</p>}
-            </ErrorMessage>
 
             <Field
               id="tasteRating"
@@ -206,7 +182,7 @@ const NewIDPage: NextPage = ({
         <button
           className="p-2 bg-stone-100 hover:bg-fresh hover:text-white font-semibold rounded-xl"
           onClick={() => {
-            // setEdit(!edit);
+            setEdit(!edit);
           }}
         >
           Edit
@@ -738,9 +714,15 @@ const NewIDPage: NextPage = ({
     );
   };
 
-  const ingredient_list_1: string = data?.ingredientList;
+  const ingredient_list_init: any[] = [];
+  data.ingredientList.map((d: any) => {
+    ingredient_list_init.push(JSON.parse(d));
+  });
 
-  const direction_list_1: string = JSON.stringify(data?.directions);
+  const direction_list_init: any[] = [];
+  data.directions.map((d: any) => {
+    direction_list_init.push(JSON.parse(d));
+  });
 
   const initialValues = {
     name: edit ? data.name : "",
@@ -753,9 +735,9 @@ const NewIDPage: NextPage = ({
     authorId: session?.userId,
     id: edit ? data.id : null,
 
-    ingredient_list: ingredient_list_1,
+    ingredient_list: ingredient_list_init,
 
-    direction_list: direction_list_1,
+    direction_list: direction_list_init,
   };
 
   return (
@@ -775,8 +757,8 @@ const NewIDPage: NextPage = ({
             caption: Yup.string().required("Please enter a short description"),
             featured_image: Yup.mixed(),
           })}
-          onSubmit={(values, { setSubmitting }) => {
-            fetch("/api/update_recipe", {
+          onSubmit={async (values, { setSubmitting }) => {
+            const apiRes = await fetch("/api/update_recipe", {
               method: "PUT",
               headers: {
                 Accept: "application/json",
@@ -784,16 +766,18 @@ const NewIDPage: NextPage = ({
               body: JSON.stringify(values),
             });
 
-            router.reload();
-
-            setSubmitting(false);
+            const response = await apiRes.json();
+            if (response?.data !== 400) {
+              router.reload();
+              setSubmitting(false);
+            } else {
+              console.log("failed to fork");
+              setSubmitting(false);
+            }
           }}
         >
           {({ values }) => (
             <Form>
-              <div className="bg-fresh text-white mx-auto rounded-xl flex max-w-xs">
-                <p className="my-2 font-semibold m-auto text-xl">Edit Mode</p>
-              </div>
               <div className="flex flex-col">
                 <div className="flex flex-col-reverse md:flex-row">
                   {/* left side */}
@@ -837,41 +821,31 @@ const NewIDPage: NextPage = ({
                           <p className="mr-auto">Amount</p>
                         </div>
 
-                        {/* <FieldArray name="ingredient_list">
-                          {({ insert, remove, push }) => (
+                        <FieldArray name="ingredient_list">
+                          {({ remove, push }) => (
                             <div>
                               {values.ingredient_list.length > 0 &&
                                 values.ingredient_list.map(
                                   (ingredient_list: any, index: number) => (
                                     <div key={index}>
                                       <div className="grid grid-cols-3 gap-4 my-4">
-                                        <div>
-                                          <Field
-                                            name={`ingredient_list.${index}.ingredient_name`}
-                                            placeholder={
-                                              JSON.parse(ingredient_list)
-                                                .ingredient_name
-                                            }
-                                            type="text"
-                                            className=" border-4 border-rosalight rounded-xl p-3 w-full"
-                                          />
-                                          <ErrorMessage
-                                            name={`ingredient_list.${index}.ingredient_name`}
-                                          />
-                                        </div>
-                                        <div>
-                                          <Field
-                                            name={`ingredient_list.${index}.ingredient_amount`}
-                                            placeholder={
-                                              JSON.parse(ingredient_list)
-                                                .ingredient_amount
-                                            }
-                                            className=" border-4 border-rosalight  rounded-xl p-3 w-full"
-                                          />
-                                          <ErrorMessage
-                                            name={`ingredient_list.${index}.ingredient_name`}
-                                          />
-                                        </div>
+                                        <Field
+                                          name={`ingredient_list.${index}.ingredient_name`}
+                                          type="text"
+                                          className=" border-4 border-rosalight rounded-xl p-3 w-full"
+                                        />
+                                        <ErrorMessage
+                                          name={`ingredient_list.${index}.ingredient_name`}
+                                        />
+
+                                        <Field
+                                          name={`ingredient_list.${index}.ingredient_amount`}
+                                          className=" border-4 border-rosalight  rounded-xl p-3 w-full"
+                                        />
+                                        <ErrorMessage
+                                          name={`ingredient_list.${index}.ingredient_amount`}
+                                        />
+
                                         <div className="flex flex-row">
                                           <button
                                             type="button"
@@ -926,7 +900,7 @@ const NewIDPage: NextPage = ({
                               </button>
                             </div>
                           )}
-                        </FieldArray> */}
+                        </FieldArray>
                       </div>
                     </div>
                     <hr />
@@ -942,8 +916,8 @@ const NewIDPage: NextPage = ({
                           <p className="">Steps</p>
                         </div>
 
-                        {/* <FieldArray name="direction_list">
-                          {({ insert, remove, push }) => (
+                        <FieldArray name="direction_list">
+                          {({ remove, push }) => (
                             <div className="">
                               {values.direction_list.length > 0 &&
                                 values.direction_list.map(
@@ -953,13 +927,9 @@ const NewIDPage: NextPage = ({
                                         <div className="w-full">
                                           <Field
                                             name={`direction_list.${index}.direction_description`}
-                                            // placeholder={
-                                            //   direction_list[index]
-                                            //     .direction_description
-                                            // }
                                             type="text"
                                             component="textarea"
-                                            className="text border-4 border-rosalight rounded-xl p-3 w-full"
+                                            className="border-4 border-rosalight rounded-xl p-3 w-full"
                                           />
                                           <ErrorMessage
                                             name={`direction_list.${index}.direction_description`}
@@ -1019,7 +989,7 @@ const NewIDPage: NextPage = ({
                               </button>
                             </div>
                           )}
-                        </FieldArray> */}
+                        </FieldArray>
                       </div>
                     </div>
                     <hr />

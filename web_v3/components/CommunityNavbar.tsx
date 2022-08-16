@@ -79,7 +79,7 @@ const CommunityNavBar = () => {
           <button className="text-lg font-medium mt-1 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mx-auto"
+              className="h-6 w-6 ml-auto"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
