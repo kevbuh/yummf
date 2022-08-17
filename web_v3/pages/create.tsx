@@ -26,9 +26,14 @@ function CreateRecipePage({
   const router = useRouter();
 
   const [image, setImage] = useState<any>(undefined);
+  const [tooBig, setTooBig] = useState<any>(false);
 
   const onFileChange = (e: any) => {
-    setImage(e.target.files[0]);
+    if (e.target.files[0].size < 666284) {
+      setImage(e.target.files[0]);
+    } else {
+      console.log("File size too big, 1.5 MB max");
+    }
   };
 
   const initialValues = {
@@ -58,8 +63,16 @@ function CreateRecipePage({
   };
 
   const handleChange = (e: any) => {
-    setImage(e.target.files[0]);
-    console.log("image:", image);
+    if (e.target.files[0].size < 666284) {
+      setImage(e.target.files[0]);
+      setTooBig(false);
+
+      console.log("image:", image);
+    } else {
+      setTooBig(true);
+
+      console.log("File size too big, 1.5 MB max");
+    }
   };
 
   const checkIfFilesAreTooBig = (files?: [File]): boolean => {
@@ -67,7 +80,7 @@ function CreateRecipePage({
     if (files) {
       files.map((file) => {
         const size = file.size / 1024 / 1024;
-        if (size > 3) {
+        if (size > 1) {
           valid = false;
         }
       });
@@ -90,8 +103,8 @@ function CreateRecipePage({
   return (
     <div>
       <NavBar />
-      <div className="flex flex-col items-center my-16 mx-auto min-h-screen">
-        <div>
+      <div className="flex flex-col items-center my-16 mx-auto min-h-screen ">
+        <div className="bg-stone-100 p-6 rounded-xl">
           <p className="text-6xl font-semibold mb-4">Create your own recipe</p>
 
           <Formik
@@ -106,21 +119,21 @@ function CreateRecipePage({
               caption: Yup.string().required(
                 "Please enter a short description"
               ),
-              featured_image: Yup.array()
-                .nullable()
-                .required("VALIDATION_FIELD_REQUIRED")
-                .test(
-                  "is-correct-file",
-                  "VALIDATION_FIELD_FILE_BIG",
-                  // @ts-ignore
-                  checkIfFilesAreTooBig
-                )
-                .test(
-                  "is-big-file",
-                  "VALIDATION_FIELD_FILE_WRONG_TYPE",
-                  // @ts-ignore
-                  checkIfFilesAreCorrectType
-                ),
+              // featured_image: Yup.array()
+              //   .nullable()
+              //   .required("VALIDATION_FIELD_REQUIRED")
+              //   .test(
+              //     "is-correct-file",
+              //     "VALIDATION_FIELD_FILE_BIG",
+              //     // @ts-ignore
+              //     checkIfFilesAreTooBig
+              //   )
+              //   .test(
+              //     "is-big-file",
+              //     "VALIDATION_FIELD_FILE_WRONG_TYPE",
+              //     // @ts-ignore
+              //     checkIfFilesAreCorrectType
+              //   ),
             })}
             onSubmit={async (values, { setSubmitting }) => {
               if (edit) {
@@ -136,6 +149,8 @@ function CreateRecipePage({
 
                 setSubmitting(false);
               } else {
+                console.log("here");
+
                 let formData = new FormData();
                 formData.append("featured_image", image);
 
@@ -175,7 +190,7 @@ function CreateRecipePage({
           >
             {({ values }) => (
               <Form>
-                <div className="flex flex-col ">
+                <div className="flex flex-col">
                   <div className="my-8">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       Enter an image for this recipe{" "}
@@ -183,16 +198,18 @@ function CreateRecipePage({
                     <input
                       type="file"
                       name="featured_image"
-                      className="mb-8 block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-stone-100 hover:file:bg-pink-600 my-3 hover:file:text-white hover:file:cursor-pointer"
-                      // id="file"
-                      // onChange={(event) => {
-                      //   const files = event.target.files;
-                      //   let myFiles = Array.from(files as ArrayLike<File>);
-                      //   setFieldValue(myFiles);
-                      // }}
+                      className="mb-8 block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-white hover:file:bg-rosa my-3 hover:file:text-white hover:file:cursor-pointer"
                       onChange={handleChange}
                       accept="*"
                     />
+                    {tooBig && (
+                      <p className="text-sm text-red-500">
+                        File size too big, please upload an image 1.5MB or less.
+                      </p>
+                    )}
+                    <ErrorMessage name="featured_image">
+                      {(msg) => <p>{msg}</p>}
+                    </ErrorMessage>
                   </div>
                   <div className="my-8">
                     <p className="my-2 font-semibold mx-auto text-xl">
@@ -201,7 +218,7 @@ function CreateRecipePage({
                     <Field
                       name="name"
                       placeholder="Name"
-                      className="text bg-stone-100 rounded-xl p-3 w-full mt-1 mb-8"
+                      className="text bg-white rounded-xl p-3 w-full mt-1 mb-8"
                     />
                     <ErrorMessage name="name">
                       {(msg) => <p>{msg}</p>}
@@ -215,7 +232,7 @@ function CreateRecipePage({
                     <Field
                       name="caption"
                       placeholder="Enter caption"
-                      className="text bg-stone-100 rounded-xl p-3 w-full mt-1 mb-8"
+                      className="text bg-white rounded-xl p-3 w-full mt-1 mb-8"
                     />
                     <ErrorMessage name="caption">
                       {(msg) => <p>{msg}</p>}
@@ -240,7 +257,7 @@ function CreateRecipePage({
                                         placeholder={`Step ${index + 1}`}
                                         type="text"
                                         component="textarea"
-                                        className="text bg-stone-100 rounded-xl p-3 w-full"
+                                        className="bg-white rounded-xl p-3 w-full"
                                       />
                                       <ErrorMessage
                                         name={`direction_list.${index}.direction_description`}
@@ -312,7 +329,7 @@ function CreateRecipePage({
                     <Field
                       name="source_url"
                       placeholder="Add recipe origin"
-                      className="text bg-stone-100 rounded-xl p-3 w-full mt-1 mb-8"
+                      className="text bg-white rounded-xl p-3 w-full mt-1 mb-8"
                     />
                     <ErrorMessage name="source_url">
                       {(msg) => <p>{msg}</p>}
@@ -326,7 +343,7 @@ function CreateRecipePage({
                     <Field
                       name="serving"
                       placeholder="4 people"
-                      className="text bg-stone-100 rounded-xl p-3 w-full mt-1 mb-8"
+                      className="text bg-white rounded-xl p-3 w-full mt-1 mb-8"
                     />
                     <ErrorMessage name="serving">
                       {(msg) => <p>{msg}</p>}
@@ -340,7 +357,7 @@ function CreateRecipePage({
                     <Field
                       name="cook_time"
                       placeholder="1hr 30mins"
-                      className="text bg-stone-100 rounded-xl p-3 w-full mt-1 mb-8"
+                      className="text bg-white rounded-xl p-3 w-full mt-1 mb-8"
                     />
                     <ErrorMessage name="cook_time">
                       {(msg) => <p>{msg}</p>}
@@ -364,7 +381,7 @@ function CreateRecipePage({
                                         name={`ingredient_list.${index}.ingredient_name`}
                                         placeholder="Ingredient"
                                         type="text"
-                                        className="text bg-stone-100 rounded-xl p-3 w-full"
+                                        className="text bg-white rounded-xl p-3 w-full"
                                       />
                                       <ErrorMessage
                                         name={`ingredient_list.${index}.ingredient_name`}
@@ -376,7 +393,7 @@ function CreateRecipePage({
                                       <Field
                                         name={`ingredient_list.${index}.ingredient_amount`}
                                         placeholder="Amount"
-                                        className="text bg-stone-100 rounded-xl p-3 w-full"
+                                        className="text bg-white rounded-xl p-3 w-full"
                                       />
                                       <ErrorMessage
                                         name={`ingredient_list.${index}.ingredient_name`}
@@ -412,7 +429,7 @@ function CreateRecipePage({
                             )}
                           <button
                             type="button"
-                            className="p-2 my-1 rounded-xl bg-stone-100 font-semibold flex flex-row"
+                            className="p-2 my-1 rounded-xl bg-white font-semibold flex flex-row"
                             onClick={() =>
                               push({
                                 ingredient_name: "",
@@ -441,12 +458,18 @@ function CreateRecipePage({
                     </FieldArray>
                   </div>
 
-                  <button
-                    type="submit"
-                    className="px-2 py-4 font-semibold mx-auto w-1/2 bg-stone-100 mt-16 mb-20 hover:bg-rosa hover:text-white rounded-xl"
-                  >
-                    Publish
-                  </button>
+                  {!image ? (
+                    <button className="px-2 py-4 font-semibold mx-auto w-1/2 bg-white mt-16 mb-20 rounded-xl">
+                      Please upload an image 1.5MB or smaller
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="px-2 py-4 font-semibold mx-auto w-1/2 bg-white mt-16 mb-20 hover:bg-rosa hover:text-white rounded-xl"
+                    >
+                      Publish
+                    </button>
+                  )}
                 </div>
               </Form>
             )}

@@ -9,7 +9,7 @@ function Sidebar() {
 
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-1 my-4 mx-2">
+      <div className="grid grid-cols-2 md:grid-cols-1 mt-8 mx-2">
         <Link href="/explore">
           <button
             className={
