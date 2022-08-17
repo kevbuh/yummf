@@ -12,7 +12,7 @@ import {
   ForkArrow,
   NormalBoldArrow,
 } from "../utils/arrows";
-import { SearchIcon } from "../utils/icons";
+import { SearchIcon, YummfLogoRed, YummfLogoSmallRed } from "../utils/icons";
 import { YumScore } from "../utils/yum_score";
 
 const Home: NextPage = () => {
@@ -40,7 +40,9 @@ const Home: NextPage = () => {
     <>
       <div className="px-6 sm:px-0">
         <div className="flex flex-row sm:grid sm:grid-cols-2 bg-white py-6 sm:p-6">
-          <p className="text-xl sm:text-2xl font-bold my-auto">yummf</p>
+          <p className="text-xl sm:text-2xl font-bold my-auto">
+            <YummfLogoSmallRed />
+          </p>
           <div className="ml-auto grid grid-cols-2 sm:gap-4">
             <button
               className="text-lg sm:text-xl font-semibold p-2 rounded-xl "
@@ -59,7 +61,11 @@ const Home: NextPage = () => {
         <div className="max-w-xl mt-40 mb-32 m-auto align-center justify-center items-center">
           <div className="flex flex-col h-full my-auto align-center justify-center">
             <p className="mx-auto font-semibold text-center">
-              <span className="text-rosa text-6xl">yummf</span>
+              <span className="text-rosa text-6xl">
+                {" "}
+                {/* <YummfLogoRed /> */}
+                yummf
+              </span>
               <br />
               <br />
 

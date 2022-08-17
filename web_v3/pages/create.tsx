@@ -62,6 +62,31 @@ function CreateRecipePage({
     console.log("image:", image);
   };
 
+  const checkIfFilesAreTooBig = (files?: [File]): boolean => {
+    let valid = true;
+    if (files) {
+      files.map((file) => {
+        const size = file.size / 1024 / 1024;
+        if (size > 3) {
+          valid = false;
+        }
+      });
+    }
+    return valid;
+  };
+
+  const checkIfFilesAreCorrectType = (files?: [File]): boolean => {
+    let valid = true;
+    if (files) {
+      files.map((file) => {
+        if (!["image/jpeg", "image/png"].includes(file.type)) {
+          valid = false;
+        }
+      });
+    }
+    return valid;
+  };
+
   return (
     <div>
       <NavBar />
@@ -81,7 +106,21 @@ function CreateRecipePage({
               caption: Yup.string().required(
                 "Please enter a short description"
               ),
-              // featured_image: Yup.mixed(),
+              featured_image: Yup.array()
+                .nullable()
+                .required("VALIDATION_FIELD_REQUIRED")
+                .test(
+                  "is-correct-file",
+                  "VALIDATION_FIELD_FILE_BIG",
+                  // @ts-ignore
+                  checkIfFilesAreTooBig
+                )
+                .test(
+                  "is-big-file",
+                  "VALIDATION_FIELD_FILE_WRONG_TYPE",
+                  // @ts-ignore
+                  checkIfFilesAreCorrectType
+                ),
             })}
             onSubmit={async (values, { setSubmitting }) => {
               if (edit) {

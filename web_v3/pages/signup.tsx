@@ -43,7 +43,7 @@ export default function SignUpPage() {
             {!shouldShowLogin ? "Sign Up " : "Log In "}&
           </div>
           <div className="text-5xl font-semibold mb-2">
-            Start <span className="underline">Today!</span>
+            Start <span className="underline">Cookin!</span>
           </div>
           <div>
             <div className="mx-auto text-2xl rounded-lg bg-stone-100 p-2 text-center space-y-4 py-8">
@@ -79,7 +79,7 @@ export default function SignUpPage() {
   return (
     <div>
       <div className="md:grid md:grid-cols-2 flex flex-col w-full sm:h-screen">
-        <div className="bg-rosa flex md:p-0 py-24">
+        <div className="bg-rosa flex md:p-0 py-24 ">
           {" "}
           <Link href="/">
             <a
@@ -90,16 +90,16 @@ export default function SignUpPage() {
             </a>
           </Link>
         </div>
-        <div className="flex my-auto flex-col w-full px-6 py-32 sm:p-0 text-center">
+        <div className="flex my-auto flex-col w-full px-6 py-32 sm:p-0 text-center ">
           <div className="mx-auto flex flex-col">
-            <div className="text-7xl font-semibold mb-2">
-              Start <span className="underline">today!</span>
+            <div className="text-7xl font-semibold mb-2 max-w-lg">
+              Start Cookin&apos; <span className="underline">Today!</span>
             </div>
           </div>
           <p className="mt-8 ">login with:</p>
 
           <div>
-            <div className="mx-auto text-2xl rounded-lg p-2 text-center space-y-4 py-8">
+            <div className="mx-auto text-2xl rounded-lg p-2 text-center space-y-4 pb-8">
               <button
                 onClick={() => signIn("google")}
                 className="rounded-full p-2 mr-4 bg-stone-100"

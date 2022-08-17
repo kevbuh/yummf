@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
+import { YummfLogoSmallRed } from "../utils/icons";
 
 const CommunityNavBar = () => {
   const [searchField, setSearchField] = useState("");
@@ -19,12 +20,13 @@ const CommunityNavBar = () => {
     <div className="navbar shadow-sm bg-white sticky top-0 z-10 ">
       <div className="sm:w-1/6">
         <Link href="/explore">
-          <a className="font-semibold py-2 normal-case text-2xl text-rosa sm:ml-4">
-            yummf
+          <a className="font-semibold py-2 normal-case text-2xl text-rosa ml-2">
+            {/* yummf */}
+            <YummfLogoSmallRed />
           </a>
         </Link>
         <Link href="/community">
-          <a className="font-semibold py-2 normal-case text-2xl sm:ml-4">
+          <a className="font-semibold py-2 normal-case text-2xl ml-2">
             community
           </a>
         </Link>

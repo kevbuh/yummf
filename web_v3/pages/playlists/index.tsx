@@ -1,6 +1,4 @@
 import { useSession } from "next-auth/react";
-import Footer from "../../components/Footer";
-import NavBar from "../../components/NavBar";
 import SideNavLayout from "../../components/sideNavLayout";
 import SignUpBanner from "../../components/SignUpBanner";
 
