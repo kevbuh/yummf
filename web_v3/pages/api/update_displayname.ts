@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
 
-  console.log(checkDisplayName, checkDisplayName?.length == 0);
+  // console.log(checkDisplayName, checkDisplayName?.length == 0);
 
   if (checkDisplayName?.length == 0) {
     const updateUser = await prisma?.user.update({

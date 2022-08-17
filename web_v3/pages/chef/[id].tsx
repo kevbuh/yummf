@@ -86,8 +86,6 @@ const Chef = ({
 
                         const response = await apiRes.json();
 
-                        console.log(response);
-
                         if (response.data == 201) {
                           router.reload();
                         } else {
@@ -205,10 +203,10 @@ const Chef = ({
           {created && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {createdPosts?.map((d: any, index: number) => {
-                console.log(d);
                 return (
                   <RecipeCard
                     key={index}
+                    image_url={d.image_url}
                     name={d.name.slice(0, 36)}
                     caption={d.caption.slice(0, 42)}
                     id={d.id}

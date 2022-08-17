@@ -1,11 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import { YumScore } from "../utils/yum_score";
+import Image from "next/image";
 
 type RecipeProps = {
   name: string;
   id: number;
   caption: string;
+  image_url: string;
+
   authorName: string;
   ratingsLength: number;
   qualityRating: number;
@@ -26,6 +29,7 @@ function RecipeCard({
   numSaves,
   numViews,
   authorName,
+  image_url,
 }: RecipeProps) {
   const YumScoreCalc = YumScore(
     tasteRating,
@@ -40,7 +44,17 @@ function RecipeCard({
     <div className="rounded-lg  border border-stone-100 shadow-sm cursor-pointer ">
       <Link href={"/recipes/" + id}>
         <div>
-          <p className="bg-stone-100  h-48"></p>
+          <p className=" relative">
+            {" "}
+            <Image
+              className="rounded-lg"
+              src={image_url}
+              objectFit="cover"
+              unoptimized={true}
+              width={300}
+              height={300}
+            />
+          </p>
 
           <div className="my-2 px-2 sm:flex sm:flex-row grid grid-cols-2 gap-1">
             <div className="mb-2 truncate">

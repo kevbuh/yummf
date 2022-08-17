@@ -11,17 +11,24 @@ import prisma from "../../utils/prisma";
 type CardProps = {
   name: string;
   id: number;
+  numComments: number;
   authorDisplayName: string;
   createdAt: string;
 };
 
-const Card = ({ name, id, authorDisplayName, createdAt }: CardProps) => {
+const Card = ({
+  name,
+  id,
+  authorDisplayName,
+  createdAt,
+  numComments,
+}: CardProps) => {
   return (
     <Link href={`discussion/${id}`}>
       <div className="my-4 w-full rounded-xl bg-stone-100 p-4 cursor-pointer hover:shadow-lg flex flex-col">
         <p className="truncate font-semibold text-xl my-2">{name}</p>
         <div className="md:w-1/2 grid grid-cols-3 divide-x-4 mt-2">
-          <p className="pr-8 ">10 answers </p>
+          <p className="pr-8 ">{numComments} answers </p>
           <p className="px-8 text-center ">
             {createdAt.slice(5, 7)}/{createdAt.slice(2, 4)}
           </p>
@@ -97,7 +104,7 @@ function CommunityPage({
           <div className="rounded-xl w-full my-16">
             <div className="flex flex-row">
               <p className="font-semibold text-5xl mb-4">Featured Questions</p>
-              <button className="ml-auto font-semibold">View All</button>
+              {/* <button className="ml-auto font-semibold">View All</button> */}
             </div>
             {data.map((d: any, index: number) => {
               return (
@@ -107,6 +114,7 @@ function CommunityPage({
                   id={d.id}
                   authorDisplayName={d.authorDisplayName}
                   createdAt={d.createdAt}
+                  numComments={d.comments?.length}
                 />
               );
             })}
@@ -170,6 +178,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   const thisRecipe = await prisma?.question.findMany({
     orderBy: {
       createdAt: "desc",
+    },
+    include: {
+      comments: true,
     },
   });
 

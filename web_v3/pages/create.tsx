@@ -25,6 +25,12 @@ function CreateRecipePage({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
+  const [image, setImage] = useState<any>(undefined);
+
+  const onFileChange = (e: any) => {
+    setImage(e.target.files[0]);
+  };
+
   const initialValues = {
     name: edit ? data.name : "",
     directions: edit ? data.name : "",
@@ -32,7 +38,7 @@ function CreateRecipePage({
     serving: edit ? data.name : "",
     cook_time: edit ? data.name : "",
     caption: edit ? data.name : "",
-    featured_image: null,
+    featured_image: "",
     authorId: yee,
     authorDisplayName: yoo,
     id: edit ? data.id : null,
@@ -49,6 +55,11 @@ function CreateRecipePage({
         direction_description: "",
       },
     ],
+  };
+
+  const handleChange = (e: any) => {
+    setImage(e.target.files[0]);
+    console.log("image:", image);
   };
 
   return (
@@ -70,7 +81,7 @@ function CreateRecipePage({
               caption: Yup.string().required(
                 "Please enter a short description"
               ),
-              featured_image: Yup.mixed(),
+              // featured_image: Yup.mixed(),
             })}
             onSubmit={async (values, { setSubmitting }) => {
               if (edit) {
@@ -86,17 +97,39 @@ function CreateRecipePage({
 
                 setSubmitting(false);
               } else {
-                const apiRes = await fetch("/api/create_recipe", {
+                let formData = new FormData();
+                formData.append("featured_image", image);
+
+                const apiResMedia = await fetch("/api/upload", {
                   method: "POST",
-                  headers: {
-                    Accept: "application/json",
-                  },
-                  body: JSON.stringify(values),
+                  body: formData,
                 });
 
-                const data = await apiRes.json();
+                const data = await apiResMedia.json();
 
-                router.push(`/confirm-recipe?type=${data.data}`);
+                if (data.data == 201) {
+                  console.log("here2");
+
+                  values.featured_image =
+                    ("https://yummf.sfo3.digitaloceanspaces.com" +
+                      "/" +
+                      data.img_url) as string;
+
+                  const apiRes = await fetch("/api/create_recipe", {
+                    method: "POST",
+                    headers: {
+                      Accept: "application/json",
+                    },
+                    body: JSON.stringify(values),
+                  });
+
+                  const response = await apiRes.json();
+                  console.log("response", response);
+                  if (response.data) {
+                    router.push(`/confirm-recipe?type=${response.data}`);
+                  }
+                }
+
                 setSubmitting(false);
               }
             }}
@@ -112,6 +145,14 @@ function CreateRecipePage({
                       type="file"
                       name="featured_image"
                       className="mb-8 block w-full text-sm text-black file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-stone-100 hover:file:bg-pink-600 my-3 hover:file:text-white hover:file:cursor-pointer"
+                      // id="file"
+                      // onChange={(event) => {
+                      //   const files = event.target.files;
+                      //   let myFiles = Array.from(files as ArrayLike<File>);
+                      //   setFieldValue(myFiles);
+                      // }}
+                      onChange={handleChange}
+                      accept="*"
                     />
                   </div>
                   <div className="my-8">

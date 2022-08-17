@@ -19,8 +19,6 @@ function CreateCommunityQuestion() {
     router.push(`/search-results?result=qas_${searchField}`);
   };
 
-  console.log(session);
-
   return (
     <div>
       <CommunityNavBar />

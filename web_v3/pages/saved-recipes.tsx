@@ -26,6 +26,7 @@ const SavedRecipesPage: NextPage = ({
             return (
               <RecipeCard
                 key={index}
+                image_url={d.image_url}
                 name={d.name.slice(0, 36)}
                 caption={d.caption.slice(0, 42)}
                 id={d.id}

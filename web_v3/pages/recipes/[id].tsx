@@ -20,6 +20,7 @@ import {
   StarSVG,
 } from "../../utils/socialSVGs";
 import { YumScore } from "../../utils/yum_score";
+import Image from "next/image";
 
 const NewIDPage: NextPage = ({
   data,
@@ -768,7 +769,6 @@ const NewIDPage: NextPage = ({
               "Please enter the total cook time"
             ),
             caption: Yup.string().required("Please enter a short description"),
-            featured_image: Yup.mixed(),
           })}
           onSubmit={async (values, { setSubmitting }) => {
             const apiRes = await fetch("/api/update_recipe", {
@@ -1154,8 +1154,18 @@ const NewIDPage: NextPage = ({
             {/* left side */}
             <div className="md:w-8/12 mx-8 ">
               <div className="h-fit w-full grid grid-cols-2 gap-2 rounded-xl md:my-8">
-                <div className="h-full w-full rounded-xl bg-stone-100 ">
-                  &nbsp;
+                <div className="h-full w-full rounded-xl ">
+                  <Image
+                    className="rounded-xl "
+                    src={data.image_url}
+                    unoptimized={true}
+                    width="100%"
+                    height="100%"
+                    layout="responsive"
+                    objectFit="contain"
+                    priority={true}
+                    quality={10}
+                  />
                 </div>
                 <div className="h-full w-full gap-2 grid grid-rows-2">
                   <div className="h-full w-full rounded-xl bg-stone-100 p-20">

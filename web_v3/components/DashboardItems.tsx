@@ -45,6 +45,7 @@ const DashboardItems: NextPage = () => {
                   numViews={d.numViews}
                   ratingsLength={d.ratings?.length}
                   authorName={d.authorDisplayName}
+                  image_url={d.image_url}
                 />
               ))}
             </React.Fragment>

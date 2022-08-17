@@ -143,8 +143,6 @@ const UniqueDiscussion = ({
 };
 
 export async function getServerSideProps({ query }: any) {
-  console.log(query.id.slice(4, query.id.length));
-
   const thisDiscussion = await prisma?.question.findUnique({
     where: {
       id: parseInt(query.id),

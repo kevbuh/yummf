@@ -39,7 +39,22 @@ function RecipeCardLanding({
     <div className={`rounded-lg p-1 shadow-sm cursor-pointer ${color} h-full`}>
       <Link href={"/recipes/" + id}>
         <div className="m-1">
-          <p className="bg-white rounded-lg h-80"></p>
+          <p className="bg-white rounded-lg h-80">
+            <Image
+              // loader={data.img_url}
+              className="rounded-xl "
+              src="https://yummf.sfo3.digitaloceanspaces.com/greenris.jpeg_570bf40666888fd8510410b04"
+              unoptimized={true}
+              width="100%"
+              height="100%"
+              layout="responsive"
+              objectFit="contain"
+              priority={true}
+              quality={50}
+              // width={500}
+              // height={500}
+            />
+          </p>
 
           {/* )} */}
           <div className="my-2">

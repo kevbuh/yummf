@@ -74,6 +74,7 @@ model Recipe {
   cookTime          String?
   servingSize       String?
   sourceURL         String?
+  image_url         String?
   caption           String
   numSaves          Int        @default(0)
   numViews          Int        @default(0)
