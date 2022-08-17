@@ -35,7 +35,7 @@ export const YumScore = (
   num_saves: number,
   num_views: number
 ) => {
-  if (rating_length == 0) {
+  if (rating_length == 0 || rating_length == undefined) {
     return 60;
   }
 

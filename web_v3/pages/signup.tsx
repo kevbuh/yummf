@@ -78,8 +78,8 @@ export default function SignUpPage() {
 
   return (
     <div>
-      <div className="md:grid md:grid-cols-2 flex flex-col w-full h-screen ">
-        <div className="bg-rosa flex md:p-0 py-12">
+      <div className="md:grid md:grid-cols-2 flex flex-col w-full sm:h-screen">
+        <div className="bg-rosa flex md:p-0 py-24">
           {" "}
           <Link href="/">
             <a
@@ -90,12 +90,14 @@ export default function SignUpPage() {
             </a>
           </Link>
         </div>
-        <div className="flex my-auto flex-col w-full px-6 py-6 sm:p-0 text-center">
+        <div className="flex my-auto flex-col w-full px-6 py-32 sm:p-0 text-center">
           <div className="mx-auto flex flex-col">
             <div className="text-7xl font-semibold mb-2">
               Start <span className="underline">today!</span>
             </div>
           </div>
+          <p className="mt-8 ">login with:</p>
+
           <div>
             <div className="mx-auto text-2xl rounded-lg p-2 text-center space-y-4 py-8">
               <button
@@ -110,7 +112,7 @@ export default function SignUpPage() {
               >
                 <FacebookSVG />
               </button>
-
+              {/* 
               <div className="w-1/2 mx-auto"></div>
               <p className="text-base ">or</p>
               <button
@@ -119,7 +121,7 @@ export default function SignUpPage() {
               >
                 <EmailSVG />
                 Email address
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

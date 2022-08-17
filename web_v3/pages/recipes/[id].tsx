@@ -686,6 +686,19 @@ const NewIDPage: NextPage = ({
                 </div>
               </div>
             </div>
+            {data?.source_url && (
+              <>
+                <hr />
+                <div className="my-8 ">
+                  <p className="text-xl font-semibold mb-4">Source</p>
+                  <div className="mb-4 m-auto truncate">
+                    <p className="font-semibold text-sm text-gray-500 truncate">
+                      {data.sourceURL}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
             {/* <hr /> */}
             {/* <div className="my-8">
               <p className="text-xl font-semibold mb-4">Serving Size</p>

@@ -2,13 +2,13 @@ import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar";
 import type { NextPage, InferGetServerSidePropsType } from "next";
 import { useSession } from "next-auth/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import prisma from "../../utils/prisma";
 import SignUpBanner from "../../components/SignUpBanner";
 import Link from "next/link";
 import RecipeCard from "../../components/RecipeCard";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 const Chef = ({
   data,
@@ -17,6 +17,8 @@ const Chef = ({
   const { data: session } = useSession();
   const [created, setCreated] = useState(true);
   const [liked, setLiked] = useState(false);
+
+  const router = useRouter();
 
   return (
     <>
@@ -41,19 +43,14 @@ const Chef = ({
           <span className="flex flex-col">
             {data?.displayName == null && (
               <>
-                <label
-                  htmlFor="my-modal-5"
-                  className="block py-4 px-2 mx-auto text-sm text-black rounded-xl bg-stone-100"
-                >
-                  {/* open modal */}
-                  Choose a name you like....
-                </label>
-
                 {/* actual */}
                 <input
                   type="checkbox"
                   id="my-modal-5"
-                  className="modal-toggle t"
+                  className="modal-toggle t modal-open"
+                  // checked={true}
+                  defaultChecked={true}
+                  // checked={true}
                 />
                 <label
                   htmlFor="my-modal-5"
@@ -88,6 +85,8 @@ const Chef = ({
                         );
 
                         const response = await apiRes.json();
+
+                        console.log(response);
 
                         if (response.data == 201) {
                           router.reload();
@@ -124,9 +123,11 @@ const Chef = ({
                 : data?.name}
             </p>
             <p className="text-lg font-medium text-gray-500 ">{data?.name}</p>
-            <button className="p-1 bg-rosa text-white font-semibold rounded mt-auto">
-              Follow
-            </button>
+            {session?.userId == data?.userId && (
+              <button className="p-1 bg-rosa text-white font-semibold rounded mt-auto">
+                Follow
+              </button>
+            )}
           </span>
         </div>
         <div className=" grid grid-cols-3 gap-4 md:w-3/5">
@@ -164,7 +165,7 @@ const Chef = ({
             >
               Created Recipes
             </p>
-            <p
+            {/* <p
               className={
                 liked
                   ? "text-xl font-semibold mx-2 py-4 underline cursor-pointer"
@@ -176,10 +177,10 @@ const Chef = ({
               }}
             >
               Saved Posts
-            </p>
+            </p> */}
           </div>
 
-          {liked && (
+          {/* {liked && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {data?.savedRecipes?.map((d: any, index: number) => {
                 return (
@@ -199,11 +200,12 @@ const Chef = ({
                 );
               })}
             </div>
-          )}
+          )} */}
 
           {created && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
               {createdPosts?.map((d: any, index: number) => {
+                console.log(d);
                 return (
                   <RecipeCard
                     key={index}
@@ -215,7 +217,7 @@ const Chef = ({
                     overallRating={d.overallRating}
                     numSaves={d.numSaves}
                     numViews={d.numViews}
-                    ratingsLength={d.ratings?.length}
+                    ratingsLength={d.ratings.length > 0 ? d.ratings.length : 0}
                     authorName={d.authorDisplayName}
                   />
                 );
@@ -238,11 +240,14 @@ export async function getServerSideProps({ query }: any) {
     },
   });
 
-  // console.log(savedRecipes);
-
-  const result = prisma
-    ? await prisma.$queryRaw`SELECT * FROM "Recipe" WHERE "authorId"=${thisUser?.id};`
-    : null;
+  const result = await prisma?.recipe.findMany({
+    where: {
+      authorId: thisUser?.id,
+    },
+    include: {
+      ratings: true,
+    },
+  });
 
   return {
     props: {

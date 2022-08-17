@@ -19,11 +19,11 @@ function HelpPage() {
   return (
     <div>
       <NavBar />
-      <div className="max-w-6xl px-6 mx-auto mb-4">
-        <div className=" px-6 mt-8">
+      <div className="max-w-6xl px-4 mx-auto mb-4">
+        <div className="mt-8">
           <div className="rounded-xl w-full my-16">
             <p className="font-semibold text-5xl mb-4">Help Center</p>
-            <p className="font-medium text-xl mb-8 max-w-lg px-6 sm:px-0">
+            <p className="font-medium text-xl mb-8">
               Search for help from support articles and the community.
             </p>
 
@@ -44,7 +44,7 @@ function HelpPage() {
               <p className="font-semibold text-5xl mb-4">Common FAQs</p>
               <button className="ml-auto font-semibold">View All</button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 md:gap-4">
               <Card name="Unable to sign in" />
               <Card name="Report abuse/copyright" />
               <Card name="Can't upload recipe" />
@@ -58,7 +58,7 @@ function HelpPage() {
 
           <div className=" border-stone-100 border-4 rounded-xl px-6 py-12 text-rosa font-semibold my-16">
             <div className="grid grid-cols-1 sm:grid-cols-2">
-              <p className="mx-auto px-8 py-12 text-3xl bg-black rounded-full text-white hidden sm:block">
+              <p className="mx-auto px-8 py-16 text-3xl bg-black rounded-full text-white hidden sm:block">
                 yummf
               </p>
               <div className="m-auto">

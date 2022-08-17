@@ -8,17 +8,25 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { values, userEmail } = JSON.parse(req.body);
 
-  const updateUser = await prisma?.user.update({
+  const checkDisplayName = await prisma?.user.findMany({
     where: {
-      email: userEmail,
-    },
-    data: {
       displayName: values.displayName,
     },
   });
 
-  if (updateUser) {
-    return res.status(201).json({ data: updateUser });
+  console.log(checkDisplayName, checkDisplayName?.length == 0);
+
+  if (checkDisplayName?.length == 0) {
+    const updateUser = await prisma?.user.update({
+      where: {
+        email: userEmail,
+      },
+      data: {
+        displayName: values.displayName,
+      },
+    });
+
+    return res.status(201).json({ data: 201 });
   } else {
     return res.status(400).json({ data: 400 });
   }

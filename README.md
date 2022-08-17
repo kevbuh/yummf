@@ -10,3 +10,4 @@ Design influences:
 - DigitalOcean
 - Beacons.ai
 - Rarible
+- Posthog
