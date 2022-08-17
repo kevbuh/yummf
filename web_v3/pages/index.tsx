@@ -58,18 +58,22 @@ const Home: NextPage = () => {
         </div>
         <div className="max-w-xl mt-40 mb-32 m-auto align-center justify-center items-center">
           <div className="flex flex-col h-full my-auto align-center justify-center">
-            <p className="mx-auto font-semibold text-center mb-8">
-              <span className="text-rosa text-5xl">yummf</span>
+            <p className="mx-auto font-semibold text-center">
+              <span className="text-rosa text-6xl">yummf</span>
               <br />
               <br />
 
-              <span className="italic text-3xl sm:text-5xl">
+              {/* <span className="italic text-3xl sm:text-5xl">
                 find something to cook
-              </span>
+              </span> */}
             </p>
+            <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 text-center mb-8 max-w-lg px-6 sm:px-0 ">
+              Get personalized recommendations so you always know what to cook.
+            </p>
+
             <form className="w-full sm:mx-auto">
               <div className="relative ">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <div className="flex absolute inset-y-0 left-0 items-center pl-2 pointer-events-none">
                   <SearchIcon />
                   {/* @ts-ignore */}
                   <button onClick={onSubmit}></button>
@@ -77,7 +81,7 @@ const Home: NextPage = () => {
                 <input
                   type="search"
                   id="default-search"
-                  className=" block p-4 pl-14  w-full text-black  font-medium placeholder-gray-400 text-lg rounded sm:rounded-xl border-stone-100 border-4 "
+                  className="p-4 pl-14  w-full  placeholder-gray-400 text-lg rounded sm:rounded-xl border-stone-100 border-4 border-dashed focus:outline-none "
                   placeholder="Search Recipes, Categories, Ingredients, Chefs..."
                   onChange={(e) => setSearchField(e.target.value)}
                   onFocus={onFocus}
@@ -194,16 +198,16 @@ const Home: NextPage = () => {
         <p className="font-semibold text-5xl mb-4">
           <span className="text-rosa">Fork</span> your favorites
         </p>
-        <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 px-6 sm:px-0 mb-6">
+        <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 px-6 sm:px-0 ">
           Liked a recipe, but it needs some tweaks? Copy & edit your favorite
           recipes, and start freely making them your own.
         </p>
 
-        <Link href="/explore">
+        {/* <Link href="/explore">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
             Start a fork
           </button>
-        </Link>
+        </Link> */}
       </div>
 
       <CurlyArrow />
