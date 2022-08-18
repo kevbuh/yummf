@@ -11,15 +11,14 @@ import type {
 import RecipeCard from "../components/RecipeCard";
 
 const SavedRecipesPage: NextPage = ({
-  session,
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <div>
       <NavBar />
-      <div className="mt-8 rounded-lg w-2/3 item-center mx-auto">
+      <div className="mt-16 rounded-lg w-2/3 item-center mx-auto min-h-screen">
         <div>
-          <p className="text-4xl mb-2">Saved Recipes</p>
+          <p className="text-5xl mb-2">Saved Recipes</p>
         </div>
         <div className="grid grid-cols-4 gap-4 mt-8">
           {data?.savedRecipes?.map((d: any, index: number) => {
@@ -42,7 +41,12 @@ const SavedRecipesPage: NextPage = ({
           })}
         </div>
 
-        <div className="h-40"></div>
+        {data.savedRecipes.length == 0 && (
+          <p className="max-w-md">
+            You have no saved recipes! Save a recipe by clicking the 'save'
+            button on a recipe in the sidebar on the right.
+          </p>
+        )}
       </div>
       <Footer />
     </div>

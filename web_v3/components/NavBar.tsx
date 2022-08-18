@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import {
   DiscussionIcon,
   ProfileIcon,
@@ -9,6 +9,7 @@ import {
   UploadIcon,
   YummfLogoSmallRed,
 } from "../utils/icons";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const NavBar = () => {
   const [searchField, setSearchField] = useState("");
@@ -16,6 +17,8 @@ const NavBar = () => {
   const onBlur = () => setFocused(false);
   const onFocus = () => setFocused(true);
   const router = useRouter();
+
+  const { data: session } = useSession();
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -45,8 +48,77 @@ const NavBar = () => {
           </a>
         </Link>
       </div>
+      {session?.displayName == null && session && (
+        <>
+          {/* actual */}
+          <input
+            type="checkbox"
+            id="my-modal-5"
+            className="modal-toggle t modal-open"
+            // checked={true}
+            defaultChecked={true}
+            // checked={true}
+          />
+          <label
+            htmlFor="my-modal-5"
+            className="modal cursor-pointer bg-smoke-light"
+          >
+            <label
+              className="modal-box relative py-8 border bg-white md:w-full "
+              htmlFor=""
+            >
+              <p className="mb-4 font-semibold text-4xl flex justify-center ">
+                Welcome to Yummf
+              </p>
+              <Formik
+                initialValues={{
+                  displayName: "",
+                  authorId: session?.userId,
+                }}
+                onSubmit={async (values) => {
+                  console.log("er");
+                  const apiRes: any = await fetch("/api/update_displayname", {
+                    method: "PUT",
+                    headers: {
+                      Accept: "application/json",
+                    },
+                    body: JSON.stringify({
+                      values: values,
+                      userEmail: session?.user?.email,
+                    }),
+                  });
 
-      {/* <div className="ml-auto md:mx-auto "></div> */}
+                  const response = await apiRes.json();
+
+                  if (response.data == 201) {
+                    router.reload();
+                  } else {
+                    console.log("failed to update username");
+                  }
+                }}
+              >
+                <Form className=" mt-8">
+                  <Field
+                    id="displayName"
+                    name="displayName"
+                    placeholder="Choose a username..."
+                    className="block p-4 mx-auto placeholder-gray-400 text-lg rounded-xl border-stone-100 border-4  "
+                  />
+                  <ErrorMessage name="displayName" />
+
+                  <button
+                    className="p-3 mt-8 w-full rounded-xl font-semibold bg-stone-100 hover:bg-rosalight hover:text-white"
+                    type="submit"
+                  >
+                    <p className="m-auto">Next</p>
+                  </button>
+                </Form>
+              </Formik>
+            </label>
+          </label>
+        </>
+      )}
+
       <div className="grid grid-cols-4 gap-4  ml-auto ">
         <>
           <label

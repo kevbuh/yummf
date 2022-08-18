@@ -3,8 +3,7 @@ import router from "next/router";
 import { useState } from "react";
 import CommunityNavBar from "../../components/CommunityNavbar";
 import Footer from "../../components/Footer";
-import { CurlyArrow, DottedArrow, NormalBoldArrow } from "../../utils/arrows";
-import { SearchIcon } from "../../utils/icons";
+import { CurlyArrow, CurveRightArrow, DottedArrow } from "../../utils/arrows";
 
 type CardProps = {
   name: string;
@@ -32,9 +31,9 @@ function CommunityPage() {
   return (
     <div>
       <CommunityNavBar />
-      <div className="max-w-6xl px-4 mx-auto mb-4">
-        <div className="flex flex-col">
-          <p className="m-auto font-semibold text-center text-6xl mt-32 mb-8">
+      <div className=" px-4 mx-auto mb-4 max-w-4xl">
+        <div className="flex flex-col mb-12">
+          <p className="m-auto font-semibold text-center text-6xl mt-32 mb-8 max-w-xl">
             Welcome to the <span className="text-rosa">Yummf</span> community
           </p>
           <p className="mx-auto font-medium text-2xl text-gray-500 mb-16 max-w-lg px-6 sm:px-0 text-center">
@@ -43,10 +42,10 @@ function CommunityPage() {
           </p>
         </div>
 
-        <NormalBoldArrow />
+        <CurveRightArrow />
 
         <div className="mt-8">
-          <div className="rounded-xl w-full p-6 mt-4 mb-16 bg-stone-100">
+          {/* <div className="rounded-xl w-full p-6 mt-4 mb-16 bg-stone-100">
             <p className="font-semibold text-5xl mb-8">Tutorials</p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card name="How to cook" />
@@ -56,47 +55,46 @@ function CommunityPage() {
             <button className="flex mx-auto mt-6 max-w-xs text-xl p-3 rounded-xl bg-black text-white font-semibold">
               View all tutorials
             </button>
-          </div>
-          <DottedArrow />
-          <div className="rounded-xl w-full my-16 bg-stone-100 p-6">
-            <p className="font-semibold text-5xl mb-4">Questions & Answers</p>
-            <p className="font-medium text-xl mb-8 max-w-lg">
-              Get help with your recipe, learn about ingredients, or ask any
-              cooking related question.
+          </div> */}
+
+          <div className="items-center flex flex-col my-40 justify-center align-center">
+            <p className="font-semibold text-5xl my-4 text-center">
+              Learn from tutorials
             </p>
+            <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
+              Level up your cooking skills, taught from the best chefs around
+              the world.
+            </p>
+            {/* <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
+             Learn 
+            </p> */}
+            <Link href="/community/tutorials">
+              <button className="mt-4 max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
+                View all tutorials
+              </button>
+            </Link>
+          </div>
 
-            <form className="w-full sm:mx-auto">
-              <div className="relative ">
-                <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                  <SearchIcon />
-                  {/* @ts-ignore */}
-                  <button onClick={onSubmit}></button>
-                </div>
-                <input
-                  type="search"
-                  id="default-search"
-                  className=" block p-4 pl-14 w-full text-black  font-medium placeholder-gray-400 text-lg rounded sm:rounded-xl border-stone-100 border-4 "
-                  placeholder="Search for questions about recipes..."
-                  onChange={(e) => setSearchField(e.target.value)}
-                  onFocus={onFocus}
-                  onBlur={onBlur}
-                  required
-                />
-              </div>
-            </form>
+          <DottedArrow />
 
-            <div className="flex flex-row mt-8">
+          <div className="items-center flex flex-col my-40 justify-center align-center">
+            <p className="font-semibold text-5xl my-4 text-center">
+              Ask cooking questions
+            </p>
+            {/* <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
+             Learn 
+            </p> */}
+            <div className="flex flex-row">
               <Link href="/community/questions">
-                <button className=" flex  max-w-xs text-xl p-3 rounded-xl font-semibold mr-4">
+                <button className="mt-4 max-w-xs text-2xl p-3 mr-4 rounded-xl ">
                   View all
                 </button>
               </Link>
-              <button
-                className=" flex max-w-xs text-xl p-3 rounded-xl bg-black text-white font-semibold"
-                onClick={() => router.push("/community/create")}
-              >
-                Ask a Question
-              </button>
+              <Link href="/community/create">
+                <button className="mt-4 max-w-xs text-2xl p-3 rounded-xl bg-black text-white ">
+                  Ask a question
+                </button>
+              </Link>
             </div>
           </div>
 

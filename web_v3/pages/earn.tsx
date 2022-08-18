@@ -37,7 +37,7 @@ const EarnInfo: NextPage = () => {
         <p className="font-semibold text-5xl my-4 text-center">
           Recipes get <span className="text-fresh">rewarded</span>
         </p>
-        <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
+        {/* <p className="mx-auto font-medium text-2xl text-gray-500 text-center mb-6 max-w-lg px-6 sm:px-0">
           Yummf allows the best chefs all over the world, from professional to
           home kitchens, to reap rewards from their recipes and articles.
         </p>
@@ -45,7 +45,7 @@ const EarnInfo: NextPage = () => {
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
             Get started
           </button>
-        </Link>
+        </Link> */}
       </div>
 
       <DottedArrow />
@@ -85,7 +85,10 @@ const EarnInfo: NextPage = () => {
           <span className="underline">
             create 10 recipes with Yum Scores of 95 or over,
           </span>{" "}
-          you can submit a request to join.
+          you can submit a request to join through the{" "}
+          <Link href="/help">
+            <span className="underline cursor-pointer">Help Center</span>
+          </Link>
         </p>
       </div>
 

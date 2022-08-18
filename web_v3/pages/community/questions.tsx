@@ -58,8 +58,8 @@ function CommunityPage({
     <div>
       <CommunityNavBar />
       <div className="max-w-6xl px-3 mx-auto mb-4">
-        <div className=" mt-8">
-          <div className="rounded-xl w-full my-16">
+        <div className="mt-8">
+          <div className="rounded-xl w-full my-16 bg-stone-100 p-6">
             <p className="font-semibold text-5xl mb-4">Questions & Answers</p>
             <p className="font-medium text-xl mb-8 max-w-lg">
               Get help with your recipe, learn about ingredients, or ask any
@@ -77,7 +77,7 @@ function CommunityPage({
                   type="search"
                   id="default-search"
                   className=" block p-4 pl-14 w-full text-black  font-medium placeholder-gray-400 text-lg rounded sm:rounded-xl border-stone-100 border-4 "
-                  placeholder="Search Recipes, Categories, Ingredients, Chefs..."
+                  placeholder="Search for questions about recipes..."
                   onChange={(e) => setSearchField(e.target.value)}
                   onFocus={onFocus}
                   onBlur={onBlur}
@@ -87,9 +87,11 @@ function CommunityPage({
             </form>
 
             <div className="flex flex-row mt-8">
-              <button className=" flex  max-w-xs text-xl p-3 rounded-xl font-semibold mr-4">
-                View all
-              </button>
+              <Link href="/community/questions">
+                <button className=" flex  max-w-xs text-xl p-3 rounded-xl font-semibold mr-4">
+                  View all
+                </button>
+              </Link>
               <button
                 className=" flex max-w-xs text-xl p-3 rounded-xl bg-black text-white font-semibold"
                 onClick={() => router.push("/community/create")}
@@ -118,7 +120,18 @@ function CommunityPage({
                 />
               );
             })}
+
+            {data.length == 0 && (
+              <button
+                onClick={() => router.push("/community/create")}
+                className=" mt-4 mb-16"
+              >
+                No questions yet!{" "}
+                <span className="underline">Ask a Question</span>
+              </button>
+            )}
           </div>
+
           {/* <hr /> */}
 
           {/* <div className="rounded-xl w-full my-16">

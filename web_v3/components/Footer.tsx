@@ -14,8 +14,8 @@ function Footer() {
 
       <div>
         <span className="footer-title">yummf</span>
-        <Link href="/dashboard">
-          <a className="link link-hover">Dashboard</a>
+        <Link href="/explore">
+          <a className="link link-hover">Explore</a>
         </Link>
         <Link href="/account">
           <a className="link link-hover">Account</a>
@@ -23,17 +23,23 @@ function Footer() {
         <Link href="/community">
           <a className="link link-hover">Community</a>
         </Link>
+        <Link href="/">
+          <a className="link link-hover">About Us</a>
+        </Link>
       </div>
       <div>
         <span className="footer-title">Support</span>
-        <Link href="/">
-          <a className="link link-hover">About us</a>
+        <Link href="/terms">
+          <a className="link link-hover">Terms of Service</a>
+        </Link>
+        <Link href="/copyright">
+          <a className="link link-hover">Copyright</a>
         </Link>
         <Link href="/help">
-          <a className="link link-hover">Help</a>
+          <a className="link link-hover">Help Center</a>
         </Link>
-        <Link href="/help">
-          <a className="link link-hover">Report Abuse</a>
+        <Link href="privacy/">
+          <a className="link link-hover">Privacy</a>
         </Link>
       </div>
     </footer>

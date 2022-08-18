@@ -41,87 +41,13 @@ const Chef = ({
             <img src={data?.image as string} alt="User profile image" />
           </div>
           <span className="flex flex-col">
-            {data?.displayName == null && (
-              <>
-                {/* actual */}
-                <input
-                  type="checkbox"
-                  id="my-modal-5"
-                  className="modal-toggle t modal-open"
-                  // checked={true}
-                  defaultChecked={true}
-                  // checked={true}
-                />
-                <label
-                  htmlFor="my-modal-5"
-                  className="modal cursor-pointer bg-smoke-light"
-                >
-                  <label
-                    className="modal-box relative py-8 border bg-white md:w-full "
-                    htmlFor=""
-                  >
-                    <p className="mb-4 font-semibold text-4xl flex justify-center ">
-                      Welcome to Yummf
-                    </p>
-                    <Formik
-                      initialValues={{
-                        displayName: "",
-                        authorId: session?.userId,
-                      }}
-                      onSubmit={async (values) => {
-                        console.log("er");
-                        const apiRes: any = await fetch(
-                          "/api/update_displayname",
-                          {
-                            method: "PUT",
-                            headers: {
-                              Accept: "application/json",
-                            },
-                            body: JSON.stringify({
-                              values: values,
-                              userEmail: session?.user?.email,
-                            }),
-                          }
-                        );
-
-                        const response = await apiRes.json();
-
-                        if (response.data == 201) {
-                          router.reload();
-                        } else {
-                          console.log("failed to update username");
-                        }
-                      }}
-                    >
-                      <Form className=" mt-8">
-                        <Field
-                          id="displayName"
-                          name="displayName"
-                          placeholder="Choose a username..."
-                          className="block p-4 mx-auto placeholder-gray-400 text-lg rounded-xl border-stone-100 border-4  "
-                        />
-                        <ErrorMessage name="displayName" />
-
-                        <button
-                          className="p-3 mt-8 w-full rounded-xl font-semibold bg-stone-100 hover:bg-rosalight hover:text-white"
-                          type="submit"
-                        >
-                          <p className="m-auto">Next</p>
-                        </button>
-                      </Form>
-                    </Formik>
-                  </label>
-                </label>
-              </>
-            )}
-
             <p className="text-4xl font-semibold">
               {data?.displayName !== null
                 ? (data?.displayName as string)
                 : data?.name}
             </p>
             <p className="text-lg font-medium text-gray-500 ">{data?.name}</p>
-            {session?.userId == data?.userId && (
+            {session?.userId !== data?.userId && (
               <button className="p-1 bg-rosa text-white font-semibold rounded mt-auto">
                 Follow
               </button>

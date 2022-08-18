@@ -191,7 +191,7 @@ function CreateRecipePage({
             {({ values }) => (
               <Form>
                 <div className="flex flex-col">
-                  <div className="my-8">
+                  <div className="my-2">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       Enter an image for this recipe{" "}
                     </p>
@@ -211,7 +211,7 @@ function CreateRecipePage({
                       {(msg) => <p>{msg}</p>}
                     </ErrorMessage>
                   </div>
-                  <div className="my-8">
+                  <div className="my-2">
                     <p className="my-2 font-semibold mx-auto text-xl">
                       What&apos;s the recipe name?{" "}
                     </p>
@@ -225,7 +225,7 @@ function CreateRecipePage({
                     </ErrorMessage>
                   </div>
 
-                  <div className="my-8">
+                  <div className="my-2">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       Give a short caption for the recipe{" "}
                     </p>
@@ -239,7 +239,7 @@ function CreateRecipePage({
                     </ErrorMessage>
                   </div>
 
-                  <div className="my-8">
+                  <div className="my-2">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       Next, enter detailed directions{" "}
                     </p>
@@ -322,7 +322,7 @@ function CreateRecipePage({
                     </FieldArray>
                   </div>
 
-                  <div className="my-8">
+                  <div className="my-2">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       Did this come from an external source?{" "}
                     </p>
@@ -336,7 +336,7 @@ function CreateRecipePage({
                     </ErrorMessage>
                   </div>
 
-                  <div className="my-8">
+                  <div className="my-2">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       How many servings does this create?{" "}
                     </p>
@@ -350,7 +350,7 @@ function CreateRecipePage({
                     </ErrorMessage>
                   </div>
 
-                  <div className="my-8">
+                  <div className="my-2">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       What&apos;s the cook time?{" "}
                     </p>
@@ -364,7 +364,7 @@ function CreateRecipePage({
                     </ErrorMessage>
                   </div>
 
-                  <div className="my-8">
+                  <div className="my-2">
                     <p className="mt-8 mb-2 font-semibold mx-auto text-xl">
                       Last step! Enter all the ingredients
                     </p>
