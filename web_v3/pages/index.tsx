@@ -1,7 +1,5 @@
 import type { NextPage } from "next";
 import React, { useRef, useState } from "react";
-import { authOptions } from "../pages/api/auth/[...nextauth]";
-import { unstable_getServerSession } from "next-auth/next";
 import Footer from "../components/Footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,11 +10,12 @@ import {
   ForkArrow,
   NormalBoldArrow,
 } from "../utils/arrows";
-import { SearchIcon, YummfLogoRed, YummfLogoSmallRed } from "../utils/icons";
-import { YumScore } from "../utils/yum_score";
+import { SearchIcon, YummfLogoSmallRed } from "../utils/icons";
+import { useSession } from "next-auth/react";
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   const [searchField, setSearchField] = useState("");
   const [focused, setFocused] = useState(false);
   const onBlur = () => setFocused(false);
@@ -43,20 +42,30 @@ const Home: NextPage = () => {
           <p className="text-xl sm:text-2xl font-bold my-auto">
             <YummfLogoSmallRed />
           </p>
-          <div className="ml-auto grid grid-cols-2 sm:gap-4">
-            <button
-              className="text-lg sm:text-xl font-semibold p-2 rounded-xl "
-              onClick={executeScroll}
-            >
-              Log in
-            </button>
-            <button
-              className="text-lg sm:text-xl font-semibold p-2 rounded-xl bg-rosa text-white"
-              onClick={executeScroll}
-            >
-              Sign up
-            </button>
-          </div>
+          {!session ? (
+            <div className="ml-auto grid grid-cols-2 sm:gap-4">
+              <button
+                className="text-lg sm:text-xl font-semibold p-2 rounded-xl "
+                onClick={executeScroll}
+              >
+                Log in
+              </button>
+              <button
+                className="text-lg sm:text-xl font-semibold p-2 rounded-xl bg-rosa text-white"
+                onClick={executeScroll}
+              >
+                Sign up
+              </button>
+            </div>
+          ) : (
+            <div className="ml-auto grid grid-cols-1 sm:gap-4">
+              <Link href="/explore">
+                <button className="text-lg sm:text-xl font-semibold p-2 rounded-xl bg-rosa text-white ">
+                  Go to Dashboard
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="max-w-xl mt-40 mb-32 m-auto align-center justify-center items-center">
           <div className="flex flex-col h-full my-auto align-center justify-center">
@@ -104,23 +113,27 @@ const Home: NextPage = () => {
 
       <div className="items-center flex flex-col my-40 justify-center align-center">
         <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-8 max-w-lg w-full px-6 sm:px-0">
-          <button className="bg-stone-100 rounded-xl py-4 font-semibold text-xl">
-            Tacos
-            <br />
-            Al Pastor{" "}
-          </button>
-          <button className="bg-stone-100 rounded-xl text-center font-semibold text-xl ">
-            <p>
-              Dinner
+          <Link href="/search-results?result=tacos al pastor">
+            <button className="bg-stone-100 rounded-xl py-4 font-semibold text-xl hover:bg-rosa hover:text-white">
+              Tacos
               <br />
-              Recipes
-            </p>
-          </button>
-          <button className="bg-stone-100 rounded-xl font-semibold text-xl">
-            Boiling
-            <br />
-            Info
-          </button>
+              Al Pastor{" "}
+            </button>
+          </Link>
+          <Link href="/search-results?result=cat_dinner">
+            <button className="bg-stone-100 rounded-xl text-center font-semibold text-xl hover:bg-rosa hover:text-white">
+              <p>
+                Dinner
+                <br />
+                Recipes
+              </p>
+            </button>
+          </Link>
+          <Link href="/search-results?result=qas_salt">
+            <button className="bg-stone-100 rounded-xl font-semibold text-xl hover:bg-rosa hover:text-white">
+              Salt Info
+            </button>
+          </Link>
         </div>
         <p className="font-semibold text-5xl text-center mb-8 max-w-lg">
           Find the <span className="text-rosa">best</span> recipes and cooking
@@ -177,6 +190,11 @@ const Home: NextPage = () => {
           <span>perfect blend of several factors</span> so you know what to
           cook.
         </p>
+        <Link href="/yum-score">
+          <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
+            How it works
+          </button>
+        </Link>
       </div>
 
       <CurveRightArrow />
@@ -204,16 +222,16 @@ const Home: NextPage = () => {
         <p className="font-semibold text-5xl mb-4">
           <span className="text-rosa">Fork</span> your favorites
         </p>
-        <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 px-6 sm:px-0 ">
+        <p className="mx-auto font-medium text-xl sm:text-2xl text-gray-500 px-6 sm:px-0 mb-8 ">
           Liked a recipe, but it needs some tweaks? Copy & edit your favorite
           recipes, and start freely making them your own.
         </p>
 
-        {/* <Link href="/explore">
+        <Link href="/fork">
           <button className="max-w-xs text-2xl p-3 rounded-xl bg-black text-white font-semibold">
-            Start a fork
+            Fork Info
           </button>
-        </Link> */}
+        </Link>
       </div>
 
       <CurlyArrow />
@@ -230,7 +248,7 @@ const Home: NextPage = () => {
           so you always know what to cook.
         </p>
         <Link href="/signup">
-          <button className="max-w-xs text-2xl p-3 rounded-xl bg-rosa text-white font-semibold">
+          <button className="max-w-xs text-xl sm:text-2xl p-3 rounded-xl bg-rosa text-white font-semibold">
             Get started with Yummf
           </button>
         </Link>
@@ -240,28 +258,5 @@ const Home: NextPage = () => {
     </>
   );
 };
-
-export async function getServerSideProps(context: any) {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
-
-  if (session) {
-    return {
-      redirect: {
-        destination: "/explore",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      session: session,
-    },
-  };
-}
 
 export default Home;

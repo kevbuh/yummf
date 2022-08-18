@@ -101,7 +101,7 @@ const EarnInfo: NextPage = () => {
           Start uploading recipes and get a chance at earning!
         </p>
         <Link href="/signup">
-          <button className="max-w-xs text-2xl p-3 rounded-xl bg-rosa text-white font-semibold">
+          <button className="max-w-xs text-xl sm:text-2xl p-3 rounded-xl bg-rosa text-white font-semibold">
             Get started with Yummf
           </button>
         </Link>

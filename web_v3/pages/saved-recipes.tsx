@@ -3,11 +3,7 @@ import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
 import { authOptions } from "./api/auth/[...nextauth]";
 import prisma from "../utils/prisma";
-import type {
-  NextPage,
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-} from "next";
+import type { NextPage, InferGetServerSidePropsType } from "next";
 import RecipeCard from "../components/RecipeCard";
 
 const SavedRecipesPage: NextPage = ({
