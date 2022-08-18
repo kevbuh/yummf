@@ -33,15 +33,15 @@ const ForkInfoPage: NextPage = () => {
         <CurlyArrow />
 
         <div className="items-center flex flex-col my-40 text-center">
-          <p className="font-semibold text-5xl my-4 text-center">
-            1. Find a recipe you like
+          <p className="font-semibold text-4xl sm:text-5xl my-4 text-center">
+            1. Find a recipe you want to change
           </p>
-          <p className="font-semibold text-5xl my-4 text-center flex flex-row">
+          <p className="font-semibold text-4xl sm:text-5xl my-4 text-center flex flex-col md:flex-row">
             2. Click on the&nbsp;
             <BigGitHubForkSVG />
-            &nbsp;Fork button
+            &nbsp;(Fork) button
           </p>
-          <p className="font-semibold text-5xl my-4 text-center">
+          <p className="font-semibold text-4xl sm:text-5xl my-4 text-center">
             3. Confirm, and start editing!
           </p>
         </div>

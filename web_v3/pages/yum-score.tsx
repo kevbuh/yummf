@@ -64,9 +64,7 @@ const YumScoreInfo: NextPage = () => {
       <CurlyArrow />
 
       <div className="items-center flex flex-col my-40 justify-center align-center text-center max-w-lg mx-auto">
-        <p className="font-semibold text-5xl mb-4">
-          Liked/disliked a recommendation?
-        </p>
+        <p className="font-semibold text-5xl mb-4">Liked/disliked a recipe?</p>
         <p className="mx-auto font-medium text-2xl text-gray-500 px-6 sm:px-0 mb-6">
           Help you and others out by giving ratings to recipes! As we improve
           Yummf, the score with get more sophisticated and accurate over time.

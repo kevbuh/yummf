@@ -16,9 +16,9 @@ Needs to maxed at 100
 Ratings above 4.5 need to be more valuable than ones around 4
 
 still need to include:
-- comments
+- number comments
 - pos neg review ratio
-- normalize to 100
+- plus/minus points for tags
  */
 }
 const getBaseLog = (x: number, y: number) => {
