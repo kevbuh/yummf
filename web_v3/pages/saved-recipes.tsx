@@ -43,8 +43,8 @@ const SavedRecipesPage: NextPage = ({
 
         {data.savedRecipes.length == 0 && (
           <p className="max-w-md">
-            You have no saved recipes! Save a recipe by clicking the 'save'
-            button on a recipe in the sidebar on the right.
+            You have no saved recipes! Save a recipe by clicking the
+            &apos;save&apos; button on a recipe in the sidebar on the right.
           </p>
         )}
       </div>
