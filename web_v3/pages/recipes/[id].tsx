@@ -56,6 +56,7 @@ const NewIDPage: NextPage = ({
           })}
           onSubmit={(values) => {
             try {
+              console.log("here");
               fetch("/api/create_rating", {
                 method: "POST",
                 headers: {
