@@ -86,12 +86,12 @@ const Home: NextPage = () => {
               Get personalized recommendations so you always know what to cook.
             </p>
 
-            <Link href="https://www.kevinbuhler.com/yummf">
+            {/* <Link href="https://www.kevinbuhler.com/yummf">
               <p className="mx-auto font-medium text-gray-500 text-center mb-8 max-w-lg px-6 sm:px-0 underline">
                 This site works on local machines only. Click here to see a
                 showcase.
               </p>
-            </Link>
+            </Link> */}
 
             <form className="w-full sm:mx-auto">
               <div className="relative ">
