@@ -1,5 +1,7 @@
 # yummf
 
+```Yummf.com frontend still works, but backend does not work due to the shutting down of free Heroku instances :(```
+
 What is Yummf? (Formally called Kooki, hence the repository name):
 
 - A recipe recommendation feed with a community discussion forum
